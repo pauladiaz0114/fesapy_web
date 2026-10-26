@@ -13,6 +13,39 @@ Formato:
 
 ---
 
+## 2026-10-26 — Día 1: seguridad base (Sebastián con Claude Code)
+**Qué se hizo:** (rama `chore/seguridad-base`)
+- Commit de los documentos nuevos: `CLAUDE.md` de Fesapy y plan de seguridad ampliado.
+- Esquema Prisma (sin migrar): `Cotizacion` con `nitCifrado`, `correoCifrado`, `correoHash`, `telefonoCifrado` y `politicaVersion`; `IntentoEnvio` reemplazado por `IntentoLimitado` (enum `AccionLimitada`: COTIZACION | LOGIN, `clave` HMAC).
+- `src/lib/env.ts`: única lectura de `process.env` en el servidor, validada con Zod, con `import "server-only"`. Los errores muestran solo nombres de variables, nunca valores. `src/lib/env.client.ts` solo con `NEXT_PUBLIC_TURNSTILE_SITE_KEY`. `prisma.ts` usa `env.DATABASE_URL` y tiene `server-only`.
+- ESLint prohíbe `process.env` fuera de los archivos de entorno y `$queryRawUnsafe` / `$executeRawUnsafe`.
+- `next.config.ts`: HSTS sin `preload`, `Cross-Origin-Opener-Policy: same-origin`, Permissions-Policy con `payment=()` y `usb=()`.
+- `.npmrc` con `save-exact=true` y todas las versiones de `package.json` exactas.
+- `.env.example` con `DATA_ENCRYPTION_KEY`, `IP_HASH_SECRET`, `TURNSTILE_SECRET_KEY` y `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, y cómo generar cada una.
+- `.github/dependabot.yml` (npm y Actions, semanal, agrupado) y `.github/workflows/ci.yml` (`npm ci` → lint → build → `npm audit --audit-level=high --omit=dev` + gitleaks), con las acciones fijadas por SHA.
+- `npm audit` encontró 3 vulnerabilidades altas en `deepmerge-ts` (vía Prisma 6) → override a 8.0.2 (ver DECISIONES).
+- Verificado: build, lint y `npm audit` (completo y de producción) sin errores; gitleaks 8.30.1 sobre todo el historial sin hallazgos; un componente cliente que importa `env.ts` rompe el build; ESLint detecta `process.env` y `$queryRawUnsafe`; `env.ts` rechaza variables faltantes o mal formadas sin mostrar valores.
+
+**Archivos:** `prisma/schema.prisma`, `src/lib/env.ts`, `src/lib/env.client.ts`, `src/lib/prisma.ts`, `eslint.config.mjs`, `next.config.ts`, `.npmrc`, `package.json`, `package-lock.json`, `.env.example`, `.github/dependabot.yml`, `.github/workflows/ci.yml`, `docs/PLAN.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:**
+- *Cifrado vs. hash:* lo cifrado se puede descifrar con la llave (correo, teléfono); un hash/HMAC no se revierte, pero sirve para comparar y buscar (`correoHash`).
+- *HMAC:* un hash que además usa un secreto. Sin el secreto nadie puede calcularlo, así que no se puede "adivinar" una IP probando todas.
+- *`server-only`:* marca un archivo como exclusivo del servidor; si llega al navegador, el build falla.
+- *Versiones exactas y lockfile:* todos instalan exactamente lo mismo; las actualizaciones son PRs deliberados (Dependabot).
+- *CI:* revisión automática en cada PR; si falla, no se fusiona.
+- *Override de npm:* fuerza la versión de una sub-dependencia sin cambiar el paquete que la trae.
+- *Fijar acciones por SHA:* la etiqueta `v7` se puede mover; el SHA identifica un código exacto.
+
+**Pendientes / notas:**
+- La CI corre por primera vez al subir el repo a GitHub: revisar que quede en verde.
+- Instalar gitleaks en cada computador: `winget install Gitleaks.Gitleaks` (opcional: como pre-commit local).
+- Generar los secretos locales (`AUTH_SECRET`, `DATA_ENCRYPTION_KEY`, `IP_HASH_SECRET`) y guardar `DATA_ENCRYPTION_KEY` de Production en un gestor de contraseñas.
+- ⚠️ Colores: `CLAUDE.md` define `--amarillo: #FFC400` y `--gris: #F4F4F4`, pero `globals.css` tiene `#ffd100` y `#4a4a4a` (gris para texto). Decidir cuál queda y alinear en otra tarea.
+- Quitar el override de `deepmerge-ts` al migrar a Prisma 7.
+
+---
+
 ## 2026-10-26 — Día 1: base del proyecto (Sebastián con Claude Code)
 **Qué se hizo:**
 - Proyecto Next.js **16.4.3** (React 19.3, Tailwind v4, ESLint, App Router, `src/`), creado en una carpeta temporal y movido aquí sin tocar `CLAUDE.md` ni `docs/`.

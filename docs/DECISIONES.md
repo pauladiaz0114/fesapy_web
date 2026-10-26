@@ -83,3 +83,25 @@ La app usa el rol `fesapy_app` (solo SELECT/INSERT/UPDATE/DELETE); las migracion
 ## 2026-10-26 · Mapas con enlace, no iframe
 Cada sede tiene un enlace "Ver en Google Maps".
 **Por qué:** un iframe agrega cookies de terceros, más dominios a la CSP y peso a la página.
+
+## 2026-10-26 · No se instala el paquete `server-only`
+Se usa `import "server-only"` en `env.ts` y `prisma.ts` sin instalar el paquete: Next.js 16 trae su propia copia y su documentación dice que instalarlo es opcional. Probado: un componente cliente que importa `env.ts` hace fallar el build.
+**Por qué:** una dependencia menos que vigilar. Se instalaría solo si alguna regla de lint lo exige.
+
+## 2026-10-26 · Override de `deepmerge-ts` a 8.0.2
+`npm audit` marcaba 3 vulnerabilidades altas (GHSA-ggr8-5vv4-36mx) en `deepmerge-ts` < 8, que llega por `prisma` → `@prisma/config`. Como `@prisma/client` declara a `prisma` como peer dependency, npm lo cuenta como producción y `npm audit --omit=dev` fallaba. Se fuerza la 8.0.2 con `overrides` en `package.json`.
+**Por qué:** Prisma solo usa `deepmerge()` simple sobre objetos de configuración; los cambios de la v8 (Maps, nombres de tipos, `deepmergeInto`) no lo afectan. Probado con `prisma validate`, `format` y `generate`.
+**Descartado:** `npm audit fix --force` (sube a Prisma 7, ver decisión anterior); dejar la excepción documentada (la CI quedaría en rojo).
+**Pendiente:** quitar el override cuando se migre a Prisma 7.10.1 o superior.
+
+## 2026-10-26 · Variables de entorno: obligatorias según el día
+`env.ts` exige desde ya `DATABASE_URL` (con `sslmode=require`), `AUTH_SECRET`, `DATA_ENCRYPTION_KEY` (32 bytes), `IP_HASH_SECRET` y `TURNSTILE_SECRET_KEY` (en local, llaves de prueba de Cloudflare). `RESEND_API_KEY` y `BLOB_READ_WRITE_TOKEN` son opcionales hasta el Día 4 y el Día 5.
+**Por qué:** si se exigieran todas hoy, nadie podría correr `npm run dev` sin crear cuentas que aún no se usan.
+
+## 2026-10-26 · Reglas de ESLint para seguridad
+ESLint marca como error leer `process.env` fuera de `env.ts`, `env.client.ts` y `next.config.ts`, y usar `$queryRawUnsafe` o `$executeRawUnsafe`.
+**Por qué:** las reglas de `CLAUDE.md` se cumplen solas en cada `npm run lint` y en la CI, sin depender de la memoria.
+
+## 2026-10-26 · Acciones de GitHub fijadas por SHA
+`ci.yml` usa `actions/checkout`, `actions/setup-node` y `gitleaks/gitleaks-action` por el SHA del commit, no por la etiqueta. Token de la CI en solo lectura.
+**Por qué:** una etiqueta se puede mover a código malicioso si la acción se compromete; un SHA no. Dependabot las mantiene al día.

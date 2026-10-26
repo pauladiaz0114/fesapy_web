@@ -1,6 +1,6 @@
 // Esquema de la base de datos de Fesapy.
 // Modelo de referencia: docs/ARQUITECTURA-Y-SEGURIDAD.md
-// Las tablas de Auth.js (Usuario, Sesion, CuentaVerificacion) se agregan el Día 5.
+// Las tablas de Auth.js, Usuario y RegistroAuditoria se agregan el Día 5.
 // Regla del equipo: solo una persona a la vez crea migraciones (docs/COLABORACION.md).
 
 generator client {
@@ -68,30 +68,44 @@ enum EstadoCotizacion {
 }
 
 model Cotizacion {
-  id            String           @id @default(cuid())
-  nombre        String           @db.VarChar(100)
-  empresa       String           @db.VarChar(150)
-  nit           String?          @db.VarChar(20)
-  correo        String           @db.VarChar(254)
-  telefono      String           @db.VarChar(20)
-  ciudad        String           @db.VarChar(100)
-  mensaje       String           @db.VarChar(2000)
-  productos     String?          @db.VarChar(2000)
-  // Ley 1581 de 2012: autorización del tratamiento de datos y su fecha.
-  aceptaDatos   Boolean
-  aceptaDatosEn DateTime
-  estado        EstadoCotizacion @default(NUEVA)
-  creadaEn      DateTime         @default(now())
+  id              String           @id @default(cuid())
+  nombre          String           @db.VarChar(100)
+  empresa         String           @db.VarChar(150)
+  // Datos de contacto cifrados con AES-256-GCM (src/lib/cripto.ts), formato v1:<iv>:<tag>:<cifrado>.
+  // Sin @db.VarChar: el largo real lo limita Zod antes de cifrar.
+  nitCifrado      String?
+  correoCifrado   String
+  // HMAC del correo normalizado: permite buscar las cotizaciones de una persona sin descifrar.
+  correoHash      String           @db.VarChar(64)
+  telefonoCifrado String
+  ciudad          String           @db.VarChar(100)
+  mensaje         String           @db.VarChar(2000)
+  productos       String?          @db.VarChar(2000)
+  // Ley 1581 de 2012: autorización, fecha (la fija el servidor) y versión de la política aceptada.
+  aceptaDatos     Boolean
+  aceptaDatosEn   DateTime
+  politicaVersion String           @db.VarChar(20)
+  estado          EstadoCotizacion @default(NUEVA)
+  creadaEn        DateTime         @default(now())
 
   @@index([estado, creadaEn])
+  @@index([correoHash])
 }
 
-// Límite de envíos del formulario por IP (ej. 5 por hora).
-// Se guarda solo el hash de la IP, nunca la IP real.
-model IntentoEnvio {
-  id       String   @id @default(cuid())
-  ipHash   String   @db.VarChar(64)
-  creadoEn DateTime @default(now())
+enum AccionLimitada {
+  COTIZACION
+  LOGIN
+}
 
-  @@index([ipHash, creadoEn])
+// Rate limiting en la base de datos (docs/ARQUITECTURA-Y-SEGURIDAD.md §6.10).
+// clave = HMAC-SHA256(IP_HASH_SECRET, ip o correo). Nunca se guarda la IP ni el correo real.
+// Los registros de más de 24 horas se borran al registrar un intento nuevo.
+model IntentoLimitado {
+  id       String         @id @default(cuid())
+  accion   AccionLimitada
+  clave    String         @db.VarChar(64)
+  creadoEn DateTime       @default(now())
+
+  @@index([accion, clave, creadoEn])
+  @@index([creadoEn])
 }
