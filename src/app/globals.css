@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/*
+  Tokens de marca de Fesapy.
+  REGLA: nada de texto amarillo sobre fondo blanco (no se lee: contraste ~1,4:1).
+  El amarillo va como fondo con texto negro, o como texto sobre fondo negro.
+*/
+:root {
+  --amarillo: #ffd100;
+  --negro: #111111;
+  /* Gris para textos secundarios y bordes. Sobre blanco tiene contraste AA (8,9:1). */
+  --gris: #4a4a4a;
+  --blanco: #ffffff;
+}
+
+/* Con @theme, Tailwind v4 crea las clases bg-amarillo, text-negro, border-gris, font-titulo, etc. */
+@theme inline {
+  --color-amarillo: var(--amarillo);
+  --color-negro: var(--negro);
+  --color-gris: var(--gris);
+  --color-blanco: var(--blanco);
+  --font-sans: var(--font-barlow);
+  --font-titulo: var(--font-barlow-condensed);
+}
+
+body {
+  background: var(--blanco);
+  color: var(--negro);
+}
