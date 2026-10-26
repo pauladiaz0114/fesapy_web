@@ -42,6 +42,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] (A) Formulario de cotización: Zod estricto, anti-bots, límite 5/hora, casilla Habeas Data con `politicaVersion`, datos cifrados
 - [ ] (A) Guardar en BD + correo de aviso con Resend (React Email o texto plano, sin datos sensibles innecesarios)
 - [ ] (B) Página Política de tratamiento de datos (con versión, conservación y canal de derechos)
+- [ ] (B) Permiso para cookies: inventario de cookies (necesarias vs. no esenciales), sección de cookies en la política y aviso de consentimiento que bloquee las no esenciales hasta que la persona acepte (rechazar tan fácil como aceptar)
 - [ ] (B) Página de contacto con direcciones de las 3 sedes y enlace "Ver en Google Maps" (sin iframe)
 
 ## Día 5 — Panel de administración

@@ -392,6 +392,7 @@ El formulario de cotización recoge nombre, correo, teléfono y, opcionalmente, 
 - [ ] Página `/politica-de-datos` con: responsable (Fesapy, NIT, dirección, correo), finalidad (responder cotizaciones y contacto comercial), derechos del titular (conocer, actualizar, rectificar, suprimir, revocar), canal y plazos para ejercerlos, **tiempo de conservación** y fecha/versión de la política.
 - [ ] Casilla **obligatoria y no marcada por defecto**: "Autorizo el tratamiento de mis datos según la política…" con enlace. Se guarda `aceptaDatos`, `aceptaDatosEn` (lo fija el servidor) y `politicaVersion`.
 - [ ] Solo pedir los datos necesarios (NIT opcional).
+- [ ] **Cookies:** inventario en la política (nombre, para qué, duración). Las necesarias (sesión del panel) no piden permiso; las no esenciales (analítica, terceros) **solo se cargan después de que la persona acepte**, con botones "Aceptar" y "Rechazar" igual de visibles, y se puede cambiar la elección después. Se guarda la elección (sin datos personales).
 - [ ] **Conservación:** proponer a la dueña 2 años para cotizaciones. Después, borrado o anonimización. `IntentoLimitado` se borra a las 24 h.
 - [ ] **Solicitudes de titulares:** el ADMIN busca por `correoHash`, puede exportar o suprimir, y queda registrado en la auditoría.
 - [ ] **Incidentes:** si hay una filtración de datos personales, Fesapy debe informar a la SIC. Tener anotado quién decide y quién reporta (ver §9).

@@ -105,3 +105,7 @@ ESLint marca como error leer `process.env` fuera de `env.ts`, `env.client.ts` y 
 ## 2026-10-26 · Acciones de GitHub fijadas por SHA
 `ci.yml` usa `actions/checkout`, `actions/setup-node` y `gitleaks/gitleaks-action` por el SHA del commit, no por la etiqueta. Token de la CI en solo lectura.
 **Por qué:** una etiqueta se puede mover a código malicioso si la acción se compromete; un SHA no. Dependabot las mantiene al día.
+
+## 2026-10-26 · Permiso para cookies
+Aviso de consentimiento con "Aceptar" y "Rechazar" igual de visibles; las cookies no esenciales (analítica, terceros) no se cargan hasta aceptar. Las necesarias (sesión del panel) no piden permiso. Tarea del Día 4 junto a la política de datos.
+**Por qué:** la Ley 1581 exige autorización previa para tratar datos personales, y las cookies de analítica pueden recogerlos.
