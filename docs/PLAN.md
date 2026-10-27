@@ -10,17 +10,17 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] Crear repo en GitHub (privado) y agregar a ambos como colaboradores — *a mano, ver BITACORA 2026-10-26*
 - [x] `create-next-app` con TypeScript, Tailwind, ESLint, App Router, carpeta `src/` (Next.js 16.4.3)
 - [x] Copiar `CLAUDE.md`, `docs/` y `.env.example` al repo
-- [x] Reemplazar `CLAUDE.md` (era de otro proyecto) por el de Fesapy
+- [ ] Reemplazar `CLAUDE.md` (era de otro proyecto) por el de Fesapy
 - [ ] Conectar a Vercel (despliegue automático) + Deployment Protection en previews — *a mano*
 - [ ] Crear base en Neon con ramas `main` (producción) y `dev` (previews y local) — *a mano*
 - [x] Prisma: esquema inicial (`prisma/schema.prisma`) y cliente `src/lib/prisma.ts`
-- [x] Esquema de seguridad: campos cifrados en Cotizacion, `correoHash`, `politicaVersion`, `IntentoLimitado` (sin migrar)
+- [ ] Esquema de seguridad: campos cifrados en Cotizacion, `correoHash`, `politicaVersion`, `IntentoLimitado`
 - [ ] Prisma: primera migración — *requiere Neon* (`npx prisma migrate dev --name inicial`)
 - [ ] Rol `fesapy_app` en Neon con solo SELECT/INSERT/UPDATE/DELETE (SQL en el documento de seguridad §5)
 - [x] Tokens de diseño (colores, fuentes Barlow) y layout base
 - [x] Cabeceras de seguridad con CSP básica (endurecer el Día 7)
-- [x] Seguridad base: `src/lib/env.ts` (Zod), `server-only`, `.npmrc` (`save-exact`), HSTS sin `preload`, COOP, Permissions-Policy ampliada
-- [x] Escaneo: `.github/dependabot.yml` + CI (lint, build, `npm audit`, gitleaks) + escaneo del historial con gitleaks — *la CI corre por primera vez al subir el repo a GitHub*
+- [ ] Seguridad base: `src/lib/env.ts` (Zod), `server-only`, `.npmrc` (`save-exact`), HSTS sin `preload`, COOP, Permissions-Policy ampliada
+- [ ] Escaneo: `.github/dependabot.yml` + CI (lint, build, `npm audit`, gitleaks) + escaneo del historial con gitleaks
 - [ ] 2FA en GitHub, Vercel, Neon, Resend y Cloudflare — *a mano*
 
 ## Día 2 — Estructura pública
@@ -42,7 +42,6 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] (A) Formulario de cotización: Zod estricto, anti-bots, límite 5/hora, casilla Habeas Data con `politicaVersion`, datos cifrados
 - [ ] (A) Guardar en BD + correo de aviso con Resend (React Email o texto plano, sin datos sensibles innecesarios)
 - [ ] (B) Página Política de tratamiento de datos (con versión, conservación y canal de derechos)
-- [ ] (B) Permiso para cookies: inventario de cookies (necesarias vs. no esenciales), sección de cookies en la política y aviso de consentimiento que bloquee las no esenciales hasta que la persona acepte (rechazar tan fácil como aceptar)
 - [ ] (B) Página de contacto con direcciones de las 3 sedes y enlace "Ver en Google Maps" (sin iframe)
 
 ## Día 5 — Panel de administración
