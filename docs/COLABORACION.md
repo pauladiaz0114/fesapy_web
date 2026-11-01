@@ -113,7 +113,7 @@ Buenas prácticas:
 4. `git add <archivo>` y `git commit`.
 
 ### Conflictos en migraciones de Prisma
-Nunca edites una migración que ya está en `main`. Si los dos crearon migraciones a la vez, quien fusione de segundo borra **su** migración nueva (no la del otro), trae `main` y vuelve a correr `npx prisma migrate dev --name ...`.
+Nunca edites una migración que ya está en `main`. Si los dos crearon migraciones a la vez, quien fusione de segundo borra **su** migración nueva (no la del otro), trae `main` y vuelve a correr `npm run db:migrar -- --name ...`.
 
 ## 6. Trabajar con Claude Code
 

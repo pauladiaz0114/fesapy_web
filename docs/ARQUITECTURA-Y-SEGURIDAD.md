@@ -163,7 +163,8 @@ En este proyecto **no existe ninguna llave de base de datos en el navegador**. E
 Así, aunque alguien lograra ejecutar SQL a través de la app, no podría hacer `DROP TABLE`. SQL a correr una vez en Neon (SQL Editor) **después de la primera migración**:
 
 ```sql
-CREATE ROLE fesapy_app WITH LOGIN PASSWORD '<generada por Neon o larga y aleatoria>';
+-- Contraseña: node -e "console.log(require('crypto').randomBytes(24).toString('base64url'))"
+CREATE ROLE fesapy_app WITH LOGIN PASSWORD '<larga y aleatoria>';
 GRANT USAGE ON SCHEMA public TO fesapy_app;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO fesapy_app;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO fesapy_app;
@@ -174,13 +175,19 @@ ALTER DEFAULT PRIVILEGES FOR ROLE neondb_owner IN SCHEMA public
   GRANT USAGE, SELECT ON SEQUENCES TO fesapy_app;
 -- Opcional, muy recomendado: la app no puede alterar ni borrar la auditoría.
 REVOKE UPDATE, DELETE ON "RegistroAuditoria" FROM fesapy_app;   -- después del Día 5
+-- La app no necesita el historial de migraciones de Prisma:
+REVOKE ALL ON "_prisma_migrations" FROM fesapy_app;
 ```
 
-En Neon también se puede crear el rol desde la consola (Roles → New role). El nombre del dueño puede variar: verificarlo en la consola.
+**El rol se crea con SQL, NO desde la consola (Roles → New role).** Neon da a los roles creados por la consola, la CLI o la API membresía en `neon_superuser` (CREATEDB, CREATEROLE, BYPASSRLS y todos los permisos sobre las tablas de `public`), lo que anularía el mínimo privilegio. Los roles creados con SQL solo tienen lo que se les concede. El dueño se llama `neondb_owner`.
+
+Verificado el 2026-11-01: `fesapy_app` lee las tablas, pero no puede crear, borrar, alterar ni vaciar (TRUNCATE) tablas, ni leer `_prisma_migrations`, ni crear roles.
 
 ### Ramas de Neon por entorno
-- Rama `main` de Neon → variables de **Production** en Vercel.
-- Rama `dev` de Neon → variables de **Preview** y del `.env.local` de cada uno.
+- Rama `production` de Neon → variables de **Production** en Vercel.
+- Rama `development` de Neon (creada desde `production`) → variables de **Preview** y del `.env.local` de cada uno.
+- Al crear una rama, Neon copia los roles **con sus contraseñas**: en `development` se cambiaron las de `fesapy_app` (`ALTER ROLE`) y `neondb_owner` (Roles → Reset password), para que un `.env.local` filtrado no exponga producción.
+- Migraciones: primero en `development` (`npm run db:migrar`). A producción se aplican con `migrate deploy` usando la `DIRECT_URL` de `production`, que vive solo en el gestor de contraseñas, nunca en Vercel.
 - Así, los PR y las pruebas **nunca tocan datos reales**. Las ramas de Neon son gratis.
 
 ### Row Level Security (RLS): evaluado, no se activa en el MVP
@@ -327,7 +334,8 @@ Capas, de la más barata a la más fuerte:
 - [ ] Solo `src/lib/env.ts` lee `process.env` en el servidor, y lo valida con Zod al arrancar. Si falta una variable, la app falla con un mensaje claro en lugar de funcionar a medias.
 - [ ] **Única** variable pública permitida: `NEXT_PUBLIC_TURNSTILE_SITE_KEY` (está diseñada para ser pública). Cualquier otra variable con `NEXT_PUBLIC_` debe justificarse en `DECISIONES.md`.
 - [ ] Antes de lanzar: buscar secretos en el código que llega al navegador: `npm run build`, luego buscar en `.next/static` valores como `re_`, `postgres://`, `vercel_blob_rw_`. Debe dar **cero** resultados.
-- [ ] Secretos distintos en Production, Preview y local.
+- [ ] Secretos distintos en Production, Preview y local, **excepto** `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET`, que van **una por rama de Neon**: todos los que usan `development` (locales y Preview) comparten la misma, o no podrían leer los datos cifrados por los otros. `AUTH_SECRET` sí es distinto en cada lugar.
+- [ ] `DIRECT_URL` (rol dueño) **no se carga en Vercel**: solo se usa para migraciones desde un computador.
 - [ ] Guardar una copia de `DATA_ENCRYPTION_KEY` en un gestor de contraseñas (ej. Bitwarden, gratis). **Si se pierde, los datos cifrados no se pueden recuperar.**
 
 ### 6.16 Secretos en Git: prevenir, detectar y eliminar
