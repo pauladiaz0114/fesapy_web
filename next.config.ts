@@ -3,8 +3,9 @@ import type { NextConfig } from "next";
 const esDesarrollo = process.env.NODE_ENV === "development";
 
 // Content-Security-Policy BÁSICA (sin nonces).
-// PENDIENTE Día 7: endurecerla (nonces, quitar 'unsafe-inline') y agregar los
-// dominios de Vercel Blob, mapas o analítica si se usan. Ver docs/PLAN.md.
+// PENDIENTE Día 6: agregar Turnstile (challenges.cloudflare.com) y Vercel Blob.
+// PENDIENTE Día 7: endurecerla (SRI y/o nonces, quitar 'unsafe-inline').
+// Etapas en docs/ARQUITECTURA-Y-SEGURIDAD.md §6.13.
 const csp = [
   "default-src 'self'",
   // 'unsafe-eval' solo en desarrollo: lo necesita la recarga en vivo de Next.js.
@@ -22,17 +23,19 @@ const csp = [
 
 const cabecerasDeSeguridad = [
   { key: "Content-Security-Policy", value: csp },
+  // Sin "preload" hasta tener el dominio propio definitivo (es muy difícil de revertir).
   {
     key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains; preload",
+    value: "max-age=63072000; includeSubDomains",
   },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
+    value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
   },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
 const nextConfig: NextConfig = {

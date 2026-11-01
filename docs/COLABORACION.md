@@ -10,6 +10,7 @@ Somos dos personas, cada una con su propio Claude Code, trabajando en el mismo r
   - `feat/nombre-corto` para algo nuevo, por ejemplo `feat/header`, `feat/formulario-cotizacion`
   - `fix/nombre-corto` para corregir un error, por ejemplo `fix/menu-celular`
   - `docs/nombre-corto` para cambios solo de documentación
+  - `chore/nombre-corto` para configuración, dependencias o seguridad de base
 - Una rama es una tarea. Las ramas deben ser cortas: lo ideal es menos de un día de trabajo.
 
 > **Concepto:** una rama es una copia paralela del proyecto. Puedes cambiar lo que quieras ahí sin afectar `main`. Cuando terminas, "fusionas" (merge) tus cambios a `main` mediante un Pull Request.

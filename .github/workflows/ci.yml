@@ -1,0 +1,66 @@
+# CI: corre en cada PR y en cada push a main. Si algo falla, el PR no se fusiona.
+# Ver docs/ARQUITECTURA-Y-SEGURIDAD.md §6.16 y §6.17.
+# Las acciones se fijan por SHA (no por etiqueta) para que nadie pueda cambiar su código
+# sin que nos enteremos. Dependabot las actualiza.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Mínimo privilegio: el token de la CI solo puede leer.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  calidad:
+    name: Lint, build y audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Instalar dependencias (exactas del package-lock.json)
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Vulnerabilidades en dependencias de producción
+        run: npm audit --audit-level=high --omit=dev
+
+  secretos:
+    name: Gitleaks (secretos en todo el historial)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Sin comentarios en el PR: el token solo tiene permiso de lectura.
+          GITLEAKS_ENABLE_COMMENTS: "false"
+          # Repo de cuenta personal: no necesita GITLEAKS_LICENSE.
+          # Si el repo pasa a una organización de GitHub, hay que pedir una licencia gratuita.
