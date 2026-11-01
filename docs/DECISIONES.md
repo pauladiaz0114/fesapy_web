@@ -127,3 +127,17 @@ La rama principal de Neon se llama `production`; `development` se creó desde el
 `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET` son una por rama de Neon: los `.env.local` y Preview (todos sobre `development`) comparten las mismas; Production tiene las suyas. `AUTH_SECRET` es distinto en cada lugar. `DIRECT_URL` (rol dueño) solo existe en los computadores y en el gestor de contraseñas.
 **Por qué:** con llaves distintas sobre la misma base, nadie podría leer los datos cifrados por los otros. Vercel no necesita la URL del dueño para compilar ni para funcionar, y tenerla allí permitiría alterar tablas si se filtrara.
 **Cómo compartir secretos:** organización gratuita de Bitwarden para los dos (o Bitwarden Send con la contraseña por otro canal). Nunca por chat, correo ni GitHub.
+
+## 2026-11-01 · Colores: dorado del logo en vez de amarillo
+`--amarillo` (#FFD100) se reemplaza por `--dorado: #E8B53E`, muestreado del logo "Fesapy Distribuciones" (dorado sobre negro). Se agrega `--crema: #F5F4F0` para fondos claros. `--gris: #4A4A4A` queda para texto secundario (el `#F4F4F4` que decía `CLAUDE.md` nunca se usó).
+**Regla:** el dorado nunca va como texto sobre blanco o crema; solo como fondo con texto negro (≈ 10:1) o sobre negro.
+**Por qué:** la marca tiene logo dorado y el amarillo ya no combinaba. Resuelve también la diferencia de colores entre `CLAUDE.md` y `globals.css` anotada en la bitácora del Día 1.
+
+## 2026-11-01 · Primera versión: página de inicio única con WhatsApp
+Antes del sitio completo se publica una sola página, sin menú ni enlaces a otras páginas. La única acción es "Cotizar por WhatsApp" con mensaje prellenado (empresa, NIT, productos, logo, ciudad), armado con `encodeURIComponent` en `src/lib/whatsapp.ts`. Los datos de la empresa viven en `src/lib/contenido.ts`.
+**Por qué:** no se guarda ningún dato personal en la base, se publica rápido y sirve para ver qué piden los clientes. El formulario de cotización y el catálogo siguen en el plan.
+**Detalles:** enlaces externos con `target="_blank" rel="noopener noreferrer"`. Página 100 % estática (el año del © está fijo en `contenido.ts` para no depender de la fecha del servidor). Íconos en SVG escritos en el código (trazos de Lucide, licencia ISC), sin instalar paquetes.
+
+## 2026-11-01 · Fotos de referencia de Pexels mientras llegan las propias
+Cuatro fotos de Pexels (licencia libre, uso comercial permitido) en `public/referencia/`, registradas en `docs/CREDITOS-IMAGENES.md` con autor y enlace. Sin caras en primer plano ni logos de marcas. Optimizadas a WebP 800 × 800 sin metadatos con `sharp` (dependencia que ya trae Next.js; no se instaló nada).
+**Pendiente:** reemplazarlas por fotos propias de Fesapy, sobre todo un overol con logo bordado.

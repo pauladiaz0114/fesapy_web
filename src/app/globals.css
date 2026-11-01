@@ -1,22 +1,27 @@
 @import "tailwindcss";
 
 /*
-  Tokens de marca de Fesapy.
-  REGLA: nada de texto amarillo sobre fondo blanco (no se lee: contraste ~1,4:1).
-  El amarillo va como fondo con texto negro, o como texto sobre fondo negro.
+  Tokens de marca de Fesapy Distribuciones.
+  REGLA: el dorado NUNCA va como texto sobre fondo blanco o crema (no se lee).
+  El dorado va como fondo con texto negro, o como texto/ícono sobre fondo negro.
+  Contrastes (WCAG): negro sobre dorado ≈ 10:1 · gris sobre crema ≈ 8:1.
 */
 :root {
-  --amarillo: #ffd100;
+  /* Dorado sacado del logo (antes: --amarillo #ffd100). */
+  --dorado: #e8b53e;
   --negro: #111111;
-  /* Gris para textos secundarios y bordes. Sobre blanco tiene contraste AA (8,9:1). */
+  /* Fondo cálido de secciones claras. */
+  --crema: #f5f4f0;
+  /* Gris para textos secundarios y bordes. Sobre blanco o crema tiene contraste AA. */
   --gris: #4a4a4a;
   --blanco: #ffffff;
 }
 
-/* Con @theme, Tailwind v4 crea las clases bg-amarillo, text-negro, border-gris, font-titulo, etc. */
+/* Con @theme, Tailwind v4 crea las clases bg-dorado, text-negro, bg-crema, font-titulo, etc. */
 @theme inline {
-  --color-amarillo: var(--amarillo);
+  --color-dorado: var(--dorado);
   --color-negro: var(--negro);
+  --color-crema: var(--crema);
   --color-gris: var(--gris);
   --color-blanco: var(--blanco);
   --font-sans: var(--font-barlow);
