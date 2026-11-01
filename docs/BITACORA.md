@@ -13,6 +13,14 @@ Formato:
 
 ---
 
+## 2026-11-01 — Lista de pendientes para Paula (Sebastián con Claude Code)
+**Qué se hizo:** (rama `docs/pendientes-paula`) se agregó `docs/PENDIENTES-PAULA.md` (Vercel, PR #6, Bitwarden, `.env.local`, variables de Vercel, Deployment Protection, 2FA, colores y primera tarea) y un enlace en `COLABORACION.md`. Se corrigió según la documentación de Vercel (en Hobby no se puede invitar en repos privados), las llaves por rama de Neon, qué variables no van en Vercel, la variable vacía que `env.ts` rechaza y el reparto de tareas del Día 2.
+**Archivos:** `docs/PENDIENTES-PAULA.md`, `docs/COLABORACION.md`.
+**Conceptos aprendidos:** *conflicto evitable:* el enlace va en `COLABORACION.md` y no en `PLAN.md` porque el PR #6 cambia muchas líneas de `PLAN.md`.
+**Pendientes / notas:** decidir la opción de Vercel (paso 1) y anotarla en `DECISIONES.md`.
+
+---
+
 ## 2026-10-26 — Día 1: seguridad base (Sebastián con Claude Code)
 **Qué se hizo:** (rama `chore/seguridad-base`)
 - Commit de los documentos nuevos: `CLAUDE.md` de Fesapy y plan de seguridad ampliado.

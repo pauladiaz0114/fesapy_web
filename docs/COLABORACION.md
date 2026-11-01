@@ -2,6 +2,8 @@
 
 Somos dos personas, cada una con su propio Claude Code, trabajando en el mismo repo. Estas reglas sirven para no pisarnos el trabajo.
 
+> **Paula:** tu lista de configuración y primeros pasos (Vercel, Bitwarden, `.env.local`, 2FA, primera tarea) está en [`PENDIENTES-PAULA.md`](PENDIENTES-PAULA.md).
+
 ## 1. Ramas
 
 - `main` es la versión que funciona y la que Vercel publica. **Nadie trabaja directo en `main`.**
