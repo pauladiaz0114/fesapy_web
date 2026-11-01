@@ -25,7 +25,7 @@ export function PiePagina() {
                 rel="noopener noreferrer"
                 className={enlace}
               >
-                {contacto.whatsapp}
+                {contacto.whatsappTexto}
               </a>
             ) : (
               <span>TODO(contenido): número de WhatsApp</span>

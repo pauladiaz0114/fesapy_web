@@ -13,10 +13,10 @@ export const empresa = {
 } as const;
 
 export const contacto = {
-  // TODO(contenido): número de WhatsApp de Fesapy con indicativo de país,
-  // solo dígitos, sin "+" ni espacios. Ejemplo de formato: "573001234567".
-  // Mientras esté vacío, el botón abre WhatsApp para que la persona elija el contacto.
-  whatsapp: "",
-  // TODO(contenido): correo de contacto de Fesapy.
-  correo: "",
+  // Número de WhatsApp con indicativo de país (57), solo dígitos, sin "+" ni espacios:
+  // así lo exige wa.me. Si se deja vacío, el botón abre WhatsApp sin destinatario.
+  whatsapp: "573123329422",
+  // El mismo número, escrito para que lo lean las personas (pie de página).
+  whatsappTexto: "+57 312 332 9422",
+  correo: "asistente.fesapy@gmail.com",
 } as const;
