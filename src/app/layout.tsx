@@ -16,9 +16,10 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  title: "Fesapy — Seguridad industrial",
+  // Valores por defecto para las páginas que no definan los suyos.
+  title: "Fesapy Distribuciones",
   description:
-    "Todo lo que tu empresa necesita en seguridad, en un solo lugar. Dotación, EPP, señalización, botiquines y más.",
+    "Todo lo que tu empresa necesita en seguridad, en un solo lugar. Uniformes industriales, elementos de protección personal y calzado de seguridad.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

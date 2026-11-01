@@ -24,6 +24,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] 2FA en GitHub, Vercel, Neon, Resend y Cloudflare — *a mano*
 
 ## Día 2 — Estructura pública
+- [x] Página de inicio simple (una sola página, sin menú, acción única "Cotizar por WhatsApp"): encabezado, portada, lo que ofrecemos, sectores, franja y pie de página, con botón flotante y mensaje prellenado — *rama `feat/pagina-inicio`*
 - [ ] (A) Header con menú responsive + Footer con redes y sedes
 - [ ] (A) Botón flotante de WhatsApp (texto con `encodeURIComponent`)
 - [ ] (B) Página de Inicio: hero, categorías, "todo en uno", personalización

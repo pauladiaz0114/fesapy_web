@@ -13,6 +13,32 @@ Formato:
 
 ---
 
+## 2026-11-01 — Página de inicio simple (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/pagina-inicio`)
+- Colores: `--dorado: #E8B53E` (del logo) reemplaza a `--amarillo`, y se agregó `--crema: #F5F4F0`. Se actualizaron `CLAUDE.md` (colores, nombre "Fesapy Distribuciones", una sola sede) y `BRIEF.md`.
+- `src/lib/contenido.ts` (nombre, lema, ciudad; WhatsApp y correo como `TODO(contenido)`) y `src/lib/whatsapp.ts` (enlace `wa.me` con mensaje prellenado y `encodeURIComponent`).
+- Página de inicio sin menú: encabezado negro con logo y botón dorado, portada crema con collage 2x2, "Lo que ofrecemos" (4 puntos), "Sectores que atendemos" (3 tarjetas), franja dorada, pie de página y botón flotante de WhatsApp con `aria-label`.
+- 4 fotos de referencia de Pexels optimizadas en `public/referencia/` y `docs/CREDITOS-IMAGENES.md`.
+- Metadata de la página (título y descripción); `lang="es-CO"` ya estaba.
+- Verificado: lint y build sin errores, página estática, un solo `h1`, enlaces con `noopener noreferrer`, CSP sin cambios, capturas en celular y escritorio.
+
+**Archivos:** `src/app/globals.css`, `src/app/layout.tsx`, `src/app/page.tsx`, `src/lib/contenido.ts`, `src/lib/whatsapp.ts`, `src/components/ui/` (BotonWhatsApp, iconos), `src/components/sitio/` (Encabezado, Logo, PiePagina, WhatsAppFlotante), `src/components/inicio/` (Portada, CollageFotos, LoQueOfrecemos, Sectores, FranjaCotizar), `public/marca/`, `public/referencia/`, `CLAUDE.md`, `docs/BRIEF.md`, `docs/CREDITOS-IMAGENES.md`, `docs/PLAN.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:**
+- *`encodeURIComponent`:* convierte espacios, tildes y saltos de línea en códigos que una URL acepta (`%20`, `%0A`). Sin eso el mensaje de WhatsApp llega cortado.
+- *`rel="noopener noreferrer"`:* la pestaña que se abre no puede controlar nuestra página ni saber de dónde venía.
+- *Importación estática de imágenes:* `import foto from ".../foto.webp"` le dice a Next.js el tamaño exacto; reserva el espacio y la página no "salta" al cargar.
+- *`sizes` en `next/image`:* le dice al navegador qué tan grande se verá la foto para que descargue la versión justa, no la gigante.
+- *Contraste AA:* el texto debe tener al menos 4,5:1 con su fondo para leerse bien. Por eso el dorado nunca va como texto sobre blanco.
+- *Mobile first:* las clases sin prefijo son para celular; `sm:` y `lg:` cambian el diseño en pantallas más grandes.
+
+**Pendientes / notas:**
+- `TODO(contenido)`: número de WhatsApp (con 57, solo dígitos) y correo en `src/lib/contenido.ts`. Hasta entonces el botón abre WhatsApp sin destinatario.
+- Reemplazar las fotos de referencia por fotos propias (sobre todo un overol con logo bordado) y conseguir el logo en SVG o PNG transparente.
+- `PLAN.md` todavía menciona 3 sedes en la tarea de contacto del Día 4; ajustar cuando se replanifique.
+
+---
+
 ## 2026-10-26 — Día 1: seguridad base (Sebastián con Claude Code)
 **Qué se hizo:** (rama `chore/seguridad-base`)
 - Commit de los documentos nuevos: `CLAUDE.md` de Fesapy y plan de seguridad ampliado.
