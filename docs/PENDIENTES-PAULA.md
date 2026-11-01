@@ -7,19 +7,19 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 ---
 
 ## 1. Resolver el bloqueo de Vercel (urgente)
-- [ ] Vercel → equipo **fesapy** → **Settings → Billing**: mira qué plan tiene (Hobby, Pro o "Pro Trial").
-- [ ] Con esa información, decidan juntos una opción (abajo) y anótenla en `docs/DECISIONES.md`.
+- [x] Plan del equipo **fesapy** en Vercel: **Hobby** (confirmado).
+- [ ] Decidan juntos una opción (abajo) y anótenla en `docs/DECISIONES.md`.
 
 **Qué pasa:** Vercel no quiere publicar los commits de Sebastián porque su cuenta (`sebashooo`) no es miembro de tu equipo de Vercel. Por eso el PR #6 muestra ❌ en Vercel, aunque el código está bien.
 
-**Lo que dice Vercel** ([documentación](https://vercel.com/docs/deployments/troubleshoot-project-collaboration)): en el plan **Hobby** no se puede colaborar en repos **privados**; solo se publican los commits de la dueña del equipo. En **Pro** cada miembro paga su asiento. En repos **públicos** colaborar es gratis.
+**Lo que dice Vercel** ([documentación](https://vercel.com/docs/deployments/troubleshoot-project-collaboration)): el plan **Hobby** no permite colaborar en repos **privados**: solo se publican los commits de la dueña de la cuenta (tú). **No hay forma de invitar a Sebastián en Hobby**. En repos **públicos** colaborar es gratis.
 
-**Opciones:**
+**Opciones con Hobby:**
 | Opción | Ventaja | Cuidado |
 |---|---|---|
-| Invitar a Sebastián al equipo (Settings → Members) | Todo funciona normal | **En Hobby no se puede**: hay que pasar a Pro y cada miembro paga su asiento. Si es un "Pro Trial", al terminar la prueba empieza a cobrar |
-| Dejar el repo **público** en GitHub | Gratis en Vercel; GitHub da gratis secret scanning, push protection y CodeQL | Cualquiera ve el código y **todo el historial**, incluidos los correos de los autores de los commits. No hay secretos en el repo (gitleaks lo revisa). Hay que avisar a la dueña de Fesapy y actualizar "repo privado" en `ARQUITECTURA-Y-SEGURIDAD.md` §6.20 y `COLABORACION.md` §8 |
-| No hacer nada | — | Las vistas previas de los PR de Sebastián fallan, y como "Squash and merge" deja el commit a nombre de quien abrió el PR, también puede fallar la publicación de `main` |
+| Dejar el repo **público** en GitHub | Gratis; todo funciona normal; GitHub además da gratis secret scanning, push protection y CodeQL | Cualquiera ve el código y **todo el historial**, incluidos los correos de los autores de los commits. No hay secretos en el repo (gitleaks lo revisa). Hay que avisar a la dueña de Fesapy y actualizar "repo privado" en `ARQUITECTURA-Y-SEGURIDAD.md` §6.20 y `COLABORACION.md` §8 |
+| Pasar a **Pro** e invitar a Sebastián | Repo privado y todo funciona normal | Cuesta dinero: plan Pro más el asiento de cada miembro (precios en vercel.com/pricing). Ojo: Hobby es solo para uso **no comercial**, así que al lanzar oficialmente la página de Fesapy probablemente haya que pasar a Pro de todas formas (`ARQUITECTURA-Y-SEGURIDAD.md` §1) |
+| Seguir en Hobby con el repo privado | Gratis, nada cambia | Los PR de Sebastián nunca tienen vista previa, y como "Squash and merge" deja el commit a nombre de quien abrió el PR, `main` **no se publica** cuando el último cambio es de Sebastián. Solo sirve como solución temporal |
 
 **Cómo funciona:** Vercel publica la página cada vez que llega un commit a GitHub, pero primero revisa que el autor del commit tenga permiso en el equipo de Vercel.
 
@@ -82,7 +82,7 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 - [ ] Vercel → **Settings → Deployment Protection** → activar para **Preview**.
 
 **Para qué:** que solo ustedes vean las versiones en prueba. La página principal (el dominio de producción `.vercel.app`) sí queda pública.
-**Ojo:** las vistas previas protegidas solo las abren los miembros del equipo de Vercel. Si Sebastián no es miembro (paso 1), él no podrá verlas.
+**Ojo:** las vistas previas protegidas solo las abren los miembros del equipo de Vercel. En Hobby Sebastián no puede ser miembro, así que no podrá abrirlas; si eligen repo público, revisen en **Deployment Protection** cómo compartirle el acceso a las vistas previas.
 
 ---
 
