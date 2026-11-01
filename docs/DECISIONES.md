@@ -67,7 +67,7 @@ Se cifran en la aplicación con `node:crypto`; `correoHash` (HMAC) permite busca
 **Descartado:** reCAPTCHA (cookies de Google, más fricción).
 
 ## 2026-10-26 · Roles de base de datos y ramas de Neon
-La app usa el rol `fesapy_app` (solo SELECT/INSERT/UPDATE/DELETE); las migraciones, el rol dueño. Rama `main` de Neon para producción y `dev` para previews y local.
+La app usa el rol `fesapy_app` (solo SELECT/INSERT/UPDATE/DELETE); las migraciones, el rol dueño. Rama `production` de Neon para producción y `development` para previews y local (nombres definitivos, ver 2026-11-01).
 **Por qué:** si alguien lograra ejecutar SQL por la app, no podría alterar ni borrar tablas; las pruebas nunca tocan datos reales.
 
 ## 2026-10-26 · Row Level Security: no en el MVP
@@ -109,6 +109,24 @@ ESLint marca como error leer `process.env` fuera de `env.ts`, `env.client.ts` y 
 ## 2026-10-26 · Permiso para cookies
 Aviso de consentimiento con "Aceptar" y "Rechazar" igual de visibles; las cookies no esenciales (analítica, terceros) no se cargan hasta aceptar. Las necesarias (sesión del panel) no piden permiso. Tarea del Día 4 junto a la política de datos.
 **Por qué:** la Ley 1581 exige autorización previa para tratar datos personales, y las cookies de analítica pueden recogerlos.
+
+## 2026-11-01 · Ramas de Neon: `production` y `development`
+La rama principal de Neon se llama `production`; `development` se creó desde ella (hereda tablas, roles y permisos). En `development` se cambiaron las contraseñas de `fesapy_app` y `neondb_owner`.
+**Por qué:** nombres que coinciden con los entornos de Vercel; contraseñas distintas para que un `.env.local` filtrado no exponga producción.
+
+## 2026-11-01 · `fesapy_app` se crea con SQL, no desde la consola de Neon
+**Por qué:** según la documentación de Neon, los roles creados por la consola, la CLI o la API son miembros de `neon_superuser` (CREATEDB, CREATEROLE, BYPASSRLS, todos los permisos en `public`). Los creados con SQL solo tienen lo concedido. También se revoca el acceso a `_prisma_migrations`.
+**Verificado:** la app lee las tablas, pero no puede crear, borrar, alterar ni vaciar tablas, ni crear roles.
+
+## 2026-11-01 · Scripts `db:*` con `node --env-file=.env.local`
+`npm run db:migrar`, `db:estado` y `db:studio` ejecutan la CLI de Prisma cargando `.env.local` con una opción nativa de Node.
+**Por qué:** la CLI de Prisma 6 solo lee `.env`; así los secretos viven en un solo archivo.
+**Descartado:** `dotenv-cli` (paquete nuevo innecesario); duplicar las variables en `.env`.
+
+## 2026-11-01 · Llaves de cifrado por rama de Neon; `DIRECT_URL` fuera de Vercel
+`DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET` son una por rama de Neon: los `.env.local` y Preview (todos sobre `development`) comparten las mismas; Production tiene las suyas. `AUTH_SECRET` es distinto en cada lugar. `DIRECT_URL` (rol dueño) solo existe en los computadores y en el gestor de contraseñas.
+**Por qué:** con llaves distintas sobre la misma base, nadie podría leer los datos cifrados por los otros. Vercel no necesita la URL del dueño para compilar ni para funcionar, y tenerla allí permitiría alterar tablas si se filtrara.
+**Cómo compartir secretos:** organización gratuita de Bitwarden para los dos (o Bitwarden Send con la contraseña por otro canal). Nunca por chat, correo ni GitHub.
 
 ## 2026-11-01 · Colores: dorado del logo en vez de amarillo
 `--amarillo` (#FFD100) se reemplaza por `--dorado: #E8B53E`, muestreado del logo "Fesapy Distribuciones" (dorado sobre negro). Se agrega `--crema: #F5F4F0` para fondos claros. `--gris: #4A4A4A` queda para texto secundario (el `#F4F4F4` que decía `CLAUDE.md` nunca se usó).

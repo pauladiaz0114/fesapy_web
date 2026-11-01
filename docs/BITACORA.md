@@ -33,9 +33,37 @@ Formato:
 - *Mobile first:* las clases sin prefijo son para celular; `sm:` y `lg:` cambian el diseño en pantallas más grandes.
 
 **Pendientes / notas:**
-- `TODO(contenido)`: número de WhatsApp (con 57, solo dígitos) y correo en `src/lib/contenido.ts`. Hasta entonces el botón abre WhatsApp sin destinatario.
+- Datos de contacto agregados el mismo día en `src/lib/contenido.ts`: WhatsApp `573123329422` (en el pie de página: +57 312 332 9422) y correo `asistente.fesapy@gmail.com`.
 - Reemplazar las fotos de referencia por fotos propias (sobre todo un overol con logo bordado) y conseguir el logo en SVG o PNG transparente.
 - `PLAN.md` todavía menciona 3 sedes en la tarea de contacto del Día 4; ajustar cuando se replanifique.
+
+---
+
+## 2026-11-01 — Día 1: base de datos en Neon y primera migración (Sebastián con Claude Code)
+**Qué se hizo:** (rama `chore/primera-migracion`)
+- `env.local.txt` (creado con el Bloc de notas) se renombró a `.env.local`: con el nombre anterior Git no lo ignoraba y Prisma/Next.js no lo leían.
+- Scripts `npm run db:migrar`, `db:estado` y `db:studio`, que cargan `.env.local` (la CLI de Prisma solo lee `.env`).
+- Primera migración `20261101153708_inicial` aplicada en la rama `production` de Neon: 2 enums, 6 tablas, 7 índices y la relación Producto → Categoria.
+- Rol `fesapy_app` creado **con SQL** (no por la consola, que lo haría miembro de `neon_superuser`), con solo SELECT/INSERT/UPDATE/DELETE, permisos por defecto para tablas futuras y sin acceso a `_prisma_migrations`.
+- Rama `development` creada desde `production`, con contraseñas propias para `fesapy_app` y `neondb_owner`.
+- `.env.local` apunta a `development`: `DATABASE_URL` con `fesapy_app` (pooled) y `DIRECT_URL` con `neondb_owner` (directa), ambas con `sslmode=require`; secretos generados con Node; llaves de prueba de Turnstile.
+- Verificado: `env.ts` acepta `.env.local`; `development` tiene la migración; `fesapy_app` lee las 6 tablas pero no puede crear, borrar, alterar ni vaciar tablas, leer `_prisma_migrations` ni crear roles (prueba con ROLLBACK, sin tocar datos); Prisma Studio muestra las tablas.
+- Se restauraron en `PLAN.md` las marcas `[x]` y la tarea de cookies que un commit anterior había revertido.
+
+**Archivos:** `package.json`, `prisma/migrations/`, `CLAUDE.md`, `.env.example`, `docs/ARQUITECTURA-Y-SEGURIDAD.md`, `docs/COLABORACION.md`, `docs/DECISIONES.md`, `docs/PLAN.md`.
+
+**Conceptos aprendidos:**
+- *Migración:* archivo SQL versionado que lleva la base de "como está" a "como dice el esquema". Se sube a Git; `_prisma_migrations` registra cuáles ya se aplicaron.
+- *Rama de Neon:* copia instantánea de la base para probar sin tocar producción.
+- *Mínimo privilegio en la base:* la app usa un rol que solo maneja datos; la estructura solo la cambia el dueño.
+- *Transacción y ROLLBACK:* agrupa cambios y permite deshacerlos todos; así se probó el bloqueo de `DROP TABLE` sin riesgo.
+- *Llave por base de datos:* quien comparte una base debe compartir la llave de cifrado, o no podrá leer lo que cifraron los demás.
+
+**Pendientes / notas:**
+- Paula: conectar Vercel y cargar variables (Production → `production`, Preview → `development`) según DECISIONES 2026-11-01; activar Deployment Protection.
+- Compartir con Paula, por Bitwarden, las contraseñas de `fesapy_app` y las llaves de `development`.
+- Guardar la `DIRECT_URL` de `production` en el gestor de contraseñas (para `migrate deploy` futuros).
+- Turnstile real en Production antes de publicar el formulario (Día 4).
 
 ---
 

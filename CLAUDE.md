@@ -49,8 +49,10 @@ npm run dev          # servidor local
 npm run build        # build de producción (debe pasar antes de abrir PR)
 npm run lint         # ESLint
 npm audit --audit-level=high --omit=dev   # vulnerabilidades en dependencias
-npx prisma migrate dev --name <nombre>   # nueva migración (solo una persona a la vez)
-npx prisma studio    # ver la base de datos
+npm run db:migrar -- --name <nombre>   # nueva migración en development (solo una persona a la vez)
+npm run db:estado    # qué migraciones faltan
+npm run db:studio    # ver la base de datos
+# Los db:* cargan .env.local (la CLI de Prisma sola solo lee .env). No usar npx prisma directo.
 ```
 
 ## Estructura

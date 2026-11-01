@@ -7,13 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "db:migrar": "node --env-file=.env.local node_modules/prisma/build/index.js migrate dev",
+    "db:estado": "node --env-file=.env.local node_modules/prisma/build/index.js migrate status",
+    "db:studio": "node --env-file=.env.local node_modules/prisma/build/index.js studio"
   },
   "dependencies": {
     "@prisma/client": "6.19.3",
     "next": "16.4.3",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "zod": "4.6.7"
   },
   "devDependencies": {
