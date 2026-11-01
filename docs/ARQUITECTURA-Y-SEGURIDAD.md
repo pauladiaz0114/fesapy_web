@@ -335,7 +335,7 @@ Capas, de la más barata a la más fuerte:
 - [ ] `.gitignore` incluye `.env*` excepto `.env.example`.
 - [ ] **gitleaks** en GitHub Actions en cada PR y push (bloquea el PR si encuentra un secreto).
 - [ ] Recomendado: gitleaks también como *pre-commit* local, para detectarlo antes de que salga del computador.
-- [ ] En GitHub: activar Secret scanning y Push protection **si aparecen** en Settings → Code security. En repos privados de cuentas gratuitas pueden no estar disponibles, y en ese caso gitleaks cubre esa función.
+- [ ] En GitHub: activar Secret scanning y Push protection en Settings → Advanced Security (gratis porque el repo es público). gitleaks se mantiene como segunda capa.
 
 **Detectar en el historial:** `gitleaks git .` revisa todos los commits, no solo el último. Correrlo una vez ahora y en CI.
 
@@ -353,7 +353,7 @@ Capas, de la más barata a la más fuerte:
 - [ ] `.npmrc` con `save-exact=true` (versiones exactas, sin `^`).
 - [ ] **Antes de instalar cualquier paquete nuevo**, Claude Code debe proponerlo y esperar aprobación, verificando: nombre exacto (cuidado con *typosquatting*: `reactt`, `next-auht`), descargas semanales, fecha de la última versión, repositorio público y licencia. Registrar en `DECISIONES.md` por qué se agregó.
 - [ ] Revisar `npm audit` antes de cada despliegue a producción. Si una vulnerabilidad alta no tiene arreglo, documentar por qué no afecta o reemplazar el paquete.
-- CodeQL (análisis de código) es gratis solo en repos públicos. Si el repo se vuelve público, activarlo.
+- [ ] **CodeQL** (análisis de código): activarlo con *Default setup* en Settings → Advanced Security (gratis porque el repo es público).
 
 ### 6.18 Cifrar datos sensibles
 **Ya cifrado sin hacer nada:** en tránsito (HTTPS y TLS a Neon) y en reposo (Neon cifra los discos con AES-256).
@@ -381,7 +381,7 @@ Capas, de la más barata a la más fuerte:
 
 ### 6.20 Cuentas y plataformas
 - [ ] 2FA en GitHub, Vercel, Neon, Resend, Cloudflare y en los correos de los administradores.
-- [ ] Repo privado; solo los dos como colaboradores.
+- [ ] Repo **público** (decisión 2026-11-01); solo los dos como colaboradores, `main` protegida con PR obligatorio y revisiones de la CI. Al ser público, cualquiera ve el código y el historial (incluidos los correos de los commits): **la seguridad nunca depende de que el código sea secreto**, solo de los secretos fuera del repo.
 - [ ] Vercel: activar **Deployment Protection** en las previsualizaciones (solo personas con acceso a Vercel las ven).
 - [ ] Resend: verificar el dominio con SPF, DKIM y DMARC cuando exista el dominio propio, para que nadie se haga pasar por Fesapy por correo.
 

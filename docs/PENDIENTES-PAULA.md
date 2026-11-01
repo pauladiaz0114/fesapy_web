@@ -3,32 +3,32 @@
 Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **para qué sirve** y **cómo funciona**, en corto.
 
 > Tu papel en el proyecto: eres dueña del repo y de Vercel, y te encargas de **lo que se ve** (componentes, páginas, diseño, textos, pruebas en celular). Sebastián se encarga de **lo que va por debajo** (base de datos, seguridad, login). Cada uno revisa los PR del otro.
+>
+> **Cómo trabajas:** escribes el código tú misma y usas **Claude (el chat)** para investigar y resolver dudas. No usas Claude Code. Sebastián sí lo usa.
 
 ---
 
-## 1. Resolver el bloqueo de Vercel (urgente)
+## 1. Pasar el repo a público (resuelve el bloqueo de Vercel)
 - [x] Plan del equipo **fesapy** en Vercel: **Hobby** (confirmado).
-- [ ] Decidan juntos una opción (abajo) y anótenla en `docs/DECISIONES.md`.
+- [x] Decisión: el repo pasa a **público** (anotada en `docs/DECISIONES.md`).
+- [ ] GitHub → repo `fesapy_web` → **Settings → General** → abajo del todo, **Danger Zone → Change repository visibility → Change to public**. GitHub pide escribir el nombre del repo para confirmar.
+- [ ] Ya público, en **Settings → Advanced Security** (puede llamarse *Code security*) activa:
+  - **Dependabot alerts** y **Dependabot security updates**
+  - **Secret scanning** y **Push protection**
+  - **Code scanning → CodeQL → Default setup**
+- [ ] **Settings → Rules → Rulesets** (o *Branches*): crea una regla para `main` que exija **Pull Request** antes de fusionar y que pasen las revisiones **"Lint, build y audit"** y **"Gitleaks"**. En repos públicos es gratis.
+- [ ] Avísale a Sebastián cuando esté listo: él vuelve a subir un cambio al PR #6 y Vercel debería crear la vista previa.
 
-**Qué pasa:** Vercel no quiere publicar los commits de Sebastián porque su cuenta (`sebashooo`) no es miembro de tu equipo de Vercel. Por eso el PR #6 muestra ❌ en Vercel, aunque el código está bien.
-
-**Lo que dice Vercel** ([documentación](https://vercel.com/docs/deployments/troubleshoot-project-collaboration)): el plan **Hobby** no permite colaborar en repos **privados**: solo se publican los commits de la dueña de la cuenta (tú). **No hay forma de invitar a Sebastián en Hobby**. En repos **públicos** colaborar es gratis.
-
-**Opciones con Hobby:**
-| Opción | Ventaja | Cuidado |
-|---|---|---|
-| Dejar el repo **público** en GitHub | Gratis; todo funciona normal; GitHub además da gratis secret scanning, push protection y CodeQL | Cualquiera ve el código y **todo el historial**, incluidos los correos de los autores de los commits. No hay secretos en el repo (gitleaks lo revisa). Hay que avisar a la dueña de Fesapy y actualizar "repo privado" en `ARQUITECTURA-Y-SEGURIDAD.md` §6.20 y `COLABORACION.md` §8 |
-| Pasar a **Pro** e invitar a Sebastián | Repo privado y todo funciona normal | Cuesta dinero: plan Pro más el asiento de cada miembro (precios en vercel.com/pricing). Ojo: Hobby es solo para uso **no comercial**, así que al lanzar oficialmente la página de Fesapy probablemente haya que pasar a Pro de todas formas (`ARQUITECTURA-Y-SEGURIDAD.md` §1) |
-| Seguir en Hobby con el repo privado | Gratis, nada cambia | Los PR de Sebastián nunca tienen vista previa, y como "Squash and merge" deja el commit a nombre de quien abrió el PR, `main` **no se publica** cuando el último cambio es de Sebastián. Solo sirve como solución temporal |
-
-**Cómo funciona:** Vercel publica la página cada vez que llega un commit a GitHub, pero primero revisa que el autor del commit tenga permiso en el equipo de Vercel.
+**Qué pasaba:** Vercel no publicaba los commits de Sebastián porque su cuenta (`sebashooo`) no es miembro de tu equipo, y el plan **Hobby** no permite colaborar en repos **privados** ([documentación de Vercel](https://vercel.com/docs/deployments/troubleshoot-project-collaboration)). En repos **públicos** colaborar es gratis.
+**Qué cambia:** cualquiera puede ver el código y **todo el historial**, incluidos los correos con los que se hicieron los commits. **No hay secretos en el repo**: gitleaks revisa todo el historial en cada PR, y `.env.local` nunca se sube. A cambio, GitHub da gratis el escaneo de secretos, el bloqueo al subir una clave por error (push protection) y CodeQL, que busca errores de seguridad en el código.
+**Para recordar:** el plan Hobby de Vercel es solo para uso **no comercial**. Cuando la página de Fesapy salga oficialmente, revisen si hay que pasar a Pro (`ARQUITECTURA-Y-SEGURIDAD.md` §1).
 
 ---
 
 ## 2. Revisar y fusionar el PR #6 (base de datos)
 - [ ] Abre https://github.com/pauladiaz0114/fesapy_web/pull/6 → pestaña **Files changed** → mira los cambios.
-- [ ] Revisa especialmente `docs/PLAN.md`: Claude Code restauró tareas que se borraron sin querer en un commit anterior. Si algo lo quitaste a propósito, coméntalo en el PR.
-- [ ] Si todo está bien: **Squash and merge** → **Confirm** → **Delete branch**. El ❌ de Vercel no impide fusionar (es el bloqueo del paso 1); lo que importa es que "Lint, build y audit" y "Gitleaks" estén en ✅.
+- [ ] Revisa especialmente `docs/PLAN.md`: Sebastián restauró tareas que se borraron sin querer en un commit anterior. Si algo lo quitaste a propósito, coméntalo en el PR.
+- [ ] Si todo está bien: **Squash and merge** → **Confirm** → **Delete branch**. Lo que importa es que "Lint, build y audit" y "Gitleaks" estén en ✅.
 - [ ] En tu computador: `git checkout main`, `git pull` y `npm ci` (instala lo necesario y prepara Prisma).
 
 **Para qué:** este PR crea la base de datos del sitio (6 tablas) y agrega los comandos para manejarla.
@@ -36,19 +36,21 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 
 ---
 
-## 3. Crear tu cuenta en Bitwarden (gestor de contraseñas)
-- [ ] Crea una cuenta gratis en bitwarden.com e instala la extensión del navegador o la app. Usa una contraseña maestra larga que no uses en ningún otro lado: si la olvidas, Bitwarden no puede recuperarla.
-- [ ] Activa la verificación en dos pasos de Bitwarden (Settings → Security → Two-step login).
-- [ ] Pásale a Sebastián el correo de tu cuenta: él crea una **organización gratuita** (permite 2 personas) con una colección "Fesapy" y te invita. Ahí quedan las claves compartidas.
+## 3. Recibir las claves de Sebastián
+- [ ] Sebastián te manda por mensaje **directo y privado**:
+  - Su `.env.local` con los valores de **development** (base de pruebas).
+  - La `DATABASE_URL` de **production** con el rol `fesapy_app` (para Vercel).
+- [ ] Cuando ya las hayas cargado (pasos 4 y 5), **borra el mensaje** en los dos lados y el archivo de tu carpeta de Descargas.
 
-**Para qué:** las contraseñas de la base de datos y las llaves secretas **nunca** se mandan por WhatsApp ni se pegan en chats. Bitwarden las guarda cifradas y permite compartirlas de forma segura.
+**Para qué:** son las llaves para conectarse a la base de datos.
+**Cuidados:** nunca las subas al repo (ahora es **público**: lo vería cualquiera), ni las pegues en issues, comentarios de PR ni en Claude. Si alguna se filtra, avisa a Sebastián de inmediato: hay que cambiarla en Neon (rotarla). Borrar el mensaje no basta.
 
 ---
 
-## 4. Crear tu `.env.local` (cuando Sebastián te comparta las claves)
+## 4. Crear tu `.env.local`
 - [ ] En tu carpeta: `copy .env.example .env.local` y ábrelo con VS Code (`code .env.local`). No uses el Bloc de notas: le agrega `.txt` al nombre y entonces no funciona.
-- [ ] Pega los valores de **development** que te compartió Sebastián por Bitwarden: `DATABASE_URL`, `DIRECT_URL`, `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET`.
-- [ ] `AUTH_SECRET` la generas **tú** (es distinta para cada persona). En la terminal:
+- [ ] Pega los valores de **development** que te mandó Sebastián: `DATABASE_URL`, `DIRECT_URL`, `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET`.
+- [ ] `AUTH_SECRET` la generas **tú** (es distinta para cada persona; no uses la de Sebastián). En la terminal:
   `node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"`
 - [ ] Turnstile: usa las llaves de **prueba** de Cloudflare (siempre aprueban, solo para local):
   `TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA` y `NEXT_PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA`
@@ -60,17 +62,18 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 
 ---
 
-## 5. Cargar las variables en Vercel (con Sebastián)
-- [ ] Vercel → tu proyecto del sitio → **Settings → Environment Variables**. Cada variable: marca **solo** su entorno y activa **Sensitive** (así nadie puede volver a leer el valor).
+## 5. Cargar las variables en Vercel
+- [ ] Vercel → tu proyecto del sitio → **Settings → Environment Variables**. Cada variable: marca **solo** su entorno y activa **Sensitive** (así nadie puede volver a leer el valor desde Vercel).
 - [ ] **Preview** (base `development`):
   - `DATABASE_URL`: la misma de tu `.env.local` (rol `fesapy_app`).
   - `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET`: las **mismas** de tu `.env.local` (misma base = misma llave).
   - `AUTH_SECRET`: una **nueva** (genérala con el comando del paso 4).
   - Turnstile: las llaves de prueba.
 - [ ] **Production** (base `production`):
-  - `DATABASE_URL`: la de `production` con el rol **`fesapy_app`** que te comparte Sebastián (nunca con `neondb_owner`).
-  - `AUTH_SECRET`, `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET`: **nuevas**, generadas por ti. Guarda la `DATA_ENCRYPTION_KEY` en Bitwarden: **si se pierde, los datos cifrados no se recuperan**.
+  - `DATABASE_URL`: la de `production` con el rol **`fesapy_app`** que te mandó Sebastián (nunca con `neondb_owner`).
+  - `AUTH_SECRET`, `DATA_ENCRYPTION_KEY` e `IP_HASH_SECRET`: **nuevas**, generadas por ti con el comando del paso 4.
   - Turnstile: llaves de prueba por ahora; las reales de Cloudflare antes de publicar el formulario (Día 4).
+- [ ] **Guarda una copia de la `DATA_ENCRYPTION_KEY` de Production fuera de Vercel**, por ejemplo como contraseña en el gestor de tu navegador o de tu celular, y pásale otra copia a Sebastián por mensaje privado (luego bórrenlo). Como la marcaste *Sensitive*, Vercel no deja volver a verla, y **si se pierde, los datos cifrados no se recuperan**.
 - [ ] **No** se cargan en Vercel: `DIRECT_URL` (solo sirve en el computador para crear tablas; si se filtrara permitiría borrarlas), `ADMIN_EMAILS` (solo la usa un script local), `RESEND_API_KEY` y `BLOB_READ_WRITE_TOKEN` (llegan el Día 4 y 5).
 
 **Para qué:** la página publicada también necesita las claves para conectarse a la base.
@@ -82,14 +85,14 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 - [ ] Vercel → **Settings → Deployment Protection** → activar para **Preview**.
 
 **Para qué:** que solo ustedes vean las versiones en prueba. La página principal (el dominio de producción `.vercel.app`) sí queda pública.
-**Ojo:** las vistas previas protegidas solo las abren los miembros del equipo de Vercel. En Hobby Sebastián no puede ser miembro, así que no podrá abrirlas; si eligen repo público, revisen en **Deployment Protection** cómo compartirle el acceso a las vistas previas.
+**Ojo:** las vistas previas protegidas solo las abren los miembros del equipo de Vercel, y en Hobby Sebastián no puede ser miembro. Para que él pruebe un PR desde su celular, revisen en **Deployment Protection** la opción de compartir el enlace de esa vista previa.
 
 ---
 
 ## 7. Verificación en dos pasos (2FA)
-- [ ] GitHub → Settings → **Password and authentication** → activar 2FA.
-- [ ] Vercel → Settings → activar 2FA.
-- [ ] Bitwarden: ya quedó en el paso 3. Más adelante, también en Resend y Cloudflare cuando se creen esas cuentas.
+- [x] GitHub → Settings → **Password and authentication** → 2FA activado.
+- [x] Vercel → 2FA activado.
+- [ ] Más adelante: también en Resend y Cloudflare cuando se creen esas cuentas.
 
 **Para qué:** aunque alguien consiga tu contraseña, no puede entrar sin el código de tu celular. Como eres la dueña del repo y de Vercel, esto protege todo el proyecto.
 
@@ -112,43 +115,69 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 ---
 
 ## 10. Tu primera tarea de código (Día 2)
-Cuando los pasos 2 y 9 estén listos:
+Cuando los pasos 2 y 9 estén listos.
+
+**Antes de empezar:** hoy `PLAN.md` asigna Header, Footer y botón de WhatsApp a la persona **A (Sebastián)**. Si ahora los haces tú, acuérdenlo y cambien la letra en `PLAN.md` (paso b), para no hacer el mismo trabajo dos veces.
+
+**a) Ponerte al día** (en la terminal de VS Code, dentro de la carpeta del proyecto):
 ```
-cd ~\Documents\fesapy-web
 git checkout main
 git pull
 npm ci
-claude
-```
-Y pégale a Claude Code:
-```
-Estoy en main recién actualizado. Lee CLAUDE.md, docs/PLAN.md y docs/COLABORACION.md.
-Soy Paula. Vamos a hacer mis tareas del Día 2 que no dependen de la base de datos:
-0. Primero, según COLABORACION.md: marca en PLAN.md mis tareas con [~] (Paula), haz
-   commit y push de ese cambio a main.
-1. Crea la rama feat/componentes-base.
-2. Componentes en src/components/ui/: Boton (variantes amarillo y negro), Tarjeta,
-   Input y TituloSeccion, siguiendo el diseño de CLAUDE.md (nunca texto amarillo
-   sobre blanco, Barlow Condensed en títulos, mobile first).
-3. Header con menú responsive (hamburguesa en celular) y Footer con sedes y redes en
-   src/components/sitio/. Donde falten datos reales usa TODO(contenido).
-4. Botón flotante de WhatsApp (número como TODO(contenido), texto con encodeURIComponent).
-5. Úsalos en el layout y en la página de inicio provisional.
-Explícame cada paso en español sencillo. Antes de terminar ejecuta npm run dev y dime
-cómo verlo en el navegador. Al final: npm run lint y npm run build sin errores, entrada
-en BITACORA.md, tareas marcadas en PLAN.md, commit y push de la rama, y dime cómo abrir
-el Pull Request.
 ```
 
-**Antes de empezar:** hoy `PLAN.md` asigna Header, Footer y botón de WhatsApp a la persona **A (Sebastián)**. Si ahora los haces tú, acuérdenlo y cambien la letra en `PLAN.md` en el paso 0, para no hacer el mismo trabajo dos veces.
+**b) Tomar la tarea** (lo único que se sube directo a `main`, según `COLABORACION.md`): en `docs/PLAN.md` cambia `[ ]` por `[~] (Paula)` en tus tareas y luego:
+```
+git add docs/PLAN.md
+git commit -m "docs: tomo tareas de componentes (Paula)"
+git push
+```
+
+**c) Crear tu rama y abrir el sitio:**
+```
+git checkout -b feat/componentes-base
+npm run dev
+```
+Abre http://localhost:3000. Cada vez que guardes un archivo, la página se actualiza sola.
+
+**d) Qué construir:**
+1. En `src/components/ui/`: `Boton` (variantes amarillo y negro), `Tarjeta`, `Input` y `TituloSeccion`.
+2. En `src/components/sitio/`: `Header` con menú responsive (hamburguesa en celular) y `Footer` con sedes y redes. Donde falten datos reales, escribe `TODO(contenido): ...` visible.
+3. Botón flotante de WhatsApp (número como `TODO(contenido)`, texto con `encodeURIComponent`).
+4. Úsalos en `src/app/layout.tsx` y en la página de inicio provisional.
+
+Reglas de diseño (en `CLAUDE.md`, sección *Diseño*): nunca texto amarillo sobre fondo blanco, Barlow Condensed en títulos (mayúsculas, peso 700), colores con las clases de los tokens (`bg-amarillo`, `text-negro`…), mobile first (diseña primero para celular).
+
+**e) Antes de subir** (las dos deben terminar sin errores; la CI las vuelve a correr en el PR):
+```
+npm run lint
+npm run build
+```
+
+**f) Documentar:** agrega tu entrada arriba en `docs/BITACORA.md` (el formato está al inicio de ese archivo) y marca tus tareas `[x]` en `docs/PLAN.md`.
+
+**g) Subir y abrir el PR:**
+```
+git add .
+git commit -m "feat: componentes base, header, footer y botón de WhatsApp"
+git push -u origin feat/componentes-base
+```
+En GitHub aparece el botón **Compare & pull request**. Describe qué hiciste, agrega capturas de celular y pídele revisión a Sebastián.
+
+**Cómo usar Claude (el chat) para investigar:**
+- Dile siempre la versión del proyecto: *"Uso Next.js 16 con App Router, React 19, TypeScript estricto y Tailwind CSS v4 (los colores van con `@theme` en `globals.css`)"*. Claude a veces responde con versiones viejas: si algo no funciona, revisa la guía oficial que viene en el proyecto, en `node_modules/next/dist/docs/`.
+- Para un error, pega el mensaje completo y el pedazo de código donde ocurre.
+- Puedes pegarle las reglas de `CLAUDE.md` para que sus sugerencias las respeten.
+- **Nunca** le pegues el contenido de `.env.local` ni ninguna clave.
 
 **Para qué:** son las piezas visuales que usarán todas las páginas.
-**Cómo funciona:** Claude Code trabaja en una **rama** (una copia aparte), así no afectas `main` ni el trabajo de Sebastián. Al final abres un PR; él lo revisa con el link de vista previa desde el celular.
+**Cómo funciona:** trabajas en una **rama** (una copia aparte), así no afectas `main` ni el trabajo de Sebastián. Al final abres un PR; él lo revisa con el link de vista previa desde el celular.
 
 ---
 
 ## Reglas para no olvidar
-- Nunca trabajes directo en `main`: siempre en una rama.
+- Nunca trabajes directo en `main`: siempre en una rama (la única excepción es tomar una tarea en `PLAN.md`).
 - Antes de empezar cada día: `git checkout main` y `git pull`.
+- El repo es **público**: nunca subas contraseñas, claves ni `.env.local`. Antes de cada commit, mira qué vas a subir con `git status`.
 - Nunca pegues contraseñas ni el contenido de `.env.local` en chats (ni en WhatsApp ni en Claude).
-- Si algo falla, copia el mensaje de error (sin claves) y pregúntale a Claude Code qué significa.
+- Si algo falla, copia el mensaje de error (sin claves) y pregúntale a Claude qué significa.

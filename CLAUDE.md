@@ -21,7 +21,7 @@ Detalles completos en `docs/BRIEF.md`.
 No hay pagos en línea ni precios públicos (por ahora).
 
 ## Equipo y forma de trabajo
-- Dos personas trabajan en este repo, cada una con su propio Claude Code. Ambas están aprendiendo.
+- Dos personas trabajan en este repo y ambas están aprendiendo. **Sebastián** usa Claude Code (base de datos, seguridad, login). **Paula** escribe el código ella misma (lo visual) y usa Claude en el chat solo para investigar. Por eso todo lo que Claude Code deje en el repo debe poder entenderlo y mantenerlo alguien sin Claude Code.
 - **Explica siempre lo que haces** en español sencillo: qué archivo tocaste, por qué y qué concepto hay detrás. Al final de cada tarea, resume en 3 a 6 viñetas.
 - **Documenta cada tarea terminada** en `docs/BITACORA.md` (formato al inicio de ese archivo).
 - **Toda decisión técnica relevante** (librería nueva, cambio de estructura, cambio de modelo de datos, cambio de seguridad) va en `docs/DECISIONES.md`.
@@ -112,7 +112,7 @@ Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea c
 - Errores genéricos al usuario. En logs, solo ids, **nunca** correos, teléfonos ni NIT.
 
 **Secretos**
-- Nunca subir secretos al repo. Todo va en `.env.local` (ignorado) y en Vercel. `.env.example` actualizado sin valores.
+- Nunca subir secretos al repo: **es público**. Todo va en `.env.local` (ignorado) y en Vercel. `.env.example` actualizado sin valores.
 - Solo `src/lib/env.ts` lee `process.env`. La única variable `NEXT_PUBLIC_` permitida es `NEXT_PUBLIC_TURNSTILE_SITE_KEY`.
 - Nunca imprimas en la terminal ni copies al chat el contenido de `.env.local`.
 

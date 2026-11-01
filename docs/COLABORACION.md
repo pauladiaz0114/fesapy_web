@@ -1,8 +1,8 @@
 # Cómo trabajamos juntos (Git y GitHub)
 
-Somos dos personas, cada una con su propio Claude Code, trabajando en el mismo repo. Estas reglas sirven para no pisarnos el trabajo.
+Somos dos personas trabajando en el mismo repo: Sebastián con Claude Code y Paula escribiendo el código ella misma (con Claude en el chat para investigar). Estas reglas sirven para no pisarnos el trabajo, sin importar con qué herramienta trabaje cada uno.
 
-> **Paula:** tu lista de configuración y primeros pasos (Vercel, Bitwarden, `.env.local`, 2FA, primera tarea) está en [`PENDIENTES-PAULA.md`](PENDIENTES-PAULA.md).
+> **Paula:** tu lista de configuración y primeros pasos (repo público, Vercel, `.env.local`, 2FA, primera tarea) está en [`PENDIENTES-PAULA.md`](PENDIENTES-PAULA.md).
 
 ## 1. Ramas
 
@@ -117,7 +117,7 @@ Buenas prácticas:
 ### Conflictos en migraciones de Prisma
 Nunca edites una migración que ya está en `main`. Si los dos crearon migraciones a la vez, quien fusione de segundo borra **su** migración nueva (no la del otro), trae `main` y vuelve a correr `npx prisma migrate dev --name ...`.
 
-## 6. Trabajar con Claude Code
+## 6. Trabajar con Claude Code (Sebastián)
 
 - Al iniciar cada sesión, díganle en qué rama están y qué tarea van a hacer, por ejemplo: *"Estoy en feat/header. Vamos a hacer la tarea Header + Footer del Día 2 de PLAN.md."*
 - Claude Code sigue `CLAUDE.md`. Si cambian una regla del proyecto, actualicen `CLAUDE.md` en el mismo PR.
@@ -132,8 +132,8 @@ Nunca edites una migración que ya está en `main`. Si los dos crearon migracion
 
 ## 8. Configuración de GitHub (una sola vez)
 
-- [ ] Repo **privado** y los dos como colaboradores
+- [ ] Repo **público** (decisión 2026-11-01: el plan Hobby de Vercel no permite colaborar en repos privados) y los dos como colaboradores
 - [ ] 2FA activado en ambas cuentas
-- [ ] Settings → Code security: **Secret scanning**, **Push protection** y **Dependabot**
+- [ ] Settings → Advanced Security: **Secret scanning**, **Push protection**, **Dependabot** y **CodeQL** (gratis en repos públicos)
 - [ ] Settings → General → Pull Requests: dejar activo solo **"Allow squash merging"** y activar **"Automatically delete head branches"**
-- [ ] Protección de `main` (Settings → Branches/Rules): exigir PR antes de fusionar. *Puede que no esté disponible en repos privados del plan gratuito de GitHub. Si no aparece, la regla se cumple por acuerdo entre los dos.*
+- [ ] Protección de `main` (Settings → Rules): exigir PR antes de fusionar y que pasen "Lint, build y audit" y "Gitleaks". Gratis en repos públicos.
