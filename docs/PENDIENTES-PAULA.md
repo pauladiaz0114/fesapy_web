@@ -12,7 +12,7 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 - [x] Plan del equipo **fesapy** en Vercel: **Hobby** (confirmado).
 - [x] Decisión: el repo pasa a **público** (anotada en `docs/DECISIONES.md`).
 - [X] GitHub → repo `fesapy_web` → **Settings → General** → abajo del todo, **Danger Zone → Change repository visibility → Change to public**. GitHub pide escribir el nombre del repo para confirmar.
-- [ ] Ya público, en **Settings → Advanced Security** (puede llamarse *Code security*) activa:
+- [x] Ya público, en **Settings → Advanced Security** (puede llamarse *Code security*) activa:
   - **Dependabot alerts** y **Dependabot security updates**
   - **Secret scanning** y **Push protection**
   - **Code scanning → CodeQL → Default setup**
