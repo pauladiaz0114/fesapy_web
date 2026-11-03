@@ -26,10 +26,10 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
 ---
 
 ## 2. Revisar y fusionar el PR #6 (base de datos)
-- [ ] Abre https://github.com/pauladiaz0114/fesapy_web/pull/6 → pestaña **Files changed** → mira los cambios.
-- [ ] Revisa especialmente `docs/PLAN.md`: Sebastián restauró tareas que se borraron sin querer en un commit anterior. Si algo lo quitaste a propósito, coméntalo en el PR.
-- [ ] Si todo está bien: **Squash and merge** → **Confirm** → **Delete branch**. Lo que importa es que "Lint, build y audit" y "Gitleaks" estén en ✅.
-- [ ] En tu computador: `git checkout main`, `git pull` y `npm ci` (instala lo necesario y prepara Prisma).
+- [x] Abre https://github.com/pauladiaz0114/fesapy_web/pull/6 → pestaña **Files changed** → mira los cambios.
+- [x] Revisa especialmente `docs/PLAN.md`: Sebastián restauró tareas que se borraron sin querer en un commit anterior. Si algo lo quitaste a propósito, coméntalo en el PR.
+- [x] Si todo está bien: **Squash and merge** → **Confirm** → **Delete branch**. Lo que importa es que "Lint, build y audit" y "Gitleaks" estén en ✅.
+- [x] En tu computador: `git checkout main`, `git pull` y `npm ci` (instala lo necesario y prepara Prisma).
 
 **Para qué:** este PR crea la base de datos del sitio (6 tablas) y agrega los comandos para manejarla.
 **Cómo funciona:** un PR es una propuesta de cambios; tú la revisas antes de que pase a `main`, que es la versión oficial. "Squash" junta todos los commits en uno para que el historial quede limpio.
