@@ -16,8 +16,8 @@ Lista en orden. Marca `[x]` cuando termines. Cada paso dice **qué hacer**, **pa
   - **Dependabot alerts** y **Dependabot security updates**
   - **Secret scanning** y **Push protection**
   - **Code scanning → CodeQL → Default setup**
-- [ ] **Settings → Rules → Rulesets** (o *Branches*): crea una regla para `main` que exija **Pull Request** antes de fusionar y que pasen las revisiones **"Lint, build y audit"** y **"Gitleaks"**. En repos públicos es gratis.
-- [ ] Avísale a Sebastián cuando esté listo: él vuelve a subir un cambio al PR #6 y Vercel debería crear la vista previa.
+- [x] **Settings → Rules → Rulesets** (o *Branches*): crea una regla para `main` que exija **Pull Request** antes de fusionar y que pasen las revisiones **"Lint, build y audit"** y **"Gitleaks"**. En repos públicos es gratis.
+- [x] Avísale a Sebastián cuando esté listo: él vuelve a subir un cambio al PR #6 y Vercel debería crear la vista previa.
 
 **Qué pasaba:** Vercel no publicaba los commits de Sebastián porque su cuenta (`sebashooo`) no es miembro de tu equipo, y el plan **Hobby** no permite colaborar en repos **privados** ([documentación de Vercel](https://vercel.com/docs/deployments/troubleshoot-project-collaboration)). En repos **públicos** colaborar es gratis.
 **Qué cambia:** cualquiera puede ver el código y **todo el historial**, incluidos los correos con los que se hicieron los commits. **No hay secretos en el repo**: gitleaks revisa todo el historial en cada PR, y `.env.local` nunca se sube. A cambio, GitHub da gratis el escaneo de secretos, el bloqueo al subir una clave por error (push protection) y CodeQL, que busca errores de seguridad en el código.
