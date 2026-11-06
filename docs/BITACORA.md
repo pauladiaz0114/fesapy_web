@@ -13,6 +13,13 @@ Formato:
 
 ---
 
+## 2026-11-01 — Lista de pendientes para Paula (Sebastián con Claude Code)
+**Qué se hizo:** (rama `docs/pendientes-paula`) se agregó `docs/PENDIENTES-PAULA.md` (Vercel, PR #6, Bitwarden, `.env.local`, variables de Vercel, Deployment Protection, 2FA, colores y primera tarea) y un enlace en `COLABORACION.md`. Se corrigió según la documentación de Vercel (en Hobby no se puede invitar en repos privados), las llaves por rama de Neon, qué variables no van en Vercel, la variable vacía que `env.ts` rechaza y el reparto de tareas del Día 2.
+**Archivos:** `docs/PENDIENTES-PAULA.md`, `docs/COLABORACION.md`.
+**Conceptos aprendidos:** *conflicto evitable:* el enlace va en `COLABORACION.md` y no en `PLAN.md` porque el PR #6 cambia muchas líneas de `PLAN.md`.
+**Actualización (mismo día):** el equipo de Vercel es Hobby → se decide **repo público** (pasos para hacerlo y activar secret scanning, push protection, CodeQL y protección de `main`). Paula ya activó 2FA en GitHub y Vercel. Sin Bitwarden por ahora: las claves se envían por mensaje directo y se borran después. Paula no usa Claude Code: el paso 10 pasó a ser una guía manual (git, `npm run dev`, lint, build, PR) con consejos para investigar con Claude en el chat. Se actualizaron `CLAUDE.md`, `COLABORACION.md` y `ARQUITECTURA-Y-SEGURIDAD.md` (§6.16, §6.17, §6.20).
+**Pendientes / notas:** Paula pasa el repo a público. Después de fusionar el PR #6: cambiar "privado" en la tarea del Día 1 de `PLAN.md` y la línea de Bitwarden de `DECISIONES.md` (se dejaron para evitar conflictos).
+
 ## 2026-11-01 — Página de inicio simple (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/pagina-inicio`)
 - Colores: `--dorado: #E8B53E` (del logo) reemplaza a `--amarillo`, y se agregó `--crema: #F5F4F0`. Se actualizaron `CLAUDE.md` (colores, nombre "Fesapy Distribuciones", una sola sede) y `BRIEF.md`.

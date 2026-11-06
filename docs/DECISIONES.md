@@ -110,6 +110,20 @@ ESLint marca como error leer `process.env` fuera de `env.ts`, `env.client.ts` y 
 Aviso de consentimiento con "Aceptar" y "Rechazar" igual de visibles; las cookies no esenciales (analítica, terceros) no se cargan hasta aceptar. Las necesarias (sesión del panel) no piden permiso. Tarea del Día 4 junto a la política de datos.
 **Por qué:** la Ley 1581 exige autorización previa para tratar datos personales, y las cookies de analítica pueden recogerlos.
 
+## 2026-11-01 · Repo público en GitHub
+El equipo de Vercel es Hobby, que no permite colaborar en repos privados: los commits de Sebastián no se publicaban. Se pasa el repo a público.
+**Por qué:** gratis; además GitHub da sin costo secret scanning, push protection, CodeQL y protección de `main`. No hay secretos en el repo (gitleaks revisa todo el historial).
+**Costo:** el código y el historial son visibles, incluidos los correos de los autores de los commits.
+**Descartado:** pasar a Vercel Pro (pago por plan y por miembro). Se reevalúa al lanzar oficialmente, porque Hobby es solo para uso no comercial.
+
+## 2026-11-01 · Secretos por mensaje directo (sin gestor de contraseñas por ahora)
+Sebastián le envía a Paula los valores por mensaje privado; se borra el mensaje después de cargarlos. Bitwarden queda pospuesto.
+**Cuidado:** la `DATA_ENCRYPTION_KEY` de Production se guarda fuera de Vercel (Vercel no deja volver a verla si es *Sensitive*); sin copia, los datos cifrados no se recuperan.
+
+## 2026-11-01 · Paula no usa Claude Code
+Paula escribe el código ella misma y usa Claude en el chat para investigar. Su guía de trabajo está en `docs/PENDIENTES-PAULA.md` (paso 10).
+**Por qué:** decisión del equipo. Consecuencia: el código y la documentación deben poder entenderse y mantenerse sin Claude Code.
+
 ## 2026-11-01 · Ramas de Neon: `production` y `development`
 La rama principal de Neon se llama `production`; `development` se creó desde ella (hereda tablas, roles y permisos). En `development` se cambiaron las contraseñas de `fesapy_app` y `neondb_owner`.
 **Por qué:** nombres que coinciden con los entornos de Vercel; contraseñas distintas para que un `.env.local` filtrado no exponga producción.
