@@ -20,6 +20,58 @@ Formato:
 **Actualización (mismo día):** el equipo de Vercel es Hobby → se decide **repo público** (pasos para hacerlo y activar secret scanning, push protection, CodeQL y protección de `main`). Paula ya activó 2FA en GitHub y Vercel. Sin Bitwarden por ahora: las claves se envían por mensaje directo y se borran después. Paula no usa Claude Code: el paso 10 pasó a ser una guía manual (git, `npm run dev`, lint, build, PR) con consejos para investigar con Claude en el chat. Se actualizaron `CLAUDE.md`, `COLABORACION.md` y `ARQUITECTURA-Y-SEGURIDAD.md` (§6.16, §6.17, §6.20).
 **Pendientes / notas:** Paula pasa el repo a público. Después de fusionar el PR #6: cambiar "privado" en la tarea del Día 1 de `PLAN.md` y la línea de Bitwarden de `DECISIONES.md` (se dejaron para evitar conflictos).
 
+## 2026-11-01 — Página de inicio simple (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/pagina-inicio`)
+- Colores: `--dorado: #E8B53E` (del logo) reemplaza a `--amarillo`, y se agregó `--crema: #F5F4F0`. Se actualizaron `CLAUDE.md` (colores, nombre "Fesapy Distribuciones", una sola sede) y `BRIEF.md`.
+- `src/lib/contenido.ts` (nombre, lema, ciudad; WhatsApp y correo como `TODO(contenido)`) y `src/lib/whatsapp.ts` (enlace `wa.me` con mensaje prellenado y `encodeURIComponent`).
+- Página de inicio sin menú: encabezado negro con logo y botón dorado, portada crema con collage 2x2, "Lo que ofrecemos" (4 puntos), "Sectores que atendemos" (3 tarjetas), franja dorada, pie de página y botón flotante de WhatsApp con `aria-label`.
+- 4 fotos de referencia de Pexels optimizadas en `public/referencia/` y `docs/CREDITOS-IMAGENES.md`.
+- Metadata de la página (título y descripción); `lang="es-CO"` ya estaba.
+- Verificado: lint y build sin errores, página estática, un solo `h1`, enlaces con `noopener noreferrer`, CSP sin cambios, capturas en celular y escritorio.
+
+**Archivos:** `src/app/globals.css`, `src/app/layout.tsx`, `src/app/page.tsx`, `src/lib/contenido.ts`, `src/lib/whatsapp.ts`, `src/components/ui/` (BotonWhatsApp, iconos), `src/components/sitio/` (Encabezado, Logo, PiePagina, WhatsAppFlotante), `src/components/inicio/` (Portada, CollageFotos, LoQueOfrecemos, Sectores, FranjaCotizar), `public/marca/`, `public/referencia/`, `CLAUDE.md`, `docs/BRIEF.md`, `docs/CREDITOS-IMAGENES.md`, `docs/PLAN.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:**
+- *`encodeURIComponent`:* convierte espacios, tildes y saltos de línea en códigos que una URL acepta (`%20`, `%0A`). Sin eso el mensaje de WhatsApp llega cortado.
+- *`rel="noopener noreferrer"`:* la pestaña que se abre no puede controlar nuestra página ni saber de dónde venía.
+- *Importación estática de imágenes:* `import foto from ".../foto.webp"` le dice a Next.js el tamaño exacto; reserva el espacio y la página no "salta" al cargar.
+- *`sizes` en `next/image`:* le dice al navegador qué tan grande se verá la foto para que descargue la versión justa, no la gigante.
+- *Contraste AA:* el texto debe tener al menos 4,5:1 con su fondo para leerse bien. Por eso el dorado nunca va como texto sobre blanco.
+- *Mobile first:* las clases sin prefijo son para celular; `sm:` y `lg:` cambian el diseño en pantallas más grandes.
+
+**Pendientes / notas:**
+- Datos de contacto agregados el mismo día en `src/lib/contenido.ts`: WhatsApp `573123329422` (en el pie de página: +57 312 332 9422) y correo `asistente.fesapy@gmail.com`.
+- Reemplazar las fotos de referencia por fotos propias (sobre todo un overol con logo bordado) y conseguir el logo en SVG o PNG transparente.
+- `PLAN.md` todavía menciona 3 sedes en la tarea de contacto del Día 4; ajustar cuando se replanifique.
+
+---
+
+## 2026-11-01 — Día 1: base de datos en Neon y primera migración (Sebastián con Claude Code)
+**Qué se hizo:** (rama `chore/primera-migracion`)
+- `env.local.txt` (creado con el Bloc de notas) se renombró a `.env.local`: con el nombre anterior Git no lo ignoraba y Prisma/Next.js no lo leían.
+- Scripts `npm run db:migrar`, `db:estado` y `db:studio`, que cargan `.env.local` (la CLI de Prisma solo lee `.env`).
+- Primera migración `20261101153708_inicial` aplicada en la rama `production` de Neon: 2 enums, 6 tablas, 7 índices y la relación Producto → Categoria.
+- Rol `fesapy_app` creado **con SQL** (no por la consola, que lo haría miembro de `neon_superuser`), con solo SELECT/INSERT/UPDATE/DELETE, permisos por defecto para tablas futuras y sin acceso a `_prisma_migrations`.
+- Rama `development` creada desde `production`, con contraseñas propias para `fesapy_app` y `neondb_owner`.
+- `.env.local` apunta a `development`: `DATABASE_URL` con `fesapy_app` (pooled) y `DIRECT_URL` con `neondb_owner` (directa), ambas con `sslmode=require`; secretos generados con Node; llaves de prueba de Turnstile.
+- Verificado: `env.ts` acepta `.env.local`; `development` tiene la migración; `fesapy_app` lee las 6 tablas pero no puede crear, borrar, alterar ni vaciar tablas, leer `_prisma_migrations` ni crear roles (prueba con ROLLBACK, sin tocar datos); Prisma Studio muestra las tablas.
+- Se restauraron en `PLAN.md` las marcas `[x]` y la tarea de cookies que un commit anterior había revertido.
+
+**Archivos:** `package.json`, `prisma/migrations/`, `CLAUDE.md`, `.env.example`, `docs/ARQUITECTURA-Y-SEGURIDAD.md`, `docs/COLABORACION.md`, `docs/DECISIONES.md`, `docs/PLAN.md`.
+
+**Conceptos aprendidos:**
+- *Migración:* archivo SQL versionado que lleva la base de "como está" a "como dice el esquema". Se sube a Git; `_prisma_migrations` registra cuáles ya se aplicaron.
+- *Rama de Neon:* copia instantánea de la base para probar sin tocar producción.
+- *Mínimo privilegio en la base:* la app usa un rol que solo maneja datos; la estructura solo la cambia el dueño.
+- *Transacción y ROLLBACK:* agrupa cambios y permite deshacerlos todos; así se probó el bloqueo de `DROP TABLE` sin riesgo.
+- *Llave por base de datos:* quien comparte una base debe compartir la llave de cifrado, o no podrá leer lo que cifraron los demás.
+
+**Pendientes / notas:**
+- Paula: conectar Vercel y cargar variables (Production → `production`, Preview → `development`) según DECISIONES 2026-11-01; activar Deployment Protection.
+- Compartir con Paula, por Bitwarden, las contraseñas de `fesapy_app` y las llaves de `development`.
+- Guardar la `DIRECT_URL` de `production` en el gestor de contraseñas (para `migrate deploy` futuros).
+- Turnstile real en Production antes de publicar el formulario (Día 4).
+
 ---
 
 ## 2026-10-26 — Día 1: seguridad base (Sebastián con Claude Code)

@@ -3,7 +3,7 @@
 Este archivo lo lee Claude Code al inicio de cada sesión. Contiene el contexto y las reglas del proyecto. Si algo aquí cambia, se actualiza este archivo en el mismo commit.
 
 ## Qué es Fesapy
-Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Sedes: Bogotá, Madrid (Cundinamarca) y Mosquera. Despacha a nivel nacional e internacional.
+Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). Una sola sede, en Madrid (Cundinamarca). Despacha a nivel nacional e internacional.
 
 - **Fabrica y personaliza dotación**: overoles, uniformes, ropa de trabajo con logos estampados y bordados.
 - **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines.
@@ -49,8 +49,10 @@ npm run dev          # servidor local
 npm run build        # build de producción (debe pasar antes de abrir PR)
 npm run lint         # ESLint
 npm audit --audit-level=high --omit=dev   # vulnerabilidades en dependencias
-npx prisma migrate dev --name <nombre>   # nueva migración (solo una persona a la vez)
-npx prisma studio    # ver la base de datos
+npm run db:migrar -- --name <nombre>   # nueva migración en development (solo una persona a la vez)
+npm run db:estado    # qué migraciones faltan
+npm run db:studio    # ver la base de datos
+# Los db:* cargan .env.local (la CLI de Prisma sola solo lee .env). No usar npx prisma directo.
 ```
 
 ## Estructura
@@ -81,14 +83,18 @@ docs/
 ```
 
 ## Diseño
-- Colores de marca: amarillo y negro. Tokens como variables CSS en `globals.css` (`@theme`):
-  - `--amarillo: #FFC400` (fondos, botones, acentos)
+- Colores de marca: dorado (del logo) y negro. Tokens como variables CSS en `globals.css` (`@theme`):
+  - `--dorado: #E8B53E` (fondos, botones, acentos; sacado del logo)
   - `--negro: #111111` (texto y fondos oscuros)
-  - `--gris: #F4F4F4` (fondos de sección)
-- **Nunca** texto amarillo sobre fondo blanco (contraste insuficiente). Amarillo siempre como fondo con texto negro, o sobre fondo negro.
+  - `--crema: #F5F4F0` (fondos de sección claros)
+  - `--gris: #4A4A4A` (texto secundario y bordes)
+  - `--blanco: #FFFFFF`
+- **Nunca** texto dorado sobre fondo blanco o crema (contraste insuficiente). Dorado siempre como fondo con texto negro, o como texto sobre fondo negro.
 - Tipografía: **Barlow Condensed** (títulos, en mayúsculas, peso 700) + **Barlow** (texto). Cargar con `next/font/google`.
 - Estilo industrial, limpio, mucho contraste. Mobile first: la mayoría de clientes entrará desde el celular.
 - Botón flotante de WhatsApp visible en todas las páginas públicas.
+- Sin animaciones: en hover solo cambia el color. Botones de mínimo 44 px de alto. Un solo `h1` por página.
+- Fotos que no sean propias: solo con licencia libre, registradas en `docs/CREDITOS-IMAGENES.md`.
 
 ## Reglas de seguridad (obligatorias)
 Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea choca con estas reglas, **detente y pregunta**.
@@ -140,4 +146,4 @@ Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea c
 
 ## Contenido
 - Textos en español de Colombia, tono profesional y cercano, orientado a empresas (jefes de compras, HSE/SST).
-- SEO: cada página con `metadata` (título y descripción), `sitemap.ts`, `robots.ts`, datos estructurados `LocalBusiness` para las tres sedes.
+- SEO: cada página con `metadata` (título y descripción), `sitemap.ts`, `robots.ts`, datos estructurados `LocalBusiness` para la sede de Madrid.
