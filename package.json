@@ -28,7 +28,7 @@
     "eslint-config-next": "16.4.3",
     "prisma": "6.19.3",
     "tailwindcss": "4.3.3",
-    "typescript": "5.9.3"
+    "typescript": "7.0.2"
   },
   "overrides": {
     "deepmerge-ts": "8.0.2"
