@@ -1,84 +1,60 @@
-# Plan de trabajo — MVP en 1 semana
+# Plan de trabajo
 
 Leyenda: [ ] pendiente · [~] en curso (poner nombre) · [x] terminado
-Persona A = Sebastián · Persona B = novia (ajusten como quieran)
+Persona A = Sebastián · Persona B = Paula (ajusten como quieran)
 
 Regla: antes de tomar una tarea, márquenla con `[~] (nombre)` y hagan commit/push de este archivo para no pisarse.
-Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le correspondan (tabla §11).
+Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le correspondan.
 
-## Día 1 — Base del proyecto (juntos)
-- [ ] Crear repo en GitHub (privado) y agregar a ambos como colaboradores — *a mano, ver BITACORA 2026-10-26*
-- [x] `create-next-app` con TypeScript, Tailwind, ESLint, App Router, carpeta `src/` (Next.js 16.4.3)
-- [x] Copiar `CLAUDE.md`, `docs/` y `.env.example` al repo
-- [x] Reemplazar `CLAUDE.md` (era de otro proyecto) por el de Fesapy
-- [ ] Conectar a Vercel (despliegue automático) + Deployment Protection en previews + variables de Production y Preview — *a mano, Paula (ver BITACORA 2026-11-01)*
-- [x] Crear base en Neon con ramas `production` (producción) y `development` (previews y local)
-- [x] Prisma: esquema inicial (`prisma/schema.prisma`) y cliente `src/lib/prisma.ts`
-- [x] Esquema de seguridad: campos cifrados en Cotizacion, `correoHash`, `politicaVersion`, `IntentoLimitado`
-- [x] Prisma: primera migración `inicial` (`npm run db:migrar -- --name inicial`)
-- [x] Rol `fesapy_app` en Neon con solo SELECT/INSERT/UPDATE/DELETE, creado con SQL (documento de seguridad §5), contraseñas distintas por rama
-- [x] Tokens de diseño (colores, fuentes Barlow) y layout base
-- [x] Cabeceras de seguridad con CSP básica (endurecer el Día 7)
-- [x] Seguridad base: `src/lib/env.ts` (Zod), `server-only`, `.npmrc` (`save-exact`), HSTS sin `preload`, COOP, Permissions-Policy ampliada
-- [x] Escaneo: `.github/dependabot.yml` + CI (lint, build, `npm audit`, gitleaks) + escaneo del historial con gitleaks
-- [ ] 2FA en GitHub, Vercel, Neon, Resend y Cloudflare — *a mano*
+> **Cambio de rumbo (9 de noviembre de 2026):** se cancela la base de datos externa, el catálogo administrable, el login y el panel. El sitio es simple: páginas estáticas + WhatsApp + un formulario de cotización que **no guarda datos** (arma un mensaje y abre WhatsApp o el correo). Motivos en `DECISIONES.md`. El plan anterior (Días 2 al 7) quedó reemplazado: ver al final.
 
-## Día 2 — Estructura pública
-- [x] Página de inicio simple (una sola página, sin menú, acción única "Cotizar por WhatsApp"): encabezado, portada, lo que ofrecemos, sectores, franja y pie de página, con botón flotante y mensaje prellenado — *rama `feat/pagina-inicio`*
-- [ ] (A) Header con menú responsive + Footer con redes y sedes
-- [ ] (A) Botón flotante de WhatsApp (texto con `encodeURIComponent`)
-- [ ] (B) Página de Inicio: hero, categorías, "todo en uno", personalización
-- [ ] (B) Sección clientes y testimonios (con datos de ejemplo)
-- [ ] (A) DAL pública inicial `src/lib/dal/` (`server-only`, `select` mínimo, solo `activo: true`)
+## Plan vigente
 
-## Día 3 — Catálogo
-- [ ] (A) Página de productos por categoría (datos desde la DAL)
-- [ ] (A) Detalle de producto por `slug` (404 si no existe u oculto) con botón "Cotizar este producto"
-- [ ] (B) Página Nosotros
-- [ ] (B) Página Personalización (bordado y estampado)
+### Hecho
+- [x] Base del proyecto: Next.js 16, Tailwind v4, Zod, tokens de diseño (dorado, negro, crema), fuentes Barlow
+- [x] Seguridad base: cabeceras y CSP, `.npmrc` con versiones exactas, Dependabot, CI (lint, build, `npm audit`, gitleaks) y revisión del historial
+- [x] Repo en GitHub (público) y Vercel conectado, con vista previa en cada PR
+- [x] Home y marco común: barra de anuncio, encabezado con menú, hero, ventajas, problemas que resolvemos, 8 categorías, clientes y reseñas (con marcadores), pie y botón flotante de WhatsApp
+- [x] `/cotizacion`: formulario validado con Zod que abre WhatsApp o el correo (sin guardar nada)
+- [x] Páginas cortas: `/productos`, `/personalizacion`, `/nosotros` y `/politica-de-datos` (borrador)
+- [x] Quitar todo lo de base de datos, DAL, cifrado, login y panel (rama `chore/quitar-base-de-datos`)
 
-## Día 4 — Cotizaciones
-- [ ] (A) `src/lib/cripto.ts` (AES-256-GCM + HMAC) y `src/lib/sanitizar.ts`
-- [ ] (A) `src/lib/limite.ts` (rate limiting con IP de Vercel + HMAC) y `src/lib/antibots.ts` (honeypot, trampa de tiempo, Turnstile)
-- [ ] (A) Formulario de cotización: Zod estricto, anti-bots, límite 5/hora, casilla Habeas Data con `politicaVersion`, datos cifrados
-- [ ] (A) Guardar en BD + correo de aviso con Resend (React Email o texto plano, sin datos sensibles innecesarios)
-- [ ] (B) Página Política de tratamiento de datos (con versión, conservación y canal de derechos)
-- [ ] (B) Permiso para cookies: inventario de cookies (necesarias vs. no esenciales), sección de cookies en la política y aviso de consentimiento que bloquee las no esenciales hasta que la persona acepte (rechazar tan fácil como aceptar)
-- [ ] (B) Página de contacto con direcciones de las 3 sedes y enlace "Ver en Google Maps" (sin iframe)
+### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)
+- [ ] Dirección y horario de la sede de Madrid
+- [ ] Enlaces de Instagram y Facebook
+- [ ] Razón social, NIT y plazo de conservación para la política de datos; revisión de la política por la empresa (idealmente con un abogado)
+- [ ] Logos de clientes (con su permiso por escrito) y reseñas reales (nombre, cargo, empresa y permiso)
+- [ ] Fotos propias: productos por categoría y trabajos bordados y estampados (reemplazan las de referencia de `docs/CREDITOS-IMAGENES.md`)
+- [ ] Logo en SVG o PNG con fondo transparente
+- [ ] `/nosotros`: historia y año de fundación
+- [ ] `/personalizacion`: cantidad mínima, tiempos y formatos de logo aceptados
+- [ ] Confirmar el alcance de la asesoría, los tiempos de despacho y el horario de atención (comentarios en `Ventajas.tsx`)
 
-## Día 5 — Panel de administración
-- [ ] (A) Verificar compatibilidad de Auth.js con Next.js 16 (si no, proponer alternativa en DECISIONES)
-- [ ] (A) Auth.js con enlace mágico, sesiones en BD, cookies seguras, Turnstile y límite en login, respuesta idéntica
-- [ ] (A) Modelo `Usuario` con `rol` (ADMIN/EDITOR), `src/lib/permisos.ts`, `exigirPermiso()`, script `admin:crear`
-- [ ] (A) `src/proxy.ts` (redirección optimista) + DAL protegida en cada acción
-- [ ] (A) `RegistroAuditoria` + revocar UPDATE/DELETE a `fesapy_app`
-- [ ] (A) CRUD de productos y categorías con subida segura (`file-type` + `sharp`, nombre aleatorio, máx. 4 MB)
-- [ ] (B) CRUD de clientes y testimonios (permiso `contenido:gestionar`)
-- [ ] (B) Lista de cotizaciones (solo ADMIN): DTO mínimo, descifrado en la DAL, cambio de estado auditado
-- [ ] (B) Gestión de usuarios (solo ADMIN): invitar, cambiar rol, desactivar (borra sesiones)
-
-## Día 6 — Contenido real y SEO
-- [ ] Cargar catálogo, logo, clientes y testimonios reales
-- [ ] Metadata por página, `sitemap.ts`, `robots.ts` (bloquear `/admin` y `/api`), `LocalBusiness` con JSON-LD escapado
-- [ ] Open Graph (imagen al compartir en WhatsApp)
-- [ ] Optimizar imágenes con `next/image` + CSP con el dominio de Vercel Blob
-
-## Día 7 — Revisión y lanzamiento de prueba
-- [ ] Endurecer la CSP (SRI en el sitio público y/o nonces en `/admin`, sin `'unsafe-inline'`) + securityheaders.com (meta: A)
-- [ ] Buscar secretos en `.next/static` (`re_`, `postgres://`, `vercel_blob_rw_`): cero resultados
-- [ ] `npm audit` sin altas + gitleaks del historial limpio
-- [ ] Pruebas manuales de seguridad: IDOR (cambiar ids), mass assignment (campos extra), EDITOR intentando ver cotizaciones, envío de 6 cotizaciones seguidas, POST directo a una Server Action sin sesión
-- [ ] Revisión completa con la checklist de `ARQUITECTURA-Y-SEGURIDAD.md`
+### Pendiente: calidad y lanzamiento
+- [ ] SEO: `sitemap.ts`, `robots.ts`, datos estructurados `LocalBusiness` (sede de Madrid, JSON-LD escapado) y Open Graph (imagen al compartir por WhatsApp)
+- [ ] Endurecer la CSP (quitar `'unsafe-inline'` con SRI o nonces) y revisar en securityheaders.com (meta: A)
+- [ ] Antes de lanzar: buscar secretos en `.next/static`, `npm audit` sin altas y gitleaks limpio
 - [ ] Pruebas en celular (Android y iPhone) y Lighthouse (>90)
-- [ ] Revisión con la dueña de Fesapy: tiempo de conservación de datos, texto de la política, responsable de incidentes
-- [ ] Documentar en BITACORA
+- [ ] Revisión con la dueña de Fesapy: textos, datos de contacto y política de datos
+- [ ] 2FA en GitHub y Vercel (confirmar que está activo)
+- [ ] Comprar el dominio y conectarlo; luego HSTS `preload`
+- [ ] Evaluar Vercel Pro al lanzamiento oficial (el plan Hobby es para uso no comercial)
 
-## Después del MVP
-- Comprar dominio y conectarlo; luego HSTS `preload` y SPF/DKIM/DMARC en Resend
-- Google Business Profile para las 3 sedes
-- Analítica (Vercel Analytics o Google Analytics, con aviso de cookies)
-- Descargar catálogo en PDF
-- Más productos y fotos propias
-- Evaluar migración a Prisma 7
-- Row Level Security si se agregan cuentas de clientes o acceso directo a la base
-- Tarea programada para borrar cotizaciones vencidas según la política de conservación
+### Ideas para después
+- Fotos y página por categoría; catálogo descargable en PDF
+- Google Business Profile para la sede de Madrid
+- Analítica (Vercel Analytics o Google Analytics) **con** aviso de cookies
+- Si hiciera falta recibir las cotizaciones en un servidor: evaluar Server Action + Resend (ver `DECISIONES.md`, 2026-11-09)
+
+---
+
+## Plan anterior — REEMPLAZADO por el cambio de rumbo del 9 de noviembre de 2026
+Estas tareas ya **no se harán** como estaban escritas. Se dejan como historial.
+
+- **Día 1 — Base del proyecto:** se hizo la parte de código, repo, Vercel y seguridad base. Se descartó la base de datos externa, el esquema, la migración y los roles de base de datos.
+- **Día 2 — Estructura pública:** *reemplazado.* Lo visual se hizo en los PR #8 y #10 (home, encabezado, pie, botón flotante). Se descartó la capa de acceso a datos.
+- **Día 3 — Catálogo:** *reemplazado.* No hay catálogo desde una base de datos; `/productos` muestra las categorías.
+- **Día 4 — Cotizaciones:** *reemplazado.* El formulario no guarda datos, no cifra, no usa anti-bots ni límite de intentos, y no envía correos desde el servidor. La política de datos se hizo como borrador.
+- **Día 5 — Panel de administración:** *descartado.* Sin login, roles, panel ni subida de imágenes.
+- **Día 6 — Contenido real y SEO:** *pasa al plan vigente* (sin catálogo cargado en un panel).
+- **Día 7 — Revisión y lanzamiento de prueba:** *pasa al plan vigente* (sin las pruebas del panel ni de la base de datos).

@@ -5,7 +5,9 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Reglas de seguridad del proyecto (docs/ARQUITECTURA-Y-SEGURIDAD.md §6.9 y §6.15).
+  // Regla de seguridad del proyecto (docs/ARQUITECTURA-Y-SEGURIDAD.md §5).
+  // Hoy el sitio no usa variables de entorno. Si algún día hacen falta, se lee todo desde
+  // UN solo archivo validado (src/lib/env.ts) y se agrega a la lista de abajo.
   {
     rules: {
       "no-restricted-properties": [
@@ -13,28 +15,17 @@ const eslintConfig = defineConfig([
         {
           object: "process",
           property: "env",
-          message: "Lee las variables desde src/lib/env.ts (servidor) o src/lib/env.client.ts (públicas).",
-        },
-        {
-          property: "$queryRawUnsafe",
-          message: "Prohibido: usa prisma.$queryRaw con plantilla etiquetada.",
-        },
-        {
-          property: "$executeRawUnsafe",
-          message: "Prohibido: usa prisma.$executeRaw con plantilla etiquetada.",
+          message:
+            "No leas process.env aquí. Si necesitas una variable, propónlo y créala en src/lib/env.ts (validada con Zod). Ver docs/ARQUITECTURA-Y-SEGURIDAD.md §5.",
         },
       ],
     },
   },
   {
-    // Únicos archivos que pueden leer process.env.
-    files: ["src/lib/env.ts", "src/lib/env.client.ts", "next.config.ts"],
+    // Único archivo que lee process.env hoy: la configuración de Next.js (modo desarrollo).
+    files: ["next.config.ts"],
     rules: {
-      "no-restricted-properties": [
-        "error",
-        { property: "$queryRawUnsafe", message: "Prohibido." },
-        { property: "$executeRawUnsafe", message: "Prohibido." },
-      ],
+      "no-restricted-properties": "off",
     },
   },
   // Override default ignores of eslint-config-next.

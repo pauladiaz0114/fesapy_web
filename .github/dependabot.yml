@@ -1,6 +1,6 @@
 # Dependabot: revisa cada semana si hay versiones nuevas y abre PRs agrupados.
 # Las alertas de seguridad se activan aparte en GitHub (Settings → Advanced Security).
-# Ver docs/ARQUITECTURA-Y-SEGURIDAD.md §6.17.
+# Ver docs/ARQUITECTURA-Y-SEGURIDAD.md §7.
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -16,12 +16,6 @@ updates:
       # Parches y versiones menores juntos en un solo PR. Las mayores llegan una por una.
       npm-menores:
         update-types: ["minor", "patch"]
-    ignore:
-      # Prisma se mantiene en la 6 (docs/DECISIONES.md). Pasar a la 7 es una tarea aparte.
-      - dependency-name: "prisma"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "@prisma/client"
-        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

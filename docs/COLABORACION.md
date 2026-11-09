@@ -91,8 +91,7 @@ Ejemplos: `feat: botón flotante de WhatsApp` · `fix: el menú no cerraba en iP
 Un **conflicto** ocurre cuando los dos cambian las mismas líneas del mismo archivo. Git no sabe cuál versión dejar y te pide que decidas.
 
 Archivos "delicados" que tocan los dos. **Avisen antes de cambiarlos:**
-- `prisma/schema.prisma` y `prisma/migrations/`: **solo una persona a la vez crea migraciones.**
-- `src/app/layout.tsx`, `src/app/globals.css`, `next.config.ts`
+- `src/app/layout.tsx`, `src/app/globals.css`, `src/app/(sitio)/layout.tsx`, `src/lib/contenido.ts`, `next.config.ts`
 - `package.json` y `package-lock.json` (al instalar librerías)
 - `docs/PLAN.md` y `docs/BITACORA.md`
 
@@ -112,12 +111,9 @@ Buenas prácticas:
 3. En el archivo verás marcas `<<<<<<<`, `=======` y `>>>>>>>`. Se deja la versión correcta (o una mezcla de las dos) y se borran las marcas.
 4. `git add <archivo>` y `git commit`.
 
-### Conflictos en migraciones de Prisma
-Nunca edites una migración que ya está en `main`. Si los dos crearon migraciones a la vez, quien fusione de segundo borra **su** migración nueva (no la del otro), trae `main` y vuelve a correr `npm run db:migrar -- --name ...`.
-
 ## 6. Trabajar con Claude Code
 
-- Al iniciar cada sesión, díganle en qué rama están y qué tarea van a hacer, por ejemplo: *"Estoy en feat/header. Vamos a hacer la tarea Header + Footer del Día 2 de PLAN.md."*
+- Al iniciar cada sesión, díganle en qué rama están y qué tarea van a hacer, por ejemplo: *"Estoy en feat/fotos-categorias. Vamos a hacer la tarea «Fotos de las categorías» de PLAN.md."*
 - Claude Code sigue `CLAUDE.md`. Si cambian una regla del proyecto, actualicen `CLAUDE.md` en el mismo PR.
 - Revisen lo que hizo antes de hacer commit (`git diff` o la vista de cambios del editor). El código se lo hace Claude, pero **ustedes son los responsables** de lo que se sube.
 

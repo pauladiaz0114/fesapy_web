@@ -2,10 +2,11 @@ import type { NextConfig } from "next";
 
 const esDesarrollo = process.env.NODE_ENV === "development";
 
-// Content-Security-Policy BÁSICA (sin nonces).
-// PENDIENTE Día 6: agregar Turnstile (challenges.cloudflare.com) y Vercel Blob.
-// PENDIENTE Día 7: endurecerla (SRI y/o nonces, quitar 'unsafe-inline').
-// Etapas en docs/ARQUITECTURA-Y-SEGURIDAD.md §6.13.
+// Content-Security-Policy BÁSICA (sin nonces). Todo se sirve desde el propio sitio.
+// Si agregas un servicio externo (scripts, imágenes, iframes, analítica), actualiza esta
+// lista y anótalo en docs/DECISIONES.md.
+// PENDIENTE: endurecerla (SRI y/o nonces, quitar 'unsafe-inline').
+// Detalle en docs/ARQUITECTURA-Y-SEGURIDAD.md §3.
 const csp = [
   "default-src 'self'",
   // 'unsafe-eval' solo en desarrollo: lo necesita la recarga en vivo de Next.js.
