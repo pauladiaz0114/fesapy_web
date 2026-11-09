@@ -17,7 +17,7 @@ export function TarjetaCategoria({ categoria, indice }: { categoria: Categoria; 
   const dorado = indice % 2 === 0;
 
   return (
-    <li className="group relative flex h-full flex-col overflow-hidden rounded border border-negro/15 bg-blanco transition-[transform,box-shadow] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
+    <li className="group relative flex flex-col overflow-hidden rounded border border-negro/15 bg-blanco transition-[transform,box-shadow] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-crema">
         {portada ? (
           <Image
@@ -53,7 +53,7 @@ export function TarjetaCategoria({ categoria, indice }: { categoria: Categoria; 
         <div className="flex flex-wrap gap-2">
           <Link
             href={`/productos/${categoria.slug}`}
-            className={clasesBoton("negro", "after:absolute after:inset-0")}
+            className={clasesBoton("negro", "after:absolute after:inset-0", false)}
           >
             Ver productos
             <span className="sr-only"> de {categoria.nombre}</span>

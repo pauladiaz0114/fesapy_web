@@ -1,3 +1,4 @@
+import { CarruselCategorias } from "@/components/catalogo/CarruselCategorias";
 import { TarjetaCategoria } from "@/components/catalogo/TarjetaCategoria";
 import { BotonEnlace } from "@/components/ui/Boton";
 import { categorias } from "@/lib/contenido";
@@ -24,11 +25,14 @@ export function Categorias({
           cada empresa recibe su cotización.
         </p>
 
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {categorias.map((categoria, i) => (
-            <TarjetaCategoria key={categoria.slug} categoria={categoria} indice={i} />
-          ))}
-        </ul>
+        <div className="mt-10">
+          {/* En celular es un carrusel con scroll-snap; desde 768 px, una grilla. */}
+          <CarruselCategorias total={categorias.length}>
+            {categorias.map((categoria, i) => (
+              <TarjetaCategoria key={categoria.slug} categoria={categoria} indice={i} />
+            ))}
+          </CarruselCategorias>
+        </div>
 
         {/* Para lo que no aparece en las tarjetas. Sin prometer inventario ni plazos. */}
         <div className="mt-10 flex flex-col items-start gap-4 rounded border-l-4 border-dorado bg-crema p-6 sm:flex-row sm:items-center sm:justify-between">

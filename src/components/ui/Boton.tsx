@@ -11,7 +11,12 @@ import type { ReactNode } from "react";
 //   texto sobre blanco o crema.
 
 const base =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded px-5 py-2 text-center font-titulo text-lg font-bold uppercase tracking-wide transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out hover:shadow-md motion-safe:active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded px-5 py-2 text-center font-titulo text-lg font-bold uppercase tracking-wide transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2";
+
+// Leve presión al hacer clic. OJO: NO usarla en enlaces "estirados" (los que cubren toda una tarjeta
+// con ::after). Un elemento con transform/scale pasa a ser el contenedor de sus hijos absolutos:
+// al presionar, el ::after se encogería al tamaño del botón y el clic se perdería.
+const presion = "motion-safe:active:scale-[0.98]";
 
 const variantes = {
   // Dorado con texto negro: para fondos negros o blancos.
@@ -25,8 +30,8 @@ const variantes = {
 
 export type VarianteBoton = keyof typeof variantes;
 
-export function clasesBoton(variante: VarianteBoton, extra = ""): string {
-  return `${base} ${variantes[variante]} ${extra}`.trim();
+export function clasesBoton(variante: VarianteBoton, extra = "", conPresion = true): string {
+  return `${base} ${variantes[variante]} ${conPresion ? presion : ""} ${extra}`.replace(/\s+/g, " ").trim();
 }
 
 /** Botón que lleva a otra página del mismo sitio. */
