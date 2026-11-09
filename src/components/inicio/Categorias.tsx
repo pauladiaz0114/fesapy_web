@@ -52,6 +52,16 @@ export function Categorias({ titulo = "Lo que tu empresa puede cotizar" }: { tit
             );
           })}
         </ul>
+
+        {/* Para lo que no aparece en las tarjetas. Sin prometer inventario ni plazos. */}
+        <div className="mt-10 flex flex-col items-start gap-4 rounded border-l-4 border-dorado bg-crema p-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-lg text-negro">
+            <strong>¿No ves lo que buscas?</strong> Cuéntanos qué necesitas y te cotizamos.
+          </p>
+          <BotonEnlace href="/cotizacion" variante="negro" className="shrink-0">
+            Cuéntanos qué necesitas
+          </BotonEnlace>
+        </div>
       </div>
     </section>
   );

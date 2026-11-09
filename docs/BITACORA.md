@@ -13,6 +13,23 @@ Formato:
 
 ---
 
+ feat/categoria-seguridad-vial
+## 2026-11-09 — Categoría "Señalización y seguridad vial" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/categoria-seguridad-vial`) Fesapy también vende conos y productos de ese tipo.
+- La categoría "Señalización y letreros" pasó a **"Señalización y seguridad vial"** (slug `senalizacion-y-seguridad-vial`) y su descripción menciona letreros y señales, conos, cintas de demarcación, barreras y delineadores. Siguen siendo **8 categorías**.
+- Como las categorías viven en un solo lugar (`src/lib/contenido.ts`), el cambio llegó solo a la home, a `/productos`, a la lista del formulario de `/cotizacion` y a la preselección por `?categoria=`. Un slug viejo (`senalizacion`) en la dirección se ignora sin error.
+- Textos ajustados: metadata de `/productos`, `/nosotros`, "Problemas que resolvemos", `CLAUDE.md` y `docs/BRIEF.md`.
+- Nueva frase con botón al final de las categorías (home y `/productos`): "¿No ves lo que buscas? Cuéntanos qué necesitas y te cotizamos." → `/cotizacion`. No se afirma que haya de todo ni se prometen plazos o inventario.
+- Verificado en el navegador a 1280 y 390 px: 8 categorías en la lista, los 8 enlaces de la home preseleccionan bien, el slug viejo se ignora, sin desborde; lint, build y `npm audit` sin errores.
+
+**Archivos:** `src/lib/contenido.ts`, `src/components/inicio/Categorias.tsx`, `src/components/inicio/Problemas.tsx`, `src/app/(sitio)/productos/page.tsx`, `src/app/(sitio)/nosotros/page.tsx`, `CLAUDE.md`, `docs/BRIEF.md`, `docs/BITACORA.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:**
+- *Una sola fuente de datos:* al definir las categorías en un archivo y leerlas desde todas partes, renombrar una es cambiar una línea y no se pueden quedar enlaces con el nombre viejo.
+- *Slug:* el nombre corto de una categoría que viaja en la dirección (`?categoria=...`). Si cambia, los enlaces guardados con el viejo dejan de coincidir: aquí simplemente no preseleccionan nada.
+
+**Pendientes / notas:** `TODO(contenido)`: confirmar con Fesapy qué otros productos de seguridad vial venden (solo se mencionan los ejemplos dados: conos, cintas de demarcación, barreras y delineadores) y fotos de la categoría. `PLAN.md` no se tocó.
+
 ## 2026-11-09 — Quitar todo lo de base de datos (Sebastián con Claude Code)
 **Qué se hizo:** (rama `chore/quitar-base-de-datos`, desde `main`) Cambio de rumbo: se cancela Neon y se descartan base de datos, panel y login.
 - **Borrado:** carpeta `prisma/`, `src/lib/prisma.ts`, `src/lib/env.ts` y `src/lib/env.client.ts`. Antes de borrar se comprobó con grep que solo `prisma.ts` importaba `env.ts` y que nadie importaba `env.client.ts`. No existían `dal/`, `cripto.ts`, `limite.ts`, `antibots.ts`, `auth.ts`, `permisos.ts`, `auditoria.ts`, `proxy.ts`, `admin/` ni `api/`.
@@ -35,7 +52,7 @@ Formato:
 **Pendientes / notas:**
 - A mano: borrar el proyecto de Neon, quitar las variables de Vercel, borrar las claves guardadas y los `.env.local`.
 - El PR #7 (lista de pendientes para Paula) queda desactualizado y va a chocar con este (mismos documentos): hay que rehacerlo o ajustarlo después de fusionar este.
-- Las entradas antiguas de `BITACORA.md` y las decisiones antiguas de `DECISIONES.md` mencionan Prisma y Neon a propósito: son historial.
+- Las entradas antiguas de `BITACORA.md` y las decisiones antiguas de `DECISIONES.md` mencionan Prisma y Neon a propósito: son historial. main
 
 ---
 

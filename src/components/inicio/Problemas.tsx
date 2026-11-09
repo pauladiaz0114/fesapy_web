@@ -24,7 +24,7 @@ const problemas = [
   },
   {
     titulo: "Poca variedad",
-    texto: "EPP, calzado, señalización, botiquines, lubricantes y más, con un solo proveedor.",
+    texto: "EPP, calzado, señalización y seguridad vial, botiquines, lubricantes y más, con un solo proveedor.",
   },
 ];
 

@@ -157,16 +157,8 @@ Se tomó solo la estructura (orden de secciones, dos botones en el hero, bloque 
 `/politica-de-datos` se publica como borrador (versión 0.1) con una nota visible: la empresa (idealmente con un abogado) debe revisarla. Razón social, NIT, dirección y plazo de conservación quedan como `TODO(contenido)`.
 **Por qué:** hace falta el enlace de la casilla de autorización, pero no se deben inventar los datos legales de la empresa.
 
-## 2026-11-09 · Se cancela Neon y se descarta base de datos, panel y login
-Cambio de rumbo: el sitio queda simple (páginas estáticas + WhatsApp + un formulario que arma un mensaje y abre WhatsApp o el correo, sin guardar nada). Se cancela el proyecto de Neon y se descartan la base de datos, la capa de acceso a datos, el cifrado, el login (Auth.js), el panel de administración, la subida de imágenes, los correos desde el servidor, los anti-bots y el límite de intentos.
-**Qué se quitó del repo:** la carpeta `prisma/` (esquema y primera migración), `src/lib/prisma.ts`, `src/lib/env.ts` y `src/lib/env.client.ts` (quedaban sin nada que validar), las dependencias `prisma` y `@prisma/client` (con ellas salen 35 paquetes del `package-lock.json`), el `overrides` de `deepmerge-ts` (existía solo por Prisma), los scripts `db:*` y el `postinstall: prisma generate`, las reglas de ESLint contra `$queryRawUnsafe` y `$executeRawUnsafe`, todas las variables de `.env.example` y el bloque de Prisma de `dependabot.yml`. `CLAUDE.md`, `ARQUITECTURA-Y-SEGURIDAD.md`, `PLAN.md`, `COLABORACION.md`, `BRIEF.md` y el README se actualizaron.
-**Por qué:**
-- Lo que el negocio necesita hoy es que lo contacten por WhatsApp y que pidan cotización; no hace falta guardar nada.
-- Una base de datos, login y panel obligaban a abrir y proteger cuentas (Neon, Resend, Cloudflare), llaves, roles, cifrado y datos personales (Ley 1581 de 2012), un costo grande para dos personas que están aprendiendo.
-- Sin datos guardados baja el riesgo (no hay qué filtrar) y el mantenimiento. Además, el sitio ya no depende de variables de entorno, así que Vercel no puede fallar por una variable que falte, y `npm ci` ya no ejecuta scripts de Prisma.
-**Alternativas descartadas:**
-- Dejar Neon y Prisma "por si acaso": cuenta y claves que proteger sin usarse, dependencias que actualizar y vigilar, y la CI atada a Prisma.
-- Cambiar a una base más simple (SQLite, Supabase, Google Sheets): sigue siendo guardar datos personales.
-- Para evaluar más adelante, si hace falta recibir las cotizaciones en un servidor: Server Action + Resend (ver 2026-11-09 · Formulario de cotización sin guardar datos).
-**Qué pasa con las decisiones anteriores:** las del 2026-10-26 y 2026-11-01 sobre base de datos, ramas de Neon, rol `fesapy_app`, scripts `db:*`, cifrado, HMAC de IP, anti-bots, roles y permisos, DAL, variables de entorno obligatorias, reglas de ESLint de Prisma, `server-only` y el override de `deepmerge-ts` quedan como **historial: ya no aplican**. Siguen vigentes las de cabeceras y CSP, HSTS sin `preload`, versiones exactas, Dependabot + CI + gitleaks, acciones de GitHub por SHA, mapas con enlace y el permiso para cookies si algún día se agrega analítica.
-**Pendiente a mano (no se puede hacer desde el repo):** borrar el proyecto de Neon, quitar las variables de Vercel, borrar las claves guardadas y los `.env.local` de los computadores.
+## 2026-11-09 · Categoría "Señalización y seguridad vial" (se mantienen 8 categorías)
+"Señalización y letreros" se renombra a "Señalización y seguridad vial" (slug `senalizacion-y-seguridad-vial`) para incluir conos, cintas de demarcación, barreras y delineadores.
+**Por qué:** Fesapy vende esos productos y no cabían en el nombre anterior. No se crea una novena categoría para no alargar el menú ni la lista del formulario.
+**Slug viejo:** `?categoria=senalizacion` ya no coincide con ninguna categoría y se ignora sin error (el formulario queda sin categoría elegida). Aceptable: el sitio es nuevo y no hay enlaces guardados en otros lados.
+**Texto:** el bloque "¿No ves lo que buscas? Cuéntanos qué necesitas y te cotizamos." no promete inventario ni plazos.

@@ -13,7 +13,7 @@
 - **Distribuye**: productos de marcas reconocidas de seguridad industrial.
 
 ### Diferencial
-Fesapy es una **marca multifuncional**: no solo vende dotaciones, también señalización, botiquines, stickers, letreros, insumos y más. Una empresa resuelve toda su seguridad con un solo proveedor.
+Fesapy es una **marca multifuncional**: no solo vende dotaciones, también señalización y seguridad vial (conos, cintas, barreras), botiquines, stickers, letreros, insumos y más. Una empresa resuelve toda su seguridad con un solo proveedor.
 
 > Mensaje central sugerido: **"Todo lo que tu empresa necesita en seguridad, en un solo lugar."**
 
@@ -23,7 +23,7 @@ Fesapy es una **marca multifuncional**: no solo vende dotaciones, también seña
 3. Elementos de protección personal (cascos, guantes, gafas, protección auditiva y respiratoria)
 4. Trabajo en alturas e izaje (eslingas, arneses)
 5. Botiquines y primeros auxilios
-6. Señalización y letreros
+6. Señalización y seguridad vial (letreros y señales, conos, cintas de demarcación, barreras y delineadores)
 7. Stickers y personalización
 8. Lubricantes y mantenimiento (WD-40, CRC)
 

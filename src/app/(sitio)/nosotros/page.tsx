@@ -25,7 +25,7 @@ export default function Nosotros() {
           <p>
             Fabricamos dotación y ropa de trabajo, y la personalizamos con el logo de tu
             empresa. También distribuimos elementos de protección personal, calzado de
-            seguridad, señalización, botiquines y más.
+            seguridad, señalización y seguridad vial, botiquines y más.
           </p>
           <p>
             Nuestra idea es sencilla: que tu empresa resuelva toda su seguridad con un solo
