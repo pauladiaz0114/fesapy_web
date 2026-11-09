@@ -25,3 +25,15 @@ Licencia: [Pexels License](https://www.pexels.com/license/). Permite uso gratis,
 |---|---|
 | `fesapy-emblema.jpg` | Logo de Fesapy entregado por la empresa (400 × 400). |
 | `fesapy-logo-original.jpg` | Logo de Fesapy entregado por la empresa (1254 × 1254). Pendiente: versión SVG o PNG con fondo transparente. |
+
+## Fotos del catálogo (`public/catalogo/`)
+
+**Origen:** el *Portafolio* de Fesapy (documento PDF propio de la empresa, 40 páginas). Son 62 fotos de producto con fondo transparente, extraídas del PDF; no se descargó nada de internet.
+
+> ⚠️ **Pendiente de confirmar con Fesapy:** que la empresa tiene autorización para usar estas fotos en su sitio web. Varias muestran marcas de terceros (por ejemplo Kondor, SAGA, Westland, MSA, 3M o INSAFE). `CLAUDE.md` pide usar solo imágenes de marcas que Fesapy tenga autorización de usar (material de prensa del fabricante o distribuidor, o fotos propias).
+>
+> **Calidad:** las fotos del PDF son pequeñas (la mayoría de botas, EPP y eslingas miden entre 200 y 400 px de ancho). Se ven bien en tarjetas, pero algo suaves en la foto grande del detalle. Conviene pedir los originales a Fesapy o a los distribuidores.
+
+**Cómo se prepararon (2026-11-09):** se extrajeron con un script propio (Python + Pillow, sin instalar nada) que une cada foto con su máscara de transparencia, se descartaron las sombras difuminadas, los fondos de página, los logos y los sellos de normas, se recortaron los márgenes transparentes y se convirtieron a WebP con transparencia, máximo 800 px de ancho, sin metadatos. Pesan en total 1,0 MB (la más pesada, 86 KB). El script y el PDF **no** se suben al repo (carpeta `_fuentes/`, ignorada).
+
+Archivos: `public/catalogo/<producto>.webp` (la foto principal) y `<producto>-2.webp`, `-3`, ... (fotos adicionales del mismo producto). Cada foto se asigna a su producto en `src/lib/catalogo.ts`. Las que no se pudo asignar con total certeza (qué referencia es cada bota Westland, cada bota de soldador y cada guante) tienen un `TODO(contenido)` en ese archivo.

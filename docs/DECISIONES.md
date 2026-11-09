@@ -162,3 +162,14 @@ Se tomó solo la estructura (orden de secciones, dos botones en el hero, bloque 
 **Por qué:** Fesapy vende esos productos y no cabían en el nombre anterior. No se crea una novena categoría para no alargar el menú ni la lista del formulario.
 **Slug viejo:** `?categoria=senalizacion` ya no coincide con ninguna categoría y se ignora sin error (el formulario queda sin categoría elegida). Aceptable: el sitio es nuevo y no hay enlaces guardados en otros lados.
 **Texto:** el bloque "¿No ves lo que buscas? Cuéntanos qué necesitas y te cotizamos." no promete inventario ni plazos.
+
+## 2026-11-09 · Catálogo estático con datos del portafolio (sin base de datos)
+Los 30 productos del portafolio de Fesapy se transcriben en `src/lib/catalogo.ts` (un archivo tipado) y las páginas `/productos`, `/productos/<categoria>` y `/productos/<categoria>/<producto>` se generan como páginas estáticas con `generateStaticParams`. Una categoría o un producto inválido responde con `notFound()`.
+**Por qué:** el sitio no tiene base de datos ni panel (ver "Se cancela Neon…"). Con 30 productos, un archivo en el repo es lo más simple, no se puede romper en tiempo de ejecución, carga rápido y cada cambio pasa por un Pull Request revisado. Los datos son solo texto y fotos públicas: no hay datos personales.
+**Regla de oro:** nombres, descripciones, características, diferenciadores y normas se **transcriben** del portafolio. No se inventan precios, tallas, colores, existencias ni certificaciones. Lo que falta queda como `TODO(contenido)`. Las normas se muestran con la etiqueta "Normas indicadas en el portafolio de Fesapy" y se copian tal cual (incluido un probable error de tipeo del PDF: `ANSI/ASSEA10.32-2012`).
+**Detalles:**
+- Las categorías sin productos en el portafolio (botiquines, stickers y lubricantes) no inventan nada: muestran "Pídenos cotización de esta categoría".
+- `/cotizacion?categoria=<slug>&producto=<slug>` valida ambos valores contra el catálogo (los desconocidos se ignoran) y escribe "Quiero cotizar: <producto>" en el mensaje, que la persona puede editar.
+- Las fotos (62, 1,0 MB) vienen del propio PDF, en `public/catalogo/` (ver `CREDITOS-IMAGENES.md`). Falta confirmar con Fesapy que puede usarlas en la web.
+- **Comportamiento conocido de Next.js 16 con `cacheComponents`:** `dynamicParams` no está disponible, así que la **primera** visita a una URL inventada responde 200 (con el contenido "404: This page could not be found" y `noindex`) y las siguientes 404. Nadie enlaza a URLs inválidas, así que no se agregó un `proxy.ts` para forzarlo.
+**Alternativas descartadas:** base de datos o panel (descartados el 2026-11-09); un CMS externo (más cuentas y servicios que mantener); una página de producto por cada referencia (el portafolio agrupa varias referencias por ficha, p. ej. las botas 9009 / 9309 / 8609, y se respetó esa agrupación).

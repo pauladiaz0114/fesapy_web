@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { FormularioCotizacion } from "@/components/cotizacion/FormularioCotizacion";
 import { EncabezadoPagina } from "@/components/sitio/EncabezadoPagina";
+import { productoPorSlug } from "@/lib/catalogo";
 import { categoriaValida } from "@/lib/contenido";
 
 export const metadata: Metadata = {
@@ -12,14 +13,26 @@ export const metadata: Metadata = {
 
 type ParametrosURL = Promise<{ [clave: string]: string | string[] | undefined }>;
 
-// Lee ?categoria=<slug> de la dirección. Como depende de la petición, va dentro de un
-// <Suspense> (así lo pide Next.js con cacheComponents): el resto de la página se
+const primero = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+
+// Lee ?categoria=<slug>&producto=<slug> de la dirección. Como depende de la petición, va dentro
+// de un <Suspense> (así lo pide Next.js con cacheComponents): el resto de la página se
 // prepara de antemano y solo esta parte se resuelve al entrar.
-// Solo se acepta un slug de categoría conocido; cualquier otro valor se ignora.
+// Ambos valores se validan contra el catálogo: si no existen, se ignoran (sin error).
+// Si el producto existe, manda: su categoría queda preseleccionada y el mensaje arranca con
+// "Quiero cotizar: <producto>" (la persona puede editarlo).
 async function FormularioConCategoria({ searchParams }: { searchParams: ParametrosURL }) {
-  const { categoria } = await searchParams;
-  const valor = Array.isArray(categoria) ? categoria[0] : categoria;
-  return <FormularioCotizacion categoriaInicial={categoriaValida(valor)} />;
+  const { categoria, producto } = await searchParams;
+  const prod = productoPorSlug(primero(producto) ?? "");
+  const cat = prod ? prod.categoria : categoriaValida(primero(categoria));
+  return (
+    <FormularioCotizacion
+      // key: si cambia la dirección sin recargar, el formulario se reinicia con los valores nuevos.
+      key={`${cat ?? ""}|${prod?.slug ?? ""}`}
+      categoriaInicial={cat}
+      mensajeInicial={prod ? `Quiero cotizar: ${prod.nombre}` : undefined}
+    />
+  );
 }
 
 export default function Cotizacion({ searchParams }: { searchParams: ParametrosURL }) {

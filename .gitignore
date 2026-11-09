@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Material de trabajo que NO se sube (portafolio en PDF y scripts de extraccion): el repo es publico.
+_fuentes/

@@ -28,7 +28,7 @@ function RedSocial({ nombre, url }: { nombre: string; url: string }) {
     <Dato etiqueta={nombre}>
       {url ? (
         <a href={url} target="_blank" rel="noopener noreferrer" className={enlaceLinea}>
-          {nombre}
+          {redes.usuario}
         </a>
       ) : (
         <span>TODO(contenido): enlace de {nombre}</span>
@@ -69,7 +69,7 @@ export function PiePagina() {
 
         <div>
           <h2 className="font-titulo text-xl font-bold uppercase text-dorado">Contacto</h2>
-          <address className="mt-2 flex flex-col gap-1 not-italic">
+          <address className="mt-2 flex min-w-0 flex-col gap-1 break-words not-italic">
             <Dato etiqueta="Sede">{empresa.ciudad}</Dato>
             <Dato etiqueta="Dirección">
               {sede.direccion || <span>TODO(contenido): dirección</span>}
@@ -89,12 +89,22 @@ export function PiePagina() {
             </Dato>
             <RedSocial nombre="Instagram" url={redes.instagram} />
             <RedSocial nombre="Facebook" url={redes.facebook} />
+            <Dato etiqueta="Sitio actual">
+              <a
+                href={empresa.sitioActualUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={enlaceLinea}
+              >
+                {empresa.sitioActual}
+              </a>
+            </Dato>
           </address>
         </div>
       </div>
 
       <p className="mx-auto mt-10 max-w-6xl border-t border-blanco/20 pt-6 text-sm text-blanco/80">
-        © {empresa.anioCopyright} {empresa.nombre}
+        © {empresa.anioCopyright} {empresa.razonSocial} · {empresa.experiencia}
       </p>
     </footer>
   );

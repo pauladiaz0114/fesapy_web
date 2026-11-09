@@ -5,6 +5,12 @@
 export const empresa = {
   nombre: "Fesapy Distribuciones",
   nombreCorto: "Fesapy",
+  // Razón social y datos tomados del portafolio de Fesapy (PDF).
+  razonSocial: "Fesapy Distribuciones SAS",
+  experiencia: "Más de 4 años de experiencia",
+  // Sitio web actual de la empresa (según el portafolio).
+  sitioActual: "www.fesapydistribuciones.odoo.com",
+  sitioActualUrl: "https://www.fesapydistribuciones.odoo.com",
   lema: "Dotaciones para tu empresa",
   ciudad: "Madrid, Cundinamarca",
   // Año que aparece en el pie de página (© 2026). Se escribe fijo a propósito:
@@ -29,18 +35,20 @@ export const sede = {
   horario: "",
 } as const;
 
-// Redes sociales. Si el enlace está vacío, el pie de página muestra un TODO(contenido).
+// Redes sociales. El portafolio indica el usuario @fesapydistribuciones, pero no dice en qué red.
+// Si un enlace está vacío, el pie de página muestra un TODO(contenido).
 export const redes = {
-  // TODO(contenido): enlace del Instagram de Fesapy (https://instagram.com/...).
-  instagram: "",
-  // TODO(contenido): enlace del Facebook de Fesapy (https://facebook.com/...).
-  facebook: "",
+  usuario: "@fesapydistribuciones",
+  // TODO(contenido): confirmar enlace. Se armó con el usuario del portafolio; verificar que existe.
+  instagram: "https://www.instagram.com/fesapydistribuciones",
+  // TODO(contenido): confirmar enlace. Se armó con el usuario del portafolio; verificar que existe.
+  facebook: "https://www.facebook.com/fesapydistribuciones",
 } as const;
 
 // Datos legales para la política de tratamiento de datos (Ley 1581 de 2012).
 export const legal = {
-  // TODO(contenido): razón social completa, tal como aparece en el RUT.
-  razonSocial: "",
+  // Según el portafolio. TODO(contenido): confirmar que coincide con el RUT.
+  razonSocial: "Fesapy Distribuciones SAS",
   // TODO(contenido): NIT de la empresa.
   nit: "",
   // Versión de la política: sube el número cuando el texto cambie.
