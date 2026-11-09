@@ -13,7 +13,7 @@ Empresa colombiana proveedora integral de seguridad industrial para empresas (B2
 Detalles completos en `docs/BRIEF.md`.
 
 ## Objetivo de la página
-1. Que el visitante conozca la empresa y confíe (clientes, testimonios, sedes).
+1. Que el visitante conozca la empresa y confíe (clientes, testimonios y la sede de Madrid).
 2. Que escriba por WhatsApp con un clic.
 3. Que pida cotización mediante un formulario.
 4. Que el equipo de Fesapy administre catálogo, testimonios, clientes y cotizaciones desde un panel, sin tocar código.

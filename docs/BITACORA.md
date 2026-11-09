@@ -13,6 +13,29 @@ Formato:
 
 ---
 
+## 2026-11-09 — Home estilo Dwork y página de cotización (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/home-estilo-dwork`) Cambio de rumbo: sin base de datos, catálogo, login ni panel. El sitio es WhatsApp + un formulario de cotización que NO guarda datos. Prioridad: escritorio primero, celular después.
+- **Home rehecha** con la estructura de referencia de dwork.com.co (solo el orden de las secciones; textos, imágenes y nombre son de Fesapy): barra de anuncio, encabezado con menú (Inicio, Productos, Personalización, Nosotros, Cotización) y botón de WhatsApp, hero con 2 botones y 4 beneficios, bloque dorado "Solicita tu cotización", 3 ventajas, 6 "problemas que resolvemos", las 8 categorías con botón "Cotizar" (→ `/cotizacion?categoria=<slug>`), clientes y reseñas (con `TODO(contenido)`), pie con sede única de Madrid.
+- **`/cotizacion`:** formulario con Zod en el navegador. Dos botones: "Enviar por WhatsApp" (abre `wa.me` con el mensaje) y "Enviar por correo" (abre `mailto:`). No hay Server Actions, base de datos ni almacenamiento. Casilla Habeas Data obligatoria y sin marcar.
+- **Páginas cortas:** `/productos` (solo categorías, sin precios), `/personalizacion`, `/nosotros` y `/politica-de-datos` (borrador de la Ley 1581 de 2012, a revisar por la empresa). Ningún enlace del menú queda roto.
+- **Marco común** en `src/app/(sitio)/layout.tsx`: barra, encabezado, pie, botón flotante de WhatsApp y enlace "Saltar al contenido". Títulos con plantilla ("Productos — Fesapy Distribuciones").
+- **Datos centralizados** en `src/lib/contenido.ts` (categorías, sede, redes, datos legales). `CLAUDE.md`: se corrigió la última mención a varias sedes.
+- Sin paquetes nuevos y sin tocar `next.config.ts` (la CSP no bloquea nada).
+- Verificado: lint, build y `npm audit` sin errores; `/cotizacion` sale como *Partial Prerender* y las demás páginas como estáticas; en un navegador real (Edge): un solo `h1` por página, sin desborde horizontal a 390, 768 y 1280 px, enlaces externos con `noopener noreferrer`, botones de 44 px o más, la validación rechaza lo inválido, ignora categorías inventadas en la URL y el intento de meter saltos de línea (`Bcc:`) en el asunto del correo queda en una sola línea.
+
+**Archivos:** `src/app/(sitio)/` (`layout.tsx`, `page.tsx`, `cotizacion/`, `productos/`, `personalizacion/`, `nosotros/`, `politica-de-datos/`), `src/app/layout.tsx`, `src/components/` (`inicio/`, `sitio/`, `ui/`, `cotizacion/FormularioCotizacion.tsx`), `src/lib/` (`contenido.ts`, `sanitizar.ts`, `correo.ts`, `mensajeCotizacion.ts`, `validaciones/cotizacion.ts`), `CLAUDE.md`, `docs/BITACORA.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:**
+- *Grupo de rutas `(sitio)`:* la carpeta con paréntesis agrupa páginas que comparten un `layout.tsx` sin cambiar la dirección (`/nosotros`, no `/sitio/nosotros`).
+- *`searchParams` y `<Suspense>`:* leer `?categoria=` depende de cada visita; con `cacheComponents` esa parte se envuelve en `<Suspense>` y el resto de la página se prepara de antemano (*Partial Prerender*).
+- *Validar en el navegador no es seguridad:* sirve para ayudar a quien escribe. Como aquí no se guarda nada, el riesgo es bajo; si algún día se guardan datos, hay que repetir la validación en el servidor.
+- *Inyección de cabeceras en `mailto:`:* un salto de línea en el asunto podría colar otras cabeceras de correo; por eso el asunto se limpia y va en una sola línea.
+- *Mensajes de error accesibles:* `aria-invalid`, `aria-describedby` y llevar el foco al primer campo con error ayudan a quien usa lector de pantalla o teclado.
+
+**Pendientes / notas:** (lista de `TODO(contenido)` en el PR) dirección y horario de la sede, Instagram y Facebook, razón social y NIT para la política de datos, plazo de conservación, logos y reseñas de clientes, fotos por categoría, historia y año de fundación, tiempos y mínimos de personalización. La limpieza de Prisma/Neon va en otra rama (`chore/quitar-base-de-datos`); `PLAN.md` no se tocó aquí.
+
+---
+
 ## 2026-11-01 — Página de inicio simple (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/pagina-inicio`)
 - Colores: `--dorado: #E8B53E` (del logo) reemplaza a `--amarillo`, y se agregó `--crema: #F5F4F0`. Se actualizaron `CLAUDE.md` (colores, nombre "Fesapy Distribuciones", una sola sede) y `BRIEF.md`.

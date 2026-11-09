@@ -141,3 +141,18 @@ Antes del sitio completo se publica una sola página, sin menú ni enlaces a otr
 ## 2026-11-01 · Fotos de referencia de Pexels mientras llegan las propias
 Cuatro fotos de Pexels (licencia libre, uso comercial permitido) en `public/referencia/`, registradas en `docs/CREDITOS-IMAGENES.md` con autor y enlace. Sin caras en primer plano ni logos de marcas. Optimizadas a WebP 800 × 800 sin metadatos con `sharp` (dependencia que ya trae Next.js; no se instaló nada).
 **Pendiente:** reemplazarlas por fotos propias de Fesapy, sobre todo un overol con logo bordado.
+
+## 2026-11-09 · Formulario de cotización sin guardar datos (arma mensaje y abre WhatsApp/correo)
+`/cotizacion` es un Client Component: valida con Zod en el navegador, arma el mensaje y abre `wa.me/573123329422?text=...` o un `mailto:` con asunto y cuerpo (`encodeURIComponent`). No hay Server Actions, base de datos ni almacenamiento; la persona envía el mensaje por el canal que elige.
+**Por qué:** cambio de rumbo (sin base de datos, login ni panel). Al no guardar nada, el sitio no almacena datos personales y baja el riesgo bajo la Ley 1581 de 2012: no hay datos que filtrar, cifrar, conservar ni borrar. El aviso bajo el formulario y la política de datos lo dicen claro.
+**Descartado (para evaluar luego):** Server Action + Resend, que entrega la solicitud aunque la persona no envíe nada y permite un historial, pero obliga a guardar o procesar datos personales, Turnstile, límite por IP y cifrado (las reglas de seguridad de `CLAUDE.md`).
+**Detalles:** el asunto del correo va en una sola línea y los textos se limpian (`src/lib/sanitizar.ts`) para evitar inyección de cabeceras. Teléfono colombiano (celular, fijo con indicativo o fijo local), NIT opcional y límites de largo. Casilla de autorización obligatoria y sin marcar. Si se agrega un servidor, esta validación se repite allí.
+
+## 2026-11-09 · Home con estructura de dwork.com.co, contenido propio
+Se tomó solo la estructura (orden de secciones, dos botones en el hero, bloque de cotización, categorías, reseñas) como referencia. Textos, imágenes, logos y nombre son de Fesapy; no se copió nada.
+**Por qué:** estructura probada para compra B2B sin copiar contenido ajeno (derechos de autor).
+**Decisiones de diseño:** menú de enlaces simples, sin desplegables ni "hamburguesa" (en celular baja de renglón); marco común en `src/app/(sitio)/layout.tsx`; textos prudentes: no se afirman plazos, inventario, crédito ni alcance de la asesoría (quedan como `TODO(contenido)`); clientes y reseñas son marcadores visibles hasta tener datos reales y permiso.
+
+## 2026-11-09 · Política de datos como borrador revisable
+`/politica-de-datos` se publica como borrador (versión 0.1) con una nota visible: la empresa (idealmente con un abogado) debe revisarla. Razón social, NIT, dirección y plazo de conservación quedan como `TODO(contenido)`.
+**Por qué:** hace falta el enlace de la casilla de autorización, pero no se deben inventar los datos legales de la empresa.
