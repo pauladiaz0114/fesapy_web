@@ -33,21 +33,19 @@ Servicio transversal: **personalización con logo** (bordado y estampado).
 1. Dar a conocer la empresa y generar confianza.
 2. Contacto inmediato por **WhatsApp** (acción principal: "Cotizar por WhatsApp" con mensaje prellenado).
 3. **Solicitud de cotizaciones** por formulario.
-4. Catálogo pequeño, administrable desde un **panel**.
+4. Mostrar las categorías de productos (sin catálogo administrable): el contenido se mantiene en el código, con un Pull Request.
 
 Sin precios públicos ni tienda en línea por ahora.
 
 ## 4. Páginas
 | Página | Contenido |
 |---|---|
-| Inicio | Propuesta de valor, categorías, personalización, clientes, testimonios, sedes, CTA WhatsApp y cotizar |
-| Nosotros | Historia, misión, sedes, por qué elegirnos |
-| Productos | Catálogo por categorías |
-| Detalle de producto | Fotos, descripción, marca, tallas, "personalizable", botón cotizar este producto |
+| Inicio | Propuesta de valor, categorías, personalización, clientes, testimonios, sede de Madrid, CTA WhatsApp y cotizar |
+| Nosotros | Historia, misión, sede, por qué elegirnos |
+| Productos | Las 8 categorías, sin precios |
 | Personalización | Bordado y estampado: proceso, ejemplos de trabajos |
-| Cotizar / Contacto | Formulario, WhatsApp, correo, redes, mapa de sedes |
+| Cotización | Formulario que arma el mensaje y abre WhatsApp o correo (no guarda datos); WhatsApp, correo, redes y enlace "Ver en Google Maps" de la sede |
 | Política de tratamiento de datos | Requerida por Ley 1581 de 2012 |
-| Admin (privado) | Productos, categorías, clientes, testimonios, cotizaciones recibidas |
 
 ## 5. Contacto y redes a mostrar
 - WhatsApp: `TODO(contenido)`
@@ -65,7 +63,7 @@ Sin precios públicos ni tienda en línea por ahora.
 
 ## 7. Contenido pendiente
 - [x] Logo recibido (JPG) — falta versión SVG/PNG transparente
-- [ ] Catálogo inicial (nombre, categoría, marca, descripción, tallas, foto)
+- [ ] Fotos por categoría y, más adelante, catálogo (nombre, marca, descripción, tallas, foto)
 - [ ] Lista de clientes (con logo y permiso para mostrarlos) — en trámite
 - [ ] Testimonios (nombre, cargo, empresa, texto, permiso)
 - [ ] Fotos propias: trabajos bordados y estampados, sede, equipo (mientras tanto: fotos de referencia con licencia libre)
