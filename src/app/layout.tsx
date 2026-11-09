@@ -16,8 +16,8 @@ const barlowCondensed = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  // Valores por defecto para las páginas que no definan los suyos.
-  title: "Fesapy Distribuciones",
+  // Cada página escribe solo su parte ("Productos") y Next.js agrega el nombre de la empresa.
+  title: { default: "Fesapy Distribuciones", template: "%s — Fesapy Distribuciones" },
   description:
     "Todo lo que tu empresa necesita en seguridad, en un solo lugar. Uniformes industriales, elementos de protección personal y calzado de seguridad.",
 };
