@@ -8,6 +8,7 @@ import { TarjetaProducto } from "@/components/catalogo/TarjetaProducto";
 import { BotonEnlace } from "@/components/ui/Boton";
 import { productoDeCategoria, productos, productosRelacionados } from "@/lib/catalogo";
 import { categorias } from "@/lib/contenido";
+import { Reveal } from "@/components/ui/Reveal";
 
 type Props = { params: Promise<{ categoria: string; producto: string }> };
 
@@ -157,7 +158,7 @@ export default async function PaginaProducto({ params }: Props) {
 
       {relacionados.length > 0 && (
         <section aria-labelledby="titulo-relacionados" className="bg-crema px-4 py-12 sm:py-16">
-          <div className="mx-auto max-w-6xl">
+          <Reveal className="mx-auto max-w-6xl">
             <h2
               id="titulo-relacionados"
               className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
@@ -177,7 +178,7 @@ export default async function PaginaProducto({ params }: Props) {
                 Ver todos los productos de {categoria.nombre}
               </Link>
             </p>
-          </div>
+          </Reveal>
         </section>
       )}
     </>

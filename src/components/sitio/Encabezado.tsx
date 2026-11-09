@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BotonWhatsApp } from "@/components/ui/BotonWhatsApp";
+import { CabeceraPegajosa } from "./CabeceraPegajosa";
 import { Logo } from "./Logo";
 
 // Los enlaces del menú. Todas son páginas del propio sitio (sin menús desplegables).
@@ -12,12 +13,12 @@ export const enlacesMenu = [
 ] as const;
 
 // Encabezado negro con borde dorado abajo.
-// - Escritorio (lg y más): logo, menú y botón en UNA fila.
+// - Escritorio (lg y más): logo, menú y botón en UNA fila, pegado arriba al hacer scroll.
 // - Celular: fila 1 = logo + botón corto; fila 2 = el menú, que baja de renglón si
-//   no cabe. Todo con CSS: no hace falta JavaScript ni un menú "hamburguesa".
+//   no cabe. Todo con CSS: no hace falta un menú "hamburguesa".
 export function Encabezado() {
   return (
-    <header className="border-b-4 border-dorado bg-negro">
+    <CabeceraPegajosa>
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-3">
         <Link
           href="/"
@@ -36,9 +37,13 @@ export function Encabezado() {
               <li key={href}>
                 <Link
                   href={href}
-                  className="inline-flex min-h-11 items-center font-titulo text-sm font-bold sm:text-base uppercase tracking-wide text-blanco underline-offset-8 hover:text-dorado hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dorado"
+                  className="group inline-flex min-h-11 items-center font-titulo text-sm font-bold uppercase tracking-wide text-blanco focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dorado sm:text-base"
                 >
-                  {texto}
+                  {/* Subrayado dorado que crece de izquierda a derecha al pasar el mouse o
+                      enfocar con el teclado (dorado como acento sobre negro: permitido). */}
+                  <span className="bg-[image:linear-gradient(var(--dorado),var(--dorado))] bg-[length:0%_2px] bg-[position:0_100%] bg-no-repeat pb-1 transition-[background-size] duration-200 ease-out group-hover:bg-[length:100%_2px] group-focus-visible:bg-[length:100%_2px]">
+                    {texto}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -51,6 +56,6 @@ export function Encabezado() {
           <span className="hidden sm:inline">Cotizar por WhatsApp</span>
         </BotonWhatsApp>
       </div>
-    </header>
+    </CabeceraPegajosa>
   );
 }

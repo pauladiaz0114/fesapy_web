@@ -8,6 +8,7 @@ import { BotonEnlace } from "@/components/ui/Boton";
 import { BotonWhatsApp } from "@/components/ui/BotonWhatsApp";
 import { productosDeCategoria } from "@/lib/catalogo";
 import { categorias } from "@/lib/contenido";
+import { Reveal } from "@/components/ui/Reveal";
 
 type Props = { params: Promise<{ categoria: string }> };
 
@@ -53,7 +54,7 @@ export default async function PaginaCategoria({ params }: Props) {
       <ChipsCategorias actual={categoria.slug} />
 
       <section aria-label={`Productos de ${categoria.nombre}`} className="bg-blanco px-4 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl">
+        <Reveal className="mx-auto max-w-6xl">
           {productos.length > 0 ? (
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {productos.map((p) => (
@@ -93,7 +94,7 @@ export default async function PaginaCategoria({ params }: Props) {
               </BotonEnlace>
             </div>
           )}
-        </div>
+        </Reveal>
       </section>
     </>
   );

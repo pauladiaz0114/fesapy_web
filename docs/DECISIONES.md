@@ -173,3 +173,13 @@ Los 30 productos del portafolio de Fesapy se transcriben en `src/lib/catalogo.ts
 - Las fotos (62, 1,0 MB) vienen del propio PDF, en `public/catalogo/` (ver `CREDITOS-IMAGENES.md`). Falta confirmar con Fesapy que puede usarlas en la web.
 - **Comportamiento conocido de Next.js 16 con `cacheComponents`:** `dynamicParams` no está disponible, así que la **primera** visita a una URL inventada responde 200 (con el contenido "404: This page could not be found" y `noindex`) y las siguientes 404. Nadie enlaza a URLs inválidas, así que no se agregó un `proxy.ts` para forzarlo.
 **Alternativas descartadas:** base de datos o panel (descartados el 2026-11-09); un CMS externo (más cuentas y servicios que mantener); una página de producto por cada referencia (el portafolio agrupa varias referencias por ficha, p. ej. las botas 9009 / 9309 / 8609, y se respetó esa agrupación).
+
+## 2026-11-09 · Animaciones discretas con respeto a prefers-reduced-motion
+Se agregan animaciones pequeñas, hechas solo con CSS y React (sin librerías): aparición al hacer scroll (`Reveal`: sube 12 px y se desvanece en 500 ms, una sola vez), tarjetas que suben 3 px con sombra suave y foto que se agranda ~3 %, botones con transición de 200 ms y leve presión al hacer clic, subrayado dorado que crece en el menú, sombra del encabezado al hacer scroll y entrada suave (una vez) del botón flotante de WhatsApp.
+**Reglas:**
+- Solo se animan `opacity` y `transform`: no mueven el diseño (CLS 0 medido en la home y en `/productos`) y casi no cuestan rendimiento.
+- Sin rebotes, parallax, pulsos permanentes ni efectos llamativos.
+- **Todo se apaga con `prefers-reduced-motion: reduce`:** un interruptor general en `globals.css` deja las transiciones y animaciones en ~0 s, `Reveal` ni siquiera marca los bloques y los efectos de movimiento (subir, agrandar, presionar) usan `motion-safe:`.
+- **Si JavaScript falla, nada queda invisible:** el servidor no pone ningún atributo de ocultar; `Reveal` lo agrega ya en el navegador y solo a lo que está fuera de la pantalla al cargar (lo de arriba no parpadea).
+**Detalles:** el encabezado se queda pegado arriba solo desde pantallas grandes (`lg`); en celular ocuparía demasiado (2 filas). Su sombra y `Reveal` cambian un atributo del elemento directamente, sin `useState`, para no volver a pintar componentes en cada scroll (el evento va como *passive* y agrupado con `requestAnimationFrame`). El carrusel del hero agrega un botón de pausa (no pedido) porque pausar solo con el mouse o el foco no sirve a quien usa el celular.
+**Descartado:** Framer Motion, GSAP y similares (dependencias nuevas sin necesidad); `scroll-behavior: smooth` global; animar el menú del celular.

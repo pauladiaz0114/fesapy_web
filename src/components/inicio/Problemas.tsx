@@ -1,3 +1,5 @@
+import { Reveal } from "@/components/ui/Reveal";
+
 // "Problemas que resolvemos": 6 tarjetas. Textos originales y prudentes: solo se dice
 // lo que está confirmado en docs/BRIEF.md (fabrica y personaliza, distribuye varias
 // categorías, productos certificados, facturación electrónica, despachos).
@@ -31,7 +33,7 @@ const problemas = [
 export function Problemas() {
   return (
     <section aria-labelledby="titulo-problemas" className="bg-crema px-4 py-14 sm:py-16">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <h2
           id="titulo-problemas"
           className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
@@ -49,7 +51,7 @@ export function Problemas() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </section>
   );
 }

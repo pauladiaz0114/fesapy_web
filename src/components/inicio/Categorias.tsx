@@ -1,6 +1,7 @@
 import { TarjetaCategoria } from "@/components/catalogo/TarjetaCategoria";
 import { BotonEnlace } from "@/components/ui/Boton";
 import { categorias } from "@/lib/contenido";
+import { Reveal } from "@/components/ui/Reveal";
 
 // Las 8 categorías (docs/BRIEF.md §2). Cada tarjeta lleva a /productos/<categoria> (los productos
 // del portafolio) y tiene un botón "Cotizar" que lleva a /cotizacion?categoria=<slug>.
@@ -14,7 +15,7 @@ export function Categorias({
 }) {
   return (
     <section aria-labelledby={id} className="bg-blanco px-4 py-14 sm:py-16">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <h2 id={id} className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl">
           {titulo}
         </h2>
@@ -38,7 +39,7 @@ export function Categorias({
             Cuéntanos qué necesitas
           </BotonEnlace>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

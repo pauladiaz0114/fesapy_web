@@ -32,3 +32,61 @@ body {
   background: var(--blanco);
   color: var(--negro);
 }
+
+/*
+  ANIMACIONES DISCRETAS (casi no se notan). Reglas:
+  - Solo se animan opacity y transform (no mueven el diseño: CLS 0 y no cuestan rendimiento).
+  - Nada de rebotes, parallax ni efectos llamativos.
+  - TODO se desactiva con "reducir movimiento" (prefers-reduced-motion): ver el final de este bloque.
+*/
+
+/* Aparición al hacer scroll (componente Reveal). Por defecto el contenido se VE: el atributo
+   data-reveal lo pone JavaScript en el navegador, así que si JS falla nada queda invisible. */
+[data-reveal="pre"] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 500ms ease-out,
+    transform 500ms ease-out;
+}
+
+/* Entrada suave del botón flotante de WhatsApp: una sola vez al cargar, sin pulso permanente. */
+@keyframes entrada-flotante {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.entrada-flotante {
+  animation: entrada-flotante 500ms ease-out backwards;
+}
+
+/* Interruptor general: con "reducir movimiento" no hay animaciones ni transiciones de ningún tipo. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .entrada-flotante {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -9,7 +9,7 @@ import { rutaImagen, type Producto } from "@/lib/catalogo";
 export function TarjetaProducto({ producto }: { producto: Producto }) {
   const foto = producto.imagenes[0];
   return (
-    <li className="group relative flex h-full flex-col overflow-hidden rounded border border-negro/15 bg-blanco">
+    <li className="group relative flex h-full flex-col overflow-hidden rounded border border-negro/15 bg-blanco transition-[transform,box-shadow] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-crema">
         {foto ? (
           <Image
@@ -17,7 +17,7 @@ export function TarjetaProducto({ producto }: { producto: Producto }) {
             alt={foto.alt}
             fill
             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-            className="object-contain p-4"
+            className="object-contain p-4 transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.03]"
           />
         ) : (
           // TODO(contenido): foto del producto.
