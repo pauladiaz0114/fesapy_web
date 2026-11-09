@@ -1,3 +1,5 @@
+import { Reveal } from "@/components/ui/Reveal";
+
 // Clientes y reseñas. NO se inventa ningún cliente ni testimonio: mientras no haya
 // datos reales, esta sección muestra marcadores TODO(contenido) a propósito.
 // Cuando lleguen: logos solo con permiso por escrito del cliente, y reseñas reales
@@ -8,7 +10,7 @@ export function ClientesResenas() {
 
   return (
     <section aria-labelledby="titulo-clientes" className="bg-crema px-4 py-14 sm:py-16">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <h2
           id="titulo-clientes"
           className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
@@ -30,7 +32,7 @@ export function ClientesResenas() {
           TODO(contenido): reseñas reales de clientes (nombre, cargo, empresa y permiso para
           publicarlas).
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

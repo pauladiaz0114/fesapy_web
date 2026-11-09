@@ -14,6 +14,33 @@ Formato:
 ---
 
  feat/categoria-seguridad-vial
+## 2026-11-09 — Catálogo del portafolio, carruseles y animaciones (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/catalogo-carruseles`, 4 commits: catálogo, carrusel del hero, animaciones y carrusel móvil)
+- **Catálogo (sin base de datos):** `src/lib/catalogo.ts` con los **30 productos** del portafolio de Fesapy (PDF de 40 páginas), transcritos tal cual (descripciones, características, diferenciadores y normas; el verificador por script confirmó 232 de 238 textos literalmente en el PDF y los otros 6 son listas internas que se unieron con ";" y dos líneas de normas que se combinaron). Páginas estáticas: `/productos` (chips + 8 categorías con portada), `/productos/<categoria>` y `/productos/<categoria>/<producto>` (galería, referencias, normas, relacionados, migas). Categorías sin productos en el portafolio (botiquines, stickers, lubricantes) dicen "Pídenos cotización de esta categoría". `/cotizacion?categoria=&producto=` valida ambos y escribe "Quiero cotizar: <producto>" (editable).
+- **62 fotos** extraídas del PDF con un script propio (Python + Pillow, sin instalar nada): se unieron foto + máscara de transparencia, se descartaron sombras, fondos, logos y sellos de normas, y se optimizaron a WebP: **0,99 MB en total**, la más pesada 86 KB. El PDF y los scripts quedan en `_fuentes/` (ignorada por Git).
+- **Carrusel del hero** (`HeroCarrusel.tsx`): una imagen que cambia cada 5 s con fundido de 700 ms, puntos, flechas y botón de pausa; se pausa con mouse, foco y pestaña oculta; con `prefers-reduced-motion` no cambia sola.
+- **Animaciones discretas:** aparición al hacer scroll (`Reveal`), hover de tarjetas, presión de botones, subrayado del menú, sombra del encabezado y entrada del botón flotante. Solo `opacity`/`transform` (CLS 0) y todo se apaga con `prefers-reduced-motion`.
+- **Carrusel de categorías en celular:** `scroll-snap` con contador "2 / 8" y puntos; grilla desde 768 px. Toda la tarjeta es clicable.
+- Pie y `/nosotros` con la razón social, años de experiencia, usuario de redes y sitio actual del portafolio. `CLAUDE.md`, `PLAN.md`, `DECISIONES.md` y `CREDITOS-IMAGENES.md` actualizados.
+- **Verificado en Edge real** (1280, 768 y 390 px): lint, build y `npm audit` sin errores; rastreo de 83 páginas y 67 imágenes sin enlaces ni fotos rotas; hero rotando, pausando y con reducción de movimiento; carrusel móvil con gestos táctiles y teclado; sin desborde horizontal de la página; CLS 0.
+
+**Archivos:** `src/lib/catalogo.ts`, `src/lib/contenido.ts`, `public/catalogo/` (62 fotos), `src/app/(sitio)/productos/` (3 páginas), `src/app/(sitio)/cotizacion/page.tsx`, `src/components/catalogo/`, `src/components/inicio/` (`HeroCarrusel`, `Categorias`, secciones con `Reveal`), `src/components/ui/` (`Reveal`, `Boton`), `src/components/sitio/` (`CabeceraPegajosa`, `Encabezado`, `PiePagina`, `WhatsAppFlotante`), `src/app/globals.css`, `.gitignore`, `CLAUDE.md`, `docs/`.
+
+**Conceptos aprendidos:**
+- *Enlace estirado (stretched link):* un `::after` absoluto que cubre toda la tarjeta hace clicable la tarjeta sin poner un enlace dentro de otro. **Trampa que encontramos probando:** si ese enlace lleva `transform` o `scale` (aunque sea solo al presionar), se convierte en el contenedor de su `::after`, este se encoge al tamaño del botón y el clic se pierde. Por eso los enlaces estirados no llevan la presión al clic.
+- *`scroll-snap`:* CSS que hace que, al soltar el dedo, el desplazamiento se "pegue" a una tarjeta. No necesita JavaScript.
+- *`prefers-reduced-motion`:* preferencia del sistema de personas a quienes el movimiento les molesta o marea; se respeta con CSS y con `matchMedia`.
+- *Atributo en vez de estado:* `Reveal` y la sombra del encabezado cambian un atributo del elemento directamente (no `useState`) para no repintar componentes en cada scroll.
+- *Cache Components y rutas dinámicas:* `generateStaticParams` debe devolver al menos un valor y `dynamicParams` no existe. La primera visita a una URL inventada responde 200 (con "404" y `noindex`) y las siguientes 404.
+- *Probar de verdad:* medir con un navegador real (clics, gestos y `elementsFromPoint`) encontró un error que ni el lint ni el build ven.
+
+**Pendientes / notas:**
+- **Confirmar con Fesapy** que puede usar las fotos del portafolio en la web (algunas muestran marcas como Kondor, SAGA, Westland, MSA, 3M o INSAFE) y pedir los originales: la mayoría mide 200–400 px de ancho.
+- `TODO(contenido)`: qué referencia es cada foto en Botas Westland, Bota alta soldador y Guantes; confirmar los enlaces de Instagram/Facebook, NIT, dirección y horario; posible error de tipeo del PDF en `ANSI/ASSEA10.32-2012`; el título de la eslinga IN 8040-R repite el de la 8020-1.
+- El portafolio tiene 3 fichas de eslingas (la lista inicial pedía 2): se agregó la de IN 8020 / 8020-R / 8020-1.
+
+---
+
 ## 2026-11-09 — Categoría "Señalización y seguridad vial" (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/categoria-seguridad-vial`) Fesapy también vende conos y productos de ese tipo.
 - La categoría "Señalización y letreros" pasó a **"Señalización y seguridad vial"** (slug `senalizacion-y-seguridad-vial`) y su descripción menciona letreros y señales, conos, cintas de demarcación, barreras y delineadores. Siguen siendo **8 categorías**.

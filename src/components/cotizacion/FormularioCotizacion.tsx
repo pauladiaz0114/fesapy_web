@@ -78,7 +78,14 @@ function Campo({
   );
 }
 
-export function FormularioCotizacion({ categoriaInicial }: { categoriaInicial?: string }) {
+export function FormularioCotizacion({
+  categoriaInicial,
+  mensajeInicial,
+}: {
+  categoriaInicial?: string;
+  /** Texto con el que arranca el mensaje (por ejemplo "Quiero cotizar: <producto>"). La persona lo puede editar. */
+  mensajeInicial?: string;
+}) {
   const [valores, setValores] = useState<ValoresFormulario>({
     nombre: "",
     empresa: "",
@@ -87,7 +94,7 @@ export function FormularioCotizacion({ categoriaInicial }: { categoriaInicial?: 
     telefono: "",
     ciudad: "",
     categoria: categoriaInicial ?? "",
-    mensaje: "",
+    mensaje: mensajeInicial ?? "",
     acepta: false, // La casilla de autorización siempre empieza SIN marcar.
   });
   const [errores, setErrores] = useState<Errores>({});

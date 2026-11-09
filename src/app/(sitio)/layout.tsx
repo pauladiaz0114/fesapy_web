@@ -19,7 +19,7 @@ export default function LayoutSitio({ children }: { children: React.ReactNode })
       </a>
       <AnuncioBarra />
       <Encabezado />
-      <main id="contenido" className="flex-1">
+      <main id="contenido" className="flex-1 scroll-mt-28">
         {children}
       </main>
       <PiePagina />

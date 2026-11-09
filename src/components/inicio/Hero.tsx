@@ -8,7 +8,7 @@ import {
   IconoUniforme,
 } from "@/components/ui/iconos";
 import { empresa } from "@/lib/contenido";
-import { CollageFotos } from "./CollageFotos";
+import { HeroCarrusel } from "./HeroCarrusel";
 
 type Beneficio = {
   titulo: string;
@@ -51,7 +51,7 @@ export function Hero() {
           </div>
         </div>
 
-        <CollageFotos />
+        <HeroCarrusel />
       </div>
 
       <ul className="mx-auto mt-12 grid max-w-6xl gap-6 border-t border-negro/15 pt-8 sm:grid-cols-2 lg:grid-cols-4">

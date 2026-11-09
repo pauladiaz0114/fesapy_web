@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { IconoCamion, IconoMensaje, IconoReloj } from "@/components/ui/iconos";
+import { Reveal } from "@/components/ui/Reveal";
 
 type Ventaja = {
   titulo: string;
@@ -32,7 +33,7 @@ const ventajas: Ventaja[] = [
 export function Ventajas() {
   return (
     <section aria-labelledby="titulo-ventajas" className="bg-blanco px-4 py-14 sm:py-16">
-      <div className="mx-auto max-w-6xl">
+      <Reveal className="mx-auto max-w-6xl">
         <h2
           id="titulo-ventajas"
           className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
@@ -50,7 +51,7 @@ export function Ventajas() {
             </li>
           ))}
         </ul>
-      </div>
+      </Reveal>
     </section>
   );
 }
