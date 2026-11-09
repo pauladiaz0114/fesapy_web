@@ -7,7 +7,7 @@ Empresa colombiana proveedora integral de seguridad industrial para empresas (B2
 
 - **Fabrica y personaliza dotación**: overoles, uniformes, ropa de trabajo con logos estampados y bordados.
 - **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines.
-- **Señalización**: letreros, señales, stickers.
+- **Señalización y seguridad vial**: letreros, señales, conos, cintas de demarcación, barreras y delineadores; stickers.
 - **Diferencial**: es una marca multifuncional, "todo en uno": la empresa le compra toda su seguridad a un solo proveedor.
 
 Detalles completos en `docs/BRIEF.md`.

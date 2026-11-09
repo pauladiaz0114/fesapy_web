@@ -156,3 +156,9 @@ Se tomó solo la estructura (orden de secciones, dos botones en el hero, bloque 
 ## 2026-11-09 · Política de datos como borrador revisable
 `/politica-de-datos` se publica como borrador (versión 0.1) con una nota visible: la empresa (idealmente con un abogado) debe revisarla. Razón social, NIT, dirección y plazo de conservación quedan como `TODO(contenido)`.
 **Por qué:** hace falta el enlace de la casilla de autorización, pero no se deben inventar los datos legales de la empresa.
+
+## 2026-11-09 · Categoría "Señalización y seguridad vial" (se mantienen 8 categorías)
+"Señalización y letreros" se renombra a "Señalización y seguridad vial" (slug `senalizacion-y-seguridad-vial`) para incluir conos, cintas de demarcación, barreras y delineadores.
+**Por qué:** Fesapy vende esos productos y no cabían en el nombre anterior. No se crea una novena categoría para no alargar el menú ni la lista del formulario.
+**Slug viejo:** `?categoria=senalizacion` ya no coincide con ninguna categoría y se ignora sin error (el formulario queda sin categoría elegida). Aceptable: el sitio es nuevo y no hay enlaces guardados en otros lados.
+**Texto:** el bloque "¿No ves lo que buscas? Cuéntanos qué necesitas y te cotizamos." no promete inventario ni plazos.

@@ -13,6 +13,24 @@ Formato:
 
 ---
 
+## 2026-11-09 — Categoría "Señalización y seguridad vial" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/categoria-seguridad-vial`) Fesapy también vende conos y productos de ese tipo.
+- La categoría "Señalización y letreros" pasó a **"Señalización y seguridad vial"** (slug `senalizacion-y-seguridad-vial`) y su descripción menciona letreros y señales, conos, cintas de demarcación, barreras y delineadores. Siguen siendo **8 categorías**.
+- Como las categorías viven en un solo lugar (`src/lib/contenido.ts`), el cambio llegó solo a la home, a `/productos`, a la lista del formulario de `/cotizacion` y a la preselección por `?categoria=`. Un slug viejo (`senalizacion`) en la dirección se ignora sin error.
+- Textos ajustados: metadata de `/productos`, `/nosotros`, "Problemas que resolvemos", `CLAUDE.md` y `docs/BRIEF.md`.
+- Nueva frase con botón al final de las categorías (home y `/productos`): "¿No ves lo que buscas? Cuéntanos qué necesitas y te cotizamos." → `/cotizacion`. No se afirma que haya de todo ni se prometen plazos o inventario.
+- Verificado en el navegador a 1280 y 390 px: 8 categorías en la lista, los 8 enlaces de la home preseleccionan bien, el slug viejo se ignora, sin desborde; lint, build y `npm audit` sin errores.
+
+**Archivos:** `src/lib/contenido.ts`, `src/components/inicio/Categorias.tsx`, `src/components/inicio/Problemas.tsx`, `src/app/(sitio)/productos/page.tsx`, `src/app/(sitio)/nosotros/page.tsx`, `CLAUDE.md`, `docs/BRIEF.md`, `docs/BITACORA.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:**
+- *Una sola fuente de datos:* al definir las categorías en un archivo y leerlas desde todas partes, renombrar una es cambiar una línea y no se pueden quedar enlaces con el nombre viejo.
+- *Slug:* el nombre corto de una categoría que viaja en la dirección (`?categoria=...`). Si cambia, los enlaces guardados con el viejo dejan de coincidir: aquí simplemente no preseleccionan nada.
+
+**Pendientes / notas:** `TODO(contenido)`: confirmar con Fesapy qué otros productos de seguridad vial venden (solo se mencionan los ejemplos dados: conos, cintas de demarcación, barreras y delineadores) y fotos de la categoría. `PLAN.md` no se tocó.
+
+---
+
 ## 2026-11-09 — Home estilo Dwork y página de cotización (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/home-estilo-dwork`) Cambio de rumbo: sin base de datos, catálogo, login ni panel. El sitio es WhatsApp + un formulario de cotización que NO guarda datos. Prioridad: escritorio primero, celular después.
 - **Home rehecha** con la estructura de referencia de dwork.com.co (solo el orden de las secciones; textos, imágenes y nombre son de Fesapy): barra de anuncio, encabezado con menú (Inicio, Productos, Personalización, Nosotros, Cotización) y botón de WhatsApp, hero con 2 botones y 4 beneficios, bloque dorado "Solicita tu cotización", 3 ventajas, 6 "problemas que resolvemos", las 8 categorías con botón "Cotizar" (→ `/cotizacion?categoria=<slug>`), clientes y reseñas (con `TODO(contenido)`), pie con sede única de Madrid.

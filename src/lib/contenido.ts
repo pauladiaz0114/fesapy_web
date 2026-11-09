@@ -77,9 +77,9 @@ export const categorias = [
     descripcion: "Botiquines y elementos de primeros auxilios.",
   },
   {
-    slug: "senalizacion",
-    nombre: "Señalización y letreros",
-    descripcion: "Letreros y señales para tu planta u obra.",
+    slug: "senalizacion-y-seguridad-vial",
+    nombre: "Señalización y seguridad vial",
+    descripcion: "Letreros y señales, conos, cintas de demarcación, barreras y delineadores.",
   },
   {
     slug: "stickers-personalizacion",
