@@ -18,6 +18,8 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] `/cotizacion`: formulario validado con Zod que abre WhatsApp o el correo (sin guardar nada)
 - [x] Páginas cortas: `/productos`, `/personalizacion`, `/nosotros` y `/politica-de-datos` (borrador)
 - [x] Quitar todo lo de base de datos, DAL, cifrado, login y panel (rama `chore/quitar-base-de-datos`)
+- [x] Catálogo estático con los 30 productos del portafolio (`/productos`, `/productos/<categoria>`, `/productos/<categoria>/<producto>`), cotización por producto y fotos del PDF (rama `feat/catalogo-carruseles`)
+- [x] Carrusel del hero, animaciones discretas (con `prefers-reduced-motion`) y carrusel de categorías en celular
 
 ### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)
 - [ ] Dirección y horario de la sede de Madrid
@@ -25,6 +27,8 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] Razón social, NIT y plazo de conservación para la política de datos; revisión de la política por la empresa (idealmente con un abogado)
 - [ ] Logos de clientes (con su permiso por escrito) y reseñas reales (nombre, cargo, empresa y permiso)
 - [ ] Fotos propias: productos por categoría y trabajos bordados y estampados (reemplazan las de referencia de `docs/CREDITOS-IMAGENES.md`)
+- [ ] Confirmar con Fesapy que puede usar en la web las fotos del portafolio (varias muestran marcas de terceros) y pedir los originales en mayor resolución
+- [ ] Productos de botiquines, stickers y lubricantes (hoy esas categorías dicen "Pídenos cotización" porque no están en el portafolio)
 - [ ] Logo en SVG o PNG con fondo transparente
 - [ ] `/nosotros`: historia y año de fundación
 - [ ] `/personalizacion`: cantidad mínima, tiempos y formatos de logo aceptados
@@ -41,7 +45,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] Evaluar Vercel Pro al lanzamiento oficial (el plan Hobby es para uso no comercial)
 
 ### Ideas para después
-- Fotos y página por categoría; catálogo descargable en PDF
+- Catálogo descargable en PDF
 - Google Business Profile para la sede de Madrid
 - Analítica (Vercel Analytics o Google Analytics) **con** aviso de cookies
 - Si hiciera falta recibir las cotizaciones en un servidor: evaluar Server Action + Resend (ver `DECISIONES.md`, 2026-11-09)
