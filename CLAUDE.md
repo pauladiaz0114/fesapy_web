@@ -15,10 +15,10 @@ Detalles completos en `docs/BRIEF.md`.
 ## Objetivo de la página
 1. Que el visitante conozca la empresa y confíe (clientes, testimonios y la sede de Madrid).
 2. Que escriba por WhatsApp con un clic.
-3. Que pida cotización mediante un formulario.
-4. Que el equipo de Fesapy administre catálogo, testimonios, clientes y cotizaciones desde un panel, sin tocar código.
+3. Que pida cotización con un formulario que arma el mensaje y abre WhatsApp o su correo (el sitio no guarda nada).
+4. Que el equipo de Fesapy mantenga el contenido (categorías, datos de contacto, textos) en `src/lib/contenido.ts` y en las páginas, mediante un Pull Request.
 
-No hay pagos en línea ni precios públicos (por ahora).
+No hay pagos en línea ni precios públicos (por ahora). **Tampoco hay base de datos, login ni panel** (cambio de rumbo del 9 de noviembre de 2026; ver `docs/DECISIONES.md`).
 
 ## Equipo y forma de trabajo
 - Dos personas trabajan en este repo, cada una con su propio Claude Code. Ambas están aprendiendo.
@@ -33,13 +33,9 @@ No hay pagos en línea ni precios públicos (por ahora).
 - **Next.js 16** (App Router, `cacheComponents` activo) + TypeScript (modo `strict`)
   - Esta versión trae cambios importantes respecto a versiones anteriores: **antes de escribir código de Next.js, lee la guía correspondiente en `node_modules/next/dist/docs/`** (ver `AGENTS.md`). Por ejemplo, el antiguo `middleware.ts` ahora se llama `proxy.ts`.
 - Tailwind CSS v4 (tokens con `@theme` en `src/app/globals.css`)
-- PostgreSQL en Neon (plan gratuito) + Prisma ORM
-- Auth.js con enlace mágico por correo y sesiones en base de datos; roles `ADMIN` y `EDITOR`
-- Vercel Blob para imágenes (procesadas con `sharp`)
-- Resend para correos (aviso de nueva cotización y login del admin)
-- Zod para validar toda entrada
-- Cloudflare Turnstile contra bots
-- Despliegue en Vercel
+- Zod para validar el formulario de cotización (en el navegador)
+- Despliegue en Vercel (hoy el sitio no usa variables de entorno)
+- Sin base de datos, login, panel ni servicios externos
 
 Justificación y alternativas en `docs/ARQUITECTURA-Y-SEGURIDAD.md`.
 
@@ -49,36 +45,32 @@ npm run dev          # servidor local
 npm run build        # build de producción (debe pasar antes de abrir PR)
 npm run lint         # ESLint
 npm audit --audit-level=high --omit=dev   # vulnerabilidades en dependencias
-npm run db:migrar -- --name <nombre>   # nueva migración en development (solo una persona a la vez)
-npm run db:estado    # qué migraciones faltan
-npm run db:studio    # ver la base de datos
-# Los db:* cargan .env.local (la CLI de Prisma sola solo lee .env). No usar npx prisma directo.
 ```
 
 ## Estructura
 ```
 src/
-  proxy.ts              # redirección optimista de /admin (no es la verificación real)
   app/
-    (sitio)/            # páginas públicas
-      page.tsx          # inicio
+    layout.tsx  globals.css   # fuentes, metadata base y tokens de diseño
+    (sitio)/                  # páginas públicas (comparten layout.tsx: barra, encabezado, pie, WhatsApp)
+      page.tsx                # inicio
+      cotizacion/             # formulario (arma el mensaje; no guarda nada)
+      productos/              # solo las categorías, sin precios
+      personalizacion/        # bordado y estampado
       nosotros/
-      productos/        # catálogo por categoría
-      productos/[slug]/
-      personalizacion/  # bordado y estampado
-      cotizar/
       politica-de-datos/
-    admin/              # panel protegido
-    api/
   components/
-    ui/                 # botones, inputs, tarjetas
-    sitio/              # header, footer, botón WhatsApp flotante
+    ui/                       # botones e íconos
+    sitio/                    # barra de anuncio, encabezado, pie, botón WhatsApp flotante
+    inicio/                   # secciones de la home
+    cotizacion/               # formulario de cotización (Client Component)
   lib/
-    env.ts              # única lectura de process.env (validada con Zod)
-    prisma.ts  auth.ts  permisos.ts  cripto.ts  limite.ts  antibots.ts  sanitizar.ts  auditoria.ts
-    dal/                # Capa de Acceso a Datos: única puerta a la base de datos
-    validaciones/       # esquemas Zod
-prisma/schema.prisma
+    contenido.ts              # datos de la empresa, contacto, sede, redes y las 8 categorías
+    whatsapp.ts  correo.ts  mensajeCotizacion.ts   # enlaces wa.me y mailto: con encodeURIComponent
+    sanitizar.ts              # limpieza de texto escrito por personas
+    validaciones/             # esquemas Zod
+public/
+  marca/  referencia/         # logo y fotos de referencia (créditos en docs/CREDITOS-IMAGENES.md)
 docs/
 ```
 
@@ -99,39 +91,21 @@ docs/
 ## Reglas de seguridad (obligatorias)
 Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea choca con estas reglas, **detente y pregunta**.
 
-**Acceso y permisos**
-- Toda lectura o escritura de datos pasa por `src/lib/dal/`. Páginas, Server Actions y Route Handlers **no** importan Prisma directamente.
-- Cada función protegida de la DAL empieza con `exigirPermiso('<permiso>')` (matriz en `src/lib/permisos.ts`). Se verifica en la DAL **aunque** `proxy.ts` o el layout ya lo hayan hecho: las Server Actions se pueden llamar con un POST directo.
-- Se pregunta por permisos, nunca `if (rol === 'ADMIN')`. Ocultar un botón no es seguridad.
-- Nunca cachear (`'use cache'`) funciones que lean la sesión o datos personales.
-- Contenido público: siempre `activo: true`, búsqueda por `slug`, y 404 (no 403) para lo oculto.
+**Sin datos en el servidor**
+- El sitio no tiene base de datos, login, panel ni Server Actions que guarden datos. El formulario de cotización solo arma un mensaje y abre WhatsApp (`wa.me`) o el correo (`mailto:`); no envía nada a un servidor propio.
+- Si una tarea necesita guardar, enviar o procesar datos personales en un servidor (base de datos, correo desde el servidor, analítica, cuentas), **detente y pregunta**: obliga a volver a diseñar la seguridad (validación en el servidor, cifrado, límites, Ley 1581 de 2012).
 
 **Datos que entran**
-- Zod **en el servidor** para toda entrada, con `z.strictObject` y solo los campos permitidos. Nunca `data: { ...formData }` hacia Prisma: campo por campo.
-- El servidor fija `id`, `estado`, fechas, `aceptaDatosEn`, `politicaVersion`, `rol` y autores. Nunca se aceptan del cliente.
-- Normalizar texto con `src/lib/sanitizar.ts`. Prohibido `dangerouslySetInnerHTML` con contenido de usuarios o del panel. JSON-LD escapando `<`.
-- Solo la API de Prisma o `$queryRaw` con plantilla. **Prohibidos** `$queryRawUnsafe` y `$executeRawUnsafe`.
-
-**Datos que salen**
-- `select` explícito en cada consulta. A los componentes cliente solo llegan DTOs con los campos necesarios.
-- Archivos de `lib/dal/`, `env.ts`, `prisma.ts`, `auth.ts` y `cripto.ts` empiezan con `import 'server-only'`.
-- Errores genéricos al usuario. En logs, solo ids, **nunca** correos, teléfonos ni NIT.
+- Todo campo del formulario se valida con Zod (`z.strictObject`, con límites de largo) y se limpia con `src/lib/sanitizar.ts`. Validar en el navegador ayuda a quien escribe; no es una barrera de seguridad.
+- Los enlaces con datos de personas se arman con `encodeURIComponent`. El asunto de `mailto:` va en una sola línea.
+- Prohibido `dangerouslySetInnerHTML` con contenido que no sea nuestro. JSON-LD escapando `<`.
+- Enlaces externos con `target="_blank"` y `rel="noopener noreferrer"`.
 
 **Secretos**
 - Nunca subir secretos al repo. Todo va en `.env.local` (ignorado) y en Vercel. `.env.example` actualizado sin valores.
-- Solo `src/lib/env.ts` lee `process.env`. La única variable `NEXT_PUBLIC_` permitida es `NEXT_PUBLIC_TURNSTILE_SITE_KEY`.
+- Hoy no hay variables de entorno. Si hace falta una, propónlo antes: se lee solo desde `src/lib/env.ts` validado con Zod, y no se hace obligatoria si el sitio puede funcionar sin ella (para no romper el build). ESLint prohíbe `process.env` fuera de `next.config.ts`.
+- Las variables `NEXT_PUBLIC_` llegan al navegador: solo para datos que puedan ser públicos.
 - Nunca imprimas en la terminal ni copies al chat el contenido de `.env.local`.
-
-**Formularios y abuso**
-- Cotización: honeypot + trampa de tiempo firmada + Turnstile verificado en el servidor + límite 5/hora por IP (HMAC) + casilla Habeas Data obligatoria, no marcada, con enlace a la política.
-- Login: Turnstile + límite por IP y por correo + respuesta idéntica exista o no el correo.
-- IP del visitante solo desde la que entrega Vercel, nunca del primer valor de `X-Forwarded-For`. Nunca se guarda la IP real.
-
-**Datos sensibles**
-- Correo, teléfono y NIT de cotizaciones se cifran con `src/lib/cripto.ts` (AES-256-GCM) antes de guardar. Solo se descifran en la DAL con `cotizaciones:ver`. No inventar criptografía: solo `node:crypto`.
-
-**Archivos**
-- Imágenes: solo con permiso `imagenes:subir`. Tipo verificado por los bytes del archivo (JPEG/PNG/WebP, nunca SVG), máx. 4 MB, reprocesadas con `sharp` (WebP, sin metadatos), nombre generado por el servidor.
 
 **Dependencias**
 - **No instales paquetes sin proponerlo primero** con su nombre exacto, para qué sirve, descargas semanales y última versión. Espera aprobación y regístralo en `DECISIONES.md`.
@@ -139,7 +113,6 @@ Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea c
 
 **Infraestructura**
 - Cabeceras de seguridad en `next.config.ts`. Si agregas un servicio externo (scripts, imágenes, iframes), actualiza la CSP y anótalo en `DECISIONES.md`.
-- Las migraciones las corre una sola persona y con `DIRECT_URL`. La app usa el rol `fesapy_app`, sin permisos de estructura.
 
 **Contenido**
 - Imágenes de productos de marcas: solo las que Fesapy tenga autorización de usar (material de prensa del fabricante o distribuidor, o fotos propias). No descargar imágenes al azar de Google.

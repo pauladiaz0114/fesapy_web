@@ -13,6 +13,32 @@ Formato:
 
 ---
 
+## 2026-11-09 — Quitar todo lo de base de datos (Sebastián con Claude Code)
+**Qué se hizo:** (rama `chore/quitar-base-de-datos`, desde `main`) Cambio de rumbo: se cancela Neon y se descartan base de datos, panel y login.
+- **Borrado:** carpeta `prisma/`, `src/lib/prisma.ts`, `src/lib/env.ts` y `src/lib/env.client.ts`. Antes de borrar se comprobó con grep que solo `prisma.ts` importaba `env.ts` y que nadie importaba `env.client.ts`. No existían `dal/`, `cripto.ts`, `limite.ts`, `antibots.ts`, `auth.ts`, `permisos.ts`, `auditoria.ts`, `proxy.ts`, `admin/` ni `api/`.
+- **`package.json`:** se quitaron `prisma`, `@prisma/client`, los scripts `db:*`, el `postinstall` de Prisma y el `overrides` de `deepmerge-ts`. `package-lock.json` perdió 35 paquetes y no cambió ninguna versión ni se agregó nada. Se conservó `zod` (lo usa `/cotizacion`) y `@tailwindcss/turbopack` (lo usa `next.config.ts`).
+- **Sin variables de entorno:** `.env.example` ahora solo explica cómo agregar una; el sitio ya no necesita ninguna y el build no puede fallar en Vercel por una variable faltante.
+- **ESLint:** se quitaron las reglas de `$queryRawUnsafe` y `$executeRawUnsafe`; se mantiene la que prohíbe `process.env` (solo `next.config.ts`).
+- **CI y Dependabot:** la CI conserva lint, build, `npm audit` y gitleaks (no tenía pasos de Prisma); `dependabot.yml` ya no ignora Prisma.
+- **Docs:** `CLAUDE.md` (stack, estructura y reglas de seguridad), `ARQUITECTURA-Y-SEGURIDAD.md` (reescrito: de 451 a unas 150 líneas), `PLAN.md` (Días 2–7 marcados como reemplazados + plan nuevo breve), `COLABORACION.md`, `BRIEF.md`, README y `DECISIONES.md` (decisión nueva con porqué y alternativas descartadas).
+- **El aspecto del sitio no cambió:** se comparó pixel por pixel contra `main` en las 6 páginas a 1280 y 390 px.
+- Verificado: lint, build y `npm audit` sin errores, también en un clon limpio sin ningún `.env` (como Vercel); grep sin rastros de Prisma, Neon ni las variables viejas fuera del historial.
+
+**Archivos:** `prisma/` (borrada), `src/lib/prisma.ts`, `src/lib/env.ts`, `src/lib/env.client.ts` (borrados), `package.json`, `package-lock.json`, `.env.example`, `eslint.config.mjs`, `next.config.ts` (solo comentarios), `.github/dependabot.yml`, `.github/workflows/ci.yml` (solo un comentario), `README.md`, `CLAUDE.md`, `docs/ARQUITECTURA-Y-SEGURIDAD.md`, `docs/PLAN.md`, `docs/COLABORACION.md`, `docs/BRIEF.md`, `docs/DECISIONES.md`, `docs/BITACORA.md`.
+
+**Conceptos aprendidos:**
+- *Dependencia "de pares" (peer):* `@prisma/client` pedía a `prisma`; por eso `npm audit --omit=dev` lo contaba como de producción. Al quitar los dos desaparece también el parche (`overrides`) que lo arreglaba.
+- *Lockfile:* quitar paquetes con `npm install` solo borra líneas; si aparecieran versiones nuevas, algo salió mal. Se revisó que solo hubo remociones.
+- *`postinstall`:* un script que npm corre solo al instalar. Si se deja uno que llama a una herramienta que ya no está (`prisma generate`), `npm ci` falla; por eso se quitó antes de reinstalar.
+- *Variables obligatorias y el build:* un archivo que exige variables y que se importa desde una página hace fallar el build en Vercel si faltan. Sin variables, esa clase de error desaparece.
+
+**Pendientes / notas:**
+- A mano: borrar el proyecto de Neon, quitar las variables de Vercel, borrar las claves guardadas y los `.env.local`.
+- El PR #7 (lista de pendientes para Paula) queda desactualizado y va a chocar con este (mismos documentos): hay que rehacerlo o ajustarlo después de fusionar este.
+- Las entradas antiguas de `BITACORA.md` y las decisiones antiguas de `DECISIONES.md` mencionan Prisma y Neon a propósito: son historial.
+
+---
+
 ## 2026-11-09 — Home estilo Dwork y página de cotización (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/home-estilo-dwork`) Cambio de rumbo: sin base de datos, catálogo, login ni panel. El sitio es WhatsApp + un formulario de cotización que NO guarda datos. Prioridad: escritorio primero, celular después.
 - **Home rehecha** con la estructura de referencia de dwork.com.co (solo el orden de las secciones; textos, imágenes y nombre son de Fesapy): barra de anuncio, encabezado con menú (Inicio, Productos, Personalización, Nosotros, Cotización) y botón de WhatsApp, hero con 2 botones y 4 beneficios, bloque dorado "Solicita tu cotización", 3 ventajas, 6 "problemas que resolvemos", las 8 categorías con botón "Cotizar" (→ `/cotizacion?categoria=<slug>`), clientes y reseñas (con `TODO(contenido)`), pie con sede única de Madrid.
