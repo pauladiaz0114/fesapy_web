@@ -46,9 +46,6 @@ export function MenuMovil() {
     const antes = html.style.overflow;
     html.style.overflow = "hidden";
 
-    // Lleva el foco al primer enlace del menú.
-    panel.current?.querySelector<HTMLElement>("a")?.focus();
-
     const alTeclear = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();

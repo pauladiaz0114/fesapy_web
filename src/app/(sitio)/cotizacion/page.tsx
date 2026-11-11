@@ -47,7 +47,9 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
 
       <section className="bg-blanco px-4 py-12 sm:py-16">
         <div className="mx-auto max-w-3xl">
-          <Suspense fallback={<div className="min-h-96 text-gris">Cargando formulario…</div>}>
+          {/* Mientras llega la parte que lee la dirección, se muestra el MISMO formulario vacío:
+              mide lo mismo, así el pie de página no "salta" cuando aparece el definitivo (CLS 0). */}
+          <Suspense fallback={<FormularioCotizacion />}>
             <FormularioConCategoria searchParams={searchParams} />
           </Suspense>
         </div>

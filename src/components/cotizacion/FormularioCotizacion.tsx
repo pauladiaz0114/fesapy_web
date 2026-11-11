@@ -154,21 +154,43 @@ export function FormularioCotizacion({
 
   function cambiar<K extends keyof ValoresFormulario>(campo: K, valor: ValoresFormulario[K]) {
     if (!tocados[campo]) setTocados((anterior) => ({ ...anterior, [campo]: true }));
-    setValores((anterior) => ({ ...anterior, [campo]: valor }));
+    const nuevos = { ...valores, [campo]: valor };
+    setValores(nuevos);
+    // Si el campo tenía un error y con lo que escribió ya quedó bien, el error se quita de una vez
+    // (nunca se AGREGA un error mientras escribe; eso solo pasa al salir del campo o al enviar).
+    if (errores[campo]) {
+      const resultado = validarCotizacion(nuevos);
+      if (resultado.ok || !resultado.errores[campo]) {
+        setErrores((anterior) => ({ ...anterior, [campo]: undefined }));
+      }
+    }
     // Si ya se había enviado y la persona cambia algo, se quita el mensaje de gracias.
     if (enviado) setEnviado(null);
   }
 
   // Valida UN campo (con los valores actuales) y actualiza solo su error.
-  function validarCampo(campo: CampoCotizacion, actuales: ValoresFormulario = valores) {
+  // anunciar: false cuando la validación se hace después de un clic (si ese clic fue "Enviar",
+  // el aviso con el resumen de errores no debe quedar tapado por el de un solo campo).
+  function validarCampo(campo: CampoCotizacion, actuales: ValoresFormulario = valores, anunciar = true) {
     const resultado = validarCotizacion(actuales);
     const error = resultado.ok ? undefined : resultado.errores[campo];
     setErrores((anterior) => ({ ...anterior, [campo]: error }));
-    if (error && error !== errores[campo]) setAviso(`${ETIQUETAS[campo]}: ${error}`);
+    if (anunciar && error && error !== errores[campo]) setAviso(`${ETIQUETAS[campo]}: ${error}`);
   }
 
-  function alSalir(campo: CampoCotizacion) {
-    if (tocados[campo] || errores[campo]) validarCampo(campo);
+  // Al salir de un campo. Si salió porque la persona PRESIONÓ algo con el mouse o el dedo (otro
+  // campo, la casilla, el botón de enviar), se espera a que termine ese clic: si el mensaje de
+  // error apareciera o desapareciera justo entre presionar y soltar, el formulario se movería
+  // unos píxeles y el clic caería en otro lugar (se perdería).
+  function alSalir(campo: CampoCotizacion, formulario: HTMLFormElement | null) {
+    if (!tocados[campo] && !errores[campo]) return;
+    if (formulario?.dataset.presionando) {
+      document.addEventListener("pointerup", () => setTimeout(() => validarCampo(campo, valores, false), 0), {
+        once: true,
+      });
+    } else {
+      validarCampo(campo);
+    }
   }
 
   // Atributos comunes: id, aviso de error para el lector de pantalla y validación al salir.
@@ -180,7 +202,8 @@ export function FormularioCotizacion({
       id: idCampo(campo),
       "aria-invalid": errores[campo] ? (true as const) : undefined,
       "aria-describedby": describe || undefined,
-      onBlur: () => alSalir(campo),
+      onBlur: (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+        alSalir(campo, e.currentTarget.form),
     };
   };
 
@@ -235,6 +258,14 @@ export function FormularioCotizacion({
       noValidate
       // Enter dentro de un campo no envía nada: la persona elige uno de los dos botones.
       onSubmit={(e) => e.preventDefault()}
+      // Marca "se está presionando algo dentro del formulario" hasta que termine el clic (ver alSalir).
+      onPointerDownCapture={(e) => {
+        const formulario = e.currentTarget;
+        formulario.dataset.presionando = "si";
+        const soltar = () => setTimeout(() => delete formulario.dataset.presionando, 0);
+        document.addEventListener("pointerup", soltar, { once: true });
+        document.addEventListener("pointercancel", soltar, { once: true });
+      }}
       className="flex flex-col gap-6"
       aria-label="Solicitud de cotización"
     >
