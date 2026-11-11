@@ -70,7 +70,7 @@ export default function Nosotros() {
               href={empresa.sitioActualUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-negro underline underline-offset-4 hover:text-gris focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro"
+              className="font-bold text-negro underline underline-offset-4 hover:text-gris"
             >
               {empresa.sitioActual}
             </a>

@@ -13,7 +13,7 @@ export function WhatsAppFlotante() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Cotizar por WhatsApp (se abre en una pestaña nueva)"
-      className="fixed right-4 bottom-4 z-50 flex size-14 items-center justify-center rounded-full border-2 border-negro bg-dorado text-negro entrada-flotante shadow-lg transition-[color,background-color,box-shadow,transform] duration-200 ease-out hover:bg-blanco hover:shadow-xl motion-safe:active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro sm:right-6 sm:bottom-6 sm:size-16"
+      className="fixed right-4 bottom-4 z-50 flex size-14 items-center justify-center rounded-full border-2 border-negro bg-dorado text-negro entrada-flotante shadow-lg transition-[color,background-color,box-shadow,transform] duration-200 ease-out hover:bg-blanco hover:shadow-xl motion-safe:active:scale-95 sm:right-6 sm:bottom-6 sm:size-16"
     >
       <IconoWhatsApp className="size-7 sm:size-8" />
     </a>

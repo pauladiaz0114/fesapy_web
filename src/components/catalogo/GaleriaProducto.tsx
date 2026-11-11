@@ -45,7 +45,7 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
                 onClick={() => setActual(i)}
                 aria-label={`Ver foto ${i + 1} de ${imagenes.length}`}
                 aria-pressed={i === actual}
-                className={`relative block size-16 overflow-hidden rounded border-2 bg-crema transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro sm:size-20 ${
+                className={`relative block size-16 overflow-hidden rounded border-2 bg-crema transition-colors duration-200 sm:size-20 ${
                   i === actual ? "border-negro" : "border-negro/20 hover:border-negro/60"
                 }`}
               >

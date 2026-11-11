@@ -15,7 +15,9 @@ export function Migas({ items }: { items: Miga[] }) {
               {miga.href && !ultima ? (
                 <Link
                   href={miga.href}
-                  className="inline-flex min-h-8 items-center underline underline-offset-4 hover:text-negro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro"
+                  // El ::before invisible agranda la zona que se puede tocar a 44 px de alto
+                  // sin cambiar cómo se ve (las migas siguen compactas).
+                  className="relative inline-flex min-h-8 items-center underline underline-offset-4 before:absolute before:-inset-x-1 before:-inset-y-1.5 hover:text-negro"
                 >
                   {miga.texto}
                 </Link>

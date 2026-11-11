@@ -146,7 +146,7 @@ export function HeroCarrusel() {
           type="button"
           onClick={() => irA(indice - 1)}
           aria-label="Imagen anterior"
-          className="absolute top-1/2 left-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-negro/60 text-blanco transition-colors duration-200 hover:bg-negro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blanco md:flex"
+          className="absolute top-1/2 left-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-negro/60 text-blanco transition-colors duration-200 hover:bg-negro md:flex"
         >
           <Flecha lado="izquierda" />
         </button>
@@ -154,7 +154,7 @@ export function HeroCarrusel() {
           type="button"
           onClick={() => irA(indice + 1)}
           aria-label="Imagen siguiente"
-          className="absolute top-1/2 right-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-negro/60 text-blanco transition-colors duration-200 hover:bg-negro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blanco md:flex"
+          className="absolute top-1/2 right-2 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-negro/60 text-blanco transition-colors duration-200 hover:bg-negro md:flex"
         >
           <Flecha lado="derecha" />
         </button>
@@ -167,7 +167,7 @@ export function HeroCarrusel() {
             type="button"
             onClick={() => setPausadoPorPersona((p) => !p)}
             aria-label={pausadoPorPersona ? "Reanudar el cambio automático de imágenes" : "Pausar el cambio automático de imágenes"}
-            className="flex size-11 items-center justify-center rounded text-negro transition-colors duration-200 hover:bg-negro/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro"
+            className="flex size-11 items-center justify-center rounded text-negro transition-colors duration-200 hover:bg-negro/10"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +191,7 @@ export function HeroCarrusel() {
             onClick={() => irA(i)}
             aria-label={`Ir a la imagen ${i + 1} de ${total}`}
             aria-current={i === indice}
-            className="flex size-11 items-center justify-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro"
+            className="flex size-11 items-center justify-center rounded"
           >
             {/* El punto activo es negro y alargado; los demás, anillos. Contraste alto sobre crema/blanco. */}
             <span

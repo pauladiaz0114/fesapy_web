@@ -39,7 +39,7 @@ const idCampo = (campo: CampoCotizacion) => `cotizacion-${campo}`;
 const idError = (campo: CampoCotizacion) => `cotizacion-${campo}-error`;
 
 const claseCampo = (hayError: boolean) =>
-  `min-h-11 w-full rounded border-2 bg-blanco px-3 py-2 text-negro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro ${
+  `min-h-11 w-full rounded border-2 bg-blanco px-3 py-2 text-negro ${
     hayError ? "border-red-700" : "border-negro/60"
   }`;
 
@@ -284,7 +284,7 @@ export function FormularioCotizacion({
             name="acepta"
             checked={valores.acepta}
             onChange={(e) => cambiar("acepta", e.target.checked)}
-            className="mt-1 size-6 shrink-0 accent-negro focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-negro"
+            className="mt-1 size-6 shrink-0 accent-negro"
           />
           <label htmlFor={idCampo("acepta")} className="text-negro">
             Autorizo el tratamiento de mis datos según la{" "}

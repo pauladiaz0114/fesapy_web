@@ -34,6 +34,20 @@ body {
 }
 
 /*
+  ANILLO DE FOCO (accesibilidad). Se ve solo al navegar con el teclado (:focus-visible), no al
+  hacer clic con el mouse. Es doble para que se vea en cualquier fondo:
+  - por dentro, una franja NEGRA (box-shadow) que se ve sobre crema y blanco;
+  - por fuera, una línea DORADA (outline) que se ve sobre negro.
+  Va fuera de @layer a propósito: así gana a cualquier clase de Tailwind y TODOS los elementos
+  tienen el mismo foco, sin repetir clases en cada componente.
+*/
+:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--negro);
+}
+
+/*
   ANIMACIONES DISCRETAS (casi no se notan). Reglas:
   - Solo se animan opacity y transform (no mueven el diseño: CLS 0 y no cuestan rendimiento).
   - Nada de rebotes, parallax ni efectos llamativos.
