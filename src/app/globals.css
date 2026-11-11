@@ -28,6 +28,12 @@
   --font-titulo: var(--font-barlow-condensed);
 }
 
+/* Reserva siempre el espacio de la barra de scroll: al abrir el menú del celular (que bloquea el
+   scroll del fondo) la página no se corre de lado. */
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--blanco);
   color: var(--negro);

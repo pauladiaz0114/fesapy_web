@@ -36,7 +36,8 @@ export function CabeceraPegajosa({ children }: { children: ReactNode }) {
   return (
     <header
       ref={ref}
-      className="z-40 border-b-4 border-dorado bg-negro transition-shadow duration-200 data-[desplazado=true]:shadow-[0_4px_14px_rgba(0,0,0,0.3)] lg:sticky lg:top-0"
+      // relative: el panel del menú del celular se ubica justo debajo del encabezado.
+      className="relative z-40 border-b-4 border-dorado bg-negro transition-shadow duration-200 data-[desplazado=true]:shadow-[0_4px_14px_rgba(0,0,0,0.3)] lg:sticky lg:top-0"
     >
       {children}
     </header>
