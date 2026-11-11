@@ -28,9 +28,29 @@
   --font-titulo: var(--font-barlow-condensed);
 }
 
+/* Reserva siempre el espacio de la barra de scroll: al abrir el menú del celular (que bloquea el
+   scroll del fondo) la página no se corre de lado. */
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
   background: var(--blanco);
   color: var(--negro);
+}
+
+/*
+  ANILLO DE FOCO (accesibilidad). Se ve solo al navegar con el teclado (:focus-visible), no al
+  hacer clic con el mouse. Es doble para que se vea en cualquier fondo:
+  - por dentro, una franja NEGRA (box-shadow) que se ve sobre crema y blanco;
+  - por fuera, una línea DORADA (outline) que se ve sobre negro.
+  Va fuera de @layer a propósito: así gana a cualquier clase de Tailwind y TODOS los elementos
+  tienen el mismo foco, sin repetir clases en cada componente.
+*/
+:focus-visible {
+  outline: 3px solid var(--dorado);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--negro);
 }
 
 /*
@@ -67,6 +87,32 @@ body {
 }
 .entrada-flotante {
   animation: entrada-flotante 500ms ease-out backwards;
+}
+
+/* Fotos que aparecen con un fundido al terminar de cargar (componente ImagenSuave). Igual que
+   Reveal: el atributo lo pone JavaScript solo si la foto aún no ha cargado. */
+img[data-carga="pendiente"] {
+  opacity: 0;
+}
+img[data-carga="lista"] {
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+}
+
+/* Barra de progreso del punto activo del carrusel del hero. La duración (5 s) y la pausa
+   (animation-play-state) las pone el componente; al terminar, el carrusel pasa a la siguiente foto. */
+@keyframes progreso-carrusel {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.progreso-carrusel {
+  animation-name: progreso-carrusel;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 /* Interruptor general: con "reducir movimiento" no hay animaciones ni transiciones de ningún tipo. */

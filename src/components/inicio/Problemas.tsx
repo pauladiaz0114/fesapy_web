@@ -33,7 +33,7 @@ const problemas = [
 export function Problemas() {
   return (
     <section aria-labelledby="titulo-problemas" className="bg-crema px-4 py-14 sm:py-16">
-      <Reveal className="mx-auto max-w-6xl">
+      <Reveal escalonar className="mx-auto max-w-6xl">
         <h2
           id="titulo-problemas"
           className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
@@ -45,7 +45,7 @@ export function Problemas() {
         </p>
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {problemas.map(({ titulo, texto }) => (
-            <li key={titulo} className="rounded border-t-4 border-dorado bg-blanco p-6">
+            <li key={titulo} data-escalon className="rounded border-t-4 border-dorado bg-blanco p-6">
               <h3 className="font-titulo text-xl font-bold uppercase text-negro">{titulo}</h3>
               <p className="mt-2 text-gris">{texto}</p>
             </li>

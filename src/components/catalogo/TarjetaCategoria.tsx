@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import Link from "next/link";
 import { BotonEnlace, clasesBoton } from "@/components/ui/Boton";
 import { portadaDeCategoria, productosDeCategoria, rutaImagen } from "@/lib/catalogo";
@@ -17,14 +17,14 @@ export function TarjetaCategoria({ categoria, indice }: { categoria: Categoria; 
   const dorado = indice % 2 === 0;
 
   return (
-    <li className="group relative flex flex-col overflow-hidden rounded border border-negro/15 bg-blanco transition-[transform,box-shadow] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
+    <li data-escalon className="group relative flex flex-col overflow-hidden rounded border border-negro/15 bg-blanco transition-[transform,box-shadow] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-crema">
         {portada ? (
-          <Image
+          <ImagenSuave
             src={rutaImagen(portada.archivo)}
             alt={portada.alt}
             fill
-            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 78vw"
+            sizes="(min-width: 1184px) 270px, (min-width: 1024px) 23vw, (min-width: 768px) 46vw, 78vw"
             className="object-contain p-4 transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.03]"
           />
         ) : (

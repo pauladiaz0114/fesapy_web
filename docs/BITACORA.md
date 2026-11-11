@@ -13,6 +13,35 @@ Formato:
 
 ---
 
+## 2026-11-10 — Pulir movimiento y experiencia (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/pulir-movimiento-y-experiencia`, un commit por punto + un arreglo encontrado al probar)
+1. **Accesibilidad base:** un solo anillo de foco para todo el sitio (`:focus-visible` en `globals.css`: franja negra por dentro y línea dorada por fuera, se ve sobre crema, blanco y negro); `aria-current="page"` y subrayado fijo en el enlace de la página actual; migas con zona táctil de 44 px sin cambiar su aspecto. Revisión de contraste: no se encontró texto dorado sobre crema o blanco (el dorado como texto solo está sobre negro: pie, logo e íconos de "Ventajas"). El enlace "Saltar al contenido" ya existía y se probó con el teclado.
+2. **Formulario de cotización:** valida al salir de cada campo y al enviar (no mientras escribe); errores conectados con `aria-invalid` y `aria-describedby`; zona `aria-live` que anuncia errores, "Abriendo…" y el mensaje de gracias; foco al primer error; botones con "Abriendo WhatsApp…" / "Abriendo correo…" que evitan el doble envío sin cambiar de ancho; mensaje de gracias con fundido en un espacio reservado desde el clic.
+3. **Carruseles:** el hero se puede deslizar con el dedo o arrastrar con el mouse (*pointer events*), responde a ← → cuando tiene el foco, el punto activo se llena como barra de progreso y se pausa también fuera de pantalla; anuncio accesible solo cuando la persona navega. El carrusel de categorías del celular anuncia "Categoría 2 de 8" y tiene botones anterior/siguiente.
+4. **Entradas escalonadas:** `Reveal escalonar` hace que las tarjetas de una grilla aparezcan una tras otra (70 ms), solo la primera vez.
+5. **Carga de imágenes:** `ImagenSuave` deja ver el fondo crema mientras carga la foto y la muestra con un fundido de 300 ms; `sizes` ajustados al ancho real; `preload` solo en la primera foto del hero.
+6. **Menú del celular:** botón de hamburguesa (menos de 1024 px) con panel que abre en 200 ms; se cierra con Escape, tocando fuera, al navegar y al agrandar la ventana; bloquea el scroll del fondo y el foco no se escapa; al cerrar vuelve al botón.
+- **Arreglos encontrados probando con clics reales:** (a) si un mensaje de error aparecía o desaparecía al salir de un campo con el mouse, el formulario se movía entre presionar y soltar y **el clic se perdía** (la casilla de autorización no se marcaba); (b) `/cotizacion` tenía CLS 0,0013 porque el "Cargando formulario…" era más bajo que el formulario.
+- **Verificado en Edge real** (1280, 768 y 390 px, con mouse, toques y teclado): lint, build y `npm audit` sin errores; clic en tarjetas de categoría y producto (foto y botón "Cotizar"); flechas, puntos, arrastre, deslizar y teclado del hero; menú del celular (Escape, tocar fuera, enlaces, Tab/Shift+Tab); formulario con errores y con éxito (WhatsApp y correo); `prefers-reduced-motion` (sin avance automático ni animaciones); **CLS 0** en la home, `/productos`, una categoría y `/cotizacion`, a 1280 y a 390 px.
+
+**Archivos:** `src/app/globals.css`, `src/app/(sitio)/cotizacion/page.tsx`, `src/components/sitio/` (`Encabezado`, `EnlacesMenu` y `MenuMovil` nuevos, `CabeceraPegajosa`, `Logo`, `PiePagina`, `WhatsAppFlotante`), `src/components/cotizacion/FormularioCotizacion.tsx`, `src/components/inicio/` (`HeroCarrusel`, `Categorias`, `Problemas`, `Ventajas`), `src/components/catalogo/` (`CarruselCategorias`, `TarjetaCategoria`, `TarjetaProducto`, `GaleriaProducto`, `ChipsCategorias`, `Migas`), `src/components/ui/` (`Reveal`, `ImagenSuave` nuevo, `Boton`), `src/lib/menu.ts` (nuevo), páginas de producto y `/nosotros` (solo clases de foco), `CLAUDE.md`, `docs/`.
+
+**Conceptos aprendidos:**
+- *`:focus-visible`:* el navegador lo activa cuando se navega con el teclado y no al hacer clic con el mouse. Una sola regla global da a todo el sitio el mismo foco; va fuera de las capas de Tailwind para ganarles.
+- *Pointer events:* un mismo tipo de evento sirve para dedo, mouse y lápiz. Con `touch-action: pan-y` el navegador sigue haciendo el scroll vertical y nos deja el movimiento horizontal para "deslizar".
+- *La animación como reloj:* la barra de progreso del hero es una animación de CSS de 5 s; cuando termina (`animationend`) pasa la foto. Al pausar (`animation-play-state: paused`) se detiene donde iba.
+- *`aria-live`:* una zona invisible que el lector de pantalla lee cuando cambia su texto. Se usa para avisar lo que no se ve (errores, "Abriendo…") y se deja callada en el avance automático para no interrumpir.
+- *Trampa de foco:* mientras el menú está abierto, Tab y Shift+Tab dan vueltas solo entre sus elementos, para que quien usa teclado no termine en el contenido tapado.
+- *Un clic son dos momentos:* presionar y soltar. Si algo mueve el diseño entre los dos (por ejemplo, un mensaje de error que aparece), el clic cae en otro lugar. Por eso la validación al salir espera a que termine el clic.
+- *`aria-disabled` en vez de `disabled`:* un botón `disabled` pierde el foco del teclado; con `aria-disabled` se queda donde está y simplemente no hace nada.
+
+**Pendientes / notas:**
+- No se hicieron transiciones entre páginas ni animaciones en el detalle de producto (ver `DECISIONES.md`).
+- Las capturas de las pruebas quedaron en el computador de Sebastián (GitHub no permite adjuntar imágenes a un PR desde la terminal).
+- En esta bitácora hay una línea suelta ` feat/categoria-seguridad-vial` debajo de esta entrada (resto de una fusión anterior); no se tocó.
+
+---
+
  feat/categoria-seguridad-vial
 ## 2026-11-09 — Catálogo del portafolio, carruseles y animaciones (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/catalogo-carruseles`, 4 commits: catálogo, carrusel del hero, animaciones y carrusel móvil)

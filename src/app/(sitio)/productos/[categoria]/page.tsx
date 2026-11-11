@@ -54,7 +54,7 @@ export default async function PaginaCategoria({ params }: Props) {
       <ChipsCategorias actual={categoria.slug} />
 
       <section aria-label={`Productos de ${categoria.nombre}`} className="bg-blanco px-4 py-12 sm:py-16">
-        <Reveal className="mx-auto max-w-6xl">
+        <Reveal escalonar className="mx-auto max-w-6xl">
           {productos.length > 0 ? (
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {productos.map((p) => (

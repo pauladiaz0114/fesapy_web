@@ -20,6 +20,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Quitar todo lo de base de datos, DAL, cifrado, login y panel (rama `chore/quitar-base-de-datos`)
 - [x] Catálogo estático con los 30 productos del portafolio (`/productos`, `/productos/<categoria>`, `/productos/<categoria>/<producto>`), cotización por producto y fotos del PDF (rama `feat/catalogo-carruseles`)
 - [x] Carrusel del hero, animaciones discretas (con `prefers-reduced-motion`) y carrusel de categorías en celular
+- [x] Pulir movimiento y experiencia: foco visible y `aria-current`, formulario con validación al salir del campo y envío sin doble clic, carruseles con deslizar/teclado/barra de progreso, entradas escalonadas, carga suave de imágenes y menú hamburguesa en celular (rama `feat/pulir-movimiento-y-experiencia`)
 
 ### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)
 - [ ] Dirección y horario de la sede de Madrid

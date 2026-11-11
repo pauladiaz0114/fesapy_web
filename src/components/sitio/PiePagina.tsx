@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { contacto, empresa, redes, sede } from "@/lib/contenido";
 import { ENLACE_COTIZAR } from "@/lib/whatsapp";
-import { enlacesMenu } from "./Encabezado";
+import { enlacesMenu } from "@/lib/menu";
 import { Logo } from "./Logo";
 
 // Pie de página negro. Mientras falten datos (dirección, horario, redes), se ve un
 // TODO(contenido) a propósito, para que nadie publique sin completarlos.
 // Dorado como texto: permitido porque el fondo es negro.
 const enlaceClase =
-  "inline-flex min-h-11 items-center underline underline-offset-4 hover:text-dorado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dorado";
+  "inline-flex min-h-11 items-center underline underline-offset-4 hover:text-dorado";
 
 // Enlaces dentro de una línea de contacto: van en línea, sin altura extra.
 const enlaceLinea =
-  "underline underline-offset-4 hover:text-dorado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dorado";
+  "underline underline-offset-4 hover:text-dorado";
 
 function Dato({ etiqueta, children }: { etiqueta: string; children: React.ReactNode }) {
   return (

@@ -33,7 +33,7 @@ const ventajas: Ventaja[] = [
 export function Ventajas() {
   return (
     <section aria-labelledby="titulo-ventajas" className="bg-blanco px-4 py-14 sm:py-16">
-      <Reveal className="mx-auto max-w-6xl">
+      <Reveal escalonar className="mx-auto max-w-6xl">
         <h2
           id="titulo-ventajas"
           className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
@@ -42,7 +42,7 @@ export function Ventajas() {
         </h2>
         <ul className="mt-10 grid gap-8 md:grid-cols-3">
           {ventajas.map(({ titulo, texto, Icono }) => (
-            <li key={titulo} className="flex flex-col gap-3">
+            <li key={titulo} data-escalon className="flex flex-col gap-3">
               <span className="flex size-14 items-center justify-center rounded-full bg-negro text-dorado">
                 <Icono className="size-7" />
               </span>
