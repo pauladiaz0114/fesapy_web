@@ -83,6 +83,22 @@ body {
   animation: entrada-flotante 500ms ease-out backwards;
 }
 
+/* Barra de progreso del punto activo del carrusel del hero. La duración (5 s) y la pausa
+   (animation-play-state) las pone el componente; al terminar, el carrusel pasa a la siguiente foto. */
+@keyframes progreso-carrusel {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.progreso-carrusel {
+  animation-name: progreso-carrusel;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
 /* Interruptor general: con "reducir movimiento" no hay animaciones ni transiciones de ningún tipo. */
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
