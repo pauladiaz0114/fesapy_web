@@ -61,12 +61,13 @@ src/
       politica-de-datos/
   components/
     ui/                       # botones e íconos
-    sitio/                    # barra de anuncio, encabezado, pie, botón WhatsApp flotante
+    sitio/                    # barra de anuncio, encabezado (menú hamburguesa en celular), pie, botón WhatsApp flotante
     inicio/                   # secciones de la home (incluye el carrusel del hero)
     catalogo/                 # tarjetas de categoría y de producto, galería, migas, carrusel móvil
     cotizacion/               # formulario de cotización (Client Component)
   lib/
     contenido.ts              # datos de la empresa, contacto, sede, redes y las 8 categorías
+    menu.ts                   # enlaces del menú principal (encabezado y pie)
     catalogo.ts               # los 30 productos, transcritos del portafolio de Fesapy (sin precios)
     whatsapp.ts  correo.ts  mensajeCotizacion.ts   # enlaces wa.me y mailto: con encodeURIComponent
     sanitizar.ts              # limpieza de texto escrito por personas
@@ -90,6 +91,9 @@ docs/
 - Botón flotante de WhatsApp visible en todas las páginas públicas.
 - Animaciones discretas y sin librerías (ver `docs/DECISIONES.md`, 2026-11-09): solo `opacity` y `transform`, sin rebotes ni parallax, sin mover el diseño (CLS 0), y **todas se desactivan con `prefers-reduced-motion`**. El contenido debe verse aunque falle JavaScript. Botones de mínimo 44 px de alto. Un solo `h1` por página.
 - Enlace "estirado" (un `::after` que cubre toda una tarjeta): **nunca** lleva `transform`/`scale`, porque se vuelve el contenedor de su `::after` y el clic sobre la tarjeta se pierde.
+- Foco del teclado: lo da la regla global `:focus-visible` de `globals.css` (negro + dorado). No agregues clases `focus-visible:outline-*` en los componentes.
+- Nada debe mover el diseño entre presionar y soltar un clic (mensajes de error, cajas que aparecen): el clic se pierde. Probar con clics reales, no solo con lint/build.
+- Fotos con `ImagenSuave` (fundido al cargar) dentro de un marco que reserve su tamaño. `preload` solo en la primera foto del hero.
 - Fotos que no sean propias: solo con licencia libre o autorización de uso, registradas en `docs/CREDITOS-IMAGENES.md`.
 - Catálogo: nombres, descripciones, características, diferenciadores y normas se **transcriben** del portafolio; no se inventan precios, tallas, colores, existencias ni certificaciones (si falta algo, `TODO(contenido)`). `_fuentes/` nunca se sube (el repo es público).
 

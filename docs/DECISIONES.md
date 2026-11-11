@@ -183,3 +183,23 @@ Se agregan animaciones pequeñas, hechas solo con CSS y React (sin librerías): 
 - **Si JavaScript falla, nada queda invisible:** el servidor no pone ningún atributo de ocultar; `Reveal` lo agrega ya en el navegador y solo a lo que está fuera de la pantalla al cargar (lo de arriba no parpadea).
 **Detalles:** el encabezado se queda pegado arriba solo desde pantallas grandes (`lg`); en celular ocuparía demasiado (2 filas). Su sombra y `Reveal` cambian un atributo del elemento directamente, sin `useState`, para no volver a pintar componentes en cada scroll (el evento va como *passive* y agrupado con `requestAnimationFrame`). El carrusel del hero agrega un botón de pausa (no pedido) porque pausar solo con el mouse o el foco no sirve a quien usa el celular.
 **Descartado:** Framer Motion, GSAP y similares (dependencias nuevas sin necesidad); `scroll-behavior: smooth` global; animar el menú del celular.
+
+## 2026-11-10 · Pulir movimiento y experiencia: carruseles con pointer events, validación al salir del campo y menú hamburguesa
+**Carruseles sin librería, con *pointer events*.** El hero se desliza con el dedo o el mouse comparando dónde empieza y dónde termina el arrastre (mínimo 40 px y más horizontal que vertical), con `touch-action: pan-y` para no bloquear el scroll de la página. El punto activo se llena como barra de progreso: esa animación de CSS (5 s) es el "reloj" del carrusel (`animationend` pasa la foto y `animation-play-state` la pausa). Se pausa con mouse (solo puntero de mouse), foco, botón, pestaña oculta y cuando el hero sale de la pantalla (IntersectionObserver). Con `prefers-reduced-motion` nunca avanza solo.
+**Por qué:** cero dependencias (regla del proyecto) y el comportamiento que se necesita es poco: no hace falta arrastre que siga al dedo, solo cambiar de foto. **Descartado:** Embla, Swiper, Keen Slider (dependencias nuevas sin necesidad); un `setInterval` aparte de la barra (se desincronizan al pausar).
+
+**Validación al salir del campo (onBlur) y al enviar, no mientras se escribe.** Un error aparece al salir del campo (si la persona escribió algo o ya tenía error) o al enviar; se **quita** apenas el campo queda bien mientras escribe. Si se sale del campo presionando algo con el mouse o el dedo, la validación espera a que termine el clic.
+**Por qué:** regañar mientras se escribe es molesto ("correo inválido" a la segunda letra). La espera del clic evita un error real encontrado al probar: el mensaje de error movía el formulario entre presionar y soltar y el clic se perdía. **Descartado:** validar en cada tecla; reservar siempre un renglón vacío bajo cada campo (cambia el diseño).
+
+**Envío sin doble clic.** Los botones usan `aria-disabled` (no `disabled`, que quita el foco del teclado) durante 1,2 s mientras dicen "Abriendo WhatsApp…" / "Abriendo correo…"; los dos textos ocupan la misma celda de una grilla para que el botón no cambie de ancho. El cuadro de gracias ocupa su lugar desde el clic y aparece con un fundido (CLS 0). Sigue sin enviarse nada a un servidor.
+
+**Menú hamburguesa en celular y tableta (cambia la decisión del 2026-11-09 de "sin hamburguesa").** Por debajo de 1024 px el menú pasa a un botón que abre un panel (200 ms), con trampa de foco, scroll bloqueado y cierre con Escape, tocando fuera, al navegar o al agrandar la ventana. `html` lleva `scrollbar-gutter: stable` para que la página no se corra al bloquear el scroll.
+**Por qué:** lo pidió Sebastián para pulir la experiencia: el encabezado del celular pasa de 2 filas a 1 y el menú se lee mejor con enlaces grandes (48 px).
+
+**Un solo anillo de foco global** (`:focus-visible` fuera de las capas de Tailwind): franja negra + línea dorada, visible sobre crema, blanco y negro. Reemplaza las clases de foco que cada componente repetía.
+
+**Entradas escalonadas e imágenes suaves.** `Reveal escalonar` (70 ms entre tarjetas; solo las 6 primeras de cada grupo suman retraso, las demás aparecen con la sexta) e `ImagenSuave` (fundido de 300 ms al cargar sobre el fondo crema). Las dos marcan el elemento solo desde JavaScript y solo si hace falta: si JS falla, todo se ve. Al terminar quitan su atributo para no interferir con el hover de las tarjetas. `preload` queda solo en la primera foto del hero; el logo y la foto principal del producto usan `loading="eager"`.
+
+**Qué se dejó fuera y por qué:**
+- *Transiciones entre páginas* (View Transitions): en Next.js 16 todavía son experimentales, cambian todo el sitio a la vez y en un sitio de pocas páginas no aportan; podrían marear o sentirse lentas.
+- *Animaciones en el detalle de producto* (galería que se desliza, zoom): las fotos del portafolio son pequeñas (200–400 px) y agrandarlas o moverlas las vería peor; la galería solo usa el fundido de `ImagenSuave`.
