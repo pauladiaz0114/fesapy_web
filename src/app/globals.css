@@ -83,6 +83,16 @@ body {
   animation: entrada-flotante 500ms ease-out backwards;
 }
 
+/* Fotos que aparecen con un fundido al terminar de cargar (componente ImagenSuave). Igual que
+   Reveal: el atributo lo pone JavaScript solo si la foto aún no ha cargado. */
+img[data-carga="pendiente"] {
+  opacity: 0;
+}
+img[data-carga="lista"] {
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+}
+
 /* Barra de progreso del punto activo del carrusel del hero. La duración (5 s) y la pausa
    (animation-play-state) las pone el componente; al terminar, el carrusel pasa a la siguiente foto. */
 @keyframes progreso-carrusel {

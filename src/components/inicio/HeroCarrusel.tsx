@@ -1,6 +1,7 @@
 "use client";
 
-import Image, { type StaticImageData } from "next/image";
+import type { StaticImageData } from "next/image";
+import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import { useEffect, useRef, useState, useSyncExternalStore, type PointerEvent } from "react";
 import botas from "../../../public/referencia/botas-seguridad.webp";
 import casco from "../../../public/referencia/casco-epp.webp";
@@ -202,7 +203,7 @@ export function HeroCarrusel() {
                 activa ? "opacity-100" : "opacity-0"
               }`}
             >
-              <Image
+              <ImagenSuave
                 src={foto.src}
                 alt={foto.alt}
                 fill

@@ -8,7 +8,7 @@ import { empresa } from "@/lib/contenido";
 // "import emblema from ...jpg" (importación estática): Next.js lee el ancho y el
 // alto del archivo y reserva el espacio, así la página no "salta" al cargar.
 
-export function Logo({ preload = false }: { preload?: boolean }) {
+export function Logo() {
   return (
     <span className="flex items-center gap-3">
       <Image
@@ -16,8 +16,9 @@ export function Logo({ preload = false }: { preload?: boolean }) {
         // El nombre ya está escrito al lado, por eso el alt es corto.
         alt={`Emblema de ${empresa.nombre}`}
         sizes="56px"
-        // preload: el logo del encabezado es lo primero que se ve; se pide antes.
-        preload={preload}
+        // Arriba en la página: se pide de inmediato (eager). Sin "preload": ese aviso al
+        // navegador queda solo para la primera foto del hero.
+        loading="eager"
         className="size-12 rounded-full sm:size-14"
       />
       <span className="flex flex-col font-titulo uppercase leading-none text-blanco">

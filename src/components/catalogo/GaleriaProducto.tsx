@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import { useState } from "react";
 import { rutaImagen, type ImagenProducto } from "@/lib/catalogo";
 
@@ -24,15 +24,17 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
   return (
     <div className="flex flex-col gap-3">
       <div className="relative aspect-square overflow-hidden rounded border border-negro/15 bg-crema">
-        <Image
-          // key: al cambiar de foto, React crea un <Image> nuevo y no se ve la anterior estirada.
+        <ImagenSuave
+          // key: al cambiar de foto, React crea un <ImagenSuave> nuevo y no se ve la anterior estirada.
           key={foto.archivo}
           src={rutaImagen(foto.archivo)}
           alt={foto.alt}
           fill
-          sizes="(min-width: 1024px) 45vw, 100vw"
+          sizes="(min-width: 1184px) 540px, (min-width: 1024px) 45vw, calc(100vw - 32px)"
           className="object-contain p-6"
-          preload={actual === 0}
+          // Foto principal de esta página: se pide de inmediato (eager). "preload" queda solo
+          // para la primera foto del hero de la home.
+          loading="eager"
         />
       </div>
 
@@ -49,7 +51,7 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
                   i === actual ? "border-negro" : "border-negro/20 hover:border-negro/60"
                 }`}
               >
-                <Image
+                <ImagenSuave
                   src={rutaImagen(img.archivo)}
                   alt=""
                   fill

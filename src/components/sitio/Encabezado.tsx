@@ -14,7 +14,7 @@ export function Encabezado() {
     <CabeceraPegajosa>
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-3">
         <Link href="/" aria-label="Fesapy Distribuciones, ir al inicio" className="rounded">
-          <Logo preload />
+          <Logo />
         </Link>
 
         <nav
