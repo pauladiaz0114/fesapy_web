@@ -16,7 +16,7 @@ export function Categorias({
 }) {
   return (
     <section aria-labelledby={id} className="bg-blanco px-4 py-14 sm:py-16">
-      <Reveal className="mx-auto max-w-6xl">
+      <Reveal escalonar className="mx-auto max-w-6xl">
         <h2 id={id} className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl">
           {titulo}
         </h2>

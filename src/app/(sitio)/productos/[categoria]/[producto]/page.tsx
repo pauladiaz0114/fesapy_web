@@ -158,7 +158,7 @@ export default async function PaginaProducto({ params }: Props) {
 
       {relacionados.length > 0 && (
         <section aria-labelledby="titulo-relacionados" className="bg-crema px-4 py-12 sm:py-16">
-          <Reveal className="mx-auto max-w-6xl">
+          <Reveal escalonar className="mx-auto max-w-6xl">
             <h2
               id="titulo-relacionados"
               className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
