@@ -252,3 +252,6 @@ La franja dorada "Solicita tu cotización" y la sección "Trabajar con Fesapy es
 - Beneficios: una fila desde 640 px; en celular, 2 × 2 ("internacionales" no cabe en un cuarto de 390 px).
 - La línea del horario sale de `contacto.horario` ("7:00 a. m. a 8:00 p. m."), para tener un solo lugar donde cambiarlo.
 - Se borraron `BloqueCotizacion.tsx` y `Ventajas.tsx`. Nada de lo quitado era el único lugar con información importante: el horario sigue en la franja y en el pie, "sin crear cuenta" sigue en la franja, y dotación, logo y un solo proveedor siguen en el hero y en "Problemas".
+
+## 2026-11-13 · El botón de WhatsApp del encabezado vuelve al dorado
+Por pedido de Fesapy, el botón "Cotizar por WhatsApp" del encabezado vuelve al dorado de la marca (texto e ícono negros). Se quitó la variante `whatsapp` de `Boton.tsx`. El verde oficial queda **solo** en la burbuja flotante. Esto reemplaza la parte del 2026-11-12 que decía que el botón del encabezado iba en verde.

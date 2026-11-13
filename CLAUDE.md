@@ -86,7 +86,7 @@ docs/
   - `--gris: #4A4A4A` (texto secundario y bordes)
   - `--blanco: #FFFFFF`
 - **Nunca** texto dorado sobre fondo blanco o crema (contraste insuficiente). Dorado siempre como fondo con texto negro, o como texto sobre fondo negro.
-- **Excepción: verde de WhatsApp** (`--whatsapp: #25D366`, hover `--whatsapp-oscuro: #1FB855`), **solo** en el botón de WhatsApp del encabezado (texto e ícono negros; el blanco no pasa contraste) y en la burbuja flotante (logo blanco). El logo es `IconoWhatsApp` (Simple Icons, CC0). Ningún otro botón usa el verde, y ningún botón de WhatsApp va dorado.
+- **Excepción: verde de WhatsApp** (`--whatsapp: #25D366`, hover `--whatsapp-oscuro: #1FB855`), **solo** en la burbuja flotante (logo blanco). El botón de WhatsApp del encabezado volvió al dorado (2026-11-13). El logo es `IconoWhatsApp` (Simple Icons, CC0). Ningún otro botón usa el verde.
 - Tipografía: **Barlow Condensed** (títulos, en mayúsculas, peso 700) + **Barlow** (texto). Cargar con `next/font/google`.
 - Estilo industrial, limpio, mucho contraste. Mobile first: la mayoría de clientes entrará desde el celular.
 - Botón flotante de WhatsApp visible en todas las páginas públicas.
