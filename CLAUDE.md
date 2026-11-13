@@ -96,7 +96,7 @@ docs/
 - Nada debe mover el diseño entre presionar y soltar un clic (mensajes de error, cajas que aparecen): el clic se pierde. Probar con clics reales, no solo con lint/build.
 - Fotos con `ImagenSuave` (fundido al cargar) dentro de un marco que reserve su tamaño. `preload` solo en la primera foto del hero.
 - Fotos que no sean propias: solo con licencia libre o autorización de uso, registradas en `docs/CREDITOS-IMAGENES.md`.
-- Catálogo: nombres, descripciones, características, diferenciadores y normas se **transcriben** del portafolio; no se inventan precios, tallas, colores, existencias ni certificaciones (si falta algo, `TODO(contenido)`). `_fuentes/` nunca se sube (el repo es público).
+- Catálogo: nombres, descripciones, características, diferenciadores y normas se **transcriben** del portafolio; no se inventan precios, tallas, colores, existencias ni certificaciones (si falta algo, `TODO(contenido)`). Las imágenes que no son del portafolio llevan `referencia: true` y la ficha dice "Imagen de referencia"; sus productos se describen solo con lo que se ve. `_fuentes/` nunca se sube (el repo es público).
 
 ## Reglas de seguridad (obligatorias)
 Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea choca con estas reglas, **detente y pregunta**.

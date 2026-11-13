@@ -228,3 +228,12 @@ Los botones de WhatsApp del encabezado y la burbuja flotante usan el verde ofici
 **Contraste:** el botón con texto lleva texto e ícono **negros** sobre verde (≈ 10:1); blanco sobre ese verde da ≈ 2:1 y no pasa WCAG para texto. La burbuja (sin texto, con `aria-label`) lleva el logo blanco, como lo usa la marca; se separa del fondo con sombra.
 **Regla:** el verde es **solo** para WhatsApp. Los demás botones siguen con el dorado de Fesapy; los otros botones de WhatsApp dentro de las páginas (hero, formulario, categorías) siguen en negro o contorno, ninguno en dorado.
 **Barra de anuncio:** se quitó "Cotiza por WhatsApp y te respondemos pronto": repetía el botón verde que está justo debajo y ocupaba una fila más en el celular.
+
+## 2026-11-12 · "Protección personal" une EPP y Trabajo en alturas (7 categorías) con redirecciones 308
+"Elementos de protección personal" y "Trabajo en alturas e izaje" pasan a ser una sola categoría, **Protección personal** (slug `proteccion-personal`, el que ya tenía EPP). `/productos/trabajo-en-alturas` y `/productos/trabajo-en-alturas/:producto` redirigen de forma permanente (308) desde `next.config.ts`, y `categoriaValida` traduce el slug viejo en `/cotizacion`.
+**Por qué:** lo pidió Sebastián; arneses y eslingas también son elementos de protección personal, y un menú con menos categorías se recorre más rápido en el celular.
+**Descartado:** borrar el slug viejo sin redirección (enlaces compartidos rotos); un `proxy.ts` (las redirecciones de `next.config.ts` bastan y no corren código propio).
+
+## 2026-11-12 · Imágenes de referencia en el catálogo
+Las hojas de imágenes que entregó Fesapy se usan como **imágenes de referencia**: productos nuevos descritos solo con lo que se ve (material, medidas, normas y contenido = `TODO(contenido)`) y una 2.ª foto en 5 prendas que ya existían (la del portafolio sigue como principal; no se duplicaron productos ni se renombró "Camisas Oxford"). Cada imagen lleva `referencia: true` y la ficha muestra "Imagen de referencia".
+**Detalles:** cuadradas, fondo blanco, WebP calidad 80, sin metadatos y sin agrandar. El overol de la hoja (cinta plateada) se creó aparte de "Overol con Reflectivos" (cinta bicolor) hasta que Fesapy confirme si es el mismo. Los avisos para vehículos van en "Señalización y seguridad vial" como "Avisos reflectivos para vehículos" (material adhesivo o lámina = `TODO(contenido)`); "Stickers y personalización" queda igual.

@@ -21,6 +21,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Catálogo estático con los 30 productos del portafolio (`/productos`, `/productos/<categoria>`, `/productos/<categoria>/<producto>`), cotización por producto y fotos del PDF (rama `feat/catalogo-carruseles`)
 - [x] Carrusel del hero, animaciones discretas (con `prefers-reduced-motion`) y carrusel de categorías en celular
 - [x] Pulir movimiento y experiencia: foco visible y `aria-current`, formulario con validación al salir del campo y envío sin doble clic, carruseles con deslizar/teclado/barra de progreso, entradas escalonadas, carga suave de imágenes y menú hamburguesa en celular (rama `feat/pulir-movimiento-y-experiencia`)
+- [x] Catálogo con fotos nuevas: 12 productos (botiquines, señales, avisos para vehículos, overol), 2.ª foto de referencia en 5 prendas y categorías unidas en "Protección personal" (7 categorías, redirecciones 308) (rama `feat/catalogo-fotos-nuevas`)
 
 - [x] Contacto (WhatsApp, correo, Instagram y Facebook), sedes por ciudad sin direcciones, horario, sin barra de anuncio, sin sección de clientes/reseñas, formulario sin NIT y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
 
@@ -30,7 +31,8 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] Direcciones de las sedes de Madrid (Cundinamarca), Bogotá y Villavicencio, si Fesapy decide publicarlas
 - [ ] Fotos propias: productos por categoría y trabajos bordados y estampados (reemplazan las de referencia de `docs/CREDITOS-IMAGENES.md`)
 - [ ] Confirmar con Fesapy que puede usar en la web las fotos del portafolio (varias muestran marcas de terceros) y pedir los originales en mayor resolución
-- [ ] Productos de botiquines, stickers y lubricantes (hoy esas categorías dicen "Pídenos cotización" porque no están en el portafolio)
+- [ ] Productos de stickers y lubricantes (hoy esas categorías dicen "Pídenos cotización"; botiquines ya tiene 4 productos con imágenes de referencia)
+- [ ] Material, medidas, normas y contenido de los 12 productos agregados desde las hojas de referencia (`TODO(contenido)`); confirmar si "Overol con reflectivo plateado" es el mismo "Overol con Reflectivos" para unirlos
 - [ ] Logo en SVG o PNG con fondo transparente
 - [ ] `/nosotros`: historia y año de fundación
 - [ ] `/personalizacion`: cantidad mínima, tiempos y formatos de logo aceptados

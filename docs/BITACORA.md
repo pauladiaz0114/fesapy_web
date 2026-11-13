@@ -13,6 +13,22 @@ Formato:
 
 ---
 
+## 2026-11-12 — Catálogo con fotos nuevas y categoría "Protección personal" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/catalogo-fotos-nuevas`, un commit por punto; tabla aprobada por Sebastián antes de empezar)
+1. **Categorías de 8 a 7:** "Elementos de protección personal" y "Trabajo en alturas e izaje" se unen en **Protección personal** (13 productos: cascos V-Gard, cascos dieléctricos, protector auditivo, máscaras y respiradores, guantes, trajes, 4 arneses y 3 grupos de eslingas). `/productos/trabajo-en-alturas` y sus fichas redirigen con **308** (`next.config.ts`); `?categoria=trabajo-en-alturas` en `/cotizacion` elige la nueva. El contador del carrusel del celular pasa a "n / 7".
+2. **12 productos nuevos** desde las hojas de Fesapy: 4 botiquines, 3 grupos de señales, 4 de avisos reflectivos para vehículos y el overol con reflectivo plateado. Descripción solo con lo que se ve; material, medidas, normas y contenido = `TODO(contenido)`.
+3. **Foto de referencia** como 2.ª foto en Camisas Oxford, Camisa tipo Polo, Camisa en Jean, Chaqueta en Jean y Pantalón en Jean (la del portafolio sigue como principal). La ficha muestra "Imagen de referencia" cuando se ve una de estas fotos.
+- **Peso de `public/catalogo/`:** antes 1.039.202 bytes (62 fotos), después 1.266.558 bytes (80 fotos): +227 KB.
+- **Verificado en Edge real** (1280 y 390 px): 308 de las dos direcciones viejas; 7 categorías; clic real en la tarjeta de Botiquines y en una ficha nueva; aviso "Imagen de referencia" solo en la foto de referencia y sin mover la página; `/cotizacion?producto=botiquin-maletin-rojo` elige la categoría y escribe "Quiero cotizar: Botiquín tipo maletín rojo"; 13 productos en Protección personal; contador "1 / 7"; CLS 0 y sin desborde.
+
+**Archivos:** `src/lib/contenido.ts`, `src/lib/catalogo.ts`, `next.config.ts`, `src/components/catalogo/GaleriaProducto.tsx` (y comentarios en `CarruselCategorias` y `Categorias`), `public/catalogo/` (18 fotos), `CLAUDE.md`, `docs/`.
+
+**Conceptos aprendidos:**
+- *Redirección 308:* le dice al navegador y a Google "esta página se mudó para siempre a esta otra dirección". Así los enlaces viejos no se rompen.
+- *Renglón reservado:* el texto "Imagen de referencia" siempre ocupa su espacio (vacío o lleno), para que la página no salte al cambiar de foto.
+
+**Pendientes / notas:** `TODO(contenido)` de los 12 productos; confirmar si el overol nuevo es el mismo "Overol con Reflectivos"; lubricantes y stickers siguen sin productos (marcador "Pídenos cotización"); las vistas extra están en `_fuentes/fotos-nuevas/recortes/` y algunas espaldas necesitan retoque.
+
 ## 2026-11-12 — Contacto, sedes por ciudad, sin barra de anuncio, sin clientes/reseñas, formulario sin NIT y WhatsApp en verde (Sebastián con Claude Code)
 **Corrección pedida a mitad de la tarea (commits nuevos en la misma rama):** Fesapy **sí tiene sedes** en Madrid (Cundinamarca), Bogotá y Villavicencio. El pie dice "Sedes: Madrid (Cundinamarca), Bogotá y Villavicencio", sin direcciones ni mapas (la línea "Dirección" se eliminó); también `/nosotros`, la política de datos y las descripciones. Además: se quitó la sección **Clientes y reseñas** de la home (solo tenía marcadores) y el formulario de cotización **ya no pide NIT** (campo, validación, mensaje de WhatsApp/correo, mensaje prellenado y política). Lo que dice abajo "sin sede física" quedó reemplazado por esto. También se actualizó la experiencia a **"4 años en el mercado"** (pie y `/nosotros`; antes "Más de 4 años de experiencia").
 **Qué se hizo:** (rama `chore/contacto-redes-sin-sede`, un commit por punto)
