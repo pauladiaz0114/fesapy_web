@@ -7,7 +7,8 @@ export const empresa = {
   nombreCorto: "Fesapy",
   // Razón social y datos tomados del portafolio de Fesapy (PDF).
   razonSocial: "Fesapy Distribuciones SAS",
-  experiencia: "Más de 4 años de experiencia",
+  // Confirmado por Sebastián el 2026-11-12 (antes: "Más de 4 años de experiencia", del portafolio).
+  experiencia: "4 años en el mercado",
   // Dominio propio de la empresa. Por ahora SOLO se muestra como enlace en el pie.
   // TODO(dominio): cuando www.fesapy.tech esté conectado en Vercel, usarlo también como
   // metadataBase y en los enlaces canónicos (hoy el sitio vive en fesapy-web.vercel.app).

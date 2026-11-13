@@ -86,7 +86,7 @@ export default function Nosotros() {
             />
           </section>
 
-          {/* TODO(contenido): año de fundación (el portafolio solo dice "más de 4 años"). */}
+          {/* TODO(contenido): año de fundación exacto (se sabe que llevan 4 años en el mercado). */}
           <p className="rounded border-2 border-dashed border-negro/40 p-4 text-center">
             TODO(contenido): año de fundación de Fesapy.
           </p>
