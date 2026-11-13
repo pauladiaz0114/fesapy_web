@@ -39,7 +39,10 @@ export const contacto = {
 export const redes = {
   usuario: "@fesapydistribuciones",
   instagram: "https://www.instagram.com/fesapydistribuciones",
-  facebook: "https://www.facebook.com/share/19zYB3LRyD/",
+  // Fesapy compartió https://www.facebook.com/share/19zYB3LRyD/, pero ese enlace corto redirige a
+  // esta página agregando "?rdid=..." (un código distinto en cada visita). Se usa la dirección
+  // final, limpia: lleva a la misma página sin redirección ni parámetros.
+  facebook: "https://www.facebook.com/fesapy.distribuciones/",
 } as const;
 
 // Datos legales para la política de tratamiento de datos (Ley 1581 de 2012).
