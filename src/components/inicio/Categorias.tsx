@@ -4,7 +4,7 @@ import { BotonEnlace } from "@/components/ui/Boton";
 import { categorias } from "@/lib/contenido";
 import { Reveal } from "@/components/ui/Reveal";
 
-// Las 8 categorías (docs/BRIEF.md §2). Cada tarjeta lleva a /productos/<categoria> (los productos
+// Las 7 categorías (docs/BRIEF.md §2). Cada tarjeta lleva a /productos/<categoria> (los productos
 // del portafolio) y tiene un botón "Cotizar" que lleva a /cotizacion?categoria=<slug>.
 // Se usa en la home y en /productos.
 export function Categorias({

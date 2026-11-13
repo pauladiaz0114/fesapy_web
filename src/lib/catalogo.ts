@@ -408,7 +408,7 @@ export const productos: Producto[] = [
     ],
   },
 
-  // ───────────── Elementos de protección personal ─────────────
+  // ───────────── Protección personal (EPP, trabajo en alturas e izaje) ─────────────
   {
     slug: "cascos-v-gard",
     categoria: "proteccion-personal",
@@ -612,10 +612,10 @@ export const productos: Producto[] = [
     ],
   },
 
-  // ───────────── Trabajo en alturas e izaje ─────────────
+  // (Antes categoría aparte "Trabajo en alturas e izaje"; unida a Protección personal el 2026-11-12.)
   {
     slug: "arnes-in-8004",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliéster IN 8004",
     resumen:
       "Arnés de cuerpo completo en reata de poliéster con tratamiento ignífugo y estructura tipo “X”, para sistemas de detención de caídas.",
@@ -639,7 +639,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "arnes-in-8004-1",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliéster IN 8004-1",
     resumen:
       "Arnés para detención de caídas en reata de poliéster con tratamiento ignífugo y soporte lumbar ergonómico.",
@@ -663,7 +663,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "arnes-in-8004-p",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliuretano IN 8004-P",
     resumen:
       "Arnés de 4 argollas, cuerpo completo, con reata recubierta en poliuretano para ambientes con hidrocarburos, humedad y grasas.",
@@ -687,7 +687,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "arnes-in-8004-p1",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliuretano IN 8004-P1",
     resumen:
       "Arnés de 4 argollas en poliuretano con soporte lumbar, para ambientes agresivos y trabajos prolongados.",
@@ -711,7 +711,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "eslingas-con-absorbedor-in-8021-1se",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Eslingas con absorbedor IN 8021-1SE / IN 8020-SE / IN 8041-RSE",
     resumen:
       "Eslinga en Y y eslinga sencilla con absorbedor de energía, y eslinga de posicionamiento regulable, con herrajes en acero inoxidable.",
@@ -744,7 +744,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "eslingas-con-absorbedor-in-8020",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Eslingas con absorbedor IN 8020 / IN 8020-R / IN 8020-1",
     resumen:
       "Eslinga sencilla con absorbedor, en versión fija (IN 8020), regulable (IN 8020-R) y regulable con gancho mixto de gran apertura (IN 8020-1).",
@@ -777,7 +777,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "eslingas-de-posicionamiento-in-8040",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Eslingas de posicionamiento IN 8040 / IN 8040-1 / IN 8040-R",
     resumen:
       "Eslingas de posicionamiento y restricción en cuerda semiestática de 14 mm, con gancho mixto de gran apertura o regulables.",
@@ -946,7 +946,6 @@ const PORTADAS: Partial<Record<CategoriaSlug, string>> = {
   "dotacion-ropa-de-trabajo": "overol-con-reflectivos",
   "calzado-de-seguridad": "bota-safety-tridensidad",
   "proteccion-personal": "cascos-v-gard",
-  "trabajo-en-alturas": "arnes-in-8004",
   "senalizacion-y-seguridad-vial": "conos-viales-pvc-90-cm",
 };
 
