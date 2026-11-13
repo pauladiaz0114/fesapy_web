@@ -116,6 +116,28 @@ export function IconoCamion({ className }: PropsIcono) {
   );
 }
 
+/** Escudo con check: productos certificados. */
+export function IconoEscudo({ className }: PropsIcono) {
+  return (
+    <Icono className={className}>
+      <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+      <path d="m9 12 2 2 4-4" />
+    </Icono>
+  );
+}
+
+/** Casco de seguridad: EPP y variedad de categorías. */
+export function IconoCasco({ className }: PropsIcono) {
+  return (
+    <Icono className={className}>
+      <path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5" />
+      <path d="M14 6a6 6 0 0 1 6 6v3" />
+      <path d="M4 15v-3a6 6 0 0 1 6-6" />
+      <rect x="2" y="15" width="20" height="4" rx="1" />
+    </Icono>
+  );
+}
+
 /** Instagram (trazo de Lucide). */
 export function IconoInstagram({ className }: PropsIcono) {
   return (

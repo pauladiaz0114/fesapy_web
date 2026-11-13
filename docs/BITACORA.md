@@ -13,6 +13,22 @@ Formato:
 
 ---
 
+## 2026-11-12 — Inicio con menos texto y más imágenes (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/inicio-menos-texto`)
+1. **"Cómo cotizar"** (componente nuevo `ComoCotizar`) reemplaza "Solicita tu cotización" y "Trabajar con Fesapy es más fácil": 3 tarjetas (mosaico de 3 fotos sin marcas, celular con chat y documento con check en SVG), número en círculo dorado, título de una línea, botón "Cotizar ahora" y "Sin crear cuenta · horario".
+2. **Beneficios** en una fila de íconos con título: Asesoría para tu equipo, Envíos nacionales e internacionales, Atención todos los días, Facturación electrónica.
+3. **Problemas que resolvemos:** 6 tarjetas con ícono y solo título (íconos nuevos: escudo con check y casco).
+4. "Envíos nacionales e internacionales" también en la descripción de la home para Google y WhatsApp.
+- **Verificado en Edge real** (1280 y 390 px): textos viejos fuera; 3 pasos; 1 párrafo en "Cómo cotizar" (la línea del horario) y 0 en "Problemas"; 6 tarjetas; beneficios en 1 fila (escritorio) y 2 × 2 (celular); mosaico con 3 fotos cargadas y con `alt`; 2 SVG con `aria-label`; clic real en "Cotizar ahora" lleva a `/cotizacion`; CLS 0, sin desborde y nada escondido con "reducir movimiento".
+
+**Archivos:** `src/app/(sitio)/page.tsx`, `src/components/inicio/` (`ComoCotizar` nuevo, `Hero` solo la franja de beneficios, `Problemas`; `BloqueCotizacion` y `Ventajas` borrados), `src/components/ui/iconos.tsx`, `docs/`.
+
+**Conceptos aprendidos:**
+- *SVG en línea:* un dibujo hecho con figuras (rectángulos, círculos, caminos) escrito en el código. Pesa casi nada, se ve nítido en cualquier pantalla y toma los colores de la marca con clases como `fill-dorado`.
+- *Marco de proporción fija:* cada imagen vive en una caja 4:3; aunque la foto tarde en llegar, el espacio ya está reservado y nada se mueve (CLS 0).
+
+**Pendientes / notas:** confirmar con Fesapy el título "Tallas para todo tu equipo" (puede leerse como que hay todas las tallas, y las tallas siguen como `TODO(contenido)`); alcance de la asesoría (`TODO(contenido)`).
+
 ## 2026-11-12 — Carrusel del hero con 8 fotos y cambio cada 3 s (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/hero-mas-fotos`) 4 fotos nuevas de Pexels con el mismo estilo (casco y chaleco, arnés en techo, señalización vial, chaleco junto a un andamio; personas de espaldas, sin logos), registradas en `CREDITOS-IMAGENES.md`. El carrusel pasa de 5 s a 3 s por foto. Los puntos miden 32 px de ancho en celular (44 px de alto) para que los 8 quepan en una fila.
 **Verificado** (Edge, 1280 y 390 px): 8 fotos; cambia cada ~3 s (3,03–3,10 s medidos); clic real en un punto; puntos en una sola fila sin desborde; CLS del carrusel 0.

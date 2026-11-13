@@ -241,3 +241,14 @@ Las hojas de imágenes que entregó Fesapy se usan como **imágenes de referenci
 ## 2026-11-12 · Carrusel del hero: 8 fotos y 3 s por foto
 Pedido por Sebastián: más fotos con el mismo estilo y cambio cada 3 s (antes 5 s). Se agregaron 4 fotos de Pexels (licencia libre, sin caras de frente ni logos). Con 8 puntos, en celular cada punto mide 32 × 44 px (mínimo WCAG 2.5.8: 24 px) para que quepan en una fila; desde `sm` vuelven a 44 × 44.
 **Nota:** 3 s es poco para leer; por eso siguen la pausa con mouse, foco y botón, y con "reducir movimiento" no avanza solo.
+
+## 2026-11-12 · Inicio con menos texto: franja 'Cómo cotizar' en 3 pasos y tarjetas de solo título.
+La franja dorada "Solicita tu cotización" y la sección "Trabajar con Fesapy es más fácil" se reemplazan por **"Cómo cotizar"**: 3 pasos con imagen arriba, número y título de una línea, y un botón "Cotizar ahora" con la línea "Sin crear cuenta · <horario>". Los 4 beneficios quedan como íconos con título (sin descripción) y "Problemas que resolvemos" como 6 tarjetas con ícono y solo título. Donde se hablaba de despachos dice **"Envíos nacionales e internacionales"**.
+**Por qué:** la mayoría entra desde el celular; con menos párrafos y más imágenes la home se entiende de un vistazo.
+**Detalles:**
+- Mosaico del paso 1 con fotos **sin marcas visibles** (casco amarillo, overol en dril, arnés IN 8004): todas las fotos de botas muestran Kondor, SAGA o Westland, y el permiso de uso de las fotos del portafolio sigue como `TODO(contenido)`.
+- Pasos 2 y 3: ilustraciones SVG en línea (celular con chat, documento con check) con los colores de la marca; sin librerías.
+- El número de cada paso va en un círculo dorado con texto negro (la regla de marca no permite texto dorado sobre blanco o crema).
+- Beneficios: una fila desde 640 px; en celular, 2 × 2 ("internacionales" no cabe en un cuarto de 390 px).
+- La línea del horario sale de `contacto.horario` ("7:00 a. m. a 8:00 p. m."), para tener un solo lugar donde cambiarlo.
+- Se borraron `BloqueCotizacion.tsx` y `Ventajas.tsx`. Nada de lo quitado era el único lugar con información importante: el horario sigue en la franja y en el pie, "sin crear cuenta" sigue en la franja, y dotación, logo y un solo proveedor siguen en el hero y en "Problemas".

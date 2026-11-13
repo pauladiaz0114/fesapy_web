@@ -1,27 +1,23 @@
 import type { ComponentType } from "react";
 import { BotonEnlace } from "@/components/ui/Boton";
 import { BotonWhatsApp } from "@/components/ui/BotonWhatsApp";
-import {
-  IconoDocumento,
-  IconoEtiqueta,
-  IconoPaquete,
-  IconoUniforme,
-} from "@/components/ui/iconos";
+import { IconoCamion, IconoDocumento, IconoMensaje, IconoReloj } from "@/components/ui/iconos";
 import { empresa } from "@/lib/contenido";
 import { HeroCarrusel } from "./HeroCarrusel";
 
 type Beneficio = {
   titulo: string;
-  texto: string;
   Icono: ComponentType<{ className?: string }>;
 };
 
-// Beneficios que ya están confirmados en docs/BRIEF.md.
+// Beneficios en una fila de íconos con título corto y SIN descripción (2026-11-12).
+// Todos están confirmados en docs/BRIEF.md (envíos nacionales e internacionales, horario,
+// facturación electrónica). TODO(contenido): alcance exacto de la asesoría en EPP.
 const beneficios: Beneficio[] = [
-  { titulo: "Dotación industrial", texto: "Uniformes y ropa de trabajo.", Icono: IconoUniforme },
-  { titulo: "Con el logo de tu empresa", texto: "Bordado y estampado.", Icono: IconoEtiqueta },
-  { titulo: "Un solo proveedor", texto: "Toda tu seguridad en un lugar.", Icono: IconoPaquete },
-  { titulo: "Facturación electrónica", texto: "Para tus compras empresariales.", Icono: IconoDocumento },
+  { titulo: "Asesoría para tu equipo", Icono: IconoMensaje },
+  { titulo: "Envíos nacionales e internacionales", Icono: IconoCamion },
+  { titulo: "Atención todos los días", Icono: IconoReloj },
+  { titulo: "Facturación electrónica", Icono: IconoDocumento },
 ];
 
 // Primera sección. Aquí está el ÚNICO <h1> de la página de inicio.
@@ -54,18 +50,16 @@ export function Hero() {
         <HeroCarrusel />
       </div>
 
-      <ul className="mx-auto mt-12 grid max-w-6xl gap-6 border-t border-negro/15 pt-8 sm:grid-cols-2 lg:grid-cols-4">
-        {beneficios.map(({ titulo, texto, Icono }) => (
-          <li key={titulo} className="flex items-start gap-3">
+      {/* Una fila de 4 desde sm; en celular, 2 × 2 ("internacionales" no cabe en un cuarto de 390 px). */}
+      <ul className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-6 border-t border-negro/15 pt-8 sm:grid-cols-4">
+        {beneficios.map(({ titulo, Icono }) => (
+          <li key={titulo} className="flex flex-col items-center gap-2 text-center">
             {/* Círculo dorado con ícono negro: el dorado va como fondo. */}
             <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-dorado text-negro">
               <Icono className="size-6" />
             </span>
-            <span className="flex flex-col">
-              <span className="font-titulo text-lg font-bold uppercase leading-tight text-negro">
-                {titulo}
-              </span>
-              <span className="text-gris">{texto}</span>
+            <span className="font-titulo text-base font-bold uppercase leading-tight text-negro sm:text-lg">
+              {titulo}
             </span>
           </li>
         ))}
