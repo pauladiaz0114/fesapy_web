@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BloqueCotizacion } from "@/components/inicio/BloqueCotizacion";
 import { Categorias } from "@/components/inicio/Categorias";
-import { ClientesResenas } from "@/components/inicio/ClientesResenas";
 import { Hero } from "@/components/inicio/Hero";
 import { Problemas } from "@/components/inicio/Problemas";
 import { Ventajas } from "@/components/inicio/Ventajas";
@@ -22,7 +21,8 @@ export default function Inicio() {
       <Ventajas />
       <Problemas />
       <Categorias />
-      <ClientesResenas />
+      {/* La sección de clientes y reseñas se quitó el 2026-11-12: vuelve cuando haya logos y
+          reseñas reales con permiso (ver docs/DECISIONES.md). */}
     </>
   );
 }
