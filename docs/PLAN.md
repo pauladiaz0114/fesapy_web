@@ -22,11 +22,12 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Carrusel del hero, animaciones discretas (con `prefers-reduced-motion`) y carrusel de categorías en celular
 - [x] Pulir movimiento y experiencia: foco visible y `aria-current`, formulario con validación al salir del campo y envío sin doble clic, carruseles con deslizar/teclado/barra de progreso, entradas escalonadas, carga suave de imágenes y menú hamburguesa en celular (rama `feat/pulir-movimiento-y-experiencia`)
 
-- [x] Contacto sin sede física (WhatsApp, correo, Instagram y Facebook), horario de atención, sin barra de anuncio y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
+- [x] Contacto (WhatsApp, correo, Instagram y Facebook), sedes por ciudad sin direcciones, horario, sin barra de anuncio, sin sección de clientes/reseñas, formulario sin NIT y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
 
 ### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)
 - [ ] Razón social, NIT, domicilio legal (según el RUT) y plazo de conservación para la política de datos; revisión de la política por la empresa (idealmente con un abogado)
-- [ ] Logos de clientes (con su permiso por escrito) y reseñas reales (nombre, cargo, empresa y permiso)
+- [ ] Logos de clientes (con su permiso por escrito) y reseñas reales (nombre, cargo, empresa y permiso); con eso se vuelve a poner la sección en la home (se quitó el 2026-11-12)
+- [ ] Direcciones de las sedes de Madrid (Cundinamarca), Bogotá y Villavicencio, si Fesapy decide publicarlas
 - [ ] Fotos propias: productos por categoría y trabajos bordados y estampados (reemplazan las de referencia de `docs/CREDITOS-IMAGENES.md`)
 - [ ] Confirmar con Fesapy que puede usar en la web las fotos del portafolio (varias muestran marcas de terceros) y pedir los originales en mayor resolución
 - [ ] Productos de botiquines, stickers y lubricantes (hoy esas categorías dicen "Pídenos cotización" porque no están en el portafolio)
@@ -36,7 +37,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [ ] Confirmar el alcance de la asesoría, los tiempos de despacho y el tiempo de respuesta (comentarios en `Ventajas.tsx`)
 
 ### Pendiente: calidad y lanzamiento
-- [ ] SEO: `sitemap.ts`, `robots.ts`, datos estructurados `Organization` (name, url, logo, email, `sameAs` con Instagram y Facebook, `areaServed` "CO"; JSON-LD escapando `<`; sin dirección porque no hay sede) y Open Graph (imagen al compartir por WhatsApp)
+- [ ] SEO: `sitemap.ts`, `robots.ts`, datos estructurados `Organization` (name, url, logo, email, `sameAs` con Instagram y Facebook, `areaServed`: Colombia, Madrid (Cundinamarca), Bogotá y Villavicencio; JSON-LD escapando `<`; sin dirección mientras no se publiquen) y Open Graph (imagen al compartir por WhatsApp)
 - [ ] Endurecer la CSP (quitar `'unsafe-inline'` con SRI o nonces) y revisar en securityheaders.com (meta: A)
 - [ ] Antes de lanzar: buscar secretos en `.next/static`, `npm audit` sin altas y gitleaks limpio
 - [ ] Pruebas en celular (Android y iPhone) y Lighthouse (>90)

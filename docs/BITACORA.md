@@ -13,9 +13,10 @@ Formato:
 
 ---
 
-## 2026-11-12 — Contacto y redes sin sede física, sin barra de anuncio y WhatsApp en verde (Sebastián con Claude Code)
+## 2026-11-12 — Contacto, sedes por ciudad, sin barra de anuncio, sin clientes/reseñas, formulario sin NIT y WhatsApp en verde (Sebastián con Claude Code)
+**Corrección pedida a mitad de la tarea (commits nuevos en la misma rama):** Fesapy **sí tiene sedes** en Madrid (Cundinamarca), Bogotá y Villavicencio. El pie dice "Sedes: Madrid (Cundinamarca), Bogotá y Villavicencio", sin direcciones ni mapas (la línea "Dirección" se eliminó); también `/nosotros`, la política de datos y las descripciones. Además: se quitó la sección **Clientes y reseñas** de la home (solo tenía marcadores) y el formulario de cotización **ya no pide NIT** (campo, validación, mensaje de WhatsApp/correo, mensaje prellenado y política). Lo que dice abajo "sin sede física" quedó reemplazado por esto. También se actualizó la experiencia a **"4 años en el mercado"** (pie y `/nosotros`; antes "Más de 4 años de experiencia").
 **Qué se hizo:** (rama `chore/contacto-redes-sin-sede`, un commit por punto)
-1. **Sin sede física:** Fesapy no tiene sede ni local abierto al público. Se quitaron la sede, la ciudad y la dirección del pie, de `/nosotros`, de la descripción de la home y de la política de datos. Los datos de contacto quedan en un solo lugar (`src/lib/contenido.ts`): horario "Todos los días, 7:00 a. m. a 8:00 p. m.", Instagram y Facebook reales sin parámetros de rastreo, correo `asistente.fesapy@gmail.com` y "Sitio web: www.fesapy.tech" (solo como enlace).
+1. **Primera versión: "sin sede física"** (corregida después, ver arriba): se quitaron la línea "Dirección" y los TODO de dirección del pie y de la política de datos. Los datos de contacto quedan en un solo lugar (`src/lib/contenido.ts`): horario "Todos los días, 7:00 a. m. a 8:00 p. m.", Instagram y Facebook reales sin parámetros de rastreo, correo `asistente.fesapy@gmail.com` y "Sitio web: www.fesapy.tech" (solo como enlace).
 2. **Redes con ícono:** componente nuevo `RedesSociales` (íconos SVG en línea, 44 px, `aria-label` "Instagram de Fesapy (se abre en otra pestaña)") en el pie, en `/cotizacion` (bloque "¿Prefieres escribirnos directo?") y en `/nosotros` ("Cómo te atendemos").
 3. **Facebook sin redirección:** el enlace corto `facebook.com/share/…` redirigía agregando `?rdid=…`; se usa la dirección final `facebook.com/fesapy.distribuciones/`.
 4. **Se quitó la barra de anuncio** de arriba ("Cotiza por WhatsApp y te respondemos pronto"). El encabezado queda arriba del todo, sin hueco.
@@ -30,7 +31,7 @@ Formato:
 - *Una sola fuente de datos:* el horario se escribe una vez en `contenido.ts` y lo leen el pie, `/cotizacion`, `/nosotros` y "Ventajas".
 
 **Pendientes / notas:**
-- **No hay JSON-LD** en el sitio (nunca se creó `LocalBusiness`), así que no había nada que pasar a `Organization`. Queda en el PLAN para la tarea de SEO.
+- **No hay JSON-LD** en el sitio (nunca se creó `LocalBusiness`), así que no había nada que pasar a `Organization`. Queda en el PLAN para la tarea de SEO, con `areaServed`: Colombia y las tres ciudades.
 - `TODO(dominio)`: `www.fesapy.tech` solo es enlace; `metadataBase` y canónicos se agregan cuando el dominio esté conectado en Vercel.
 - `TODO(contenido)`: razón social, NIT y domicilio según el RUT (política de datos); tiempo de respuesta (Ventajas).
 

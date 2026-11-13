@@ -3,7 +3,7 @@
 Este archivo lo lee Claude Code al inicio de cada sesión. Contiene el contexto y las reglas del proyecto. Si algo aquí cambia, se actualiza este archivo en el mismo commit.
 
 ## Qué es Fesapy
-Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). **No tiene sede ni local abierto al público**: atiende por WhatsApp, correo e Instagram/Facebook (todos los días, 7:00 a. m. a 8:00 p. m.) y despacha a nivel nacional e internacional. No mostrar dirección, mapa ni "sede".
+Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). **Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio**, sin direcciones publicadas por ahora (no mostrar direcciones ni mapas hasta que Fesapy las dé). Atiende por WhatsApp, correo e Instagram/Facebook (todos los días, 7:00 a. m. a 8:00 p. m.) y despacha a nivel nacional e internacional.
 
 - **Fabrica y personaliza dotación**: overoles, uniformes, ropa de trabajo con logos estampados y bordados.
 - **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines.
@@ -13,7 +13,7 @@ Empresa colombiana proveedora integral de seguridad industrial para empresas (B2
 Detalles completos en `docs/BRIEF.md`.
 
 ## Objetivo de la página
-1. Que el visitante conozca la empresa y confíe (clientes, testimonios, redes sociales y canales de contacto claros).
+1. Que el visitante conozca la empresa y confíe (sedes, redes sociales y canales de contacto claros; clientes y reseñas vuelven cuando haya logos y reseñas reales con permiso).
 2. Que escriba por WhatsApp con un clic.
 3. Que pida cotización con un formulario que arma el mensaje y abre WhatsApp o su correo (el sitio no guarda nada).
 4. Que el equipo de Fesapy mantenga el contenido (categorías, datos de contacto, textos) en `src/lib/contenido.ts` y en las páginas, mediante un Pull Request.
@@ -54,7 +54,7 @@ src/
     layout.tsx  globals.css   # fuentes, metadata base y tokens de diseño
     (sitio)/                  # páginas públicas (comparten layout.tsx: barra, encabezado, pie, WhatsApp)
       page.tsx                # inicio
-      cotizacion/             # formulario (arma el mensaje; no guarda nada)
+      cotizacion/             # formulario (arma el mensaje; no guarda nada; no pide NIT)
       productos/              # solo las categorías, sin precios
       personalizacion/        # bordado y estampado
       nosotros/
@@ -66,7 +66,7 @@ src/
     catalogo/                 # tarjetas de categoría y de producto, galería, migas, carrusel móvil
     cotizacion/               # formulario de cotización (Client Component)
   lib/
-    contenido.ts              # datos de la empresa, contacto, horario, redes y las 8 categorías
+    contenido.ts              # datos de la empresa, sedes (solo ciudades), contacto, horario, redes y las categorías
     menu.ts                   # enlaces del menú principal (encabezado y pie)
     catalogo.ts               # los 30 productos, transcritos del portafolio de Fesapy (sin precios)
     whatsapp.ts  correo.ts  mensajeCotizacion.ts   # enlaces wa.me y mailto: con encodeURIComponent
@@ -129,5 +129,5 @@ Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea c
 
 ## Contenido
 - Textos en español de Colombia, tono profesional y cercano, orientado a empresas (jefes de compras, HSE/SST).
-- SEO: cada página con `metadata` (título y descripción), `sitemap.ts`, `robots.ts`, datos estructurados `Organization` (sin dirección: no hay sede; `sameAs` con las redes, `areaServed` "CO"). Hoy todavía no hay JSON-LD.
+- SEO: cada página con `metadata` (título y descripción), `sitemap.ts`, `robots.ts`, datos estructurados `Organization` (sin direcciones publicadas no aplica `LocalBusiness`; `sameAs` con las redes y `areaServed` con Colombia, Madrid (Cundinamarca), Bogotá y Villavicencio). Hoy todavía no hay JSON-LD.
 - Enlaces de redes sin parámetros de rastreo (`?igsh=`, `?rdid=`, `utm_…`). El dominio `www.fesapy.tech` es solo un enlace hasta conectarlo en Vercel (`TODO(dominio)`).
