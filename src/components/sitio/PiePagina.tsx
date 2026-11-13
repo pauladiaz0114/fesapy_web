@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { contacto, empresa, redes, sede } from "@/lib/contenido";
+import { contacto, empresa } from "@/lib/contenido";
 import { ENLACE_COTIZAR } from "@/lib/whatsapp";
 import { enlacesMenu } from "@/lib/menu";
 import { Logo } from "./Logo";
+import { RedesSociales } from "./RedesSociales";
 
-// Pie de página negro. Mientras falten datos (dirección, horario, redes), se ve un
-// TODO(contenido) a propósito, para que nadie publique sin completarlos.
+// Pie de página negro. Muestra las ciudades con sede, sin direcciones ni mapas (aún no se
+// publican), y el contacto por WhatsApp, correo y redes.
 // Dorado como texto: permitido porque el fondo es negro.
 const enlaceClase =
   "inline-flex min-h-11 items-center underline underline-offset-4 hover:text-dorado";
@@ -20,20 +21,6 @@ function Dato({ etiqueta, children }: { etiqueta: string; children: React.ReactN
       <span className="text-blanco/70">{etiqueta}: </span>
       {children}
     </p>
-  );
-}
-
-function RedSocial({ nombre, url }: { nombre: string; url: string }) {
-  return (
-    <Dato etiqueta={nombre}>
-      {url ? (
-        <a href={url} target="_blank" rel="noopener noreferrer" className={enlaceLinea}>
-          {redes.usuario}
-        </a>
-      ) : (
-        <span>TODO(contenido): enlace de {nombre}</span>
-      )}
-    </Dato>
   );
 }
 
@@ -70,13 +57,8 @@ export function PiePagina() {
         <div>
           <h2 className="font-titulo text-xl font-bold uppercase text-dorado">Contacto</h2>
           <address className="mt-2 flex min-w-0 flex-col gap-1 break-words not-italic">
-            <Dato etiqueta="Sede">{empresa.ciudad}</Dato>
-            <Dato etiqueta="Dirección">
-              {sede.direccion || <span>TODO(contenido): dirección</span>}
-            </Dato>
-            <Dato etiqueta="Horario">
-              {sede.horario || <span>TODO(contenido): horario</span>}
-            </Dato>
+            <Dato etiqueta="Sedes">{empresa.sedesTexto}</Dato>
+            <Dato etiqueta="Horario">{contacto.horario}</Dato>
             <Dato etiqueta="WhatsApp">
               <a href={ENLACE_COTIZAR} target="_blank" rel="noopener noreferrer" className={enlaceLinea}>
                 {contacto.whatsappTexto}
@@ -87,18 +69,18 @@ export function PiePagina() {
                 {contacto.correo}
               </a>
             </Dato>
-            <RedSocial nombre="Instagram" url={redes.instagram} />
-            <RedSocial nombre="Facebook" url={redes.facebook} />
-            <Dato etiqueta="Sitio actual">
+            <Dato etiqueta="Sitio web">
+              {/* TODO(dominio): hoy es solo un enlace; el sitio sigue publicado en Vercel. */}
               <a
-                href={empresa.sitioActualUrl}
+                href={empresa.sitioWebUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={enlaceLinea}
               >
-                {empresa.sitioActual}
+                {empresa.sitioWeb}
               </a>
             </Dato>
+            <RedesSociales claseEnlace="hover:text-dorado" />
           </address>
         </div>
       </div>

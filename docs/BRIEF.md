@@ -3,7 +3,7 @@
 ## 1. La empresa
 **Fesapy Distribuciones** ("Dotaciones para tu empresa") es un proveedor integral de seguridad industrial para empresas en Colombia. Es una empresa pequeña que atiende empresas medianas y grandes.
 
-- **Sede**: una sola, en Madrid (Cundinamarca). (Corregido 2026-11-01: antes decía 3 sedes.)
+- **Sedes**: Madrid (Cundinamarca), Bogotá y Villavicencio (aclarado 2026-11-12), sin direcciones publicadas por ahora. Atiende por WhatsApp, correo y redes, todos los días de 7:00 a. m. a 8:00 p. m.
 - **Cobertura**: despachos nacionales e internacionales.
 - **Clientes**: empresas (B2B): fábricas, petroleras y constructoras.
 - **Lo que más valoran sus clientes**: personalización, atención y rapidez.
@@ -40,19 +40,22 @@ Sin precios públicos ni tienda en línea por ahora.
 ## 4. Páginas
 | Página | Contenido |
 |---|---|
-| Inicio | Propuesta de valor, categorías, personalización, clientes, testimonios, sede de Madrid, CTA WhatsApp y cotizar |
-| Nosotros | Historia, misión, sede, por qué elegirnos |
+| Inicio | Propuesta de valor, categorías, personalización, CTA WhatsApp y cotizar (clientes y testimonios vuelven cuando haya logos y reseñas reales con permiso) |
+| Nosotros | Historia, misión, sedes (ciudades), cómo atendemos, redes, por qué elegirnos |
 | Productos | Las 8 categorías, sin precios |
 | Personalización | Bordado y estampado: proceso, ejemplos de trabajos |
-| Cotización | Formulario que arma el mensaje y abre WhatsApp o correo (no guarda datos); WhatsApp, correo, redes y enlace "Ver en Google Maps" de la sede |
+| Cotización | Formulario que arma el mensaje y abre WhatsApp o correo (no guarda datos ni pide NIT); WhatsApp, correo, horario y redes |
 | Política de tratamiento de datos | Requerida por Ley 1581 de 2012 |
 
 ## 5. Contacto y redes a mostrar
-- WhatsApp: `TODO(contenido)`
-- Instagram: `TODO(contenido)`
-- Facebook: `TODO(contenido)`
-- Correo: `TODO(contenido)`
-- Dirección y horario de la sede de Madrid: `TODO(contenido)`
+Todos los datos viven en `src/lib/contenido.ts` (confirmados 2026-11-12):
+- WhatsApp: +57 312 332 9422
+- Correo: asistente.fesapy@gmail.com
+- Instagram: https://www.instagram.com/fesapydistribuciones
+- Facebook: https://www.facebook.com/fesapy.distribuciones/
+- Horario de atención: todos los días, 7:00 a. m. a 8:00 p. m.
+- Sitio web: www.fesapy.tech (dominio aún no conectado en Vercel)
+- Sedes: Madrid (Cundinamarca), Bogotá y Villavicencio (sin direcciones publicadas: `TODO(contenido)`).
 
 ## 6. Identidad visual
 - Logo: emblema circular **dorado sobre negro** ("Fesapy Distribuciones"), archivo en `public/marca/`. Dorado de referencia `#E8B53E` (muestreado del logo). Pendiente: versión vectorial/plana del logo.
@@ -66,8 +69,8 @@ Sin precios públicos ni tienda en línea por ahora.
 - [ ] Fotos por categoría y, más adelante, catálogo (nombre, marca, descripción, tallas, foto)
 - [ ] Lista de clientes (con logo y permiso para mostrarlos) — en trámite
 - [ ] Testimonios (nombre, cargo, empresa, texto, permiso)
-- [ ] Fotos propias: trabajos bordados y estampados, sede, equipo (mientras tanto: fotos de referencia con licencia libre)
-- [ ] Datos de contacto y redes
+- [ ] Fotos propias: trabajos bordados y estampados, equipo (mientras tanto: fotos de referencia con licencia libre)
+- [x] Datos de contacto y redes
 - [ ] Texto de "Nosotros" (año de fundación, historia)
 - [ ] Competidores o páginas de referencia que les gusten
 

@@ -1,10 +1,9 @@
-import { AnuncioBarra } from "@/components/sitio/AnuncioBarra";
 import { Encabezado } from "@/components/sitio/Encabezado";
 import { PiePagina } from "@/components/sitio/PiePagina";
 import { WhatsAppFlotante } from "@/components/sitio/WhatsAppFlotante";
 
-// Marco común de todas las páginas públicas: barra de anuncio, encabezado,
-// contenido de cada página, pie y botón flotante de WhatsApp.
+// Marco común de todas las páginas públicas: encabezado, contenido de cada página,
+// pie y botón flotante de WhatsApp. (La barra de anuncio de arriba se quitó el 2026-11-12.)
 // "(sitio)" es un grupo de rutas: la carpeta no aparece en la dirección (/nosotros, no /sitio/nosotros).
 export default function LayoutSitio({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +16,6 @@ export default function LayoutSitio({ children }: { children: React.ReactNode })
       >
         Saltar al contenido
       </a>
-      <AnuncioBarra />
       <Encabezado />
       <main id="contenido" className="flex-1 scroll-mt-28">
         {children}

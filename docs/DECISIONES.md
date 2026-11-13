@@ -81,7 +81,7 @@ La app usa el rol `fesapy_app` (solo SELECT/INSERT/UPDATE/DELETE); las migracion
 **Regla:** ningún paquete nuevo sin propuesta y aprobación; versiones exactas (`save-exact`).
 
 ## 2026-10-26 · Mapas con enlace, no iframe
-Cada sede tiene un enlace "Ver en Google Maps".
+Cada sede tiene un enlace "Ver en Google Maps". **(En pausa desde el 2026-11-12: las sedes aún no tienen dirección publicada, así que no hay mapas. Si se publican, se sigue esta regla.)**
 **Por qué:** un iframe agrega cookies de terceros, más dominios a la CSP y peso a la página.
 
 ## 2026-10-26 · No se instala el paquete `server-only`
@@ -203,3 +203,28 @@ Se agregan animaciones pequeñas, hechas solo con CSS y React (sin librerías): 
 **Qué se dejó fuera y por qué:**
 - *Transiciones entre páginas* (View Transitions): en Next.js 16 todavía son experimentales, cambian todo el sitio a la vez y en un sitio de pocas páginas no aportan; podrían marear o sentirse lentas.
 - *Animaciones en el detalle de producto* (galería que se desliza, zoom): las fotos del portafolio son pequeñas (200–400 px) y agrandarlas o moverlas las vería peor; la galería solo usa el fundido de `ImagenSuave`.
+
+## 2026-11-12 · Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio, sin direcciones publicadas por ahora; JSON-LD Organization con areaServed
+Fesapy tiene sedes en **Madrid (Cundinamarca), Bogotá y Villavicencio**. El sitio muestra solo las ciudades ("Sedes: Madrid (Cundinamarca), Bogotá y Villavicencio" en el pie, `/nosotros`, la política de datos y las descripciones); **sin direcciones ni mapas** hasta que Fesapy decida publicarlas (`TODO(contenido)` en `contenido.ts`). El contacto es por WhatsApp, correo (`asistente.fesapy@gmail.com`) e Instagram/Facebook, con despachos nacionales e internacionales. Todos los datos viven en `src/lib/contenido.ts` (`empresa.sedes` y `empresa.sedesTexto`).
+*(Corrige la primera versión de esta misma rama, que decía "sin sede física".)*
+**Horario de atención:** "Todos los días, 7:00 a. m. a 8:00 p. m." (confirmado por Fesapy), en el pie, `/cotizacion`, `/nosotros` y "Ventajas".
+**Enlaces de redes sin parámetros de rastreo:** Instagram `instagram.com/fesapydistribuciones` y Facebook `facebook.com/fesapy.distribuciones/`. El enlace que compartió Fesapy (`facebook.com/share/19zYB3LRyD/`) redirige a esa misma página agregando `?rdid=…` (distinto en cada visita), así que se usa la dirección final. Abren en otra pestaña con `rel="noopener noreferrer"` y `aria-label`.
+**JSON-LD:** será `Organization` (sin dirección publicada no aplica `LocalBusiness`): name, url, logo, email, `sameAs` con las redes y `areaServed` con Colombia y las tres ciudades. Hoy el sitio **no tiene JSON-LD** (nunca se creó `LocalBusiness`); no se crea en esta tarea porque exige insertar un `<script>` con `dangerouslySetInnerHTML` y merece su propia revisión. Queda en el PLAN, dentro de la tarea de SEO, con estos datos.
+**Política de datos:** sin direcciones; el correo es el canal para ejercer los derechos. Razón social, NIT y domicilio legal quedan como `TODO(contenido)` hasta tener el RUT; se listan las ciudades con sede.
+**Descartado por ahora:** Google Business Profile por sede (exige dirección o zona de servicio; se revisa cuando haya direcciones).
+
+## 2026-11-12 · Se quita la sección de clientes/reseñas hasta tener logos y reseñas reales con permiso
+La home ya no muestra "Clientes y reseñas": solo tenía marcadores `TODO(contenido)` y se veía inacabada. Se borró el componente `ClientesResenas` (no usaba imágenes). Vuelve cuando haya logos con permiso por escrito y reseñas reales (nombre, cargo, empresa y permiso).
+
+## 2026-11-12 · El formulario de cotización no pide NIT (menos datos personales y menos fricción)
+Se quitó el campo NIT del formulario, su validación, la línea "NIT" del mensaje de WhatsApp y correo, el "NIT:" del mensaje prellenado de los botones de WhatsApp y la mención en la política de datos. El NIT se puede pedir después, al facturar. El NIT **de Fesapy** en la política sigue como `TODO(contenido)`.
+
+## 2026-11-12 · www.fesapy.tech solo como enlace hasta conectar el dominio
+El pie muestra "Sitio web: www.fesapy.tech" (reemplaza al sitio viejo de Odoo). **No** se cambian `metadataBase`, canónicos ni URLs de datos estructurados (hoy no existen): el dominio aún no está conectado en Vercel y apuntar ahí rompería enlaces al compartir. `TODO(dominio)` en `contenido.ts`.
+
+## 2026-11-12 · WhatsApp en verde oficial (excepción a la paleta) y sin barra de anuncio
+Los botones de WhatsApp del encabezado y la burbuja flotante usan el verde oficial `#25D366` (tokens `--whatsapp` y `--whatsapp-oscuro: #1FB855` para hover), con el logo oficial de WhatsApp (path de Simple Icons, licencia CC0) en un solo componente `IconoWhatsApp`.
+**Por qué:** la gente reconoce el verde y el logo de WhatsApp al instante, y la acción principal del sitio es escribir por WhatsApp.
+**Contraste:** el botón con texto lleva texto e ícono **negros** sobre verde (≈ 10:1); blanco sobre ese verde da ≈ 2:1 y no pasa WCAG para texto. La burbuja (sin texto, con `aria-label`) lleva el logo blanco, como lo usa la marca; se separa del fondo con sombra.
+**Regla:** el verde es **solo** para WhatsApp. Los demás botones siguen con el dorado de Fesapy; los otros botones de WhatsApp dentro de las páginas (hero, formulario, categorías) siguen en negro o contorno, ninguno en dorado.
+**Barra de anuncio:** se quitó "Cotiza por WhatsApp y te respondemos pronto": repetía el botón verde que está justo debajo y ocupaba una fila más en el celular.

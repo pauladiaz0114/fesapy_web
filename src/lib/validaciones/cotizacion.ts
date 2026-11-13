@@ -25,11 +25,7 @@ const telefonoValido = (valor: string) => {
   return /^3\d{9}$/.test(t) || /^60\d{8}$/.test(t) || /^\d{7}$/.test(t);
 };
 
-// NIT colombiano: 6 a 10 dígitos, con o sin dígito de verificación (900123456-7).
-// Se aceptan puntos y espacios al escribirlo.
-export function normalizarNit(valor: string): string {
-  return valor.replace(/[\s.]/g, "");
-}
+// El formulario NO pide NIT (decisión del 2026-11-12: menos datos personales y menos fricción).
 
 export const esquemaCotizacion = z.strictObject({
   nombre: z
@@ -40,12 +36,6 @@ export const esquemaCotizacion = z.strictObject({
     .string()
     .min(2, { error: "Escribe el nombre de tu empresa." })
     .max(100, { error: "El nombre de la empresa es demasiado largo (máximo 100)." }),
-  nit: z
-    .string()
-    .max(20, { error: "El NIT es demasiado largo." })
-    .refine((v) => v === "" || /^\d{6,10}(-\d)?$/.test(normalizarNit(v)), {
-      error: "El NIT debe tener entre 6 y 10 números, por ejemplo 900123456-7.",
-    }),
   correo: z
     .string()
     .max(120, { error: "El correo es demasiado largo." })
@@ -79,7 +69,6 @@ export type CampoCotizacion = keyof DatosCotizacion;
 export type ValoresFormulario = {
   nombre: string;
   empresa: string;
-  nit: string;
   correo: string;
   telefono: string;
   ciudad: string;
@@ -88,12 +77,11 @@ export type ValoresFormulario = {
   acepta: boolean;
 };
 
-/** Limpia cada campo (espacios, caracteres raros) y deja el teléfono y el NIT en formato simple. */
+/** Limpia cada campo (espacios, caracteres raros). */
 export function limpiarValores(v: ValoresFormulario): ValoresFormulario {
   return {
     nombre: limpiarLinea(v.nombre),
     empresa: limpiarLinea(v.empresa),
-    nit: limpiarLinea(v.nit),
     correo: limpiarLinea(v.correo).toLowerCase(),
     telefono: limpiarLinea(v.telefono),
     ciudad: limpiarLinea(v.ciudad),

@@ -5,7 +5,6 @@ import { contacto } from "./contenido";
 export const MENSAJE_COTIZACION = [
   "Hola, Fesapy. Quiero cotizar.",
   "Empresa:",
-  "NIT:",
   "Productos y cantidades:",
   "¿Con logo de la empresa? (sí/no):",
   "Ciudad de entrega:",

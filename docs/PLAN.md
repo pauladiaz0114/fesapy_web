@@ -22,32 +22,32 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Carrusel del hero, animaciones discretas (con `prefers-reduced-motion`) y carrusel de categorías en celular
 - [x] Pulir movimiento y experiencia: foco visible y `aria-current`, formulario con validación al salir del campo y envío sin doble clic, carruseles con deslizar/teclado/barra de progreso, entradas escalonadas, carga suave de imágenes y menú hamburguesa en celular (rama `feat/pulir-movimiento-y-experiencia`)
 
+- [x] Contacto (WhatsApp, correo, Instagram y Facebook), sedes por ciudad sin direcciones, horario, sin barra de anuncio, sin sección de clientes/reseñas, formulario sin NIT y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
+
 ### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)
-- [ ] Dirección y horario de la sede de Madrid
-- [ ] Enlaces de Instagram y Facebook
-- [ ] Razón social, NIT y plazo de conservación para la política de datos; revisión de la política por la empresa (idealmente con un abogado)
-- [ ] Logos de clientes (con su permiso por escrito) y reseñas reales (nombre, cargo, empresa y permiso)
+- [ ] Razón social, NIT, domicilio legal (según el RUT) y plazo de conservación para la política de datos; revisión de la política por la empresa (idealmente con un abogado)
+- [ ] Logos de clientes (con su permiso por escrito) y reseñas reales (nombre, cargo, empresa y permiso); con eso se vuelve a poner la sección en la home (se quitó el 2026-11-12)
+- [ ] Direcciones de las sedes de Madrid (Cundinamarca), Bogotá y Villavicencio, si Fesapy decide publicarlas
 - [ ] Fotos propias: productos por categoría y trabajos bordados y estampados (reemplazan las de referencia de `docs/CREDITOS-IMAGENES.md`)
 - [ ] Confirmar con Fesapy que puede usar en la web las fotos del portafolio (varias muestran marcas de terceros) y pedir los originales en mayor resolución
 - [ ] Productos de botiquines, stickers y lubricantes (hoy esas categorías dicen "Pídenos cotización" porque no están en el portafolio)
 - [ ] Logo en SVG o PNG con fondo transparente
 - [ ] `/nosotros`: historia y año de fundación
 - [ ] `/personalizacion`: cantidad mínima, tiempos y formatos de logo aceptados
-- [ ] Confirmar el alcance de la asesoría, los tiempos de despacho y el horario de atención (comentarios en `Ventajas.tsx`)
+- [ ] Confirmar el alcance de la asesoría, los tiempos de despacho y el tiempo de respuesta (comentarios en `Ventajas.tsx`)
 
 ### Pendiente: calidad y lanzamiento
-- [ ] SEO: `sitemap.ts`, `robots.ts`, datos estructurados `LocalBusiness` (sede de Madrid, JSON-LD escapado) y Open Graph (imagen al compartir por WhatsApp)
+- [ ] SEO: `sitemap.ts`, `robots.ts`, datos estructurados `Organization` (name, url, logo, email, `sameAs` con Instagram y Facebook, `areaServed`: Colombia, Madrid (Cundinamarca), Bogotá y Villavicencio; JSON-LD escapando `<`; sin dirección mientras no se publiquen) y Open Graph (imagen al compartir por WhatsApp)
 - [ ] Endurecer la CSP (quitar `'unsafe-inline'` con SRI o nonces) y revisar en securityheaders.com (meta: A)
 - [ ] Antes de lanzar: buscar secretos en `.next/static`, `npm audit` sin altas y gitleaks limpio
 - [ ] Pruebas en celular (Android y iPhone) y Lighthouse (>90)
 - [ ] Revisión con la dueña de Fesapy: textos, datos de contacto y política de datos
 - [ ] 2FA en GitHub y Vercel (confirmar que está activo)
-- [ ] Comprar el dominio y conectarlo; luego HSTS `preload`
+- [ ] Conectar `www.fesapy.tech` en Vercel; luego `metadataBase`, canónicos y HSTS `preload` (`TODO(dominio)` en `contenido.ts`)
 - [ ] Evaluar Vercel Pro al lanzamiento oficial (el plan Hobby es para uso no comercial)
 
 ### Ideas para después
 - Catálogo descargable en PDF
-- Google Business Profile para la sede de Madrid
 - Analítica (Vercel Analytics o Google Analytics) **con** aviso de cookies
 - Si hiciera falta recibir las cotizaciones en un servidor: evaluar Server Action + Resend (ver `DECISIONES.md`, 2026-11-09)
 

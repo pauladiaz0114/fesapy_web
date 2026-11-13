@@ -32,7 +32,6 @@ type Canal = "whatsapp" | "correo";
 const ORDEN: CampoCotizacion[] = [
   "nombre",
   "empresa",
-  "nit",
   "correo",
   "telefono",
   "ciudad",
@@ -45,7 +44,6 @@ const ORDEN: CampoCotizacion[] = [
 const ETIQUETAS: Record<CampoCotizacion, string> = {
   nombre: "Nombre",
   empresa: "Empresa",
-  nit: "NIT",
   correo: "Correo",
   telefono: "Teléfono",
   ciudad: "Ciudad de entrega",
@@ -70,7 +68,6 @@ const claseCampo = (hayError: boolean) =>
 function Campo({
   campo,
   etiqueta,
-  opcional = false,
   ayuda,
   error,
   ancho = false,
@@ -78,7 +75,6 @@ function Campo({
 }: {
   campo: CampoCotizacion;
   etiqueta: string;
-  opcional?: boolean;
   ayuda?: string;
   error?: string;
   /** Ocupa las dos columnas en pantallas medianas. */
@@ -89,7 +85,6 @@ function Campo({
     <div className={`flex flex-col gap-1 ${ancho ? "md:col-span-2" : ""}`}>
       <label htmlFor={idCampo(campo)} className="font-bold text-negro">
         {etiqueta}
-        {opcional && <span className="font-normal text-gris"> (opcional)</span>}
       </label>
       {children}
       {ayuda && (
@@ -130,7 +125,6 @@ export function FormularioCotizacion({
   const [valores, setValores] = useState<ValoresFormulario>({
     nombre: "",
     empresa: "",
-    nit: "",
     correo: "",
     telefono: "",
     ciudad: "",
@@ -304,26 +298,6 @@ export function FormularioCotizacion({
             value={valores.empresa}
             onChange={(e) => cambiar("empresa", e.target.value)}
             className={claseCampo(!!errores.empresa)}
-          />
-        </Campo>
-
-        <Campo
-          campo="nit"
-          etiqueta="NIT"
-          opcional
-          ayuda="Con o sin dígito de verificación, por ejemplo 900123456-7."
-          error={errores.nit}
-        >
-          <input
-            {...propsCampo("nit", true)}
-            type="text"
-            name="nit"
-            inputMode="numeric"
-            autoComplete="off"
-            maxLength={20}
-            value={valores.nit}
-            onChange={(e) => cambiar("nit", e.target.value)}
-            className={claseCampo(!!errores.nit)}
           />
         </Campo>
 

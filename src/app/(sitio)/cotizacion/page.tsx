@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { FormularioCotizacion } from "@/components/cotizacion/FormularioCotizacion";
 import { EncabezadoPagina } from "@/components/sitio/EncabezadoPagina";
+import { RedesSociales } from "@/components/sitio/RedesSociales";
 import { productoPorSlug } from "@/lib/catalogo";
-import { categoriaValida } from "@/lib/contenido";
+import { categoriaValida, contacto } from "@/lib/contenido";
 
 export const metadata: Metadata = {
   title: "Cotización",
@@ -52,6 +53,33 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
           <Suspense fallback={<FormularioCotizacion />}>
             <FormularioConCategoria searchParams={searchParams} />
           </Suspense>
+
+          {/* Otros canales: correo, horario y redes (las sedes aún no tienen dirección publicada). */}
+          <section
+            aria-labelledby="titulo-otros-canales"
+            className="mt-12 rounded border-l-4 border-dorado bg-crema p-6 text-gris"
+          >
+            <h2
+              id="titulo-otros-canales"
+              className="font-titulo text-2xl font-bold uppercase text-negro"
+            >
+              ¿Prefieres escribirnos directo?
+            </h2>
+            <p className="mt-2">
+              Correo:{" "}
+              <a
+                href={`mailto:${contacto.correo}`}
+                className="font-bold text-negro underline underline-offset-4 hover:text-gris"
+              >
+                {contacto.correo}
+              </a>
+            </p>
+            <p className="mt-1">Horario de atención: {contacto.horario}</p>
+            <RedesSociales
+              claseLista="mt-2"
+              claseEnlace="font-bold text-negro hover:text-gris"
+            />
+          </section>
         </div>
       </section>
     </>

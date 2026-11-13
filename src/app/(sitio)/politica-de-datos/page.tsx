@@ -47,13 +47,12 @@ export default function PoliticaDeDatos() {
               El responsable de tus datos personales es <strong>{empresa.nombre}</strong>.
             </p>
             <ul className="list-disc pl-6">
-              <li>Razón social: {legal.razonSocial || TODO("razón social")}</li>
+              <li>Razón social: {legal.razonSocial || TODO("razón social según el RUT")}</li>
               <li>NIT: {legal.nit || TODO("NIT")}</li>
+              <li>Domicilio: {legal.domicilio || TODO("domicilio según el RUT")}</li>
+              <li>Sedes: {empresa.sedesTexto} (sin dirección publicada por ahora)</li>
               <li>
-                Domicilio: {empresa.ciudad}. Dirección: TODO(contenido): dirección de la sede.
-              </li>
-              <li>
-                Correo:{" "}
+                Canal de atención (correo):{" "}
                 <a
                   href={`mailto:${contacto.correo}`}
                   className="font-bold text-negro underline underline-offset-4"
@@ -66,8 +65,8 @@ export default function PoliticaDeDatos() {
 
           <Seccion titulo="2. Qué datos tratamos">
             <p>
-              Los que tú escribes en el formulario de cotización: nombre, empresa, NIT
-              (opcional), correo, teléfono, ciudad de entrega, categoría de interés y mensaje.
+              Los que tú escribes en el formulario de cotización: nombre, empresa, correo,
+              teléfono, ciudad de entrega, categoría de interés y mensaje.
               No pedimos datos sensibles ni datos de menores de edad.
             </p>
           </Seccion>

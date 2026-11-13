@@ -3,7 +3,7 @@
 Este archivo lo lee Claude Code al inicio de cada sesión. Contiene el contexto y las reglas del proyecto. Si algo aquí cambia, se actualiza este archivo en el mismo commit.
 
 ## Qué es Fesapy
-Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). Una sola sede, en Madrid (Cundinamarca). Despacha a nivel nacional e internacional.
+Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). **Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio**, sin direcciones publicadas por ahora (no mostrar direcciones ni mapas hasta que Fesapy las dé). Atiende por WhatsApp, correo e Instagram/Facebook (todos los días, 7:00 a. m. a 8:00 p. m.) y despacha a nivel nacional e internacional.
 
 - **Fabrica y personaliza dotación**: overoles, uniformes, ropa de trabajo con logos estampados y bordados.
 - **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines.
@@ -13,7 +13,7 @@ Empresa colombiana proveedora integral de seguridad industrial para empresas (B2
 Detalles completos en `docs/BRIEF.md`.
 
 ## Objetivo de la página
-1. Que el visitante conozca la empresa y confíe (clientes, testimonios y la sede de Madrid).
+1. Que el visitante conozca la empresa y confíe (sedes, redes sociales y canales de contacto claros; clientes y reseñas vuelven cuando haya logos y reseñas reales con permiso).
 2. Que escriba por WhatsApp con un clic.
 3. Que pida cotización con un formulario que arma el mensaje y abre WhatsApp o su correo (el sitio no guarda nada).
 4. Que el equipo de Fesapy mantenga el contenido (categorías, datos de contacto, textos) en `src/lib/contenido.ts` y en las páginas, mediante un Pull Request.
@@ -54,19 +54,19 @@ src/
     layout.tsx  globals.css   # fuentes, metadata base y tokens de diseño
     (sitio)/                  # páginas públicas (comparten layout.tsx: barra, encabezado, pie, WhatsApp)
       page.tsx                # inicio
-      cotizacion/             # formulario (arma el mensaje; no guarda nada)
+      cotizacion/             # formulario (arma el mensaje; no guarda nada; no pide NIT)
       productos/              # solo las categorías, sin precios
       personalizacion/        # bordado y estampado
       nosotros/
       politica-de-datos/
   components/
     ui/                       # botones e íconos
-    sitio/                    # barra de anuncio, encabezado (menú hamburguesa en celular), pie, botón WhatsApp flotante
+    sitio/                    # encabezado (menú hamburguesa en celular), pie, redes sociales, botón WhatsApp flotante
     inicio/                   # secciones de la home (incluye el carrusel del hero)
     catalogo/                 # tarjetas de categoría y de producto, galería, migas, carrusel móvil
     cotizacion/               # formulario de cotización (Client Component)
   lib/
-    contenido.ts              # datos de la empresa, contacto, sede, redes y las 8 categorías
+    contenido.ts              # datos de la empresa, sedes (solo ciudades), contacto, horario, redes y las categorías
     menu.ts                   # enlaces del menú principal (encabezado y pie)
     catalogo.ts               # los 30 productos, transcritos del portafolio de Fesapy (sin precios)
     whatsapp.ts  correo.ts  mensajeCotizacion.ts   # enlaces wa.me y mailto: con encodeURIComponent
@@ -86,6 +86,7 @@ docs/
   - `--gris: #4A4A4A` (texto secundario y bordes)
   - `--blanco: #FFFFFF`
 - **Nunca** texto dorado sobre fondo blanco o crema (contraste insuficiente). Dorado siempre como fondo con texto negro, o como texto sobre fondo negro.
+- **Excepción: verde de WhatsApp** (`--whatsapp: #25D366`, hover `--whatsapp-oscuro: #1FB855`), **solo** en el botón de WhatsApp del encabezado (texto e ícono negros; el blanco no pasa contraste) y en la burbuja flotante (logo blanco). El logo es `IconoWhatsApp` (Simple Icons, CC0). Ningún otro botón usa el verde, y ningún botón de WhatsApp va dorado.
 - Tipografía: **Barlow Condensed** (títulos, en mayúsculas, peso 700) + **Barlow** (texto). Cargar con `next/font/google`.
 - Estilo industrial, limpio, mucho contraste. Mobile first: la mayoría de clientes entrará desde el celular.
 - Botón flotante de WhatsApp visible en todas las páginas públicas.
@@ -128,4 +129,5 @@ Detalle completo y razones en `docs/ARQUITECTURA-Y-SEGURIDAD.md`. Si una tarea c
 
 ## Contenido
 - Textos en español de Colombia, tono profesional y cercano, orientado a empresas (jefes de compras, HSE/SST).
-- SEO: cada página con `metadata` (título y descripción), `sitemap.ts`, `robots.ts`, datos estructurados `LocalBusiness` para la sede de Madrid.
+- SEO: cada página con `metadata` (título y descripción), `sitemap.ts`, `robots.ts`, datos estructurados `Organization` (sin direcciones publicadas no aplica `LocalBusiness`; `sameAs` con las redes y `areaServed` con Colombia, Madrid (Cundinamarca), Bogotá y Villavicencio). Hoy todavía no hay JSON-LD.
+- Enlaces de redes sin parámetros de rastreo (`?igsh=`, `?rdid=`, `utm_…`). El dominio `www.fesapy.tech` es solo un enlace hasta conectarlo en Vercel (`TODO(dominio)`).

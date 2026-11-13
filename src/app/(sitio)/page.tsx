@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BloqueCotizacion } from "@/components/inicio/BloqueCotizacion";
 import { Categorias } from "@/components/inicio/Categorias";
-import { ClientesResenas } from "@/components/inicio/ClientesResenas";
 import { Hero } from "@/components/inicio/Hero";
 import { Problemas } from "@/components/inicio/Problemas";
 import { Ventajas } from "@/components/inicio/Ventajas";
@@ -10,7 +9,7 @@ import { Ventajas } from "@/components/inicio/Ventajas";
 export const metadata: Metadata = {
   title: { absolute: "Fesapy Distribuciones — Dotaciones para tu empresa" },
   description:
-    "Dotación industrial, elementos de protección personal y calzado de seguridad con el logo de tu empresa. Atendemos empresas desde Madrid, Cundinamarca. Cotiza por WhatsApp o por correo.",
+    "Dotación industrial, elementos de protección personal y calzado de seguridad con el logo de tu empresa. Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio. Cotiza por WhatsApp o por correo.",
 };
 
 // Página de inicio. El encabezado, el pie y el botón flotante vienen de layout.tsx.
@@ -22,7 +21,8 @@ export default function Inicio() {
       <Ventajas />
       <Problemas />
       <Categorias />
-      <ClientesResenas />
+      {/* La sección de clientes y reseñas se quitó el 2026-11-12: vuelve cuando haya logos y
+          reseñas reales con permiso (ver docs/DECISIONES.md). */}
     </>
   );
 }
