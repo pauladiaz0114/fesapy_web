@@ -1,6 +1,6 @@
 # Fesapy — sitio web
 
-Sitio de Fesapy Distribuciones (dotación y seguridad industrial, Madrid, Cundinamarca). Next.js 16 + TypeScript + Tailwind v4, desplegado en Vercel.
+Sitio de Fesapy Distribuciones (dotación y seguridad industrial en Colombia, sin sede física). Next.js 16 + TypeScript + Tailwind v4, desplegado en Vercel.
 
 Es un sitio **sin base de datos, login ni panel**: el visitante escribe por WhatsApp o llena un formulario de cotización que **no guarda nada** (arma un mensaje y abre WhatsApp o su correo). El contenido se edita en `src/lib/contenido.ts`.
 

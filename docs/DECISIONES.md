@@ -81,7 +81,7 @@ La app usa el rol `fesapy_app` (solo SELECT/INSERT/UPDATE/DELETE); las migracion
 **Regla:** ningún paquete nuevo sin propuesta y aprobación; versiones exactas (`save-exact`).
 
 ## 2026-10-26 · Mapas con enlace, no iframe
-Cada sede tiene un enlace "Ver en Google Maps".
+Cada sede tiene un enlace "Ver en Google Maps". **(Sin efecto desde el 2026-11-12: Fesapy no tiene sede física, no hay mapas.)**
 **Por qué:** un iframe agrega cookies de terceros, más dominios a la CSP y peso a la página.
 
 ## 2026-10-26 · No se instala el paquete `server-only`
@@ -203,3 +203,21 @@ Se agregan animaciones pequeñas, hechas solo con CSS y React (sin librerías): 
 **Qué se dejó fuera y por qué:**
 - *Transiciones entre páginas* (View Transitions): en Next.js 16 todavía son experimentales, cambian todo el sitio a la vez y en un sitio de pocas páginas no aportan; podrían marear o sentirse lentas.
 - *Animaciones en el detalle de producto* (galería que se desliza, zoom): las fotos del portafolio son pequeñas (200–400 px) y agrandarlas o moverlas las vería peor; la galería solo usa el fundido de `ImagenSuave`.
+
+## 2026-11-12 · Sin sede física; contacto solo por WhatsApp, correo e Instagram/Facebook
+Fesapy **no tiene sede ni local abierto al público**. El sitio no muestra dirección, mapa, "sede" ni "visítanos"; el contacto es por WhatsApp, correo (`asistente.fesapy@gmail.com`) e Instagram/Facebook, con despachos nacionales e internacionales. Todos los datos viven en `src/lib/contenido.ts`.
+**Horario de atención:** "Todos los días, 7:00 a. m. a 8:00 p. m." (confirmado por Fesapy), en el pie, `/cotizacion`, `/nosotros` y "Ventajas".
+**Enlaces de redes sin parámetros de rastreo:** Instagram `instagram.com/fesapydistribuciones` y Facebook `facebook.com/fesapy.distribuciones/`. El enlace que compartió Fesapy (`facebook.com/share/19zYB3LRyD/`) redirige a esa misma página agregando `?rdid=…` (distinto en cada visita), así que se usa la dirección final. Abren en otra pestaña con `rel="noopener noreferrer"` y `aria-label`.
+**JSON-LD:** la idea era pasar de `LocalBusiness` a `Organization` (name, url, logo, email, sameAs con las redes, areaServed "CO"), pero el sitio **nunca tuvo JSON-LD**. No se creó en esta tarea (no cambiar más de lo pedido ni agregar `dangerouslySetInnerHTML` sin revisión); queda en el PLAN dentro de la tarea de SEO, ya como `Organization`.
+**Política de datos:** sin dirección física; el correo es el canal para ejercer los derechos. Razón social, NIT y domicilio quedan como `TODO(contenido)` hasta tener el RUT.
+**Descartado:** Google Business Profile "para la sede" (exige dirección o zona de servicio; se reevaluará como negocio sin local si Fesapy lo quiere).
+
+## 2026-11-12 · www.fesapy.tech solo como enlace hasta conectar el dominio
+El pie muestra "Sitio web: www.fesapy.tech" (reemplaza al sitio viejo de Odoo). **No** se cambian `metadataBase`, canónicos ni URLs de datos estructurados (hoy no existen): el dominio aún no está conectado en Vercel y apuntar ahí rompería enlaces al compartir. `TODO(dominio)` en `contenido.ts`.
+
+## 2026-11-12 · WhatsApp en verde oficial (excepción a la paleta) y sin barra de anuncio
+Los botones de WhatsApp del encabezado y la burbuja flotante usan el verde oficial `#25D366` (tokens `--whatsapp` y `--whatsapp-oscuro: #1FB855` para hover), con el logo oficial de WhatsApp (path de Simple Icons, licencia CC0) en un solo componente `IconoWhatsApp`.
+**Por qué:** la gente reconoce el verde y el logo de WhatsApp al instante, y la acción principal del sitio es escribir por WhatsApp.
+**Contraste:** el botón con texto lleva texto e ícono **negros** sobre verde (≈ 10:1); blanco sobre ese verde da ≈ 2:1 y no pasa WCAG para texto. La burbuja (sin texto, con `aria-label`) lleva el logo blanco, como lo usa la marca; se separa del fondo con sombra.
+**Regla:** el verde es **solo** para WhatsApp. Los demás botones siguen con el dorado de Fesapy; los otros botones de WhatsApp dentro de las páginas (hero, formulario, categorías) siguen en negro o contorno, ninguno en dorado.
+**Barra de anuncio:** se quitó "Cotiza por WhatsApp y te respondemos pronto": repetía el botón verde que está justo debajo y ocupaba una fila más en el celular.

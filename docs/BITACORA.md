@@ -13,6 +13,27 @@ Formato:
 
 ---
 
+## 2026-11-12 — Contacto y redes sin sede física, sin barra de anuncio y WhatsApp en verde (Sebastián con Claude Code)
+**Qué se hizo:** (rama `chore/contacto-redes-sin-sede`, un commit por punto)
+1. **Sin sede física:** Fesapy no tiene sede ni local abierto al público. Se quitaron la sede, la ciudad y la dirección del pie, de `/nosotros`, de la descripción de la home y de la política de datos. Los datos de contacto quedan en un solo lugar (`src/lib/contenido.ts`): horario "Todos los días, 7:00 a. m. a 8:00 p. m.", Instagram y Facebook reales sin parámetros de rastreo, correo `asistente.fesapy@gmail.com` y "Sitio web: www.fesapy.tech" (solo como enlace).
+2. **Redes con ícono:** componente nuevo `RedesSociales` (íconos SVG en línea, 44 px, `aria-label` "Instagram de Fesapy (se abre en otra pestaña)") en el pie, en `/cotizacion` (bloque "¿Prefieres escribirnos directo?") y en `/nosotros` ("Cómo te atendemos").
+3. **Facebook sin redirección:** el enlace corto `facebook.com/share/…` redirigía agregando `?rdid=…`; se usa la dirección final `facebook.com/fesapy.distribuciones/`.
+4. **Se quitó la barra de anuncio** de arriba ("Cotiza por WhatsApp y te respondemos pronto"). El encabezado queda arriba del todo, sin hueco.
+5. **WhatsApp en verde oficial:** botón del encabezado verde `#25D366` con texto e ícono negro (hover `#1FB855`); burbuja flotante verde con el logo blanco, sin borde. Logo oficial de WhatsApp (Simple Icons, CC0) en un solo componente (`IconoWhatsApp`) que usan todos los botones de WhatsApp.
+- **Verificado en Edge real** (1280 y 390 px, clics de mouse): clic en botón y burbuja de WhatsApp (abren `wa.me` con el mensaje), en Instagram, Facebook, sitio web y correo del pie, de `/cotizacion` y de `/nosotros` (URL final sin parámetros de rastreo); ninguna página muestra sede, dirección ni mapa; CLS 0 y sin desborde horizontal en inicio, `/cotizacion`, `/nosotros`, `/politica-de-datos` y `/productos`.
+
+**Archivos:** `src/lib/contenido.ts`, `src/components/sitio/` (`PiePagina`, `RedesSociales` nuevo, `Encabezado`, `WhatsAppFlotante`, `AnuncioBarra` borrado), `src/components/ui/` (`iconos`, `Boton`), `src/components/inicio/Ventajas.tsx`, `src/app/globals.css`, `src/app/(sitio)/` (`layout`, `page`, `cotizacion`, `nosotros`, `politica-de-datos`), `CLAUDE.md`, `docs/`.
+
+**Conceptos aprendidos:**
+- *Parámetros de rastreo:* lo que va después de `?` en un enlace compartido (`?igsh=`, `?rdid=`, `utm_…`) sirve para que la red sepa de dónde vino la visita. Para enlazar no hace falta: se usa la dirección limpia.
+- *Contraste del verde de WhatsApp:* blanco sobre `#25D366` da ≈ 2:1 (no sirve para texto); negro da ≈ 10:1. Por eso el botón con texto lleva letras negras y solo la burbuja (sin texto, con `aria-label`) lleva el logo blanco.
+- *Una sola fuente de datos:* el horario se escribe una vez en `contenido.ts` y lo leen el pie, `/cotizacion`, `/nosotros` y "Ventajas".
+
+**Pendientes / notas:**
+- **No hay JSON-LD** en el sitio (nunca se creó `LocalBusiness`), así que no había nada que pasar a `Organization`. Queda en el PLAN para la tarea de SEO.
+- `TODO(dominio)`: `www.fesapy.tech` solo es enlace; `metadataBase` y canónicos se agregan cuando el dominio esté conectado en Vercel.
+- `TODO(contenido)`: razón social, NIT y domicilio según el RUT (política de datos); tiempo de respuesta (Ventajas).
+
 ## 2026-11-10 — Pulir movimiento y experiencia (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/pulir-movimiento-y-experiencia`, un commit por punto + un arreglo encontrado al probar)
 1. **Accesibilidad base:** un solo anillo de foco para todo el sitio (`:focus-visible` en `globals.css`: franja negra por dentro y línea dorada por fuera, se ve sobre crema, blanco y negro); `aria-current="page"` y subrayado fijo en el enlace de la página actual; migas con zona táctil de 44 px sin cambiar su aspecto. Revisión de contraste: no se encontró texto dorado sobre crema o blanco (el dorado como texto solo está sobre negro: pie, logo e íconos de "Ventajas"). El enlace "Saltar al contenido" ya existía y se probó con el teclado.
