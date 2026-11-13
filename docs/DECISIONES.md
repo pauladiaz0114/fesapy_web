@@ -237,3 +237,7 @@ Los botones de WhatsApp del encabezado y la burbuja flotante usan el verde ofici
 ## 2026-11-12 · Imágenes de referencia en el catálogo
 Las hojas de imágenes que entregó Fesapy se usan como **imágenes de referencia**: productos nuevos descritos solo con lo que se ve (material, medidas, normas y contenido = `TODO(contenido)`) y una 2.ª foto en 5 prendas que ya existían (la del portafolio sigue como principal; no se duplicaron productos ni se renombró "Camisas Oxford"). Cada imagen lleva `referencia: true` y la ficha muestra "Imagen de referencia".
 **Detalles:** cuadradas, fondo blanco, WebP calidad 80, sin metadatos y sin agrandar. El overol de la hoja (cinta plateada) se creó aparte de "Overol con Reflectivos" (cinta bicolor) hasta que Fesapy confirme si es el mismo. Los avisos para vehículos van en "Señalización y seguridad vial" como "Avisos reflectivos para vehículos" (material adhesivo o lámina = `TODO(contenido)`); "Stickers y personalización" queda igual.
+
+## 2026-11-12 · Carrusel del hero: 8 fotos y 3 s por foto
+Pedido por Sebastián: más fotos con el mismo estilo y cambio cada 3 s (antes 5 s). Se agregaron 4 fotos de Pexels (licencia libre, sin caras de frente ni logos). Con 8 puntos, en celular cada punto mide 32 × 44 px (mínimo WCAG 2.5.8: 24 px) para que quepan en una fila; desde `sm` vuelven a 44 × 44.
+**Nota:** 3 s es poco para leer; por eso siguen la pausa con mouse, foco y botón, y con "reducir movimiento" no avanza solo.

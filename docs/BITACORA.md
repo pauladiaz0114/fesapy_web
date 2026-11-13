@@ -13,6 +13,13 @@ Formato:
 
 ---
 
+## 2026-11-12 — Carrusel del hero con 8 fotos y cambio cada 3 s (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/hero-mas-fotos`) 4 fotos nuevas de Pexels con el mismo estilo (casco y chaleco, arnés en techo, señalización vial, chaleco junto a un andamio; personas de espaldas, sin logos), registradas en `CREDITOS-IMAGENES.md`. El carrusel pasa de 5 s a 3 s por foto. Los puntos miden 32 px de ancho en celular (44 px de alto) para que los 8 quepan en una fila.
+**Verificado** (Edge, 1280 y 390 px): 8 fotos; cambia cada ~3 s (3,03–3,10 s medidos); clic real en un punto; puntos en una sola fila sin desborde; CLS del carrusel 0.
+**Archivos:** `src/components/inicio/HeroCarrusel.tsx`, `src/app/globals.css` (comentario), `public/referencia/` (4 fotos), `docs/`.
+**Conceptos aprendidos:** *peso de una foto:* una textura fina (pavimento, grava) casi no se comprime; por eso se descartó una foto de conos que pesaba 200 KB.
+**Pendientes / notas:** en 1 de 2 cargas a 1280 px se midió un CLS de 0,0008 en el menú del encabezado (al terminar de cargar la fuente); ya estaba en `main`, no lo causa este cambio. Revisar aparte.
+
 ## 2026-11-12 — Catálogo con fotos nuevas y categoría "Protección personal" (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/catalogo-fotos-nuevas`, un commit por punto; tabla aprobada por Sebastián antes de empezar)
 1. **Categorías de 8 a 7:** "Elementos de protección personal" y "Trabajo en alturas e izaje" se unen en **Protección personal** (13 productos: cascos V-Gard, cascos dieléctricos, protector auditivo, máscaras y respiradores, guantes, trajes, 4 arneses y 3 grupos de eslingas). `/productos/trabajo-en-alturas` y sus fichas redirigen con **308** (`next.config.ts`); `?categoria=trabajo-en-alturas` en `/cotizacion` elige la nueva. El contador del carrusel del celular pasa a "n / 7".

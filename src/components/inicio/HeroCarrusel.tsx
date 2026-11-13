@@ -7,14 +7,18 @@ import botas from "../../../public/referencia/botas-seguridad.webp";
 import casco from "../../../public/referencia/casco-epp.webp";
 import dotacion from "../../../public/referencia/dotacion-reflectiva.webp";
 import guantes from "../../../public/referencia/guantes-trabajo.webp";
+import cascoChaleco from "../../../public/referencia/casco-chaleco.webp";
+import arnes from "../../../public/referencia/arnes-alturas.webp";
+import senalizacion from "../../../public/referencia/senalizacion-vial.webp";
+import chalecoObra from "../../../public/referencia/chaleco-obra.webp";
 
 // Carrusel del hero: UNA imagen grande que cambia sola, sin librerías (React + CSS + APIs del navegador).
 // TODO(contenido): son fotos de REFERENCIA de Pexels (autores y licencia en
 // docs/CREDITOS-IMAGENES.md). Reemplazar por fotos propias de Fesapy.
 //
 // Comportamiento:
-// - Cambia cada 5 s con un fundido cruzado de 700 ms (solo opacidad).
-// - El punto activo se llena como una barra de progreso durante esos 5 s. Esa misma animación de
+// - Cambia cada 3 s con un fundido cruzado de 700 ms (solo opacidad).
+// - El punto activo se llena como una barra de progreso durante esos 3 s. Esa misma animación de
 //   CSS es el "reloj": cuando termina, pasa a la siguiente foto. Así, al pausar, la barra se
 //   detiene donde iba y sigue desde ahí al reanudar.
 // - Se pausa con el mouse encima, con el foco dentro, con el botón de pausa, con la pestaña
@@ -33,9 +37,14 @@ const fotos: Foto[] = [
   { src: casco, alt: "Casco, gafas de seguridad y tapabocas en un maniquí" },
   { src: dotacion, alt: "Trabajadores con dotación reflectiva y botas de caucho" },
   { src: guantes, alt: "Trabajador poniéndose guantes de carnaza" },
+  { src: cascoChaleco, alt: "Trabajador de espaldas con casco amarillo y chaleco reflectivo" },
+  { src: arnes, alt: "Trabajador con arnés y línea de vida sobre un techo" },
+  { src: senalizacion, alt: "Barril y cono de señalización vial junto a un letrero de precaución" },
+  { src: chalecoObra, alt: "Trabajador de espaldas con chaleco reflectivo naranja junto a un andamio" },
 ];
 
-const INTERVALO_MS = 5000;
+// Tiempo que se queda cada foto (pedido por Sebastián el 2026-11-12: 3 s).
+const INTERVALO_MS = 3000;
 // Distancia mínima (en px) para que un arrastre cuente como "deslizar".
 const UMBRAL_DESLIZAR = 40;
 
@@ -126,7 +135,7 @@ export function HeroCarrusel() {
     setAnuncio(`Imagen ${nuevo + 1} de ${total}: ${fotos[nuevo].alt}`);
   };
 
-  // Cambio automático: cuando la barra de progreso del punto activo termina sus 5 s.
+  // Cambio automático: cuando la barra de progreso del punto activo termina sus 3 s.
   const alTerminarProgreso = () => {
     // Doble seguro: con "reducir movimiento" nunca avanza solo (aunque la animación alcance a correr).
     if (!automatico || window.matchMedia(CONSULTA_REDUCIR).matches) return;
@@ -241,8 +250,9 @@ export function HeroCarrusel() {
         </button>
       </div>
 
-      {/* Pausa y puntos (botones de 44 × 44 px; el punto visible es más pequeño). */}
-      <div className="mt-1 flex items-center justify-center gap-1">
+      {/* Pausa y puntos. Botones de 44 px de alto; en celular los puntos miden 32 px de ancho
+          (8 puntos × 44 px no caben en 358 px) y desde sm vuelven a 44 × 44. El punto visible es más pequeño. */}
+      <div className="mt-1 flex items-center justify-center sm:gap-1">
         {!reducirMovimiento && (
           <button
             type="button"
@@ -274,10 +284,10 @@ export function HeroCarrusel() {
               onClick={() => irA(i)}
               aria-label={`Ir a la imagen ${i + 1} de ${total}`}
               aria-current={activo}
-              className="flex size-11 items-center justify-center rounded"
+              className="flex h-11 w-8 items-center justify-center rounded sm:w-11"
             >
               {/* Punto activo: píldora con borde negro que se llena de izquierda a derecha durante
-                  los 5 s (barra de progreso). Los demás: anillos. Contraste alto sobre crema. */}
+                  los 3 s (barra de progreso). Los demás: anillos. Contraste alto sobre crema. */}
               <span
                 aria-hidden="true"
                 className={`relative block h-3 overflow-hidden rounded-full border-2 border-negro transition-[width] duration-300 motion-reduce:transition-none ${

@@ -106,7 +106,7 @@ img[data-carga="lista"] {
   transition: opacity 300ms ease-out;
 }
 
-/* Barra de progreso del punto activo del carrusel del hero. La duración (5 s) y la pausa
+/* Barra de progreso del punto activo del carrusel del hero. La duración (3 s, INTERVALO_MS) y la pausa
    (animation-play-state) las pone el componente; al terminar, el carrusel pasa a la siguiente foto. */
 @keyframes progreso-carrusel {
   from {
