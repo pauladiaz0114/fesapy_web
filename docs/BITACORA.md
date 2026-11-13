@@ -13,6 +13,18 @@ Formato:
 
 ---
 
+## 2026-11-13 — Botón de WhatsApp del encabezado en dorado y título de tallas (Sebastián con Claude Code)
+**Qué se hizo:** (rama `fix/whatsapp-dorado-tallas`)
+1. El botón "Cotizar por WhatsApp" del encabezado vuelve al dorado con texto negro; se borró la variante `whatsapp` de `Boton.tsx`. La burbuja flotante sigue en verde.
+2. Problemas: "Tallas para todo tu equipo" pasa a "Pedidos con las tallas de tu equipo" (no promete todas las tallas).
+3. `CLAUDE.md` y `docs/DECISIONES.md` actualizados con la nueva regla del verde.
+
+**Archivos:** `src/components/sitio/Encabezado.tsx`, `src/components/ui/Boton.tsx`, `src/components/inicio/Problemas.tsx`, `src/app/globals.css`, `CLAUDE.md`, `docs/DECISIONES.md`.
+
+**Conceptos aprendidos:** una *variante* de botón es un estilo con nombre; si ya nadie la usa, se borra para no dejar código muerto.
+
+**Pendientes / notas:** las tallas siguen sin confirmar (`TODO(contenido)`).
+
 ## 2026-11-12 — Inicio con menos texto y más imágenes (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/inicio-menos-texto`)
 1. **"Cómo cotizar"** (componente nuevo `ComoCotizar`) reemplaza "Solicita tu cotización" y "Trabajar con Fesapy es más fácil": 3 tarjetas (mosaico de 3 fotos sin marcas, celular con chat y documento con check en SVG), número en círculo dorado, título de una línea, botón "Cotizar ahora" y "Sin crear cuenta · horario".

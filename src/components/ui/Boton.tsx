@@ -27,9 +27,6 @@ const variantes = {
   // Solo borde negro: botón secundario sobre fondos claros.
   contorno:
     "border-2 border-negro bg-transparent text-negro hover:bg-negro hover:text-blanco",
-  // Verde oficial de WhatsApp con texto e ícono negros (excepción a la paleta, solo para
-  // el botón de WhatsApp del encabezado). Al pasar el mouse, un verde un poco más oscuro.
-  whatsapp: "bg-whatsapp text-negro hover:bg-whatsapp-oscuro",
 } as const;
 
 export type VarianteBoton = keyof typeof variantes;

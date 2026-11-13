@@ -15,7 +15,7 @@ import { Reveal } from "@/components/ui/Reveal";
 const problemas: { titulo: string; Icono: ComponentType<{ className?: string }> }[] = [
   { titulo: "Todo en un solo pedido", Icono: IconoPaquete },
   { titulo: "Productos certificados", Icono: IconoEscudo },
-  { titulo: "Tallas para todo tu equipo", Icono: IconoUniforme },
+  { titulo: "Pedidos con las tallas de tu equipo", Icono: IconoUniforme },
   { titulo: "Tu logo bordado o estampado", Icono: IconoEtiqueta },
   { titulo: "Envíos nacionales e internacionales", Icono: IconoCamion },
   { titulo: "EPP, calzado, señalización y más", Icono: IconoCasco },
