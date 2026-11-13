@@ -1,33 +1,24 @@
+import type { ComponentType } from "react";
+import {
+  IconoCamion,
+  IconoCasco,
+  IconoEscudo,
+  IconoEtiqueta,
+  IconoPaquete,
+  IconoUniforme,
+} from "@/components/ui/iconos";
 import { Reveal } from "@/components/ui/Reveal";
 
-// "Problemas que resolvemos": 6 tarjetas. Textos originales y prudentes: solo se dice
-// lo que está confirmado en docs/BRIEF.md (fabrica y personaliza, distribuye varias
-// categorías, productos certificados, facturación electrónica, despachos).
-const problemas = [
-  {
-    titulo: "Pedidos incompletos",
-    texto: "Reúne dotación, calzado y elementos de seguridad en un solo pedido, no en varios.",
-  },
-  {
-    titulo: "Calidad que no convence",
-    texto: "Trabajamos con productos certificados para que tu equipo esté protegido.",
-  },
-  {
-    titulo: "Tallas que no cuadran",
-    texto: "Cuéntanos las tallas y cantidades de tu equipo al cotizar y las tenemos en cuenta.",
-  },
-  {
-    titulo: "Uniformes sin tu logo",
-    texto: "Bordamos o estampamos el logo de tu empresa en la dotación que fabricamos.",
-  },
-  {
-    titulo: "Entregas que se complican",
-    texto: "Dinos la ciudad de entrega y coordinamos el despacho contigo.",
-  },
-  {
-    titulo: "Poca variedad",
-    texto: "EPP, calzado, señalización y seguridad vial, botiquines, lubricantes y más, con un solo proveedor.",
-  },
+// "Problemas que resolvemos": 6 tarjetas con ícono y SOLO título (sin párrafo ni subtítulo,
+// 2026-11-12). Solo se dice lo confirmado en docs/BRIEF.md: un proveedor para todo, productos
+// con certificaciones/normas, personalización con logo, envíos nacionales e internacionales.
+const problemas: { titulo: string; Icono: ComponentType<{ className?: string }> }[] = [
+  { titulo: "Todo en un solo pedido", Icono: IconoPaquete },
+  { titulo: "Productos certificados", Icono: IconoEscudo },
+  { titulo: "Tallas para todo tu equipo", Icono: IconoUniforme },
+  { titulo: "Tu logo bordado o estampado", Icono: IconoEtiqueta },
+  { titulo: "Envíos nacionales e internacionales", Icono: IconoCamion },
+  { titulo: "EPP, calzado, señalización y más", Icono: IconoCasco },
 ];
 
 export function Problemas() {
@@ -40,14 +31,20 @@ export function Problemas() {
         >
           Problemas que resolvemos
         </h2>
-        <p className="mt-2 max-w-2xl text-lg text-gris">
-          Comprar dotación y seguridad para una empresa no debería ser complicado.
-        </p>
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {problemas.map(({ titulo, texto }) => (
-            <li key={titulo} data-escalon className="rounded border-t-4 border-dorado bg-blanco p-6">
-              <h3 className="font-titulo text-xl font-bold uppercase text-negro">{titulo}</h3>
-              <p className="mt-2 text-gris">{texto}</p>
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {problemas.map(({ titulo, Icono }) => (
+            <li
+              key={titulo}
+              data-escalon
+              className="flex items-center gap-4 rounded border-t-4 border-dorado bg-blanco p-5"
+            >
+              {/* Dorado sobre negro: combinación permitida. */}
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-negro text-dorado">
+                <Icono className="size-6" />
+              </span>
+              <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-negro">
+                {titulo}
+              </h3>
             </li>
           ))}
         </ul>
