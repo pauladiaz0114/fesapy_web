@@ -9,7 +9,6 @@ export function mensajeCotizacion(d: DatosCotizacion): string {
     "Hola, Fesapy. Quiero cotizar.",
     `Nombre: ${d.nombre}`,
     `Empresa: ${d.empresa}`,
-    ...(d.nit ? [`NIT: ${d.nit}`] : []),
     `Correo: ${d.correo}`,
     `Teléfono: ${d.telefono}`,
     `Ciudad de entrega: ${d.ciudad}`,

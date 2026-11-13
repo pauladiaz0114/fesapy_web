@@ -65,8 +65,8 @@ export default function PoliticaDeDatos() {
 
           <Seccion titulo="2. Qué datos tratamos">
             <p>
-              Los que tú escribes en el formulario de cotización: nombre, empresa, NIT
-              (opcional), correo, teléfono, ciudad de entrega, categoría de interés y mensaje.
+              Los que tú escribes en el formulario de cotización: nombre, empresa, correo,
+              teléfono, ciudad de entrega, categoría de interés y mensaje.
               No pedimos datos sensibles ni datos de menores de edad.
             </p>
           </Seccion>
