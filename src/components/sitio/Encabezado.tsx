@@ -26,7 +26,7 @@ export function Encabezado() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <BotonWhatsApp variante="dorado" className="px-3 sm:px-5">
+          <BotonWhatsApp variante="whatsapp" className="px-3 sm:px-5">
             {/* En celular el texto corto cabe al lado del logo. */}
             <span className="sm:hidden">Cotizar</span>
             <span className="hidden sm:inline">Cotizar por WhatsApp</span>

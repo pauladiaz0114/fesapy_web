@@ -15,6 +15,11 @@
   /* Gris para textos secundarios y bordes. Sobre blanco o crema tiene contraste AA. */
   --gris: #4a4a4a;
   --blanco: #ffffff;
+  /* EXCEPCIÓN a la paleta: verde oficial de WhatsApp, SOLO para los botones de WhatsApp
+     (botón del encabezado y burbuja flotante). Texto/ícono negro sobre verde ≈ 10:1;
+     el blanco sobre este verde no llega al contraste mínimo para texto (≈ 2:1). */
+  --whatsapp: #25d366;
+  --whatsapp-oscuro: #1fb855;
 }
 
 /* Con @theme, Tailwind v4 crea las clases bg-dorado, text-negro, bg-crema, font-titulo, etc. */
@@ -24,6 +29,8 @@
   --color-crema: var(--crema);
   --color-gris: var(--gris);
   --color-blanco: var(--blanco);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-oscuro: var(--whatsapp-oscuro);
   --font-sans: var(--font-barlow);
   --font-titulo: var(--font-barlow-condensed);
 }
