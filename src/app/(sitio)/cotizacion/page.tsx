@@ -54,7 +54,7 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
             <FormularioConCategoria searchParams={searchParams} />
           </Suspense>
 
-          {/* Otros canales. Fesapy no tiene sede física: solo WhatsApp, correo y redes. */}
+          {/* Otros canales: correo, horario y redes (las sedes aún no tienen dirección publicada). */}
           <section
             aria-labelledby="titulo-otros-canales"
             className="mt-12 rounded border-l-4 border-dorado bg-crema p-6 text-gris"

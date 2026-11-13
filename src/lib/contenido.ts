@@ -14,8 +14,11 @@ export const empresa = {
   sitioWeb: "www.fesapy.tech",
   sitioWebUrl: "https://www.fesapy.tech",
   lema: "Dotaciones para tu empresa",
-  // Fesapy NO tiene sede ni local abierto al público: atiende por WhatsApp y correo,
-  // y despacha a nivel nacional e internacional.
+  // Ciudades con sede (confirmado por Sebastián el 2026-11-12). Sin direcciones ni mapas:
+  // TODO(contenido): dirección de cada sede, cuando Fesapy decida publicarlas.
+  sedes: ["Madrid (Cundinamarca)", "Bogotá", "Villavicencio"],
+  // Las mismas ciudades en una frase: "Madrid (Cundinamarca), Bogotá y Villavicencio".
+  sedesTexto: "Madrid (Cundinamarca), Bogotá y Villavicencio",
   // Año que aparece en el pie de página (© 2026). Se escribe fijo a propósito:
   // así la página puede ser 100 % estática y no depende de la fecha del servidor.
   anioCopyright: 2026,

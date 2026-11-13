@@ -7,7 +7,7 @@ import { contacto, empresa } from "@/lib/contenido";
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Fesapy Distribuciones: proveedor de dotación y seguridad industrial para empresas en Colombia, con despachos nacionales e internacionales.",
+    "Fesapy Distribuciones: proveedor de dotación y seguridad industrial para empresas, con sedes en Madrid (Cundinamarca), Bogotá y Villavicencio.",
 };
 
 // Texto basado en la presentación del portafolio de Fesapy (página 2), reescrito.
@@ -17,8 +17,9 @@ export default function Nosotros() {
     <>
       <EncabezadoPagina titulo="Nosotros">
         <p>
-          {empresa.razonSocial} ({empresa.nombre}) es una empresa colombiana que comercializa
-          elementos de protección personal y soluciones de seguridad industrial para empresas.
+          {empresa.razonSocial} ({empresa.nombre}) es una empresa colombiana, con sedes en{" "}
+          {empresa.sedesTexto}, que comercializa elementos de protección personal y soluciones de
+          seguridad industrial para empresas.
         </p>
       </EncabezadoPagina>
 
@@ -72,7 +73,7 @@ export default function Nosotros() {
               Cómo te atendemos
             </h2>
             <p className="mt-2">
-              No tenemos local abierto al público: te atendemos por WhatsApp y por correo, y
+              Tenemos sedes en {empresa.sedesTexto}. Te atendemos por WhatsApp y por correo, y
               despachamos a nivel nacional e internacional.
             </p>
             <p className="mt-2">

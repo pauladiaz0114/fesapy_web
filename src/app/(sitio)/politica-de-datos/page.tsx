@@ -50,6 +50,7 @@ export default function PoliticaDeDatos() {
               <li>Razón social: {legal.razonSocial || TODO("razón social según el RUT")}</li>
               <li>NIT: {legal.nit || TODO("NIT")}</li>
               <li>Domicilio: {legal.domicilio || TODO("domicilio según el RUT")}</li>
+              <li>Sedes: {empresa.sedesTexto} (sin dirección publicada por ahora)</li>
               <li>
                 Canal de atención (correo):{" "}
                 <a

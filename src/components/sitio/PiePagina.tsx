@@ -5,8 +5,8 @@ import { enlacesMenu } from "@/lib/menu";
 import { Logo } from "./Logo";
 import { RedesSociales } from "./RedesSociales";
 
-// Pie de página negro. Fesapy no tiene sede física: el contacto es por WhatsApp, correo
-// y redes (sin dirección ni mapa).
+// Pie de página negro. Muestra las ciudades con sede, sin direcciones ni mapas (aún no se
+// publican), y el contacto por WhatsApp, correo y redes.
 // Dorado como texto: permitido porque el fondo es negro.
 const enlaceClase =
   "inline-flex min-h-11 items-center underline underline-offset-4 hover:text-dorado";
@@ -57,6 +57,7 @@ export function PiePagina() {
         <div>
           <h2 className="font-titulo text-xl font-bold uppercase text-dorado">Contacto</h2>
           <address className="mt-2 flex min-w-0 flex-col gap-1 break-words not-italic">
+            <Dato etiqueta="Sedes">{empresa.sedesTexto}</Dato>
             <Dato etiqueta="Horario">{contacto.horario}</Dato>
             <Dato etiqueta="WhatsApp">
               <a href={ENLACE_COTIZAR} target="_blank" rel="noopener noreferrer" className={enlaceLinea}>
