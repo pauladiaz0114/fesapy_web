@@ -8,11 +8,14 @@ export const empresa = {
   // Razón social y datos tomados del portafolio de Fesapy (PDF).
   razonSocial: "Fesapy Distribuciones SAS",
   experiencia: "Más de 4 años de experiencia",
-  // Sitio web actual de la empresa (según el portafolio).
-  sitioActual: "www.fesapydistribuciones.odoo.com",
-  sitioActualUrl: "https://www.fesapydistribuciones.odoo.com",
+  // Dominio propio de la empresa. Por ahora SOLO se muestra como enlace en el pie.
+  // TODO(dominio): cuando www.fesapy.tech esté conectado en Vercel, usarlo también como
+  // metadataBase y en los enlaces canónicos (hoy el sitio vive en fesapy-web.vercel.app).
+  sitioWeb: "www.fesapy.tech",
+  sitioWebUrl: "https://www.fesapy.tech",
   lema: "Dotaciones para tu empresa",
-  ciudad: "Madrid, Cundinamarca",
+  // Fesapy NO tiene sede ni local abierto al público: atiende por WhatsApp y correo,
+  // y despacha a nivel nacional e internacional.
   // Año que aparece en el pie de página (© 2026). Se escribe fijo a propósito:
   // así la página puede ser 100 % estática y no depende de la fecha del servidor.
   anioCopyright: 2026,
@@ -24,31 +27,28 @@ export const contacto = {
   whatsapp: "573123329422",
   // El mismo número, escrito para que lo lean las personas (pie de página).
   whatsappTexto: "+57 312 332 9422",
+  // En minúsculas: así se escribe y se copia sin errores.
   correo: "asistente.fesapy@gmail.com",
+  // Horario de atención por WhatsApp y correo (confirmado por Fesapy el 2026-11-12).
+  horario: "Todos los días, 7:00 a. m. a 8:00 p. m.",
 } as const;
 
-// Solo hay UNA sede (Madrid, Cundinamarca).
-export const sede = {
-  // TODO(contenido): dirección completa de la sede de Madrid.
-  direccion: "",
-  // TODO(contenido): horario de atención.
-  horario: "",
-} as const;
-
-// Redes sociales. El portafolio indica el usuario @fesapydistribuciones, pero no dice en qué red.
-// Si un enlace está vacío, el pie de página muestra un TODO(contenido).
+// Redes sociales (confirmadas por Fesapy el 2026-11-12).
+// Los enlaces van SIN parámetros de rastreo (?igsh=, ?mibextid=, utm_...): no hace falta
+// decirle a la red de dónde viene la visita.
 export const redes = {
   usuario: "@fesapydistribuciones",
-  // TODO(contenido): confirmar enlace. Se armó con el usuario del portafolio; verificar que existe.
   instagram: "https://www.instagram.com/fesapydistribuciones",
-  // TODO(contenido): confirmar enlace. Se armó con el usuario del portafolio; verificar que existe.
-  facebook: "https://www.facebook.com/fesapydistribuciones",
+  facebook: "https://www.facebook.com/share/19zYB3LRyD/",
 } as const;
 
 // Datos legales para la política de tratamiento de datos (Ley 1581 de 2012).
 export const legal = {
-  // Según el portafolio. TODO(contenido): confirmar que coincide con el RUT.
-  razonSocial: "Fesapy Distribuciones SAS",
+  // TODO(contenido): razón social exacta según el RUT (el portafolio dice "Fesapy Distribuciones SAS",
+  // pero en la política solo va lo confirmado con el documento).
+  razonSocial: "",
+  // TODO(contenido): domicilio legal de la empresa (ciudad que figura en el RUT).
+  domicilio: "",
   // TODO(contenido): NIT de la empresa.
   nit: "",
   // Versión de la política: sube el número cuando el texto cambie.

@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import { IconoCamion, IconoMensaje, IconoReloj } from "@/components/ui/iconos";
 import { Reveal } from "@/components/ui/Reveal";
+import { contacto } from "@/lib/contenido";
 
 type Ventaja = {
   titulo: string;
@@ -24,8 +25,8 @@ const ventajas: Ventaja[] = [
   },
   {
     titulo: "Atención rápida",
-    // TODO(contenido): horario y tiempo de respuesta, cuando la empresa los confirme.
-    texto: "Te atendemos por WhatsApp y por correo, sin vueltas.",
+    // Horario confirmado por Fesapy (2026-11-12). TODO(contenido): tiempo de respuesta, si la empresa lo confirma.
+    texto: `Te atendemos por WhatsApp y por correo. ${contacto.horario}`,
     Icono: IconoReloj,
   },
 ];

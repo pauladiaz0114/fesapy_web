@@ -47,13 +47,11 @@ export default function PoliticaDeDatos() {
               El responsable de tus datos personales es <strong>{empresa.nombre}</strong>.
             </p>
             <ul className="list-disc pl-6">
-              <li>Razón social: {legal.razonSocial || TODO("razón social")}</li>
+              <li>Razón social: {legal.razonSocial || TODO("razón social según el RUT")}</li>
               <li>NIT: {legal.nit || TODO("NIT")}</li>
+              <li>Domicilio: {legal.domicilio || TODO("domicilio según el RUT")}</li>
               <li>
-                Domicilio: {empresa.ciudad}. Dirección: TODO(contenido): dirección de la sede.
-              </li>
-              <li>
-                Correo:{" "}
+                Canal de atención (correo):{" "}
                 <a
                   href={`mailto:${contacto.correo}`}
                   className="font-bold text-negro underline underline-offset-4"

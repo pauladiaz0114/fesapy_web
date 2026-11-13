@@ -10,7 +10,7 @@ import { Ventajas } from "@/components/inicio/Ventajas";
 export const metadata: Metadata = {
   title: { absolute: "Fesapy Distribuciones — Dotaciones para tu empresa" },
   description:
-    "Dotación industrial, elementos de protección personal y calzado de seguridad con el logo de tu empresa. Atendemos empresas desde Madrid, Cundinamarca. Cotiza por WhatsApp o por correo.",
+    "Dotación industrial, elementos de protección personal y calzado de seguridad con el logo de tu empresa. Despachos nacionales e internacionales. Cotiza por WhatsApp o por correo.",
 };
 
 // Página de inicio. El encabezado, el pie y el botón flotante vienen de layout.tsx.
