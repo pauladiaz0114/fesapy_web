@@ -5,7 +5,7 @@ import { useRef, useState, type ReactNode } from "react";
 // Lista de categorías que:
 // - en celular (menos de 768 px) es un CARRUSEL horizontal con CSS scroll-snap (cada tarjeta "se
 //   pega" al soltar el dedo), con las tarjetas al 78 % del ancho para que se asome la siguiente,
-//   un contador "2 / 8" con puntos y botones "anterior" / "siguiente";
+//   un contador "2 / 7" con puntos y botones "anterior" / "siguiente";
 // - desde 768 px vuelve a ser una grilla normal (sin scroll interno, sin contador ni botones).
 // Sin librerías: el desplazamiento y el "pegado" son del navegador (CSS). El JavaScript solo
 // calcula el contador y mueve la lista al usar los botones. También funciona con el teclado (al
@@ -81,7 +81,7 @@ export function CarruselCategorias({ total, children }: { total: number; childre
       {/* Contador, puntos y botones: solo en celular. */}
       <div className="mt-2 flex items-center justify-between gap-3 md:hidden">
         {/* El lector de pantalla oye "Categoría 2 de 8" cada vez que cambia (al deslizar o con
-            los botones); el texto visible "2 / 8" queda oculto para él (sería confuso). */}
+            los botones); el texto visible "2 / 7" queda oculto para él (sería confuso). */}
         <p className="text-sm font-bold text-negro">
           <span aria-hidden="true">
             {actual + 1} / {total}

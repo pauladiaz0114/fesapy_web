@@ -20,12 +20,11 @@ Fesapy es una **marca multifuncional**: no solo vende dotaciones, también seña
 ## 2. Categorías de productos (propuesta)
 1. Dotación y ropa de trabajo (overoles, camisas, chaquetas, uniformes)
 2. Calzado de seguridad (botas de varias marcas)
-3. Elementos de protección personal (cascos, guantes, gafas, protección auditiva y respiratoria)
-4. Trabajo en alturas e izaje (eslingas, arneses)
-5. Botiquines y primeros auxilios
-6. Señalización y seguridad vial (letreros y señales, conos, cintas de demarcación, barreras y delineadores)
-7. Stickers y personalización
-8. Lubricantes y mantenimiento (WD-40, CRC)
+3. Protección personal (cascos, guantes, gafas, protección auditiva y respiratoria, arneses, eslingas y demás elementos de seguridad). Une las antiguas "Elementos de protección personal" y "Trabajo en alturas e izaje" (2026-11-12).
+4. Botiquines y primeros auxilios
+5. Señalización y seguridad vial (letreros y señales, conos, cintas de demarcación, barreras y delineadores, avisos reflectivos para vehículos)
+6. Stickers y personalización
+7. Lubricantes y mantenimiento (WD-40, CRC)
 
 Servicio transversal: **personalización con logo** (bordado y estampado).
 
@@ -42,7 +41,7 @@ Sin precios públicos ni tienda en línea por ahora.
 |---|---|
 | Inicio | Propuesta de valor, categorías, personalización, CTA WhatsApp y cotizar (clientes y testimonios vuelven cuando haya logos y reseñas reales con permiso) |
 | Nosotros | Historia, misión, sedes (ciudades), cómo atendemos, redes, por qué elegirnos |
-| Productos | Las 8 categorías, sin precios |
+| Productos | Las 7 categorías, sin precios |
 | Personalización | Bordado y estampado: proceso, ejemplos de trabajos |
 | Cotización | Formulario que arma el mensaje y abre WhatsApp o correo (no guarda datos ni pide NIT); WhatsApp, correo, horario y redes |
 | Política de tratamiento de datos | Requerida por Ley 1581 de 2012 |

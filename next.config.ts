@@ -55,6 +55,22 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/(.*)", headers: cabecerasDeSeguridad }];
   },
+  // Redirecciones permanentes (308) de direcciones que ya no existen, para que no queden
+  // enlaces rotos. 2026-11-12: "Trabajo en alturas e izaje" se unió a "Protección personal".
+  async redirects() {
+    return [
+      {
+        source: "/productos/trabajo-en-alturas",
+        destination: "/productos/proteccion-personal",
+        permanent: true,
+      },
+      {
+        source: "/productos/trabajo-en-alturas/:producto",
+        destination: "/productos/proteccion-personal/:producto",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

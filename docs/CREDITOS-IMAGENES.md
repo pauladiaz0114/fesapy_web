@@ -37,3 +37,21 @@ Licencia: [Pexels License](https://www.pexels.com/license/). Permite uso gratis,
 **Cómo se prepararon (2026-11-09):** se extrajeron con un script propio (Python + Pillow, sin instalar nada) que une cada foto con su máscara de transparencia, se descartaron las sombras difuminadas, los fondos de página, los logos y los sellos de normas, se recortaron los márgenes transparentes y se convirtieron a WebP con transparencia, máximo 800 px de ancho, sin metadatos. Pesan en total 1,0 MB (la más pesada, 86 KB). El script y el PDF **no** se suben al repo (carpeta `_fuentes/`, ignorada).
 
 Archivos: `public/catalogo/<producto>.webp` (la foto principal) y `<producto>-2.webp`, `-3`, ... (fotos adicionales del mismo producto). Cada foto se asigna a su producto en `src/lib/catalogo.ts`. Las que no se pudo asignar con total certeza (qué referencia es cada bota Westland, cada bota de soldador y cada guante) tienen un `TODO(contenido)` en ese archivo.
+
+## Imágenes de referencia del catálogo (`public/catalogo/`, 2026-11-12)
+
+**Origen:** tres hojas de imágenes entregadas por Fesapy (`_fuentes/fotos-nuevas/`: botiquines y señales, dotación, avisos para vehículos). No se descargó nada de internet. Son **imágenes de referencia**: en la ficha del producto se ve el texto "Imagen de referencia" (campo `referencia: true` en `src/lib/catalogo.ts`).
+
+> ⚠️ **Pendiente de confirmar con Fesapy:** que las imágenes se pueden publicar y que representan lo que la empresa entrega (material, medidas y contenido quedan como `TODO(contenido)`).
+
+**Cómo se prepararon:** script propio (`_fuentes/pruebas/recortar_hojas.py`, Python + Pillow, sin instalar nada): recorte de cada producto, cuadrado con fondo blanco y margen parejo, WebP calidad 80, sin metadatos y **sin agrandar** (las piezas miden 270–800 px). Las señales y avisos que se agrupan en un producto se unen en una sola imagen. Pesan 3–44 KB cada una (18 archivos, +227 KB en total).
+
+| Archivo | Producto |
+|---|---|
+| `botiquin-maletin-rojo.webp`, `botiquin-maletin-plastico-blanco.webp`, `botiquin-morral-azul-reflectivo.webp`, `botiquin-maletin-rojo-reflectivo.webp` | Botiquines (vista de frente) |
+| `senales-evacuacion-primeros-auxilios.webp`, `senales-contra-incendios.webp`, `senales-de-advertencia.webp` | Señales (agrupadas por color) |
+| `avisos-vehiculos-no-adelantar.webp`, `avisos-vehiculos-advertencia.webp`, `avisos-vehiculos-distancia-y-velocidad.webp`, `franjas-reflectivas-chevrones.webp` | Avisos reflectivos para vehículos |
+| `overol-con-reflectivo-plateado.webp`, `overol-con-reflectivo-plateado-2.webp` | Overol con reflectivo plateado (azul y azul oscuro) |
+| `camisas-oxford-2.webp`, `camisa-tipo-polo-2.webp`, `camisa-en-jean-2.webp`, `chaqueta-en-jean-2.webp`, `pantalon-en-jean-2.webp` | Segunda foto de productos que ya existían (la del portafolio sigue como principal) |
+
+Las vistas de atrás, abierto y espalda quedan **solo** en `_fuentes/fotos-nuevas/recortes/` (no se suben). Algunas espaldas de camisas tienen restos de la prenda vecina y necesitan retoque antes de usarlas.

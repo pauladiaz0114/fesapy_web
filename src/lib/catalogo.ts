@@ -9,12 +9,20 @@ import type { CategoriaSlug } from "./contenido";
 // - "resumen" (frase de la tarjeta) y los textos "alt" de las fotos sí son redacción propia.
 // - Lo que no esté en el portafolio queda como TODO(contenido) (o se omite).
 // - Las fotos están en public/catalogo/<slug>.webp (la primera es la principal).
-//   Vienen del portafolio de Fesapy; ver docs/CREDITOS-IMAGENES.md.
+//   Vienen del portafolio de Fesapy, salvo las marcadas `referencia: true` (hojas de imágenes de
+//   referencia que entregó Fesapy el 2026-11-12); ver docs/CREDITOS-IMAGENES.md.
+// - Productos agregados desde esas hojas: nombre y descripción SOLO con lo que se ve en la foto;
+//   material, tallas, medidas, normas y contenido = TODO(contenido).
 
 export type ImagenProducto = {
   /** Nombre del archivo dentro de public/catalogo/ */
   archivo: string;
   alt: string;
+  /**
+   * true = imagen de referencia (no es foto del portafolio ni del producto exacto que se entrega).
+   * La ficha del producto muestra el texto pequeño "Imagen de referencia" mientras se ve.
+   */
+  referencia?: boolean;
 };
 
 /** Cuando un producto del portafolio reúne varias referencias (por ejemplo 9009 / 9309 / 8609). */
@@ -68,7 +76,10 @@ export const productos: Producto[] = [
     ],
     modelos: [],
     normas: "13688:2013/A1:2021 · D3775-03 · NTC 427, 481, 786, 1155, 1213",
-    imagenes: [{ archivo: "camisas-oxford.webp", alt: "Camisa Oxford blanca de manga larga, con cuello y pechera con botones" }],
+    imagenes: [
+      { archivo: "camisas-oxford.webp", alt: "Camisa Oxford blanca de manga larga, con cuello y pechera con botones" },
+      { archivo: "camisas-oxford-2.webp", alt: "Camisa de manga larga azul claro, vista de frente", referencia: true },
+    ],
   },
   {
     slug: "camisa-tipo-polo",
@@ -95,7 +106,10 @@ export const productos: Producto[] = [
     ],
     modelos: [],
     normas: "4045:2019, 4048 · D4704 · NTC 1042:1998, 1077:1998",
-    imagenes: [{ archivo: "camisa-tipo-polo.webp", alt: "Camisa tipo polo azul con cuello y pechera de botones" }],
+    imagenes: [
+      { archivo: "camisa-tipo-polo.webp", alt: "Camisa tipo polo azul con cuello y pechera de botones" },
+      { archivo: "camisa-tipo-polo-2.webp", alt: "Camiseta tipo polo azul claro de manga corta, vista de frente", referencia: true },
+    ],
   },
   {
     slug: "camisa-en-jean",
@@ -120,7 +134,10 @@ export const productos: Producto[] = [
     ],
     modelos: [],
     normas: "13688:2013/A1:2021 · D1424, D2261, D1776, D737 · NTC 2260",
-    imagenes: [{ archivo: "camisa-en-jean.webp", alt: "Camisa en jean azul de manga larga con bolsillos frontales" }],
+    imagenes: [
+      { archivo: "camisa-en-jean.webp", alt: "Camisa en jean azul de manga larga con bolsillos frontales" },
+      { archivo: "camisa-en-jean-2.webp", alt: "Camisa en jean azul de manga larga con dos bolsillos, vista de frente", referencia: true },
+    ],
   },
   {
     slug: "chaqueta-en-jean",
@@ -145,7 +162,10 @@ export const productos: Producto[] = [
     ],
     modelos: [],
     normas: "13688:2013/A1:2021 · D1424, D2261, D1776, D737 · NTC 2260",
-    imagenes: [{ archivo: "chaqueta-en-jean.webp", alt: "Chaqueta en jean azul oscuro con botones metálicos y bolsillos en el pecho" }],
+    imagenes: [
+      { archivo: "chaqueta-en-jean.webp", alt: "Chaqueta en jean azul oscuro con botones metálicos y bolsillos en el pecho" },
+      { archivo: "chaqueta-en-jean-2.webp", alt: "Chaqueta en jean azul con botones y bolsillos, vista de frente", referencia: true },
+    ],
   },
   {
     slug: "pantalon-en-jean",
@@ -170,7 +190,10 @@ export const productos: Producto[] = [
     ],
     modelos: [],
     normas: "13688:2013/A1:2021 · D1424, D2261, D1776, D737 · NTC 2260",
-    imagenes: [{ archivo: "pantalon-en-jean.webp", alt: "Pantalón en jean azul de bota recta" }],
+    imagenes: [
+      { archivo: "pantalon-en-jean.webp", alt: "Pantalón en jean azul de bota recta" },
+      { archivo: "pantalon-en-jean-2.webp", alt: "Pantalón en jean azul, vista de frente", referencia: true },
+    ],
   },
   {
     slug: "overol-en-dril",
@@ -249,6 +272,21 @@ export const productos: Producto[] = [
     modelos: [],
     normas: "13688:2013/A1:2021",
     imagenes: [{ archivo: "overol-ignifugo.webp", alt: "Overol ignífugo rojo con cintas reflectivas blancas en mangas y piernas" }],
+  },
+
+  {
+    slug: "overol-con-reflectivo-plateado",
+    categoria: "dotacion-ropa-de-trabajo",
+    nombre: "Overol con reflectivo plateado",
+    resumen: "Overol enterizo de manga larga con cinta reflectiva plateada en pecho, espalda, mangas y piernas. Se ve en azul y azul oscuro.",
+    descripcion: ["Overol enterizo de manga larga, con cuello, cierre frontal y bolsillos en pecho y piernas. Lleva cinta reflectiva plateada en el pecho, la espalda, las mangas y las piernas. Se ve en tonos azul y azul oscuro."],
+    caracteristicas: ["TODO(contenido): material, gramaje, tallas y colores disponibles. Confirmar si es el mismo producto que el Overol con Reflectivos para unirlos."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "overol-con-reflectivo-plateado.webp", alt: "Overol azul de manga larga con cinta reflectiva plateada en pecho, mangas y piernas", referencia: true },
+      { archivo: "overol-con-reflectivo-plateado-2.webp", alt: "Overol azul oscuro de manga larga con cinta reflectiva plateada en pecho, mangas y piernas", referencia: true },
+    ],
   },
 
   // ───────────── Calzado de seguridad ─────────────
@@ -408,7 +446,7 @@ export const productos: Producto[] = [
     ],
   },
 
-  // ───────────── Elementos de protección personal ─────────────
+  // ───────────── Protección personal (EPP, trabajo en alturas e izaje) ─────────────
   {
     slug: "cascos-v-gard",
     categoria: "proteccion-personal",
@@ -612,10 +650,10 @@ export const productos: Producto[] = [
     ],
   },
 
-  // ───────────── Trabajo en alturas e izaje ─────────────
+  // (Antes categoría aparte "Trabajo en alturas e izaje"; unida a Protección personal el 2026-11-12.)
   {
     slug: "arnes-in-8004",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliéster IN 8004",
     resumen:
       "Arnés de cuerpo completo en reata de poliéster con tratamiento ignífugo y estructura tipo “X”, para sistemas de detención de caídas.",
@@ -639,7 +677,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "arnes-in-8004-1",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliéster IN 8004-1",
     resumen:
       "Arnés para detención de caídas en reata de poliéster con tratamiento ignífugo y soporte lumbar ergonómico.",
@@ -663,7 +701,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "arnes-in-8004-p",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliuretano IN 8004-P",
     resumen:
       "Arnés de 4 argollas, cuerpo completo, con reata recubierta en poliuretano para ambientes con hidrocarburos, humedad y grasas.",
@@ -687,7 +725,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "arnes-in-8004-p1",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Arnés Poliuretano IN 8004-P1",
     resumen:
       "Arnés de 4 argollas en poliuretano con soporte lumbar, para ambientes agresivos y trabajos prolongados.",
@@ -711,7 +749,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "eslingas-con-absorbedor-in-8021-1se",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Eslingas con absorbedor IN 8021-1SE / IN 8020-SE / IN 8041-RSE",
     resumen:
       "Eslinga en Y y eslinga sencilla con absorbedor de energía, y eslinga de posicionamiento regulable, con herrajes en acero inoxidable.",
@@ -744,7 +782,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "eslingas-con-absorbedor-in-8020",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Eslingas con absorbedor IN 8020 / IN 8020-R / IN 8020-1",
     resumen:
       "Eslinga sencilla con absorbedor, en versión fija (IN 8020), regulable (IN 8020-R) y regulable con gancho mixto de gran apertura (IN 8020-1).",
@@ -777,7 +815,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "eslingas-de-posicionamiento-in-8040",
-    categoria: "trabajo-en-alturas",
+    categoria: "proteccion-personal",
     nombre: "Eslingas de posicionamiento IN 8040 / IN 8040-1 / IN 8040-R",
     resumen:
       "Eslingas de posicionamiento y restricción en cuerda semiestática de 14 mm, con gancho mixto de gran apertura o regulables.",
@@ -809,6 +847,60 @@ export const productos: Producto[] = [
       { archivo: "eslingas-de-posicionamiento-in-8040.webp", alt: "Eslinga de posicionamiento en cuerda blanca con ganchos de acero" },
       { archivo: "eslingas-de-posicionamiento-in-8040-2.webp", alt: "Eslinga de posicionamiento en cuerda con gancho de gran apertura" },
       { archivo: "eslingas-de-posicionamiento-in-8040-3.webp", alt: "Eslinga de posicionamiento en cuerda con ganchos de acero y absorbedor" },
+    ],
+  },
+
+  // ───────────── Botiquines y primeros auxilios (imágenes de referencia, 2026-11-12) ─────────────
+  {
+    slug: "botiquin-maletin-rojo",
+    categoria: "botiquines",
+    nombre: "Botiquín tipo maletín rojo",
+    resumen: "Botiquín tipo maletín en tela roja con manijas negras y la palabra BOTIQUÍN.",
+    descripcion: ["Botiquín tipo maletín en tela roja, con manijas negras, cruz blanca y la palabra BOTIQUÍN al frente. Por dentro tiene compartimentos para organizar los elementos de primeros auxilios."],
+    caracteristicas: ["TODO(contenido): material, medidas y contenido del botiquín (qué elementos incluye y qué norma cumple)."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "botiquin-maletin-rojo.webp", alt: "Botiquín tipo maletín rojo con cruz blanca y la palabra BOTIQUÍN", referencia: true },
+    ],
+  },
+  {
+    slug: "botiquin-maletin-plastico-blanco",
+    categoria: "botiquines",
+    nombre: "Botiquín tipo maletín plástico blanco",
+    resumen: "Botiquín en estuche plástico blanco con manija roja y cruz roja.",
+    descripcion: ["Botiquín en estuche rígido de plástico blanco, con manija roja, cruz roja y la palabra BOTIQUÍN al frente. Se abre como un maletín y por dentro guarda los elementos de primeros auxilios."],
+    caracteristicas: ["TODO(contenido): material, medidas y contenido del botiquín (qué elementos incluye y qué norma cumple)."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "botiquin-maletin-plastico-blanco.webp", alt: "Botiquín en estuche plástico blanco con manija roja, cruz roja y la palabra BOTIQUÍN", referencia: true },
+    ],
+  },
+  {
+    slug: "botiquin-morral-azul-reflectivo",
+    categoria: "botiquines",
+    nombre: "Botiquín tipo morral azul con reflectivo",
+    resumen: "Botiquín tipo morral azul con cinta reflectiva, para llevar en la espalda.",
+    descripcion: ["Botiquín tipo morral en tela azul, con cruz blanca y la palabra BOTIQUÍN al frente, cinta reflectiva y correas para llevarlo en la espalda. Por dentro tiene compartimentos para los elementos de primeros auxilios."],
+    caracteristicas: ["TODO(contenido): material, medidas y contenido del botiquín (qué elementos incluye y qué norma cumple)."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "botiquin-morral-azul-reflectivo.webp", alt: "Botiquín tipo morral azul con cruz blanca, la palabra BOTIQUÍN y cinta reflectiva", referencia: true },
+    ],
+  },
+  {
+    slug: "botiquin-maletin-rojo-reflectivo",
+    categoria: "botiquines",
+    nombre: "Botiquín tipo maletín rojo con reflectivo",
+    resumen: "Botiquín tipo maletín en tela roja con cinta reflectiva y manijas negras.",
+    descripcion: ["Botiquín tipo maletín en tela roja, con manijas negras, cruz blanca, la palabra BOTIQUÍN al frente y cinta reflectiva alrededor. Por dentro tiene compartimentos para organizar los elementos de primeros auxilios."],
+    caracteristicas: ["TODO(contenido): material, medidas y contenido del botiquín (qué elementos incluye y qué norma cumple)."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "botiquin-maletin-rojo-reflectivo.webp", alt: "Botiquín tipo maletín rojo con cruz blanca, la palabra BOTIQUÍN y cinta reflectiva", referencia: true },
     ],
   },
 
@@ -918,6 +1010,125 @@ export const productos: Producto[] = [
       { archivo: "cilindro-vial-tipo-caneca.webp", alt: "Cilindro vial tipo caneca naranja y blanco con bandas reflectivas y base negra" },
     ],
   },
+  // Señales y avisos agregados desde las hojas de imágenes de referencia (2026-11-12).
+  {
+    slug: "senales-evacuacion-primeros-auxilios",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Señales de evacuación y primeros auxilios",
+    resumen: "Señales verdes de Primeros auxilios, Camilla de emergencia, Punto de encuentro y Salida de emergencia.",
+    descripcion: ["Señales rectangulares verdes con pictograma y texto en blanco, para indicar rutas de evacuación y elementos de primeros auxilios."],
+    caracteristicas: ["TODO(contenido): material (lámina, acrílico o adhesivo), medidas y si es reflectiva o fotoluminiscente."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Primeros auxilios", descripcion: "Señal verde con cruz blanca." },
+      { nombre: "Camilla de emergencia", descripcion: "Señal verde con el pictograma de una camilla." },
+      { nombre: "Punto de encuentro", descripcion: "Señal verde con un grupo de personas y flechas hacia el centro." },
+      { nombre: "Salida de emergencia", descripcion: "Señal verde con una persona corriendo hacia una puerta y una flecha." },
+    ],
+    imagenes: [
+      { archivo: "senales-evacuacion-primeros-auxilios.webp", alt: "Cuatro señales verdes: Primeros auxilios, Camilla de emergencia, Punto de encuentro y Salida de emergencia", referencia: true },
+    ],
+  },
+  {
+    slug: "senales-contra-incendios",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Señales contra incendios",
+    resumen: "Señales rojas de Extintor y Gabinete contra incendios.",
+    descripcion: ["Señales rectangulares rojas con pictograma y texto en blanco, para ubicar los equipos contra incendios."],
+    caracteristicas: ["TODO(contenido): material (lámina, acrílico o adhesivo), medidas y si es reflectiva o fotoluminiscente."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Extintor", descripcion: "Señal roja con el pictograma de un extintor." },
+      { nombre: "Gabinete contra incendios", descripcion: "Señal roja con el pictograma de una manguera en su gabinete." },
+    ],
+    imagenes: [
+      { archivo: "senales-contra-incendios.webp", alt: "Dos señales rojas: Extintor y Gabinete contra incendios", referencia: true },
+    ],
+  },
+  {
+    slug: "senales-de-advertencia",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Señales de advertencia",
+    resumen: "Señales amarillas de Riesgo eléctrico y Peligro resbalones.",
+    descripcion: ["Señales rectangulares amarillas con triángulo de advertencia, pictograma y texto en negro."],
+    caracteristicas: ["TODO(contenido): material (lámina, acrílico o adhesivo), medidas y si es reflectiva o fotoluminiscente."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Riesgo eléctrico", descripcion: "Señal amarilla con un rayo dentro de un triángulo." },
+      { nombre: "Peligro resbalones", descripcion: "Señal amarilla con una persona resbalando dentro de un triángulo." },
+    ],
+    imagenes: [
+      { archivo: "senales-de-advertencia.webp", alt: "Dos señales amarillas: Riesgo eléctrico y Peligro resbalones", referencia: true },
+    ],
+  },
+  {
+    slug: "avisos-vehiculos-no-adelantar",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Avisos reflectivos para vehículos: No adelantar",
+    resumen: "Avisos NO ADELANTAR para la parte trasera de vehículos, en tres diseños.",
+    descripcion: ["Avisos rectangulares con el texto NO ADELANTAR, para la parte trasera de vehículos de carga y transporte."],
+    caracteristicas: ["TODO(contenido): material (adhesivo o lámina), medidas y tipo de reflectivo."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Borde rojo con flechas", descripcion: "Fondo blanco, texto negro y flechas rojas a los lados." },
+      { nombre: "Fondo amarillo con franjas", descripcion: "Fondo amarillo, texto negro y franjas diagonales negras a los lados." },
+      { nombre: "Con símbolo de prohibido", descripcion: "Fondo blanco, círculo rojo con dos carros tachados y texto negro." },
+    ],
+    imagenes: [
+      { archivo: "avisos-vehiculos-no-adelantar.webp", alt: "Tres avisos NO ADELANTAR: borde rojo con flechas, fondo amarillo con franjas negras y uno con el símbolo de prohibido adelantar", referencia: true },
+    ],
+  },
+  {
+    slug: "avisos-vehiculos-advertencia",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Avisos reflectivos para vehículos: advertencia",
+    resumen: "Avisos Peligro, Vehículo largo, Precaución y Transporte de carga para vehículos.",
+    descripcion: ["Avisos rectangulares de advertencia para vehículos, con texto grande en negro sobre fondo amarillo o blanco, con franjas o pictogramas."],
+    caracteristicas: ["TODO(contenido): material (adhesivo o lámina), medidas y tipo de reflectivo."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Peligro", descripcion: "Fondo amarillo con franjas diagonales negras." },
+      { nombre: "Vehículo largo", descripcion: "Fondo blanco con franjas diagonales rojas a los lados." },
+      { nombre: "Precaución", descripcion: "Fondo amarillo con triángulo de advertencia." },
+      { nombre: "Transporte de carga", descripcion: "Fondo amarillo con el dibujo de un camión." },
+    ],
+    imagenes: [
+      { archivo: "avisos-vehiculos-advertencia.webp", alt: "Cuatro avisos para vehículos: Peligro, Vehículo largo, Precaución y Transporte de carga", referencia: true },
+    ],
+  },
+  {
+    slug: "avisos-vehiculos-distancia-y-velocidad",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Avisos reflectivos para vehículos: distancia y velocidad",
+    resumen: "Avisos Cuidado con su distancia, Mantenga su distancia y límite de 60 km/h.",
+    descripcion: ["Avisos para la parte trasera de vehículos que piden mantener la distancia, y aviso redondo de límite de velocidad de 60 km/h."],
+    caracteristicas: ["TODO(contenido): material (adhesivo o lámina), medidas y tipo de reflectivo."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Cuidado con su distancia", descripcion: "Franja roja con la palabra CUIDADO, fondo blanco y el dibujo de un carro." },
+      { nombre: "Mantenga su distancia", descripcion: "Fondo amarillo con el dibujo de un carro y una flecha." },
+      { nombre: "Límite 60 km/h", descripcion: "Aviso redondo con borde rojo y el número 60." },
+    ],
+    imagenes: [
+      { archivo: "avisos-vehiculos-distancia-y-velocidad.webp", alt: "Avisos Cuidado con su distancia, Mantenga su distancia y límite de 60 km/h", referencia: true },
+    ],
+  },
+  {
+    slug: "franjas-reflectivas-chevrones",
+    categoria: "senalizacion-y-seguridad-vial",
+    nombre: "Avisos reflectivos para vehículos: franjas de chevrones",
+    resumen: "Franjas de chevrones amarillo y negro, y rojo y blanco, para marcar vehículos.",
+    descripcion: ["Franjas rectangulares con chevrones (flechas en V) para marcar la parte trasera o los costados de vehículos."],
+    caracteristicas: ["TODO(contenido): material (adhesivo o lámina), medidas y tipo de reflectivo."],
+    diferenciadores: [],
+    modelos: [
+      { nombre: "Amarillo y negro", descripcion: "Chevrones negros sobre fondo amarillo." },
+      { nombre: "Rojo y blanco", descripcion: "Chevrones rojos sobre fondo blanco." },
+    ],
+    imagenes: [
+      { archivo: "franjas-reflectivas-chevrones.webp", alt: "Dos franjas de chevrones: amarillo con negro y rojo con blanco", referencia: true },
+    ],
+  },
 ];
 
 // ───────────── Consultas ─────────────
@@ -946,7 +1157,7 @@ const PORTADAS: Partial<Record<CategoriaSlug, string>> = {
   "dotacion-ropa-de-trabajo": "overol-con-reflectivos",
   "calzado-de-seguridad": "bota-safety-tridensidad",
   "proteccion-personal": "cascos-v-gard",
-  "trabajo-en-alturas": "arnes-in-8004",
+  "botiquines": "botiquin-maletin-rojo",
   "senalizacion-y-seguridad-vial": "conos-viales-pvc-90-cm",
 };
 

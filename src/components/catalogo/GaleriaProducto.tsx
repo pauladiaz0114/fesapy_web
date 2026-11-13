@@ -38,6 +38,13 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
         />
       </div>
 
+      {/* Aviso "Imagen de referencia" (fotos que no son del portafolio ni del producto exacto).
+          Si el producto tiene alguna, el renglón se reserva siempre: así no se mueve nada al
+          cambiar de foto (CLS 0). */}
+      {imagenes.some((img) => img.referencia) && (
+        <p className="min-h-5 text-sm text-gris">{foto.referencia ? "Imagen de referencia" : ""}</p>
+      )}
+
       {imagenes.length > 1 && (
         <ul className="flex flex-wrap gap-2" aria-label={`Fotos de ${nombre}`}>
           {imagenes.map((img, i) => (

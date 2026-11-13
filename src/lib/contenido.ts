@@ -63,7 +63,7 @@ export const legal = {
   politicaFecha: "9 de noviembre de 2026",
 } as const;
 
-// Las 8 categorías de docs/BRIEF.md §2.
+// Las 7 categorías de docs/BRIEF.md §2 (eran 8 hasta el 2026-11-12).
 // El "slug" es el nombre que viaja en la dirección: /cotizacion?categoria=<slug>
 export const categorias = [
   {
@@ -77,14 +77,12 @@ export const categorias = [
     descripcion: "Botas de seguridad de varias marcas.",
   },
   {
+    // Une "Elementos de protección personal" y "Trabajo en alturas e izaje" (2026-11-12).
+    // La dirección vieja /productos/trabajo-en-alturas redirige aquí (308, next.config.ts).
     slug: "proteccion-personal",
-    nombre: "Elementos de protección personal",
-    descripcion: "Cascos, guantes, gafas y protección auditiva y respiratoria.",
-  },
-  {
-    slug: "trabajo-en-alturas",
-    nombre: "Trabajo en alturas e izaje",
-    descripcion: "Eslingas y arneses.",
+    nombre: "Protección personal",
+    descripcion:
+      "Cascos, guantes, gafas, protección auditiva y respiratoria, arneses, eslingas y demás elementos de seguridad.",
   },
   {
     slug: "botiquines",
@@ -110,7 +108,14 @@ export const categorias = [
 
 export type CategoriaSlug = (typeof categorias)[number]["slug"];
 
-/** Devuelve el slug si es una categoría conocida; si no, undefined. */
+// Slugs viejos que ya no existen, con la categoría que los reemplaza.
+// Así un enlace guardado como /cotizacion?categoria=trabajo-en-alturas sigue eligiendo la categoría.
+const slugsAnteriores: Record<string, CategoriaSlug> = {
+  "trabajo-en-alturas": "proteccion-personal",
+};
+
+/** Devuelve el slug si es una categoría conocida (o uno viejo que la reemplaza); si no, undefined. */
 export function categoriaValida(valor: unknown): CategoriaSlug | undefined {
+  if (typeof valor === "string" && valor in slugsAnteriores) return slugsAnteriores[valor];
   return categorias.find((c) => c.slug === valor)?.slug;
 }
