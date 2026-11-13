@@ -22,6 +22,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Carrusel del hero, animaciones discretas (con `prefers-reduced-motion`) y carrusel de categorías en celular
 - [x] Pulir movimiento y experiencia: foco visible y `aria-current`, formulario con validación al salir del campo y envío sin doble clic, carruseles con deslizar/teclado/barra de progreso, entradas escalonadas, carga suave de imágenes y menú hamburguesa en celular (rama `feat/pulir-movimiento-y-experiencia`)
 - [x] Catálogo con fotos nuevas: 12 productos (botiquines, señales, avisos para vehículos, overol), 2.ª foto de referencia en 5 prendas y categorías unidas en "Protección personal" (7 categorías, redirecciones 308) (rama `feat/catalogo-fotos-nuevas`)
+- [x] Inicio con menos texto: franja "Cómo cotizar" en 3 pasos, beneficios con ícono y título, problemas con solo título y "Envíos nacionales e internacionales" (rama `feat/inicio-menos-texto`)
 
 - [x] Contacto (WhatsApp, correo, Instagram y Facebook), sedes por ciudad sin direcciones, horario, sin barra de anuncio, sin sección de clientes/reseñas, formulario sin NIT y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
 
