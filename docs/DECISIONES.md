@@ -255,3 +255,12 @@ La franja dorada "Solicita tu cotización" y la sección "Trabajar con Fesapy es
 
 ## 2026-11-13 · El botón de WhatsApp del encabezado vuelve al dorado
 Por pedido de Fesapy, el botón "Cotizar por WhatsApp" del encabezado vuelve al dorado de la marca (texto e ícono negros). Se quitó la variante `whatsapp` de `Boton.tsx`. El verde oficial queda **solo** en la burbuja flotante. Esto reemplaza la parte del 2026-11-12 que decía que el botón del encabezado iba en verde.
+
+## 2026-11-16 · Inicio con diseño oscuro de impacto (propuesta 2) y "Envíos nacionales"
+**Qué:** la página de inicio pasa a un diseño oscuro: hero negro con resplandor dorado, franja de beneficios en carbón, "Cómo cotizar" con tarjetas carbón y números dorados, "Problemas que resolvemos" en panel dividido (foto a la izquierda, lista a la derecha), categorías sobre negro y una franja dorada "¿No ves lo que buscas?" antes del pie. El resto de las páginas (`/productos`, `/nosotros`, etc.) sigue en tema claro.
+**Colores nuevos:** `--carbon: #1c1c1c` (tarjetas y franjas) y `--carbon-claro: #2a2a2a` (marcos de imágenes). Blanco sobre carbón ≈ 16:1; dorado sobre carbón ≈ 8:1. La regla de siempre sigue: dorado como texto **solo** sobre fondos negros o carbón; nunca sobre blanco o crema.
+**Cómo:** `Categorias`, `TarjetaCategoria` y `CarruselCategorias` reciben `tema="oscuro"` (la home) o `"claro"` (por defecto, para `/productos`). Botón nuevo `contornoClaro` (borde blanco) para fondos oscuros. Los enlaces estirados de las tarjetas siguen sin `transform` al presionar.
+**Etiquetas:** componente `EtiquetaReferencia` ("Imagen de referencia") sobre el carrusel del hero y la foto de "Problemas": son fotos de Pexels, no de Fesapy.
+**Envíos:** el sitio dice "Envíos nacionales" (Fesapy lo pidió; ya no se promete envío internacional en el sitio).
+**Video (pendiente):** se pidió un video corto de 5 s en "Problemas que resolvemos" (con etiqueta "Video de referencia", `<video>` nativo, sin audio, que se pausa fuera de pantalla y con `prefers-reduced-motion`). **No se hizo:** `_fuentes/video/dotacion.mp4` no existe y este equipo no tiene ffmpeg. La foto del panel izquierdo es el lugar y será el `poster`. Sin librerías nuevas.
+**Referencia de diseño:** no estaba `_fuentes/mockups/propuesta-2.html`; se usaron las capturas `propuesta-2-oscura-impacto-*.jpg`.

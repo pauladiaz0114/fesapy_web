@@ -74,7 +74,7 @@ export default function Nosotros() {
             </h2>
             <p className="mt-2">
               Tenemos sedes en {empresa.sedesTexto}. Te atendemos por WhatsApp y por correo, y
-              despachamos a nivel nacional e internacional.
+              despachamos a nivel nacional.
             </p>
             <p className="mt-2">
               <span className="font-bold text-negro">Horario de atención:</span> {contacto.horario}

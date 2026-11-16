@@ -13,6 +13,23 @@ Formato:
 
 ---
 
+## 2026-11-16 — Inicio con diseño oscuro de impacto y "Envíos nacionales" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/diseno-oscuro-impacto`)
+1. Hero negro con título en dos colores, botón de WhatsApp dorado y botón de contorno blanco; franja de beneficios en carbón con íconos dorados.
+2. "Cómo cotizar" en tarjetas carbón con números 01, 02, 03 en dorado; "Problemas que resolvemos" en panel dividido con foto de referencia; categorías en tarjetas oscuras y franja dorada "¿No ves lo que buscas?".
+3. "Envíos nacionales e internacionales" pasa a "Envíos nacionales" en beneficios, problemas, descripción de la home, `/nosotros`, `CLAUDE.md` y `BRIEF.md`.
+4. Etiqueta "Imagen de referencia" sobre el carrusel y la foto de "Problemas".
+5. Video: **no se hizo** (falta `dotacion.mp4` y ffmpeg); ver `DECISIONES.md`.
+- **Verificado en Edge real** (390 y 1440 px): menú, carrusel (punto y pausa), "Cotizar ahora", clic sobre la foto de una tarjeta, botón "Cotizar" de una tarjeta, franja dorada, WhatsApp del encabezado (dorado) y burbuja (verde), foco visible, contrastes ≥ 4,5:1, CLS 0, sin desborde, `reducir movimiento` sin nada oculto y `/productos` sigue claro.
+
+**Archivos:** `src/components/inicio/` (`Hero`, `ComoCotizar`, `Problemas`, `Categorias`, `HeroCarrusel`), `src/components/catalogo/` (`TarjetaCategoria`, `CarruselCategorias`), `src/components/ui/` (`Boton`, `EtiquetaReferencia` nuevo), `src/app/globals.css`, `docs/`, `CLAUDE.md`.
+
+**Conceptos aprendidos:**
+- *Tema por propiedad:* un mismo componente sirve para fondo claro y oscuro con una propiedad (`tema="oscuro"`), sin duplicar código ni tocar las páginas que siguen claras.
+- *Token de color:* `--carbon` se define una vez en `globals.css` y Tailwind crea `bg-carbon`; cambiar el tono es cambiar una línea.
+
+**Pendientes / notas:** video corto (falta el archivo y ffmpeg); "4 años en el mercado" sigue como lo confirmó Sebastián el 2026-11-12, pero el año de fundación exacto sigue como `TODO(contenido)` en `/nosotros`.
+
 ## 2026-11-13 — Botón de WhatsApp del encabezado en dorado y título de tallas (Sebastián con Claude Code)
 **Qué se hizo:** (rama `fix/whatsapp-dorado-tallas`)
 1. El botón "Cotizar por WhatsApp" del encabezado vuelve al dorado con texto negro; se borró la variante `whatsapp` de `Boton.tsx`. La burbuja flotante sigue en verde.

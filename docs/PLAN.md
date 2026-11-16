@@ -24,6 +24,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Catálogo con fotos nuevas: 12 productos (botiquines, señales, avisos para vehículos, overol), 2.ª foto de referencia en 5 prendas y categorías unidas en "Protección personal" (7 categorías, redirecciones 308) (rama `feat/catalogo-fotos-nuevas`)
 - [x] Inicio con menos texto: franja "Cómo cotizar" en 3 pasos, beneficios con ícono y título, problemas con solo título y "Envíos nacionales e internacionales" (rama `feat/inicio-menos-texto`)
 
+- [x] Inicio con diseño oscuro de impacto (propuesta 2) y "Envíos nacionales" (rama `feat/diseno-oscuro-impacto`). Video corto: pendiente (falta `dotacion.mp4` y ffmpeg)
 - [x] Contacto (WhatsApp, correo, Instagram y Facebook), sedes por ciudad sin direcciones, horario, sin barra de anuncio, sin sección de clientes/reseñas, formulario sin NIT y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
 
 ### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)

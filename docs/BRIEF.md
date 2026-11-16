@@ -4,7 +4,7 @@
 **Fesapy Distribuciones** ("Dotaciones para tu empresa") es un proveedor integral de seguridad industrial para empresas en Colombia. Es una empresa pequeña que atiende empresas medianas y grandes.
 
 - **Sedes**: Madrid (Cundinamarca), Bogotá y Villavicencio (aclarado 2026-11-12), sin direcciones publicadas por ahora. Atiende por WhatsApp, correo y redes, todos los días de 7:00 a. m. a 8:00 p. m.
-- **Cobertura**: despachos nacionales e internacionales.
+- **Cobertura**: despachos nacionales.
 - **Clientes**: empresas (B2B): fábricas, petroleras y constructoras.
 - **Lo que más valoran sus clientes**: personalización, atención y rapidez.
 - **Confirmado**: facturación electrónica; productos con certificaciones/normas.

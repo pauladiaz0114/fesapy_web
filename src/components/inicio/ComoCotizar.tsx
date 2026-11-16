@@ -8,8 +8,8 @@ import { contacto } from "@/lib/contenido";
 // "Cómo cotizar": 3 pasos con imagen arriba, número y un título de una línea (sin párrafos).
 // Reemplaza la franja dorada "Solicita tu cotización" y la sección "Trabajar con Fesapy es
 // más fácil" (2026-11-12, inicio con menos texto).
-// - El número va en un círculo dorado con texto negro: la regla de marca no permite texto
-//   dorado sobre blanco o crema.
+// - Diseño oscuro (2026-11-16): tarjetas carbón sobre fondo negro. El número va en dorado
+//   (permitido: el fondo es oscuro; sobre blanco o crema NO se puede).
 // - Cada imagen vive en un marco de proporción fija (4:3): nada se mueve al cargar (CLS 0).
 // - Las ilustraciones son SVG escritos aquí (sin librerías), con los colores de la marca.
 
@@ -49,7 +49,7 @@ function IlustracionCelular() {
       className="size-full"
     >
       {/* Celular */}
-      <rect x="80" y="14" width="80" height="152" rx="14" className="fill-negro" />
+      <rect x="80" y="14" width="80" height="152" rx="14" className="fill-dorado" />
       <rect x="87" y="28" width="66" height="120" rx="4" className="fill-crema" />
       <rect x="110" y="20" width="20" height="3" rx="1.5" className="fill-gris" />
       {/* Mensaje de la persona (blanco) y respuesta (dorado) */}
@@ -101,38 +101,39 @@ const pasos: { titulo: string; imagen: ReactNode }[] = [
 
 export function ComoCotizar() {
   return (
-    <section aria-labelledby="titulo-como-cotizar" className="bg-blanco px-4 py-14 sm:py-16">
+    <section aria-labelledby="titulo-como-cotizar" className="bg-negro px-4 py-14 text-blanco sm:py-20">
       <Reveal escalonar className="mx-auto max-w-6xl">
         <h2
           id="titulo-como-cotizar"
-          className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
+          className="font-titulo text-3xl font-bold uppercase sm:text-5xl"
         >
-          Cómo cotizar
+          Cómo <span className="text-dorado">cotizar</span>
         </h2>
-        <ol className="mt-10 grid gap-8 md:grid-cols-3">
+        <ol className="mt-10 grid gap-5 md:grid-cols-3">
           {pasos.map(({ titulo, imagen }, i) => (
-            <li key={titulo} data-escalon className="flex flex-col gap-4">
-              <div className="aspect-[4/3] overflow-hidden rounded bg-crema">{imagen}</div>
-              <div className="flex items-center gap-3">
-                <span
-                  aria-hidden="true"
-                  className="flex size-12 shrink-0 items-center justify-center rounded-full bg-dorado font-titulo text-3xl font-bold text-negro"
-                >
-                  {i + 1}
+            <li
+              key={titulo}
+              data-escalon
+              className="flex flex-col gap-4 rounded border border-blanco/10 bg-carbon p-5 transition-colors duration-200 hover:border-dorado/60"
+            >
+              <div className="flex items-baseline gap-3">
+                <span aria-hidden="true" className="font-titulo text-4xl font-bold text-dorado">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-negro">
+                <h3 className="font-titulo text-xl font-bold uppercase leading-tight">
                   <span className="sr-only">Paso {i + 1}: </span>
                   {titulo}
                 </h3>
               </div>
+              <div className="aspect-[4/3] overflow-hidden rounded bg-carbon-claro">{imagen}</div>
             </li>
           ))}
         </ol>
-        <div className="mt-12 flex flex-col items-center gap-3 text-center">
-          <BotonEnlace href="/cotizacion" variante="negro">
+        <div className="mt-10 flex flex-col items-start gap-3">
+          <BotonEnlace href="/cotizacion" variante="dorado">
             Cotizar ahora
           </BotonEnlace>
-          <p className="text-sm text-gris">Sin crear cuenta · {contacto.horario}</p>
+          <p className="text-sm text-blanco/70">Sin crear cuenta · {contacto.horario}</p>
         </div>
       </Reveal>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import type { StaticImageData } from "next/image";
+import { EtiquetaReferencia } from "@/components/ui/EtiquetaReferencia";
 import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import { useEffect, useRef, useState, useSyncExternalStore, type PointerEvent } from "react";
 import botas from "../../../public/referencia/botas-seguridad.webp";
@@ -194,7 +195,7 @@ export function HeroCarrusel() {
       </p>
 
       <div
-        className="relative aspect-square w-full touch-pan-y overflow-hidden rounded bg-crema select-none"
+        className="relative aspect-square w-full touch-pan-y overflow-hidden rounded bg-carbon-claro select-none"
         onPointerDown={alPresionar}
         onPointerUp={alSoltar}
         onPointerCancel={() => (inicioArrastre.current = null)}
@@ -231,6 +232,8 @@ export function HeroCarrusel() {
           );
         })}
 
+        <EtiquetaReferencia>Imagen de referencia</EtiquetaReferencia>
+
         {/* Flechas: discretas y solo en pantallas medianas y grandes. */}
         <button
           type="button"
@@ -262,7 +265,7 @@ export function HeroCarrusel() {
                 ? "Reanudar el cambio automático de imágenes"
                 : "Pausar el cambio automático de imágenes"
             }
-            className="flex size-11 items-center justify-center rounded text-negro transition-colors duration-200 hover:bg-negro/10"
+            className="flex size-11 items-center justify-center rounded text-blanco transition-colors duration-200 hover:bg-blanco/15"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -287,23 +290,23 @@ export function HeroCarrusel() {
               className="flex h-11 w-8 items-center justify-center rounded sm:w-11"
             >
               {/* Punto activo: píldora con borde negro que se llena de izquierda a derecha durante
-                  los 3 s (barra de progreso). Los demás: anillos. Contraste alto sobre crema. */}
+                  los 3 s (barra de progreso). Los demás: anillos. Contraste alto sobre negro. */}
               <span
                 aria-hidden="true"
-                className={`relative block h-3 overflow-hidden rounded-full border-2 border-negro transition-[width] duration-300 motion-reduce:transition-none ${
+                className={`relative block h-3 overflow-hidden rounded-full border-2 border-blanco transition-[width] duration-300 motion-reduce:transition-none ${
                   activo ? "w-8" : "w-3"
                 }`}
               >
                 {activo &&
                   (reducirMovimiento ? (
                     // Sin movimiento: el punto activo simplemente está lleno.
-                    <span className="absolute inset-0 bg-negro" />
+                    <span className="absolute inset-0 bg-blanco" />
                   ) : (
                     <span
                       // key: al cambiar de foto la barra vuelve a empezar desde cero.
                       key={indice}
                       onAnimationEnd={alTerminarProgreso}
-                      className="progreso-carrusel absolute inset-0 origin-left bg-negro"
+                      className="progreso-carrusel absolute inset-0 origin-left bg-blanco"
                       style={{
                         animationDuration: `${INTERVALO_MS}ms`,
                         animationPlayState: automatico ? "running" : "paused",
