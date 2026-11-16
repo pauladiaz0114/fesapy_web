@@ -15,6 +15,10 @@
   /* Gris para textos secundarios y bordes. Sobre blanco o crema tiene contraste AA. */
   --gris: #4a4a4a;
   --blanco: #ffffff;
+  /* Carbón: fondos oscuros de tarjetas y franjas del diseño oscuro del inicio (2026-11-16).
+     Blanco sobre carbón ≈ 16:1 · dorado sobre carbón ≈ 8:1. */
+  --carbon: #1c1c1c;
+  --carbon-claro: #2a2a2a;
   /* EXCEPCIÓN a la paleta: verde oficial de WhatsApp, SOLO para los botones de WhatsApp
      (solo la burbuja flotante). Texto/ícono negro sobre verde ≈ 10:1;
      el blanco sobre este verde no llega al contraste mínimo para texto (≈ 2:1). */
@@ -29,6 +33,8 @@
   --color-crema: var(--crema);
   --color-gris: var(--gris);
   --color-blanco: var(--blanco);
+  --color-carbon: var(--carbon);
+  --color-carbon-claro: var(--carbon-claro);
   --color-whatsapp: var(--whatsapp);
   --color-whatsapp-oscuro: var(--whatsapp-oscuro);
   --font-sans: var(--font-barlow);

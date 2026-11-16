@@ -3,7 +3,7 @@
 Este archivo lo lee Claude Code al inicio de cada sesión. Contiene el contexto y las reglas del proyecto. Si algo aquí cambia, se actualiza este archivo en el mismo commit.
 
 ## Qué es Fesapy
-Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). **Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio**, sin direcciones publicadas por ahora (no mostrar direcciones ni mapas hasta que Fesapy las dé). Atiende por WhatsApp, correo e Instagram/Facebook (todos los días, 7:00 a. m. a 8:00 p. m.) y despacha a nivel nacional e internacional.
+Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). **Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio**, sin direcciones publicadas por ahora (no mostrar direcciones ni mapas hasta que Fesapy las dé). Atiende por WhatsApp, correo e Instagram/Facebook (todos los días, 7:00 a. m. a 8:00 p. m.) y despacha a nivel nacional.
 
 - **Fabrica y personaliza dotación**: overoles, uniformes, ropa de trabajo con logos estampados y bordados.
 - **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines.
@@ -85,6 +85,9 @@ docs/
   - `--crema: #F5F4F0` (fondos de sección claros)
   - `--gris: #4A4A4A` (texto secundario y bordes)
   - `--blanco: #FFFFFF`
+  - `--carbon: #1C1C1C` y `--carbon-claro: #2A2A2A` (tarjetas, franjas y marcos de imagen del tema oscuro del inicio)
+- **El inicio es oscuro** (desde 2026-11-16): fondos negro/carbón, títulos blancos con palabras en dorado (permitido sobre fondo oscuro). Las demás páginas siguen en tema claro. `Categorias`, `TarjetaCategoria` y `CarruselCategorias` aceptan `tema="oscuro"`. Botón `contornoClaro` para fondos oscuros.
+- Fotos o videos que no son de Fesapy llevan la etiqueta `EtiquetaReferencia` ("Imagen de referencia" / "Video de referencia").
 - **Nunca** texto dorado sobre fondo blanco o crema (contraste insuficiente). Dorado siempre como fondo con texto negro, o como texto sobre fondo negro.
 - **Excepción: verde de WhatsApp** (`--whatsapp: #25D366`, hover `--whatsapp-oscuro: #1FB855`), **solo** en la burbuja flotante (logo blanco). El botón de WhatsApp del encabezado volvió al dorado (2026-11-13). El logo es `IconoWhatsApp` (Simple Icons, CC0). Ningún otro botón usa el verde.
 - Tipografía: **Barlow Condensed** (títulos, en mayúsculas, peso 700) + **Barlow** (texto). Cargar con `next/font/google`.

@@ -27,6 +27,9 @@ const variantes = {
   // Solo borde negro: botón secundario sobre fondos claros.
   contorno:
     "border-2 border-negro bg-transparent text-negro hover:bg-negro hover:text-blanco",
+  // Solo borde blanco: botón secundario sobre fondos negros o carbón.
+  contornoClaro:
+    "border-2 border-blanco bg-transparent text-blanco hover:bg-blanco hover:text-negro",
 } as const;
 
 export type VarianteBoton = keyof typeof variantes;
