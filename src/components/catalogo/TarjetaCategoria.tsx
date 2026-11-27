@@ -14,22 +14,16 @@ type Categoria = (typeof categorias)[number];
 export function TarjetaCategoria({
   categoria,
   indice,
-  oscuro = false,
 }: {
   categoria: Categoria;
   indice: number;
-  oscuro?: boolean;
 }) {
   const portada = portadaDeCategoria(categoria.slug);
   const cantidad = productosDeCategoria(categoria.slug).length;
   const dorado = indice % 2 === 0;
 
   return (
-    <li data-escalon className={`group relative flex flex-col overflow-hidden rounded border transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-[3px] ${
-        oscuro
-          ? "border-blanco/10 bg-carbon hover:border-dorado/60 hover:shadow-[0_10px_24px_rgba(0,0,0,0.5)]"
-          : "border-negro/15 bg-blanco hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]"
-      }`}>
+    <li data-escalon className="group relative flex flex-col overflow-hidden rounded border border-blanco/10 bg-carbon transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:border-dorado/60 hover:shadow-[0_10px_24px_rgba(0,0,0,0.5)]">
       <div className="relative aspect-[4/3] overflow-hidden bg-crema">
         {portada ? (
           <ImagenSuave
@@ -43,7 +37,7 @@ export function TarjetaCategoria({
           // TODO(contenido): foto de la categoría. Mientras tanto, bloque de color (el dorado va como fondo con texto negro).
           <div
             aria-hidden="true"
-            className={`flex h-full items-end p-4 ${dorado ? "bg-dorado text-negro" : "bg-negro text-blanco"}`}
+            className={`flex h-full items-end p-4 ${dorado ? "bg-dorado text-negro" : "bg-carbon-claro text-blanco"}`}
           >
             <span className="font-titulo text-2xl font-bold uppercase leading-tight">
               Pídenos cotización
@@ -53,11 +47,11 @@ export function TarjetaCategoria({
       </div>
 
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <h3 className={`font-titulo text-xl font-bold uppercase leading-tight ${oscuro ? "text-blanco" : "text-negro"}`}>
+        <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-blanco">
           {categoria.nombre}
         </h3>
-        <p className={oscuro ? "text-blanco/75" : "text-gris"}>{categoria.descripcion}</p>
-        <p className={`flex-1 text-sm font-bold ${oscuro ? "text-blanco" : "text-negro"}`}>
+        <p className="text-blanco/75">{categoria.descripcion}</p>
+        <p className="flex-1 text-sm font-bold text-blanco">
           {cantidad > 0
             ? `${cantidad} ${cantidad === 1 ? "producto" : "productos"} en el portafolio`
             : "Pídenos cotización de esta categoría"}
@@ -65,14 +59,14 @@ export function TarjetaCategoria({
         <div className="flex flex-wrap gap-2">
           <Link
             href={`/productos/${categoria.slug}`}
-            className={clasesBoton(oscuro ? "dorado" : "negro", "after:absolute after:inset-0", false)}
+            className={clasesBoton("dorado", "after:absolute after:inset-0", false)}
           >
             Ver productos
             <span className="sr-only"> de {categoria.nombre}</span>
           </Link>
           <BotonEnlace
             href={`/cotizacion?categoria=${categoria.slug}`}
-            variante={oscuro ? "contornoClaro" : "contorno"}
+            variante="contornoClaro"
             className="relative z-10"
           >
             Cotizar

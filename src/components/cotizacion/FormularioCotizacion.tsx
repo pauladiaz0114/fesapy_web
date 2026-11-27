@@ -61,8 +61,8 @@ const idError = (campo: CampoCotizacion) => `cotizacion-${campo}-error`;
 const idAyuda = (campo: CampoCotizacion) => `cotizacion-${campo}-ayuda`;
 
 const claseCampo = (hayError: boolean) =>
-  `min-h-11 w-full rounded border-2 bg-blanco px-3 py-2 text-negro transition-colors duration-200 ${
-    hayError ? "border-red-700" : "border-negro/60 hover:border-negro"
+  `min-h-11 w-full rounded border-2 bg-carbon px-3 py-2 text-blanco placeholder:text-blanco/50 transition-colors duration-200 ${
+    hayError ? "border-red-400" : "border-blanco/40 hover:border-blanco/80"
   }`;
 
 function Campo({
@@ -83,17 +83,17 @@ function Campo({
 }) {
   return (
     <div className={`flex flex-col gap-1 ${ancho ? "md:col-span-2" : ""}`}>
-      <label htmlFor={idCampo(campo)} className="font-bold text-negro">
+      <label htmlFor={idCampo(campo)} className="font-bold text-blanco">
         {etiqueta}
       </label>
       {children}
       {ayuda && (
-        <p id={idAyuda(campo)} className="text-sm text-gris">
+        <p id={idAyuda(campo)} className="text-sm text-blanco/75">
           {ayuda}
         </p>
       )}
       {error && (
-        <p id={idError(campo)} className="text-sm font-bold text-red-700">
+        <p id={idError(campo)} className="text-sm font-bold text-red-400">
           {error}
         </p>
       )}
@@ -269,7 +269,7 @@ export function FormularioCotizacion({
       </p>
 
       {intentoEnviar && hayErrores && (
-        <p className="rounded border-l-4 border-red-700 bg-crema p-4 font-bold text-negro">
+        <p className="rounded border-l-4 border-red-400 bg-carbon p-4 font-bold text-blanco">
           Revisa los campos marcados en rojo.
         </p>
       )}
@@ -390,15 +390,15 @@ export function FormularioCotizacion({
               cambiar("acepta", marcada);
               if (errores.acepta) validarCampo("acepta", { ...valores, acepta: marcada });
             }}
-            className="mt-1 size-6 shrink-0 accent-negro"
+            className="mt-1 size-6 shrink-0 accent-dorado"
           />
-          <label htmlFor={idCampo("acepta")} className="text-negro">
+          <label htmlFor={idCampo("acepta")} className="text-blanco">
             Autorizo el tratamiento de mis datos según la{" "}
             <Link
               href="/politica-de-datos"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold underline underline-offset-4 hover:text-gris"
+              className="font-bold underline underline-offset-4 hover:text-dorado"
             >
               política de tratamiento de datos
             </Link>
@@ -406,7 +406,7 @@ export function FormularioCotizacion({
           </label>
         </div>
         {errores.acepta && (
-          <p id={idError("acepta")} className="text-sm font-bold text-red-700">
+          <p id={idError("acepta")} className="text-sm font-bold text-red-400">
             {errores.acepta}
           </p>
         )}
@@ -418,7 +418,7 @@ export function FormularioCotizacion({
           type="button"
           onClick={() => enviar("whatsapp")}
           aria-disabled={abriendo !== null}
-          className={clasesBoton("negro", "aria-disabled:cursor-wait aria-disabled:opacity-80")}
+          className={clasesBoton("dorado", "aria-disabled:cursor-wait aria-disabled:opacity-80")}
         >
           <IconoWhatsApp className="size-5 shrink-0" />
           <TextoBoton
@@ -431,7 +431,7 @@ export function FormularioCotizacion({
           type="button"
           onClick={() => enviar("correo")}
           aria-disabled={abriendo !== null}
-          className={clasesBoton("contorno", "aria-disabled:cursor-wait aria-disabled:opacity-80")}
+          className={clasesBoton("contornoClaro", "aria-disabled:cursor-wait aria-disabled:opacity-80")}
         >
           <TextoBoton
             normal="Enviar por correo"
@@ -442,7 +442,7 @@ export function FormularioCotizacion({
       </div>
 
       {/* Dónde van los datos: se dice claro y a la vista. */}
-      <p className="text-sm text-gris">
+      <p className="text-sm text-blanco/75">
         Tus datos <strong>no se guardan en este sitio</strong>: se envían por el canal que
         elijas (WhatsApp o correo) y solo los recibe Fesapy.
       </p>
@@ -450,12 +450,12 @@ export function FormularioCotizacion({
       {canalAviso && (
         <div
           aria-hidden={!enviado}
-          className={`rounded border-l-4 border-dorado bg-crema p-4 text-negro transition-opacity duration-300 ease-out ${
+          className={`rounded border-l-4 border-dorado bg-carbon p-4 text-blanco transition-opacity duration-300 ease-out ${
             enviado ? "opacity-100" : "opacity-0"
           }`}
         >
           <p className="font-bold">Muchas gracias por escribirnos, pronto nos comunicaremos contigo.</p>
-          <p className="mt-1 text-gris">
+          <p className="mt-1 text-blanco/75">
             {canalAviso === "whatsapp"
               ? "Recuerda tocar “enviar” en WhatsApp para que tu mensaje llegue."
               : `Recuerda enviar el correo desde tu programa de correo. Si no se abrió, escríbenos a ${contacto.correo}.`}

@@ -31,9 +31,6 @@ function Flecha({ lado }: { lado: "izquierda" | "derecha" }) {
 }
 
 const claseBotonFlecha =
-  "flex size-11 items-center justify-center rounded-full border-2 border-negro text-negro transition-colors duration-200 hover:bg-negro hover:text-blanco aria-disabled:border-negro/30 aria-disabled:text-negro/30 aria-disabled:hover:bg-transparent";
-// Mismo botón para fondos oscuros (tema oscuro de la home).
-const claseBotonFlechaOscuro =
   "flex size-11 items-center justify-center rounded-full border-2 border-blanco text-blanco transition-colors duration-200 hover:bg-blanco hover:text-negro aria-disabled:border-blanco/30 aria-disabled:text-blanco/30 aria-disabled:hover:bg-transparent";
 // Se usa aria-disabled y no "disabled": un botón "disabled" pierde el foco del teclado justo al
 // llegar a la última tarjeta. Con aria-disabled el foco se queda y el clic simplemente no hace nada.
@@ -41,11 +38,9 @@ const claseBotonFlechaOscuro =
 export function CarruselCategorias({
   total,
   children,
-  oscuro = false,
 }: {
   total: number;
   children: ReactNode;
-  oscuro?: boolean;
 }) {
   const lista = useRef<HTMLUListElement>(null);
   const pendiente = useRef(false);
@@ -93,7 +88,7 @@ export function CarruselCategorias({
       <div className="mt-2 flex items-center justify-between gap-3 md:hidden">
         {/* El lector de pantalla oye "Categoría 2 de 8" cada vez que cambia (al deslizar o con
             los botones); el texto visible "2 / 7" queda oculto para él (sería confuso). */}
-        <p className={`text-sm font-bold ${oscuro ? "text-blanco" : "text-negro"}`}>
+        <p className="text-sm font-bold text-blanco">
           <span aria-hidden="true">
             {actual + 1} / {total}
           </span>
@@ -105,10 +100,8 @@ export function CarruselCategorias({
           {Array.from({ length: total }, (_, i) => (
             <span
               key={i}
-              className={`block h-2 rounded-full border transition-[width,background-color] duration-200 ${
-                oscuro ? "border-blanco" : "border-negro"
-              } ${
-                i === actual ? (oscuro ? "w-5 bg-blanco" : "w-5 bg-negro") : "w-2 bg-transparent"
+              className={`block h-2 rounded-full border border-blanco transition-[width,background-color] duration-200 ${
+                i === actual ? "w-5 bg-blanco" : "w-2 bg-transparent"
               }`}
             />
           ))}
@@ -119,7 +112,7 @@ export function CarruselCategorias({
             onClick={() => irA(actual - 1)}
             aria-disabled={actual === 0}
             aria-label="Categoría anterior"
-            className={oscuro ? claseBotonFlechaOscuro : claseBotonFlecha}
+            className={claseBotonFlecha}
           >
             <Flecha lado="izquierda" />
           </button>
@@ -128,7 +121,7 @@ export function CarruselCategorias({
             onClick={() => irA(actual + 1)}
             aria-disabled={actual === total - 1}
             aria-label="Categoría siguiente"
-            className={oscuro ? claseBotonFlechaOscuro : claseBotonFlecha}
+            className={claseBotonFlecha}
           >
             <Flecha lado="derecha" />
           </button>
