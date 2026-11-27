@@ -13,6 +13,21 @@ Formato:
 
 ---
 
+## 2026-11-26 — Stickers, personalización y lubricantes en el catálogo (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/catalogo-stickers-lubricantes`)
+1. 8 productos nuevos con foto de referencia: 4 de stickers y personalización y 4 de lubricantes y mantenimiento (recortados de `hoja-stickers.png` y `hoja-lubricantes.png`).
+2. Los 4 avisos reflectivos para vehículos pasan a "Stickers y personalización"; las direcciones viejas redirigen (308).
+3. Bordado y estampado: botón "Ver personalización" en su ficha (opción A).
+4. Portadas para las dos categorías que antes solo decían "Pídenos cotización".
+
+**Archivos:** `src/lib/catalogo.ts`, `src/lib/contenido.ts`, `next.config.ts`, `src/app/(sitio)/productos/[categoria]/[producto]/page.tsx`, `public/catalogo/` (8 WebP), `docs/`, `CLAUDE.md`.
+
+**Conceptos aprendidos:**
+- *Redirección 308:* le dice al navegador y a Google que una página se mudó para siempre; así un enlace viejo no da error 404.
+- *Campo opcional:* `enlace?` en el tipo `Producto` permite que solo algunos productos tengan un botón extra, sin tocar los demás.
+
+**Pendientes / notas:** `TODO(contenido)` en los 8 productos (material, medidas, marcas, presentaciones, cantidad mínima); confirmar qué es el aerosol verde.
+
 ## 2026-11-16 — Inicio con diseño oscuro de impacto y "Envíos nacionales" (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/diseno-oscuro-impacto`)
 1. Hero negro con título en dos colores, botón de WhatsApp dorado y botón de contorno blanco; franja de beneficios en carbón con íconos dorados.

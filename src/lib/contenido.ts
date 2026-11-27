@@ -97,7 +97,7 @@ export const categorias = [
   {
     slug: "stickers-personalizacion",
     nombre: "Stickers y personalización",
-    descripcion: "Stickers y piezas con la identidad de tu empresa.",
+    descripcion: "Stickers con tu logo, avisos reflectivos para vehículos y logos bordados o estampados.",
   },
   {
     slug: "lubricantes-mantenimiento",

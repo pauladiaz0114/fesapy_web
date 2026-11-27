@@ -47,6 +47,8 @@ export type Producto = {
   usos?: { intro: string; items: string[] };
   /** Normas tal como las imprime el portafolio. Si no aparecen allí, se omite. */
   normas?: string;
+  /** Botón extra en la ficha (por ejemplo "Ver personalización"), junto a "Cotizar". */
+  enlace?: { href: string; texto: string };
   imagenes: ImagenProducto[];
 };
 
@@ -1061,9 +1063,68 @@ export const productos: Producto[] = [
       { archivo: "senales-de-advertencia.webp", alt: "Dos señales amarillas: Riesgo eléctrico y Peligro resbalones", referencia: true },
     ],
   },
+  // ───────────── Stickers y personalización ─────────────
+  // Desde las hojas de imágenes de referencia (2026-11-26). El escudo con estrella es un logo DE
+  // EJEMPLO: en el pedido real va el logo de cada empresa. Descripción solo con lo que se ve.
+  {
+    slug: "stickers-logo-empresa",
+    categoria: "stickers-personalizacion",
+    nombre: "Stickers con el logo de tu empresa",
+    resumen: "Hoja de stickers con el logo de tu empresa, listos para despegar y pegar.",
+    descripcion: ["Hoja de stickers individuales con el logo de la empresa, para pegar en equipos, cascos, herramientas o vehículos."],
+    caracteristicas: ["TODO(contenido): material, medidas, acabado (brillante, mate o reflectivo) y cantidad mínima por pedido."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "stickers-logo-empresa.webp", alt: "Hoja con seis stickers de un logo de ejemplo en forma de escudo; uno está a medio despegar", referencia: true },
+    ],
+  },
+  {
+    slug: "stickers-para-cascos",
+    categoria: "stickers-personalizacion",
+    nombre: "Stickers para cascos",
+    resumen: "Sticker con el logo de tu empresa para identificar los cascos de tu equipo.",
+    descripcion: ["Sticker con el logo de la empresa pegado en el casco de seguridad, para identificar al equipo."],
+    caracteristicas: ["TODO(contenido): material, medidas y si es reflectivo."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "stickers-para-cascos.webp", alt: "Casco de seguridad blanco con una franja dorada y un sticker de un logo de ejemplo", referencia: true },
+    ],
+  },
+  {
+    slug: "logo-bordado-dotacion",
+    categoria: "stickers-personalizacion",
+    nombre: "Logo bordado en dotación",
+    resumen: "Bordamos el logo de tu empresa en camisas, overoles y prendas de dotación.",
+    descripcion: ["Logo de la empresa bordado en el pecho de la prenda de dotación."],
+    caracteristicas: ["TODO(contenido): tamaños de bordado, número de colores, ubicaciones posibles y cantidad mínima."],
+    diferenciadores: [],
+    modelos: [],
+    enlace: { href: "/personalizacion", texto: "Ver personalización" },
+    imagenes: [
+      { archivo: "logo-bordado-dotacion.webp", alt: "Camisa azul de manga larga con un logo de ejemplo bordado en el pecho", referencia: true },
+    ],
+  },
+  {
+    slug: "logo-estampado-camisetas",
+    categoria: "stickers-personalizacion",
+    nombre: "Logo estampado en camisetas",
+    resumen: "Estampamos el logo de tu empresa en camisetas y prendas de dotación.",
+    descripcion: ["Logo de la empresa estampado en el frente de la camiseta, con espacio para un texto debajo."],
+    caracteristicas: ["TODO(contenido): técnica de estampado, tamaños, número de colores y cantidad mínima."],
+    diferenciadores: [],
+    modelos: [],
+    enlace: { href: "/personalizacion", texto: "Ver personalización" },
+    imagenes: [
+      { archivo: "logo-estampado-camisetas.webp", alt: "Camiseta blanca con un logo de ejemplo estampado en el frente", referencia: true },
+    ],
+  },
+  // Avisos reflectivos para vehículos: antes estaban en "Señalización y seguridad vial"; se pasaron
+  // a "Stickers y personalización" el 2026-11-26 (las direcciones viejas redirigen, ver next.config.ts).
   {
     slug: "avisos-vehiculos-no-adelantar",
-    categoria: "senalizacion-y-seguridad-vial",
+    categoria: "stickers-personalizacion",
     nombre: "Avisos reflectivos para vehículos: No adelantar",
     resumen: "Avisos NO ADELANTAR para la parte trasera de vehículos, en tres diseños.",
     descripcion: ["Avisos rectangulares con el texto NO ADELANTAR, para la parte trasera de vehículos de carga y transporte."],
@@ -1080,7 +1141,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "avisos-vehiculos-advertencia",
-    categoria: "senalizacion-y-seguridad-vial",
+    categoria: "stickers-personalizacion",
     nombre: "Avisos reflectivos para vehículos: advertencia",
     resumen: "Avisos Peligro, Vehículo largo, Precaución y Transporte de carga para vehículos.",
     descripcion: ["Avisos rectangulares de advertencia para vehículos, con texto grande en negro sobre fondo amarillo o blanco, con franjas o pictogramas."],
@@ -1098,7 +1159,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "avisos-vehiculos-distancia-y-velocidad",
-    categoria: "senalizacion-y-seguridad-vial",
+    categoria: "stickers-personalizacion",
     nombre: "Avisos reflectivos para vehículos: distancia y velocidad",
     resumen: "Avisos Cuidado con su distancia, Mantenga su distancia y límite de 60 km/h.",
     descripcion: ["Avisos para la parte trasera de vehículos que piden mantener la distancia, y aviso redondo de límite de velocidad de 60 km/h."],
@@ -1115,7 +1176,7 @@ export const productos: Producto[] = [
   },
   {
     slug: "franjas-reflectivas-chevrones",
-    categoria: "senalizacion-y-seguridad-vial",
+    categoria: "stickers-personalizacion",
     nombre: "Avisos reflectivos para vehículos: franjas de chevrones",
     resumen: "Franjas de chevrones amarillo y negro, y rojo y blanco, para marcar vehículos.",
     descripcion: ["Franjas rectangulares con chevrones (flechas en V) para marcar la parte trasera o los costados de vehículos."],
@@ -1127,6 +1188,61 @@ export const productos: Producto[] = [
     ],
     imagenes: [
       { archivo: "franjas-reflectivas-chevrones.webp", alt: "Dos franjas de chevrones: amarillo con negro y rojo con blanco", referencia: true },
+    ],
+  },
+  // ───────────── Lubricantes y mantenimiento ─────────────
+  // Desde las hojas de imágenes de referencia (2026-11-26). Son ilustraciones genéricas, sin
+  // marca: no son fotos de WD-40 ni de CRC. Descripción solo con lo que se ve.
+  {
+    slug: "lubricante-multiusos-aerosol",
+    categoria: "lubricantes-mantenimiento",
+    nombre: "Lubricante multiusos en aerosol",
+    resumen: "Lubricante en aerosol con pitillo aplicador para mantenimiento de equipos y herramientas.",
+    descripcion: ["Lata de lubricante en aerosol con válvula roja y pitillo aplicador."],
+    caracteristicas: ["TODO(contenido): marcas que maneja Fesapy (por ejemplo WD-40), presentaciones y contenido."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "lubricante-multiusos-aerosol.webp", alt: "Lata de aerosol azul oscuro con etiqueta dorada, válvula roja y pitillo aplicador", referencia: true },
+    ],
+  },
+  {
+    slug: "aerosol-mantenimiento-tapa-negra",
+    categoria: "lubricantes-mantenimiento",
+    nombre: "Aerosol de mantenimiento",
+    resumen: "Aerosol para mantenimiento industrial.",
+    descripcion: ["Lata de aerosol verde con válvula negra y etiqueta blanca."],
+    caracteristicas: ["TODO(contenido): qué producto es (por ejemplo limpiador de contactos), marcas que maneja Fesapy (por ejemplo CRC), presentaciones y contenido."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "aerosol-mantenimiento-tapa-negra.webp", alt: "Lata de aerosol verde con válvula negra y etiqueta blanca", referencia: true },
+    ],
+  },
+  {
+    slug: "grasa-en-pote",
+    categoria: "lubricantes-mantenimiento",
+    nombre: "Grasa en pote",
+    resumen: "Grasa lubricante en pote con tapa.",
+    descripcion: ["Pote de grasa con tapa roja."],
+    caracteristicas: ["TODO(contenido): tipo de grasa, marcas, presentaciones y contenido."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "grasa-en-pote.webp", alt: "Pote negro con tapa roja y etiqueta blanca", referencia: true },
+    ],
+  },
+  {
+    slug: "aceite-en-garrafa",
+    categoria: "lubricantes-mantenimiento",
+    nombre: "Aceite en garrafa",
+    resumen: "Aceite en garrafa con manija.",
+    descripcion: ["Garrafa ámbar con tapa negra, manija y etiqueta."],
+    caracteristicas: ["TODO(contenido): tipo de aceite, marcas, presentaciones y contenido."],
+    diferenciadores: [],
+    modelos: [],
+    imagenes: [
+      { archivo: "aceite-en-garrafa.webp", alt: "Garrafa color ámbar con tapa negra, manija y etiqueta blanca", referencia: true },
     ],
   },
 ];
@@ -1159,6 +1275,8 @@ const PORTADAS: Partial<Record<CategoriaSlug, string>> = {
   "proteccion-personal": "cascos-v-gard",
   "botiquines": "botiquin-maletin-rojo",
   "senalizacion-y-seguridad-vial": "conos-viales-pvc-90-cm",
+  "stickers-personalizacion": "stickers-logo-empresa",
+  "lubricantes-mantenimiento": "lubricante-multiusos-aerosol",
 };
 
 export function portadaDeCategoria(categoria: CategoriaSlug): ImagenProducto | undefined {

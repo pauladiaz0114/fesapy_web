@@ -101,6 +101,11 @@ export default async function PaginaProducto({ params }: Props) {
               <BotonEnlace href={hrefCotizar} variante="negro">
                 Cotizar este producto
               </BotonEnlace>
+              {producto.enlace && (
+                <BotonEnlace href={producto.enlace.href} variante="contorno">
+                  {producto.enlace.texto}
+                </BotonEnlace>
+              )}
               <BotonEnlace href={`/productos/${categoria.slug}`} variante="contorno">
                 Ver más de {categoria.nombre}
               </BotonEnlace>

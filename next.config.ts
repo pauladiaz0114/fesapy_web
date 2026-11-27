@@ -69,6 +69,18 @@ const nextConfig: NextConfig = {
         destination: "/productos/proteccion-personal/:producto",
         permanent: true,
       },
+      // 2026-11-26: los avisos reflectivos para vehículos pasaron de "Señalización y seguridad vial"
+      // a "Stickers y personalización".
+      ...[
+        "avisos-vehiculos-no-adelantar",
+        "avisos-vehiculos-advertencia",
+        "avisos-vehiculos-distancia-y-velocidad",
+        "franjas-reflectivas-chevrones",
+      ].map((producto) => ({
+        source: `/productos/senalizacion-y-seguridad-vial/${producto}`,
+        destination: `/productos/stickers-personalizacion/${producto}`,
+        permanent: true,
+      })),
     ];
   },
 };
