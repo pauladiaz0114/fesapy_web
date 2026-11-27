@@ -9,13 +9,13 @@ export const metadata: Metadata = {
 };
 
 const TODO = (texto: string) => (
-  <strong className="bg-crema px-1 text-negro">TODO(contenido): {texto}</strong>
+  <strong className="bg-dorado px-1 text-negro">TODO(contenido): {texto}</strong>
 );
 
 function Seccion({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="font-titulo text-2xl font-bold uppercase text-negro">{titulo}</h2>
+      <h2 className="font-titulo text-2xl font-bold uppercase text-blanco">{titulo}</h2>
       {children}
     </section>
   );
@@ -32,11 +32,11 @@ export default function PoliticaDeDatos() {
         </p>
       </EncabezadoPagina>
 
-      <section className="bg-blanco px-4 py-12 sm:py-16">
-        <div className="mx-auto flex max-w-3xl flex-col gap-8 text-gris">
+      <section className="bg-negro px-4 py-12 sm:py-16">
+        <div className="mx-auto flex max-w-3xl flex-col gap-8 text-blanco/75">
           <p
             role="note"
-            className="rounded border-l-4 border-dorado bg-crema p-4 font-bold text-negro"
+            className="rounded border-l-4 border-dorado bg-carbon p-4 font-bold text-blanco"
           >
             Borrador: este texto debe ser revisado por la empresa (y, de ser posible, por un
             abogado) antes de considerarse definitivo.
@@ -55,7 +55,7 @@ export default function PoliticaDeDatos() {
                 Canal de atención (correo):{" "}
                 <a
                   href={`mailto:${contacto.correo}`}
-                  className="font-bold text-negro underline underline-offset-4"
+                  className="font-bold text-blanco underline underline-offset-4"
                 >
                   {contacto.correo}
                 </a>
@@ -107,7 +107,7 @@ export default function PoliticaDeDatos() {
               Escríbenos a{" "}
               <a
                 href={`mailto:${contacto.correo}`}
-                className="font-bold text-negro underline underline-offset-4"
+                className="font-bold text-blanco underline underline-offset-4"
               >
                 {contacto.correo}
               </a>{" "}

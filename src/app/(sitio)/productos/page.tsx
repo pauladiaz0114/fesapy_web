@@ -20,7 +20,7 @@ export default function Productos() {
           cotiza lo que necesita tu empresa.
         </p>
       </EncabezadoPagina>
-      <div className="bg-crema px-4 pb-4">
+      <div className="bg-carbon px-4 pb-4">
         <div className="mx-auto max-w-6xl">
           <Migas items={[{ texto: "Inicio", href: "/" }, { texto: "Productos" }]} />
         </div>

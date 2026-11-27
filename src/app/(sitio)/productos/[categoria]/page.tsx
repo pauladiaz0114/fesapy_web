@@ -40,7 +40,7 @@ export default async function PaginaCategoria({ params }: Props) {
       <EncabezadoPagina titulo={categoria.nombre}>
         <p>{categoria.descripcion}</p>
       </EncabezadoPagina>
-      <div className="bg-crema px-4 pb-4">
+      <div className="bg-carbon px-4 pb-4">
         <div className="mx-auto max-w-6xl">
           <Migas
             items={[
@@ -53,7 +53,7 @@ export default async function PaginaCategoria({ params }: Props) {
       </div>
       <ChipsCategorias actual={categoria.slug} />
 
-      <section aria-label={`Productos de ${categoria.nombre}`} className="bg-blanco px-4 py-12 sm:py-16">
+      <section aria-label={`Productos de ${categoria.nombre}`} className="bg-negro px-4 py-12 sm:py-16">
         <Reveal escalonar className="mx-auto max-w-6xl">
           {productos.length > 0 ? (
             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -63,31 +63,31 @@ export default async function PaginaCategoria({ params }: Props) {
             </ul>
           ) : (
             // Categoría sin productos en el portafolio: no se inventa ninguno.
-            <div className="max-w-2xl rounded border-l-4 border-dorado bg-crema p-6">
-              <h2 className="font-titulo text-2xl font-bold uppercase text-negro">
+            <div className="max-w-2xl rounded border-l-4 border-dorado bg-carbon p-6">
+              <h2 className="font-titulo text-2xl font-bold uppercase text-blanco">
                 Pídenos cotización de esta categoría
               </h2>
-              <p className="mt-2 text-lg text-gris">
+              <p className="mt-2 text-lg text-blanco/75">
                 Todavía no tenemos productos de esta categoría publicados en el sitio. Cuéntanos
                 qué necesitas y te cotizamos.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                <BotonEnlace href={`/cotizacion?categoria=${categoria.slug}`} variante="negro">
+                <BotonEnlace href={`/cotizacion?categoria=${categoria.slug}`} variante="dorado">
                   Pedir cotización
                 </BotonEnlace>
-                <BotonWhatsApp variante="contorno" />
+                <BotonWhatsApp variante="contornoClaro" />
               </div>
             </div>
           )}
 
           {productos.length > 0 && (
-            <div className="mt-10 flex flex-col items-start gap-4 rounded border-l-4 border-dorado bg-crema p-6 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-lg text-negro">
+            <div className="mt-10 flex flex-col items-start gap-4 rounded border-l-4 border-dorado bg-carbon p-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-lg text-blanco">
                 <strong>¿No ves lo que buscas?</strong> Cuéntanos qué necesitas y te cotizamos.
               </p>
               <BotonEnlace
                 href={`/cotizacion?categoria=${categoria.slug}`}
-                variante="negro"
+                variante="dorado"
                 className="shrink-0"
               >
                 Cuéntanos qué necesitas

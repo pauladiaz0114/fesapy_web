@@ -35,22 +35,22 @@ export default function Personalizacion() {
         </p>
       </EncabezadoPagina>
 
-      <section aria-labelledby="titulo-pasos" className="bg-blanco px-4 py-14 sm:py-16">
+      <section aria-labelledby="titulo-pasos" className="bg-negro px-4 py-14 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <h2
             id="titulo-pasos"
-            className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
+            className="font-titulo text-3xl font-bold uppercase text-blanco sm:text-4xl"
           >
             Cómo pedirlo
           </h2>
           <ol className="mt-10 grid gap-6 md:grid-cols-3">
             {pasos.map(({ titulo, texto }, i) => (
-              <li key={titulo} className="rounded border-t-4 border-dorado bg-crema p-6">
-                <span className="font-titulo text-4xl font-bold text-negro">{i + 1}</span>
-                <h3 className="mt-2 font-titulo text-xl font-bold uppercase text-negro">
+              <li key={titulo} className="rounded border-t-4 border-dorado bg-carbon p-6">
+                <span className="font-titulo text-4xl font-bold text-blanco">{i + 1}</span>
+                <h3 className="mt-2 font-titulo text-xl font-bold uppercase text-blanco">
                   {titulo}
                 </h3>
-                <p className="mt-2 text-gris">{texto}</p>
+                <p className="mt-2 text-blanco/75">{texto}</p>
               </li>
             ))}
           </ol>
@@ -58,10 +58,10 @@ export default function Personalizacion() {
           {/* TODO(contenido): cantidad mínima para personalizar, tiempos de entrega y fotos
               de trabajos bordados y estampados (docs/BRIEF.md §7). */}
           <div className="mt-10 flex flex-wrap gap-3">
-            <BotonEnlace href="/cotizacion?categoria=dotacion-ropa-de-trabajo" variante="negro">
+            <BotonEnlace href="/cotizacion?categoria=dotacion-ropa-de-trabajo" variante="dorado">
               Solicitar cotización
             </BotonEnlace>
-            <BotonWhatsApp variante="contorno" />
+            <BotonWhatsApp variante="contornoClaro" />
           </div>
         </div>
       </section>

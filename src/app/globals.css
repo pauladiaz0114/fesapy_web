@@ -47,9 +47,10 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* Todo el sitio es oscuro (2026-11-26). */
 body {
-  background: var(--blanco);
-  color: var(--negro);
+  background: var(--negro);
+  color: var(--blanco);
 }
 
 /*

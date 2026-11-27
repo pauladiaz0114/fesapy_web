@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Categorias } from "@/components/inicio/Categorias";
-import { ComoCotizar } from "@/components/inicio/ComoCotizar";
 import { Hero } from "@/components/inicio/Hero";
 import { Problemas } from "@/components/inicio/Problemas";
 
@@ -16,11 +15,10 @@ export default function Inicio() {
   return (
     <>
       <Hero />
-      {/* "Cómo cotizar" reemplaza la franja dorada "Solicita tu cotización" y "Trabajar con
-          Fesapy es más fácil" (2026-11-12). */}
-      <ComoCotizar />
+      {/* "Cómo cotizar" se quitó el 2026-11-26 (pedido de Sebastián): el hero ya tiene los botones
+          de cotizar y la franja dorada "¿No ves lo que buscas?" cierra la página. */}
       <Problemas />
-      <Categorias tema="oscuro" />
+      <Categorias />
       {/* La sección de clientes y reseñas se quitó el 2026-11-12: vuelve cuando haya logos y
           reseñas reales con permiso (ver docs/DECISIONES.md). */}
     </>

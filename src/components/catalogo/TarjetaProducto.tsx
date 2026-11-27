@@ -9,7 +9,8 @@ import { rutaImagen, type Producto } from "@/lib/catalogo";
 export function TarjetaProducto({ producto }: { producto: Producto }) {
   const foto = producto.imagenes[0];
   return (
-    <li data-escalon className="group relative flex flex-col overflow-hidden rounded border border-negro/15 bg-blanco transition-[transform,box-shadow] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:shadow-[0_10px_24px_rgba(17,17,17,0.12)]">
+    <li data-escalon className="group relative flex flex-col overflow-hidden rounded border border-blanco/10 bg-carbon transition-[transform,box-shadow,border-color] duration-200 ease-out motion-safe:hover:-translate-y-[3px] hover:border-dorado/60 hover:shadow-[0_10px_24px_rgba(0,0,0,0.5)]">
+      {/* Marco claro: las fotos del portafolio tienen fondo transparente y se leen mejor así. */}
       <div className="relative aspect-[4/3] overflow-hidden bg-crema">
         {foto ? (
           <ImagenSuave
@@ -21,27 +22,27 @@ export function TarjetaProducto({ producto }: { producto: Producto }) {
           />
         ) : (
           // TODO(contenido): foto del producto.
-          <div className="flex h-full items-end bg-negro p-4 font-titulo text-2xl font-bold uppercase text-blanco">
+          <div className="flex h-full items-end bg-carbon-claro p-4 font-titulo text-2xl font-bold uppercase text-blanco">
             {producto.nombre}
           </div>
         )}
       </div>
       <div className="flex flex-1 flex-col gap-3 p-4">
-        <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-negro">
+        <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-blanco">
           {producto.nombre}
         </h3>
-        <p className="flex-1 text-gris">{producto.resumen}</p>
+        <p className="flex-1 text-blanco/75">{producto.resumen}</p>
         <div className="flex flex-wrap gap-2">
           <Link
             href={`/productos/${producto.categoria}/${producto.slug}`}
-            className={clasesBoton("negro", "after:absolute after:inset-0", false)}
+            className={clasesBoton("dorado", "after:absolute after:inset-0", false)}
           >
             Ver detalle
             <span className="sr-only"> de {producto.nombre}</span>
           </Link>
           <BotonEnlace
             href={`/cotizacion?categoria=${producto.categoria}&producto=${producto.slug}`}
-            variante="contorno"
+            variante="contornoClaro"
             className="relative z-10"
           >
             Cotizar

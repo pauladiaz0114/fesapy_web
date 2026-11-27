@@ -23,8 +23,8 @@ export default function Nosotros() {
         </p>
       </EncabezadoPagina>
 
-      <section className="bg-blanco px-4 py-14 sm:py-16">
-        <div className="mx-auto flex max-w-3xl flex-col gap-6 text-lg text-gris">
+      <section className="bg-negro px-4 py-14 sm:py-16">
+        <div className="mx-auto flex max-w-3xl flex-col gap-6 text-lg text-blanco/75">
           <p>
             Fesapy nació al notar una necesidad real del mercado: la falta de soluciones integrales
             y confiables en protección laboral. Hoy, con {empresa.experiencia.toLowerCase()},
@@ -42,11 +42,11 @@ export default function Nosotros() {
             técnica para que los equipos se usen correctamente y rindan lo máximo en campo.
           </p>
 
-          <section aria-labelledby="titulo-proposito" className="rounded border-l-4 border-dorado bg-crema p-6">
-            <h2 id="titulo-proposito" className="font-titulo text-2xl font-bold uppercase text-negro">
+          <section aria-labelledby="titulo-proposito" className="rounded border-l-4 border-dorado bg-carbon p-6">
+            <h2 id="titulo-proposito" className="font-titulo text-2xl font-bold uppercase text-blanco">
               Nuestro propósito
             </h2>
-            <p className="mt-2 text-negro">
+            <p className="mt-2 text-blanco">
               Ser el aliado estratégico en seguridad industrial de nuestros clientes, aportando
               soluciones confiables que les permitan operar con tranquilidad, cumplimiento y
               eficiencia.
@@ -56,7 +56,7 @@ export default function Nosotros() {
           <section aria-labelledby="titulo-sectores-nosotros">
             <h2
               id="titulo-sectores-nosotros"
-              className="font-titulo text-2xl font-bold uppercase text-negro"
+              className="font-titulo text-2xl font-bold uppercase text-blanco"
             >
               Sectores con los que trabajamos
             </h2>
@@ -68,30 +68,29 @@ export default function Nosotros() {
           <section aria-labelledby="titulo-contacto-nosotros">
             <h2
               id="titulo-contacto-nosotros"
-              className="font-titulo text-2xl font-bold uppercase text-negro"
+              className="font-titulo text-2xl font-bold uppercase text-blanco"
             >
               Cómo te atendemos
             </h2>
             <p className="mt-2">
-              Tenemos sedes en {empresa.sedesTexto}. Te atendemos por WhatsApp y por correo, y
-              despachamos a nivel nacional.
+              Te atendemos por WhatsApp y por correo, y despachamos a nivel nacional.
             </p>
             <p className="mt-2">
-              <span className="font-bold text-negro">Horario de atención:</span> {contacto.horario}
+              <span className="font-bold text-blanco">Horario de atención:</span> {contacto.horario}
             </p>
             <p className="mt-2">Síguenos en redes:</p>
             <RedesSociales
               claseLista="mt-2"
-              claseEnlace="font-bold text-negro hover:text-gris"
+              claseEnlace="font-bold text-blanco hover:text-dorado"
             />
           </section>
 
           {/* TODO(contenido): año de fundación exacto (se sabe que llevan 4 años en el mercado). */}
-          <p className="rounded border-2 border-dashed border-negro/40 p-4 text-center">
+          <p className="rounded border-2 border-dashed border-blanco/40 p-4 text-center">
             TODO(contenido): año de fundación de Fesapy.
           </p>
           <div>
-            <BotonEnlace href="/cotizacion" variante="negro">
+            <BotonEnlace href="/cotizacion" variante="dorado">
               Solicitar cotización
             </BotonEnlace>
           </div>

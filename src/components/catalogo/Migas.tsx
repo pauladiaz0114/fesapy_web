@@ -6,7 +6,7 @@ export type Miga = { texto: string; href?: string };
 
 export function Migas({ items }: { items: Miga[] }) {
   return (
-    <nav aria-label="Migas de pan" className="text-sm text-gris">
+    <nav aria-label="Migas de pan" className="text-sm text-blanco/75">
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {items.map((miga, i) => {
           const ultima = i === items.length - 1;
@@ -17,12 +17,12 @@ export function Migas({ items }: { items: Miga[] }) {
                   href={miga.href}
                   // El ::before invisible agranda la zona que se puede tocar a 44 px de alto
                   // sin cambiar cómo se ve (las migas siguen compactas).
-                  className="relative inline-flex min-h-8 items-center underline underline-offset-4 before:absolute before:-inset-x-1 before:-inset-y-1.5 hover:text-negro"
+                  className="relative inline-flex min-h-8 items-center underline underline-offset-4 before:absolute before:-inset-x-1 before:-inset-y-1.5 hover:text-blanco"
                 >
                   {miga.texto}
                 </Link>
               ) : (
-                <span aria-current={ultima ? "page" : undefined} className={`inline-flex min-h-8 items-center ${ultima ? "font-bold text-negro" : ""}`}>
+                <span aria-current={ultima ? "page" : undefined} className={`inline-flex min-h-8 items-center ${ultima ? "font-bold text-blanco" : ""}`}>
                   {miga.texto}
                 </span>
               )}
