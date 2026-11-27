@@ -61,3 +61,11 @@ Archivos: `public/catalogo/<producto>.webp` (la foto principal) y `<producto>-2.
 | `camisas-oxford-2.webp`, `camisa-tipo-polo-2.webp`, `camisa-en-jean-2.webp`, `chaqueta-en-jean-2.webp`, `pantalon-en-jean-2.webp` | Segunda foto de productos que ya existían (la del portafolio sigue como principal) |
 
 Las vistas de atrás, abierto y espalda quedan **solo** en `_fuentes/fotos-nuevas/recortes/` (no se suben). Algunas espaldas de camisas tienen restos de la prenda vecina y necesitan retoque antes de usarlas.
+
+### Stickers y lubricantes (2026-11-26)
+Hojas `hoja-stickers.png` y `hoja-lubricantes.png` (ilustraciones de referencia entregadas a Fesapy, en `_fuentes/fotos-nuevas/`). Recortadas con `_fuentes/pruebas/recortar_stickers_lubricantes.py` (mismo formato: cuadrado, fondo blanco, WebP calidad 80, sin agrandar). Son dibujos genéricos **sin marcas**; el escudo con estrella es un logo de ejemplo. Pesan 3–13 KB cada una (8 archivos, +49 KB en total).
+
+| Archivo | Producto |
+|---|---|
+| `stickers-logo-empresa.webp`, `stickers-para-cascos.webp`, `logo-bordado-dotacion.webp`, `logo-estampado-camisetas.webp` | Stickers y personalización |
+| `lubricante-multiusos-aerosol.webp`, `aerosol-mantenimiento-tapa-negra.webp`, `grasa-en-pote.webp`, `aceite-en-garrafa.webp` | Lubricantes y mantenimiento |

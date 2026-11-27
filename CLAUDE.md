@@ -68,7 +68,7 @@ src/
   lib/
     contenido.ts              # datos de la empresa, sedes (solo ciudades), contacto, horario, redes y las categorías
     menu.ts                   # enlaces del menú principal (encabezado y pie)
-    catalogo.ts               # los 30 productos, transcritos del portafolio de Fesapy (sin precios)
+    catalogo.ts               # 50 productos: 30 transcritos del portafolio y 20 de imágenes de referencia (sin precios)
     whatsapp.ts  correo.ts  mensajeCotizacion.ts   # enlaces wa.me y mailto: con encodeURIComponent
     sanitizar.ts              # limpieza de texto escrito por personas
     validaciones/             # esquemas Zod
