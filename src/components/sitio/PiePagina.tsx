@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { contacto, empresa } from "@/lib/contenido";
 import { ENLACE_COTIZAR } from "@/lib/whatsapp";
 import { enlacesMenu } from "@/lib/menu";
@@ -8,6 +7,9 @@ import { RedesSociales } from "./RedesSociales";
 // Pie de página negro. Muestra las ciudades con sede, sin direcciones ni mapas (aún no se
 // publican), y el contacto por WhatsApp, correo y redes.
 // Dorado como texto: permitido porque el fondo es negro.
+// Los enlaces del pie son <a> normales (no <Link> de Next.js) desde el 2026-11-27: en un iPhone
+// tocarlos no llevaba a la página. Con <a> el navegador carga la página completa desde arriba,
+// lo que funciona igual en cualquier celular (el sitio es estático y carga rápido).
 const enlaceClase =
   "inline-flex min-h-11 items-center underline underline-offset-4 hover:text-dorado";
 
@@ -30,9 +32,10 @@ export function PiePagina() {
     <footer className="border-t-4 border-dorado bg-negro px-4 pt-12 pb-28 text-blanco">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-3">
         <div className="flex flex-col items-start gap-4">
-          <Link href="/" aria-label="Fesapy Distribuciones, ir al inicio">
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- <a> a propósito: ver arriba (iPhone) */}
+          <a href="/" aria-label="Fesapy Distribuciones, ir al inicio">
             <Logo />
-          </Link>
+          </a>
           <p className="max-w-xs text-blanco/80">{empresa.lema}.</p>
         </div>
 
@@ -41,15 +44,15 @@ export function PiePagina() {
           <ul className="mt-2 flex flex-col">
             {enlacesMenu.map(({ href, texto }) => (
               <li key={href}>
-                <Link href={href} className={enlaceClase}>
+                <a href={href} className={enlaceClase}>
                   {texto}
-                </Link>
+                </a>
               </li>
             ))}
             <li>
-              <Link href="/politica-de-datos" className={enlaceClase}>
+              <a href="/politica-de-datos" className={enlaceClase}>
                 Política de datos
-              </Link>
+              </a>
             </li>
           </ul>
         </nav>
