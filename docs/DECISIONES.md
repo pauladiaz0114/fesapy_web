@@ -276,3 +276,6 @@ Por pedido de Fesapy, el botón "Cotizar por WhatsApp" del encabezado vuelve al 
 **Cómo:** `body` con fondo negro; se quitó la propiedad `tema` de `Categorias`, `TarjetaCategoria` y `CarruselCategorias` (ya no hay versión clara). Las fotos de producto siguen sobre un marco claro porque tienen fondo transparente.
 **Formulario:** campos en carbón con borde blanco suave; los errores pasan de `red-700` (≈ 3:1 sobre negro, no pasa) a `red-400` (≈ 7:1).
 **Verificado:** prueba automática en las 10 páginas (390 y 1440 px): ningún fondo claro grande fuera de marcos de foto y dorado, todos los textos visibles con contraste AA, un `h1` y sin desborde; formulario con errores legibles y envío por WhatsApp y correo como antes.
+
+## 2026-11-26 · Inicio sin "Cómo cotizar"
+Se quitó la sección "Cómo cotizar" del inicio (primero la línea "Sin crear cuenta · horario" y luego toda la sección), por pedido de Sebastián. El inicio queda: hero con carrusel y beneficios, "Problemas que resolvemos", categorías y franja dorada. Reemplaza lo del 2026-11-12 sobre "Cómo cotizar".

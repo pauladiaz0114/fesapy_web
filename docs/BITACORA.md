@@ -13,6 +13,11 @@ Formato:
 
 ---
 
+## 2026-11-26 — Inicio sin la sección "Cómo cotizar" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/inicio-sin-como-cotizar`) se quitó toda la sección "Cómo cotizar" (3 pasos y botón "Cotizar ahora") y se borró su componente `ComoCotizar.tsx`. Para cotizar quedan los botones del hero, los de cada categoría, la franja dorada y el WhatsApp del encabezado y la burbuja.
+**Archivos:** `src/app/(sitio)/page.tsx`, `src/components/inicio/ComoCotizar.tsx` (borrado).
+**Pendientes / notas:** ninguno.
+
 ## 2026-11-26 — Inicio: sin la línea "Sin crear cuenta · horario" (Sebastián con Claude Code)
 **Qué se hizo:** (rama `fix/sin-linea-horario`) se quitó la línea pequeña bajo "Cotizar ahora" en "Cómo cotizar". El horario sigue en el pie y en `/cotizacion`.
 **Archivos:** `src/components/inicio/ComoCotizar.tsx`.
