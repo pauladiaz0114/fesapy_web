@@ -13,6 +13,11 @@ Formato:
 
 ---
 
+## 2026-11-26 — Inicio: sin la línea "Sin crear cuenta · horario" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `fix/sin-linea-horario`) se quitó la línea pequeña bajo "Cotizar ahora" en "Cómo cotizar". El horario sigue en el pie y en `/cotizacion`.
+**Archivos:** `src/components/inicio/ComoCotizar.tsx`.
+**Pendientes / notas:** el video que se pidió para reemplazar el carrusel del hero **no se usó**: trae marca de agua de TikTok (`@cbmscoficial`) y logos MSA, y no hay permiso de uso. Falta un video propio de Fesapy o con licencia libre.
+
 ## 2026-11-26 — Todo el sitio en tema oscuro (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/sitio-oscuro`)
 1. Todas las páginas internas con el estilo oscuro del inicio (fondos negro y carbón, texto blanco, botones dorados).

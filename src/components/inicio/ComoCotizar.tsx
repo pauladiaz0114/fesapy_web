@@ -3,7 +3,6 @@ import { BotonEnlace } from "@/components/ui/Boton";
 import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import { Reveal } from "@/components/ui/Reveal";
 import { rutaImagen } from "@/lib/catalogo";
-import { contacto } from "@/lib/contenido";
 
 // "Cómo cotizar": 3 pasos con imagen arriba, número y un título de una línea (sin párrafos).
 // Reemplaza la franja dorada "Solicita tu cotización" y la sección "Trabajar con Fesapy es
@@ -129,11 +128,12 @@ export function ComoCotizar() {
             </li>
           ))}
         </ol>
-        <div className="mt-10 flex flex-col items-start gap-3">
+        {/* La línea "Sin crear cuenta · horario" se quitó el 2026-11-26 (pedido de Sebastián);
+            el horario sigue en el pie y en /cotizacion. */}
+        <div className="mt-10">
           <BotonEnlace href="/cotizacion" variante="dorado">
             Cotizar ahora
           </BotonEnlace>
-          <p className="text-sm text-blanco/70">Sin crear cuenta · {contacto.horario}</p>
         </div>
       </Reveal>
     </section>
