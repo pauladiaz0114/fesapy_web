@@ -279,3 +279,7 @@ Por pedido de Fesapy, el botón "Cotizar por WhatsApp" del encabezado vuelve al 
 
 ## 2026-11-26 · Inicio sin "Cómo cotizar"
 Se quitó la sección "Cómo cotizar" del inicio (primero la línea "Sin crear cuenta · horario" y luego toda la sección), por pedido de Sebastián. El inicio queda: hero con carrusel y beneficios, "Problemas que resolvemos", categorías y franja dorada. Reemplaza lo del 2026-11-12 sobre "Cómo cotizar".
+
+## 2026-11-27 · Video de prueba en "Problemas que resolvemos"
+Por pedido de Sebastián, para ver cómo queda en producción, el panel izquierdo de "Problemas que resolvemos" muestra un video corto con `<video>` nativo (sin librerías): se reproduce solo en pantalla, se pausa al salir, no arranca solo con "reducir movimiento" ni con ahorro de datos, tiene botón de pausa y la etiqueta "Video de referencia". El hero vuelve al carrusel de fotos.
+**Riesgo conocido:** el video trae marca de agua de TikTok y logos de MSA, y no hay permiso de uso (choca con la regla de imágenes con licencia). Es temporal: se cambia por un video propio o con licencia libre con solo reemplazar `public/video/prueba-bomberos.mp4`.

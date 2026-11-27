@@ -3,20 +3,15 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { EtiquetaReferencia } from "@/components/ui/EtiquetaReferencia";
 
-// PRUEBA (rama prueba/video-hero, NO para producción): video del hero en lugar del carrusel,
-// para ver cómo queda. El video de prueba trae marca de agua de TikTok y logos de otra marca:
-// solo se puede publicar uno propio de Fesapy o con licencia libre.
-//
-// Comportamiento (sin librerías):
+// Video corto de referencia dentro de un marco (sin librerías).
 // - <video> nativo: muted, loop, playsInline, preload="metadata" y poster.
-// - Se reproduce al entrar en pantalla y se pausa al salir (IntersectionObserver).
-// - Con "reducir movimiento" o con ahorro de datos NO se reproduce solo: se queda el poster.
-// - Botón de pausa/reproducir con aria-label en español (foco: regla global de globals.css).
-// - Marco cuadrado (aspect-square), igual que el carrusel: nada se mueve al cargar (CLS 0).
-// - Si el video falla, se queda la imagen del poster, sin errores en consola.
-
-const VIDEO = "/video/hero-prueba.mp4";
-const POSTER = "/video/hero-prueba-poster.jpg";
+// - Se reproduce al estar en pantalla (al menos la mitad) y se pausa al salir (IntersectionObserver).
+// - Con "reducir movimiento" o con ahorro de datos NO se reproduce solo: se queda el poster
+//   (la persona puede darle play con el botón).
+// - Botón de pausa/reproducir de 44 px con aria-label en español (foco: regla global de globals.css).
+// - El marco (className) reserva el espacio: nada se mueve al cargar (CLS 0).
+// - Si el video falla, se muestra el poster como imagen, sin errores en consola.
+// - Lleva la etiqueta "Video de referencia" mientras no sea un video de Fesapy.
 
 function useNoReproducirSolo(): boolean {
   return useSyncExternalStore(
@@ -28,23 +23,38 @@ function useNoReproducirSolo(): boolean {
     () => {
       const reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       // navigator.connection.saveData: "ahorro de datos" en Chrome/Android (no existe en todos).
-      const ahorro = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+      const ahorro =
+        (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
       return reducir || ahorro;
     },
     () => true, // en el servidor: no reproducir
   );
 }
 
-export function VideoHero() {
+export function VideoReferencia({
+  src,
+  poster,
+  descripcion,
+  className = "",
+  claseVideo = "object-cover",
+}: {
+  src: string;
+  poster: string;
+  /** Qué muestra el video (para lectores de pantalla). */
+  descripcion: string;
+  /** Clases del marco: tamaño y proporción (por ejemplo "aspect-[4/3]"). */
+  className?: string;
+  /** Cómo llena el video el marco: "object-cover" (recorta) u "object-contain" (completo, con fondo negro). */
+  claseVideo?: string;
+}) {
   const video = useRef<HTMLVideoElement>(null);
   const noSolo = useNoReproducirSolo();
   const [visible, setVisible] = useState(false);
-  // null = la persona no ha tocado el botón; true/false = lo pausó o lo reanudó a mano.
+  // null = la persona no ha tocado el botón; true/false = lo reanudó o lo pausó a mano.
   const [eleccion, setEleccion] = useState<boolean | null>(null);
   const [fallo, setFallo] = useState(false);
   const [reproduciendo, setReproduciendo] = useState(false);
 
-  // Visible en pantalla (al menos la mitad).
   useEffect(() => {
     const el = video.current;
     if (!el) return;
@@ -53,7 +63,6 @@ export function VideoHero() {
     return () => io.disconnect();
   }, []);
 
-  // Reproduce o pausa según lo visible, la preferencia del sistema y el botón.
   const debeReproducir = visible && !fallo && (eleccion ?? !noSolo);
   useEffect(() => {
     const el = video.current;
@@ -63,21 +72,21 @@ export function VideoHero() {
   }, [debeReproducir]);
 
   return (
-    <div className="relative aspect-square w-full overflow-hidden rounded bg-carbon-claro">
+    <div className={`relative overflow-hidden bg-negro ${className}`}>
       {fallo ? (
-        // eslint-disable-next-line @next/next/no-img-element -- solo en esta prueba
-        <img src={POSTER} alt="" className="absolute inset-0 size-full object-cover" />
+        // eslint-disable-next-line @next/next/no-img-element -- respaldo simple cuando el video no carga
+        <img src={poster} alt={descripcion} className={`absolute inset-0 size-full ${claseVideo}`} />
       ) : (
         <video
           ref={video}
-          className="absolute inset-0 size-full object-cover"
-          src={VIDEO}
-          poster={POSTER}
+          className={`absolute inset-0 size-full ${claseVideo}`}
+          src={src}
+          poster={poster}
           muted
           loop
           playsInline
           preload="metadata"
-          aria-label="Video de bomberos con equipo de protección"
+          aria-label={descripcion}
           onPlay={() => setReproduciendo(true)}
           onPause={() => setReproduciendo(false)}
           onError={() => setFallo(true)}

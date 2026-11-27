@@ -13,6 +13,19 @@ Formato:
 
 ---
 
+## 2026-11-27 — Carrusel de vuelta en el hero y video en "Problemas que resolvemos" (Sebastián con Claude Code)
+**Qué se hizo:** (rama `fix/video-en-problemas`)
+1. El hero vuelve a tener el carrusel de 8 fotos (el video de prueba del 2026-11-26 sale de ahí).
+2. El video pasa al panel izquierdo de "Problemas que resolvemos", con la foto del trabajador con chaleco como poster. Componente reutilizable `src/components/ui/VideoReferencia.tsx`. En celular el marco es 4:5; en escritorio el video vertical se ve completo sobre negro.
+3. Se revisaron todos los enlaces del pie con clics reales.
+- **Verificado en Edge real** (390 y 1440 px): video (reproduce en pantalla, pausa al salir, botón, Tab, reducir movimiento, video bloqueado → poster, CLS 0, sin errores en consola), carrusel del hero, 6 enlaces del pie desde 3 páginas, las 10 páginas en oscuro y el catálogo.
+
+**Archivos:** `src/components/inicio/Hero.tsx`, `src/components/inicio/Problemas.tsx`, `src/components/ui/VideoReferencia.tsx` (antes `inicio/VideoHero.tsx`), `public/video/prueba-bomberos.mp4`.
+
+**Conceptos aprendidos:** *object-cover* recorta el video para llenar el marco; *object-contain* lo muestra completo y deja bandas. Un video vertical en un marco horizontal se recorta mucho, por eso cambia según el tamaño de pantalla.
+
+**Pendientes / notas:** el video es de PRUEBA: trae marca de agua de TikTok (`@cbmscoficial`) y logos MSA, sin permiso de uso. Cambiarlo por un video de Fesapy o con licencia libre.
+
 ## 2026-11-26 — Inicio sin la sección "Cómo cotizar" (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/inicio-sin-como-cotizar`) se quitó toda la sección "Cómo cotizar" (3 pasos y botón "Cotizar ahora") y se borró su componente `ComoCotizar.tsx`. Para cotizar quedan los botones del hero, los de cada categoría, la franja dorada y el WhatsApp del encabezado y la burbuja.
 **Archivos:** `src/app/(sitio)/page.tsx`, `src/components/inicio/ComoCotizar.tsx` (borrado).

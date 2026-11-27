@@ -7,17 +7,15 @@ import {
   IconoPaquete,
   IconoUniforme,
 } from "@/components/ui/iconos";
-import { EtiquetaReferencia } from "@/components/ui/EtiquetaReferencia";
-import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import { Reveal } from "@/components/ui/Reveal";
+import { VideoReferencia } from "@/components/ui/VideoReferencia";
 import chalecoObra from "../../../public/referencia/chaleco-obra.webp";
 
 // "Problemas que resolvemos": 6 puntos con ícono y SOLO título (sin párrafo ni subtítulo,
 // 2026-11-12). Solo se dice lo confirmado en docs/BRIEF.md: un proveedor para todo, productos
 // con certificaciones/normas, personalización con logo, envíos nacionales.
-// Diseño oscuro (2026-11-16): panel dividido. A la izquierda, una foto de referencia (aquí irá el
-// video corto cuando Fesapy lo entregue; la foto quedará como poster); a la derecha, la lista
-// sobre carbón con íconos dorados.
+// Diseño oscuro (2026-11-16): panel dividido. A la izquierda, un video corto de referencia (con la
+// foto del trabajador con chaleco como poster); a la derecha, la lista sobre carbón con íconos dorados.
 const problemas: { titulo: string; Icono: ComponentType<{ className?: string }> }[] = [
   { titulo: "Todo en un solo pedido", Icono: IconoPaquete },
   { titulo: "Productos certificados", Icono: IconoEscudo },
@@ -33,17 +31,19 @@ export function Problemas() {
       aria-labelledby="titulo-problemas"
       className="grid bg-carbon text-blanco lg:grid-cols-2"
     >
-      {/* Marco de proporción fija: la foto no mueve el diseño al cargar (CLS 0). */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-carbon-claro lg:aspect-auto lg:min-h-[30rem]">
-        <ImagenSuave
-          src={chalecoObra}
-          alt="Trabajador de espaldas con chaleco reflectivo naranja junto a un andamio"
-          fill
-          sizes="(min-width: 1024px) 50vw, 100vw"
-          className="object-cover"
-        />
-        <EtiquetaReferencia>Imagen de referencia</EtiquetaReferencia>
-      </div>
+      {/* Video de PRUEBA (2026-11-27, pedido de Sebastián para ver cómo queda): trae marca de agua
+          de TikTok y logos de otra marca, sin permiso de uso. Cambiarlo por un video de Fesapy o con
+          licencia libre. La foto del trabajador con chaleco queda como poster. Marco de proporción
+          fija: nada se mueve al cargar (CLS 0). */}
+      <VideoReferencia
+        src="/video/prueba-bomberos.mp4"
+        poster={chalecoObra.src}
+        descripcion="Video de bomberos con equipo de protección personal"
+        // El video es vertical: en celular el marco es 4:5 (recorta poco); en escritorio se ve
+        // completo, centrado sobre negro, como un reel.
+        className="aspect-[4/5] sm:aspect-[4/3] lg:aspect-auto lg:min-h-[30rem]"
+        claseVideo="object-cover lg:object-contain"
+      />
 
       <Reveal escalonar className="px-4 py-12 sm:px-10 lg:px-14 lg:py-16">
         <h2
