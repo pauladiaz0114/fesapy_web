@@ -13,6 +13,18 @@ Formato:
 
 ---
 
+## 2026-11-27 — Categorías Emergencias y Aseo (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/categorias-aseo-emergencias`)
+1. Dos categorías nuevas: "Emergencias y control de derrames" y "Aseo y recolección de residuos" (aparecen en el inicio, en /productos, en los chips y en el formulario de cotización).
+2. Portada con foto de referencia de Pexels (extintor y canecas de reciclaje), etiqueta "Imagen de referencia" y créditos en `docs/CREDITOS-IMAGENES.md`.
+- **Verificado en Edge real** (390 y 1440 px): tarjetas con foto cargada, clic en la tarjeta → página de la categoría, "Pedir cotización" → formulario con la categoría elegida; contador del carrusel "n / 9"; el resto de pruebas sin cambios.
+
+**Archivos:** `src/lib/contenido.ts`, `src/components/catalogo/TarjetaCategoria.tsx`, `src/components/inicio/Categorias.tsx`, `public/referencia/` (2 WebP, +44 KB), `docs/`, `CLAUDE.md`.
+
+**Conceptos aprendidos:** *licencia de una foto:* "gratis" no siempre significa que se pueda usar en un negocio; Pexels sí lo permite, pero se guarda de dónde salió cada foto.
+
+**Pendientes / notas:** `TODO(contenido)`: productos con foto de Emergencias y Aseo, y el menú desplegable con subcategorías.
+
 ## 2026-11-27 — Sección de reseñas de clientes en el inicio (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/resenas-clientes`)
 1. Sección "Lo que dicen nuestros clientes" al final del inicio, antes del pie: tarjetas de reseñas (salen de `src/lib/resenas.ts`, hoy vacía) y formulario "Deja tu reseña" que se envía por WhatsApp o correo.

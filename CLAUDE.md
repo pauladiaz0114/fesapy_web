@@ -6,7 +6,7 @@ Este archivo lo lee Claude Code al inicio de cada sesión. Contiene el contexto 
 Empresa colombiana proveedora integral de seguridad industrial para empresas (B2B principalmente). Nombre: **Fesapy Distribuciones** ("Dotaciones para tu empresa"). **Sedes en Madrid (Cundinamarca), Bogotá y Villavicencio**, sin direcciones publicadas por ahora (no mostrar direcciones ni mapas hasta que Fesapy las dé). Atiende por WhatsApp, correo e Instagram/Facebook (todos los días, 7:00 a. m. a 8:00 p. m.) y despacha a nivel nacional.
 
 - **Fabrica y personaliza dotación**: overoles, uniformes, ropa de trabajo con logos estampados y bordados.
-- **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines.
+- **Distribuye**: EPP, calzado de seguridad de varias marcas, eslingas, lubricantes y mantenimiento (WD-40, CRC), botiquines; emergencias (camillas, extintores, kits de derrames…) y aseo (puntos ecológicos, canecas, carros de aseo…).
 - **Señalización y seguridad vial**: letreros, señales, conos, cintas de demarcación, barreras y delineadores; stickers.
 - **Diferencial**: es una marca multifuncional, "todo en uno": la empresa le compra toda su seguridad a un solo proveedor.
 
@@ -66,7 +66,7 @@ src/
     catalogo/                 # tarjetas de categoría y de producto, galería, migas, carrusel móvil
     cotizacion/               # formulario de cotización (Client Component)
   lib/
-    contenido.ts              # datos de la empresa, sedes (solo ciudades), contacto, horario, redes y las categorías
+    contenido.ts              # datos de la empresa, sedes (solo ciudades), contacto, horario, redes, las 9 categorías y fotos de categorías sin productos
     menu.ts                   # enlaces del menú principal (encabezado y pie)
     resenas.ts                # reseñas reales y autorizadas (hoy vacía) y enlace a Google (TODO)
     catalogo.ts               # 50 productos: 30 transcritos del portafolio y 20 de imágenes de referencia (sin precios)

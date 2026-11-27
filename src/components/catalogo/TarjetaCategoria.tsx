@@ -1,8 +1,9 @@
+import { EtiquetaReferencia } from "@/components/ui/EtiquetaReferencia";
 import { ImagenSuave } from "@/components/ui/ImagenSuave";
 import Link from "next/link";
 import { BotonEnlace, clasesBoton } from "@/components/ui/Boton";
 import { portadaDeCategoria, productosDeCategoria, rutaImagen } from "@/lib/catalogo";
-import type { categorias } from "@/lib/contenido";
+import { fotosCategoria, type categorias } from "@/lib/contenido";
 
 type Categoria = (typeof categorias)[number];
 
@@ -19,6 +20,8 @@ export function TarjetaCategoria({
   indice: number;
 }) {
   const portada = portadaDeCategoria(categoria.slug);
+  // Categorías sin productos todavía: foto de referencia de la categoría (si hay).
+  const fotoCategoria = portada ? undefined : fotosCategoria[categoria.slug];
   const cantidad = productosDeCategoria(categoria.slug).length;
   const dorado = indice % 2 === 0;
 
@@ -33,6 +36,17 @@ export function TarjetaCategoria({
             sizes="(min-width: 1184px) 270px, (min-width: 1024px) 23vw, (min-width: 768px) 46vw, 78vw"
             className="object-contain p-4 transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.03]"
           />
+        ) : fotoCategoria ? (
+          <>
+            <ImagenSuave
+              src={fotoCategoria.src}
+              alt={fotoCategoria.alt}
+              fill
+              sizes="(min-width: 1184px) 270px, (min-width: 1024px) 23vw, (min-width: 768px) 46vw, 78vw"
+              className="object-cover transition-transform duration-300 ease-out motion-safe:group-hover:scale-[1.03]"
+            />
+            <EtiquetaReferencia>Imagen de referencia</EtiquetaReferencia>
+          </>
         ) : (
           // TODO(contenido): foto de la categoría. Mientras tanto, bloque de color (el dorado va como fondo con texto negro).
           <div

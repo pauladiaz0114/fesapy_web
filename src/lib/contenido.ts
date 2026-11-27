@@ -63,7 +63,8 @@ export const legal = {
   politicaFecha: "27 de noviembre de 2026",
 } as const;
 
-// Las 7 categorías de docs/BRIEF.md §2 (eran 8 hasta el 2026-11-12).
+// 9 categorías: las 7 de docs/BRIEF.md §2 y, desde el 2026-11-27, Emergencias y Aseo (otros
+// productos que vende Fesapy, confirmados por WhatsApp con capturas de referencia).
 // El "slug" es el nombre que viaja en la dirección: /cotizacion?categoria=<slug>
 export const categorias = [
   {
@@ -90,9 +91,23 @@ export const categorias = [
     descripcion: "Botiquines y elementos de primeros auxilios.",
   },
   {
+    // TODO(contenido): productos con foto y ficha cuando Fesapy los entregue.
+    slug: "emergencias",
+    nombre: "Emergencias y control de derrames",
+    descripcion:
+      "Avisos industriales, camillas, extintores, salvavidas, inmovilizadores y kits para control de derrames.",
+  },
+  {
     slug: "senalizacion-y-seguridad-vial",
     nombre: "Señalización y seguridad vial",
     descripcion: "Letreros y señales, conos, cintas de demarcación, barreras y delineadores.",
+  },
+  {
+    // TODO(contenido): productos con foto y ficha cuando Fesapy los entregue.
+    slug: "aseo",
+    nombre: "Aseo y recolección de residuos",
+    descripcion:
+      "Puntos ecológicos, canecas y baldes, carros de aseo, hidrolavadoras y aspiradoras.",
   },
   {
     slug: "stickers-personalizacion",
@@ -107,6 +122,20 @@ export const categorias = [
 ] as const;
 
 export type CategoriaSlug = (typeof categorias)[number]["slug"];
+
+// Foto de portada para categorías que todavía no tienen productos en el catálogo (sin productos no
+// hay foto de producto que usar). Son fotos de REFERENCIA de Pexels (ver docs/CREDITOS-IMAGENES.md):
+// la tarjeta lleva la etiqueta "Imagen de referencia".
+export const fotosCategoria: Partial<Record<CategoriaSlug, { src: string; alt: string }>> = {
+  emergencias: {
+    src: "/referencia/emergencias-extintor.webp",
+    alt: "Extintor rojo apoyado contra una pared gris",
+  },
+  aseo: {
+    src: "/referencia/aseo-punto-ecologico.webp",
+    alt: "Cuatro canecas de reciclaje de colores contra una pared de ladrillo",
+  },
+};
 
 // Slugs viejos que ya no existen, con la categoría que los reemplaza.
 // Así un enlace guardado como /cotizacion?categoria=trabajo-en-alturas sigue eligiendo la categoría.
