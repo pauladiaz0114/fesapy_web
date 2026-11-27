@@ -13,6 +13,12 @@ Formato:
 
 ---
 
+## 2026-11-27 — Enlaces del pie que no llevaban a la página en iPhone (Sebastián con Claude Code)
+**Qué se hizo:** (rama `fix/enlaces-pie-iphone`) los enlaces del pie (Páginas y logo) pasan de `<Link>` de Next.js a `<a>` normales: el navegador carga la página completa desde arriba. En Chrome funcionaban, pero en un iPhone tocarlos no llevaba a la página.
+- **Verificado en Edge real** (390 y 1440 px): los 6 enlaces desde 3 páginas llegan a su página y la muestran desde arriba (antes la prueba solo miraba la dirección). Falta confirmarlo en el iPhone.
+**Archivos:** `src/components/sitio/PiePagina.tsx`.
+**Conceptos aprendidos:** `<Link>` cambia de página sin recargar (más rápido); `<a>` recarga la página completa (más simple y funciona igual en todos los navegadores).
+
 ## 2026-11-27 — Carrusel de vuelta en el hero y video en "Problemas que resolvemos" (Sebastián con Claude Code)
 **Qué se hizo:** (rama `fix/video-en-problemas`)
 1. El hero vuelve a tener el carrusel de 8 fotos (el video de prueba del 2026-11-26 sale de ahí).
