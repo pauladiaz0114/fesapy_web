@@ -13,7 +13,7 @@ Empresa colombiana proveedora integral de seguridad industrial para empresas (B2
 Detalles completos en `docs/BRIEF.md`.
 
 ## Objetivo de la página
-1. Que el visitante conozca la empresa y confíe (sedes, redes sociales y canales de contacto claros; clientes y reseñas vuelven cuando haya logos y reseñas reales con permiso).
+1. Que el visitante conozca la empresa y confíe (sedes, redes sociales y canales de contacto claros). Reseñas: sección al final del inicio con formulario que llega por WhatsApp/correo; solo se muestran reseñas reales y autorizadas (`src/lib/resenas.ts`), nunca inventadas. Logos de clientes: cuando haya permiso.
 2. Que escriba por WhatsApp con un clic.
 3. Que pida cotización con un formulario que arma el mensaje y abre WhatsApp o su correo (el sitio no guarda nada).
 4. Que el equipo de Fesapy mantenga el contenido (categorías, datos de contacto, textos) en `src/lib/contenido.ts` y en las páginas, mediante un Pull Request.
@@ -68,6 +68,7 @@ src/
   lib/
     contenido.ts              # datos de la empresa, sedes (solo ciudades), contacto, horario, redes y las categorías
     menu.ts                   # enlaces del menú principal (encabezado y pie)
+    resenas.ts                # reseñas reales y autorizadas (hoy vacía) y enlace a Google (TODO)
     catalogo.ts               # 50 productos: 30 transcritos del portafolio y 20 de imágenes de referencia (sin precios)
     whatsapp.ts  correo.ts  mensajeCotizacion.ts   # enlaces wa.me y mailto: con encodeURIComponent
     sanitizar.ts              # limpieza de texto escrito por personas

@@ -59,8 +59,8 @@ export const legal = {
   // TODO(contenido): NIT de la empresa.
   nit: "",
   // Versión de la política: sube el número cuando el texto cambie.
-  politicaVersion: "0.1 (borrador)",
-  politicaFecha: "9 de noviembre de 2026",
+  politicaVersion: "0.2 (borrador)",
+  politicaFecha: "27 de noviembre de 2026",
 } as const;
 
 // Las 7 categorías de docs/BRIEF.md §2 (eran 8 hasta el 2026-11-12).
