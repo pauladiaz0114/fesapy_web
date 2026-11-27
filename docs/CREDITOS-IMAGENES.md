@@ -69,3 +69,11 @@ Hojas `hoja-stickers.png` y `hoja-lubricantes.png` (ilustraciones de referencia 
 |---|---|
 | `stickers-logo-empresa.webp`, `stickers-para-cascos.webp`, `logo-bordado-dotacion.webp`, `logo-estampado-camisetas.webp` | Stickers y personalización |
 | `lubricante-multiusos-aerosol.webp`, `aerosol-mantenimiento-tapa-negra.webp`, `grasa-en-pote.webp`, `aceite-en-garrafa.webp` | Lubricantes y mantenimiento |
+
+### Portadas de categorías sin productos (2026-11-27)
+Fotos de [Pexels](https://www.pexels.com/license/) (uso gratuito, también comercial en sitios web; no exige atribución, pero se registra). Recortadas a 4:3 (800 × 600, WebP calidad 80, sin metadatos). Para no cortar el producto se completó el fondo repitiendo el borde de la misma foto (pared, piso o ladrillo). Sin marcas legibles.
+
+| Archivo | Categoría | Autor | Fuente |
+|---|---|---|---|
+| `emergencias-extintor.webp` | Emergencias y control de derrames | [Nothing Ahead](https://www.pexels.com/@ian-panelo/) | [Pexels 4805958](https://www.pexels.com/photo/red-fire-extinguisher-against-wall-4805958/) |
+| `aseo-punto-ecologico.webp` | Aseo y recolección de residuos | [Hiago Rocha](https://www.pexels.com/@hiagorocha/) | [Pexels 17072315](https://www.pexels.com/photo/colorful-garbage-bins-17072315/) |
