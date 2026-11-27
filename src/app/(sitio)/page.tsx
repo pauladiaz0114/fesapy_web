@@ -20,7 +20,7 @@ export default function Inicio() {
           Fesapy es más fácil" (2026-11-12). */}
       <ComoCotizar />
       <Problemas />
-      <Categorias tema="oscuro" />
+      <Categorias />
       {/* La sección de clientes y reseñas se quitó el 2026-11-12: vuelve cuando haya logos y
           reseñas reales con permiso (ver docs/DECISIONES.md). */}
     </>

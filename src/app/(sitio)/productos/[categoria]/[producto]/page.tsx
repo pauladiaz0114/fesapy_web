@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function Seccion({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <section className="flex flex-col gap-3">
-      <h2 className="font-titulo text-2xl font-bold uppercase text-negro">{titulo}</h2>
+      <h2 className="font-titulo text-2xl font-bold uppercase text-blanco">{titulo}</h2>
       {children}
     </section>
   );
@@ -38,7 +38,7 @@ function Seccion({ titulo, children }: { titulo: string; children: React.ReactNo
 
 function Vinetas({ items }: { items: string[] }) {
   return (
-    <ul className="flex list-disc flex-col gap-2 pl-6 text-gris marker:text-negro">
+    <ul className="flex list-disc flex-col gap-2 pl-6 text-blanco/75 marker:text-dorado">
       {items.map((t) => (
         <li key={t}>
           <ItemConTitulo texto={t} />
@@ -59,7 +59,7 @@ export default async function PaginaProducto({ params }: Props) {
 
   return (
     <>
-      <section className="bg-crema px-4 pt-8 pb-10 sm:pt-10">
+      <section className="bg-carbon px-4 pt-8 pb-10 sm:pt-10">
         <div className="mx-auto flex max-w-6xl flex-col gap-4">
           <Migas
             items={[
@@ -69,48 +69,48 @@ export default async function PaginaProducto({ params }: Props) {
               { texto: producto.nombre },
             ]}
           />
-          <h1 className="border-l-4 border-dorado pl-4 font-titulo text-3xl font-bold uppercase leading-tight text-negro sm:text-5xl">
+          <h1 className="border-l-4 border-dorado pl-4 font-titulo text-3xl font-bold uppercase leading-tight text-blanco sm:text-5xl">
             {producto.nombre}
           </h1>
         </div>
       </section>
 
-      <section className="bg-blanco px-4 py-10 sm:py-14">
+      <section className="bg-negro px-4 py-10 sm:py-14">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-2 lg:items-start">
           <GaleriaProducto nombre={producto.nombre} imagenes={producto.imagenes} />
 
           <div className="flex flex-col gap-6">
             {producto.descripcion.length > 0 ? (
-              <div className="flex flex-col gap-4 text-lg text-gris">
+              <div className="flex flex-col gap-4 text-lg text-blanco/75">
                 {producto.descripcion.map((p) => (
                   <p key={p}>{p}</p>
                 ))}
               </div>
             ) : (
-              <p className="text-lg text-gris">{producto.resumen}</p>
+              <p className="text-lg text-blanco/75">{producto.resumen}</p>
             )}
 
             {producto.usos && (
               <Seccion titulo="Usos recomendados">
-                <p className="text-gris">{producto.usos.intro}</p>
+                <p className="text-blanco/75">{producto.usos.intro}</p>
                 <Vinetas items={producto.usos.items} />
               </Seccion>
             )}
 
             <div className="flex flex-wrap gap-3">
-              <BotonEnlace href={hrefCotizar} variante="negro">
+              <BotonEnlace href={hrefCotizar} variante="dorado">
                 Cotizar este producto
               </BotonEnlace>
               {producto.enlace && (
-                <BotonEnlace href={producto.enlace.href} variante="contorno">
+                <BotonEnlace href={producto.enlace.href} variante="contornoClaro">
                   {producto.enlace.texto}
                 </BotonEnlace>
               )}
-              <BotonEnlace href={`/productos/${categoria.slug}`} variante="contorno">
+              <BotonEnlace href={`/productos/${categoria.slug}`} variante="contornoClaro">
                 Ver más de {categoria.nombre}
               </BotonEnlace>
             </div>
-            <p className="text-sm text-gris">
+            <p className="text-sm text-blanco/75">
               No mostramos precios: cada empresa recibe su cotización por WhatsApp o por correo.
             </p>
           </div>
@@ -121,11 +121,11 @@ export default async function PaginaProducto({ params }: Props) {
             <Seccion titulo="Referencias del portafolio">
               <ul className="grid gap-4 md:grid-cols-2">
                 {producto.modelos.map((m) => (
-                  <li key={m.nombre} className="flex flex-col gap-3 rounded border-t-4 border-dorado bg-crema p-5">
-                    <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-negro">
+                  <li key={m.nombre} className="flex flex-col gap-3 rounded border-t-4 border-dorado bg-carbon p-5">
+                    <h3 className="font-titulo text-xl font-bold uppercase leading-tight text-blanco">
                       {m.nombre}
                     </h3>
-                    <p className="text-gris">{m.descripcion}</p>
+                    <p className="text-blanco/75">{m.descripcion}</p>
                     {m.caracteristicas && <Vinetas items={m.caracteristicas} />}
                   </li>
                 ))}
@@ -154,19 +154,19 @@ export default async function PaginaProducto({ params }: Props) {
 
           {producto.normas && (
             <Seccion titulo="Normas">
-              <p className="text-sm font-bold text-negro">Normas indicadas en el portafolio de Fesapy</p>
-              <p className="text-gris">{producto.normas}</p>
+              <p className="text-sm font-bold text-blanco">Normas indicadas en el portafolio de Fesapy</p>
+              <p className="text-blanco/75">{producto.normas}</p>
             </Seccion>
           )}
         </div>
       </section>
 
       {relacionados.length > 0 && (
-        <section aria-labelledby="titulo-relacionados" className="bg-crema px-4 py-12 sm:py-16">
+        <section aria-labelledby="titulo-relacionados" className="bg-carbon px-4 py-12 sm:py-16">
           <Reveal escalonar className="mx-auto max-w-6xl">
             <h2
               id="titulo-relacionados"
-              className="font-titulo text-3xl font-bold uppercase text-negro sm:text-4xl"
+              className="font-titulo text-3xl font-bold uppercase text-blanco sm:text-4xl"
             >
               Productos relacionados
             </h2>
@@ -178,7 +178,7 @@ export default async function PaginaProducto({ params }: Props) {
             <p className="mt-6">
               <Link
                 href={`/productos/${categoria.slug}`}
-                className="inline-flex min-h-11 items-center font-bold text-negro underline underline-offset-4 hover:text-gris"
+                className="inline-flex min-h-11 items-center font-bold text-blanco underline underline-offset-4 hover:text-dorado"
               >
                 Ver todos los productos de {categoria.nombre}
               </Link>

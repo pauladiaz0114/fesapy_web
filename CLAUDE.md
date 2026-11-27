@@ -86,7 +86,7 @@ docs/
   - `--gris: #4A4A4A` (texto secundario y bordes)
   - `--blanco: #FFFFFF`
   - `--carbon: #1C1C1C` y `--carbon-claro: #2A2A2A` (tarjetas, franjas y marcos de imagen del tema oscuro del inicio)
-- **El inicio es oscuro** (desde 2026-11-16): fondos negro/carbón, títulos blancos con palabras en dorado (permitido sobre fondo oscuro). Las demás páginas siguen en tema claro. `Categorias`, `TarjetaCategoria` y `CarruselCategorias` aceptan `tema="oscuro"`. Botón `contornoClaro` para fondos oscuros.
+- **Todo el sitio es oscuro** (inicio desde 2026-11-16; el resto desde 2026-11-26): fondo negro (`body`), franjas y tarjetas en carbón, texto blanco (secundario `text-blanco/75`), títulos con palabras en dorado. Botones: `dorado` (principal) y `contornoClaro` (secundario); `negro` solo sobre fondo dorado. Las fotos de producto van en un marco claro (`bg-crema`). Campos del formulario en carbón; errores en `red-400` (el `red-700` no se lee sobre negro). Las variantes `negro`/`contorno` y los colores crema/gris quedan para piezas sobre fondos claros (marcos, franja dorada).
 - Fotos o videos que no son de Fesapy llevan la etiqueta `EtiquetaReferencia` ("Imagen de referencia" / "Video de referencia").
 - **Nunca** texto dorado sobre fondo blanco o crema (contraste insuficiente). Dorado siempre como fondo con texto negro, o como texto sobre fondo negro.
 - **Excepción: verde de WhatsApp** (`--whatsapp: #25D366`, hover `--whatsapp-oscuro: #1FB855`), **solo** en la burbuja flotante (logo blanco). El botón de WhatsApp del encabezado volvió al dorado (2026-11-13). El logo es `IconoWhatsApp` (Simple Icons, CC0). Ningún otro botón usa el verde.

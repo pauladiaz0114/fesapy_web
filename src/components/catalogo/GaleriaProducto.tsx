@@ -6,7 +6,7 @@ import { rutaImagen, type ImagenProducto } from "@/lib/catalogo";
 
 // Foto grande del producto y, si hay varias, miniaturas para cambiarla.
 // Las fotos vienen del portafolio de Fesapy y tienen fondo transparente: se muestran
-// completas (object-contain) sobre un fondo crema, con un marco de proporción fija
+// completas (object-contain) sobre un fondo crema (marco claro dentro del tema oscuro), con un marco de proporción fija
 // para que la página no "salte" al cambiar de foto.
 export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes: ImagenProducto[] }) {
   const [actual, setActual] = useState(0);
@@ -15,7 +15,7 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
   if (!foto) {
     // TODO(contenido): foto del producto.
     return (
-      <div className="flex aspect-square items-end bg-negro p-6 font-titulo text-3xl font-bold uppercase text-blanco">
+      <div className="flex aspect-square items-end bg-carbon-claro p-6 font-titulo text-3xl font-bold uppercase text-blanco">
         {nombre}
       </div>
     );
@@ -23,7 +23,7 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="relative aspect-square overflow-hidden rounded border border-negro/15 bg-crema">
+      <div className="relative aspect-square overflow-hidden rounded border border-blanco/15 bg-crema">
         <ImagenSuave
           // key: al cambiar de foto, React crea un <ImagenSuave> nuevo y no se ve la anterior estirada.
           key={foto.archivo}
@@ -42,7 +42,7 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
           Si el producto tiene alguna, el renglón se reserva siempre: así no se mueve nada al
           cambiar de foto (CLS 0). */}
       {imagenes.some((img) => img.referencia) && (
-        <p className="min-h-5 text-sm text-gris">{foto.referencia ? "Imagen de referencia" : ""}</p>
+        <p className="min-h-5 text-sm text-blanco/75">{foto.referencia ? "Imagen de referencia" : ""}</p>
       )}
 
       {imagenes.length > 1 && (
@@ -55,7 +55,7 @@ export function GaleriaProducto({ nombre, imagenes }: { nombre: string; imagenes
                 aria-label={`Ver foto ${i + 1} de ${imagenes.length}`}
                 aria-pressed={i === actual}
                 className={`relative block size-16 overflow-hidden rounded border-2 bg-crema transition-colors duration-200 sm:size-20 ${
-                  i === actual ? "border-negro" : "border-negro/20 hover:border-negro/60"
+                  i === actual ? "border-dorado" : "border-blanco/20 hover:border-blanco/60"
                 }`}
               >
                 <ImagenSuave

@@ -13,6 +13,21 @@ Formato:
 
 ---
 
+## 2026-11-26 — Todo el sitio en tema oscuro (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/sitio-oscuro`)
+1. Todas las páginas internas con el estilo oscuro del inicio (fondos negro y carbón, texto blanco, botones dorados).
+2. Formulario de cotización con campos oscuros y errores en rojo claro legible.
+3. `/nosotros` → "Cómo te atendemos": se quitó la frase "Tenemos sedes en…" (las sedes siguen en la introducción y en el pie).
+- **Verificado en Edge real** (390 y 1440 px, 10 páginas): sin fondos claros fuera de marcos de foto, contraste AA en todos los textos, un `h1`, sin desborde; formulario (errores, WhatsApp, correo) y pruebas del inicio y del catálogo sin cambios.
+
+**Archivos:** `src/app/globals.css`, páginas de `src/app/(sitio)/`, `src/components/catalogo/`, `src/components/cotizacion/FormularioCotizacion.tsx`, `src/components/inicio/Categorias.tsx`, `src/components/sitio/EncabezadoPagina.tsx`, `docs/`, `CLAUDE.md`.
+
+**Conceptos aprendidos:**
+- *Contraste:* el mismo color no sirve en cualquier fondo. El rojo oscuro de los errores se leía sobre blanco, pero sobre negro hay que usar uno más claro.
+- *Quitar una opción que ya nadie usa:* al ser todo oscuro, la propiedad `tema` sobraba; se borró para no mantener dos versiones.
+
+**Pendientes / notas:** ninguno nuevo.
+
 ## 2026-11-26 — Stickers, personalización y lubricantes en el catálogo (Sebastián con Claude Code)
 **Qué se hizo:** (rama `feat/catalogo-stickers-lubricantes`)
 1. 8 productos nuevos con foto de referencia: 4 de stickers y personalización y 4 de lubricantes y mantenimiento (recortados de `hoja-stickers.png` y `hoja-lubricantes.png`).

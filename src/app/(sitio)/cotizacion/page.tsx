@@ -46,7 +46,7 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
         </p>
       </EncabezadoPagina>
 
-      <section className="bg-blanco px-4 py-12 sm:py-16">
+      <section className="bg-negro px-4 py-12 sm:py-16">
         <div className="mx-auto max-w-3xl">
           {/* Mientras llega la parte que lee la dirección, se muestra el MISMO formulario vacío:
               mide lo mismo, así el pie de página no "salta" cuando aparece el definitivo (CLS 0). */}
@@ -57,11 +57,11 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
           {/* Otros canales: correo, horario y redes (las sedes aún no tienen dirección publicada). */}
           <section
             aria-labelledby="titulo-otros-canales"
-            className="mt-12 rounded border-l-4 border-dorado bg-crema p-6 text-gris"
+            className="mt-12 rounded border-l-4 border-dorado bg-carbon p-6 text-blanco/75"
           >
             <h2
               id="titulo-otros-canales"
-              className="font-titulo text-2xl font-bold uppercase text-negro"
+              className="font-titulo text-2xl font-bold uppercase text-blanco"
             >
               ¿Prefieres escribirnos directo?
             </h2>
@@ -69,7 +69,7 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
               Correo:{" "}
               <a
                 href={`mailto:${contacto.correo}`}
-                className="font-bold text-negro underline underline-offset-4 hover:text-gris"
+                className="font-bold text-blanco underline underline-offset-4 hover:text-dorado"
               >
                 {contacto.correo}
               </a>
@@ -77,7 +77,7 @@ export default function Cotizacion({ searchParams }: { searchParams: ParametrosU
             <p className="mt-1">Horario de atención: {contacto.horario}</p>
             <RedesSociales
               claseLista="mt-2"
-              claseEnlace="font-bold text-negro hover:text-gris"
+              claseEnlace="font-bold text-blanco hover:text-dorado"
             />
           </section>
         </div>

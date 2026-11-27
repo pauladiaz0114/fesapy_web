@@ -6,7 +6,7 @@ export function ItemConTitulo({ texto }: { texto: string }) {
   if (!m) return <>{texto}</>;
   return (
     <>
-      <strong className="text-negro">{m[1]}:</strong> {m[2]}
+      <strong className="text-blanco">{m[1]}:</strong> {m[2]}
     </>
   );
 }
