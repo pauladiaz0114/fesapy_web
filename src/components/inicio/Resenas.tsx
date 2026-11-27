@@ -2,7 +2,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { enlaceResenasGoogle, resenas, type Resena } from "@/lib/resenas";
 import { FormularioResena } from "./FormularioResena";
 
-// "Lo que dicen nuestros clientes": al final del inicio (2026-11-27).
+// "Lo que dicen nuestros clientes": al final del inicio y de cada ficha de producto (2026-11-27,
+// como en la página de referencia agrofarbef.com, donde los comentarios van al final del producto).
+// En la ficha solo se muestran las reseñas de ese producto y el mensaje dice de qué producto es.
 // Estructura tomada de la referencia (dwork.com.co): tarjetas con inicial, nombre, estrellas y
 // texto. Las reseñas salen de src/lib/resenas.ts (solo reales y autorizadas; hoy está vacía) y
 // al lado va el formulario para dejar una nueva, que llega a Fesapy por WhatsApp o correo.
@@ -22,9 +24,9 @@ function Estrellas({ n }: { n: number }) {
   );
 }
 
-function TarjetaResena({ r }: { r: Resena }) {
+function TarjetaResena({ r, fondo }: { r: Resena; fondo: string }) {
   return (
-    <li data-escalon className="flex flex-col gap-3 rounded border border-blanco/10 bg-negro p-5">
+    <li data-escalon className={`flex flex-col gap-3 rounded border border-blanco/10 p-5 ${fondo}`}>
       <div className="flex items-center gap-3">
         {/* Inicial en un círculo dorado con texto negro (no usamos fotos de clientes). */}
         <span
@@ -45,24 +47,37 @@ function TarjetaResena({ r }: { r: Resena }) {
   );
 }
 
-export function Resenas() {
+export function Resenas({ producto }: { producto?: { slug: string; nombre: string } }) {
+  const lista = producto ? resenas.filter((r) => r.producto === producto.slug) : resenas;
   return (
-    <section aria-labelledby="titulo-resenas" className="bg-carbon px-4 py-14 text-blanco sm:py-20">
+    <section
+      aria-labelledby="titulo-resenas"
+      className={`px-4 py-14 text-blanco sm:py-20 ${producto ? "bg-negro" : "bg-carbon"}`}
+    >
       <Reveal escalonar className="mx-auto max-w-6xl">
         <h2 id="titulo-resenas" className="font-titulo text-3xl font-bold uppercase sm:text-5xl">
-          Lo que dicen nuestros <span className="text-dorado">clientes</span>
+          {producto ? (
+            <>
+              Opiniones de <span className="text-dorado">clientes</span>
+            </>
+          ) : (
+            <>
+              Lo que dicen nuestros <span className="text-dorado">clientes</span>
+            </>
+          )}
         </h2>
 
-        {resenas.length > 0 ? (
+        {lista.length > 0 ? (
           <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {resenas.map((r) => (
-              <TarjetaResena key={`${r.nombre}-${r.fecha}`} r={r} />
+            {lista.map((r) => (
+              <TarjetaResena key={`${r.nombre}-${r.fecha}`} r={r} fondo={producto ? "bg-carbon" : "bg-negro"} />
             ))}
           </ul>
         ) : (
           <p className="mt-3 max-w-2xl text-lg text-blanco/80">
-            Estamos reuniendo las primeras reseñas de nuestros clientes. ¿Ya trabajaste con
-            Fesapy? Cuéntanos cómo te fue.
+            {producto
+              ? `Todavía no hay opiniones de ${producto.nombre}. ¿Ya lo usaste? Cuéntanos cómo te fue.`
+              : "Estamos reuniendo las primeras reseñas de nuestros clientes. ¿Ya trabajaste con Fesapy? Cuéntanos cómo te fue."}
           </p>
         )}
 
@@ -85,8 +100,11 @@ export function Resenas() {
               </a>
             )}
           </div>
-          <div data-escalon className="rounded border border-blanco/10 bg-negro p-5 sm:p-8">
-            <FormularioResena />
+          <div
+            data-escalon
+            className={`rounded border border-blanco/10 p-5 sm:p-8 ${producto ? "bg-carbon" : "bg-negro"}`}
+          >
+            <FormularioResena producto={producto?.nombre} />
           </div>
         </div>
       </Reveal>

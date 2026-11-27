@@ -63,10 +63,12 @@ export function validarResena(valores: ValoresResena): ResultadoResena {
   return { ok: false, errores };
 }
 
-/** Texto que llega a Fesapy (WhatsApp o cuerpo del correo). Recibe datos YA validados. */
-export function mensajeResena(d: DatosResena): string {
+/** Texto que llega a Fesapy (WhatsApp o cuerpo del correo). Recibe datos YA validados.
+ *  producto: nombre del producto si la reseña se escribió en su ficha. */
+export function mensajeResena(d: DatosResena, producto?: string): string {
   return [
     "Hola, Fesapy. Quiero dejar una reseña.",
+    ...(producto ? [`Producto: ${producto}`] : []),
     `Nombre: ${d.nombre}`,
     `Empresa: ${d.empresa || "(no indicada)"}`,
     `Calificación: ${"★".repeat(d.calificacion)}${"☆".repeat(5 - d.calificacion)} (${d.calificacion} de 5)`,
@@ -77,6 +79,6 @@ export function mensajeResena(d: DatosResena): string {
 }
 
 /** Asunto del correo: UNA sola línea. */
-export function asuntoResena(d: DatosResena): string {
-  return `Reseña de ${d.nombre}`;
+export function asuntoResena(d: DatosResena, producto?: string): string {
+  return producto ? `Reseña de ${d.nombre} - ${producto}` : `Reseña de ${d.nombre}`;
 }

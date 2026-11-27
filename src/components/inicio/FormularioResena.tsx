@@ -44,7 +44,8 @@ function Estrella({ llena }: { llena: boolean }) {
   );
 }
 
-export function FormularioResena() {
+/** producto: nombre del producto si el formulario está en su ficha (va en el mensaje). */
+export function FormularioResena({ producto }: { producto?: string }) {
   const base = useId();
   const id = (campo: CampoResena) => `${base}-${campo}`;
   const idError = (campo: CampoResena) => `${base}-${campo}-error`;
@@ -86,10 +87,10 @@ export function FormularioResena() {
       return;
     }
     setErrores({});
-    const texto = mensajeResena(resultado.datos);
+    const texto = mensajeResena(resultado.datos, producto);
     // window.open debe ir directo en el clic (si no, el navegador lo bloquea como ventana emergente).
     if (canal === "whatsapp") window.open(enlaceWhatsApp(texto), "_blank", "noopener,noreferrer");
-    else window.location.href = enlaceCorreo(asuntoResena(resultado.datos), texto);
+    else window.location.href = enlaceCorreo(asuntoResena(resultado.datos, producto), texto);
     setAbriendo(true);
     setAviso(canal === "whatsapp" ? "Abriendo WhatsApp…" : "Abriendo tu programa de correo…");
     clearTimeout(temporizador.current);

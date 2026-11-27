@@ -16,6 +16,8 @@ export type Resena = {
   texto: string;
   /** Mes y año en que llegó, por ejemplo "noviembre de 2026". */
   fecha: string;
+  /** Opcional: slug del producto si la reseña es de un producto (sale también en su ficha). */
+  producto?: string;
 };
 
 // TODO(contenido): agregar aquí las reseñas reales autorizadas que lleguen a Fesapy.
