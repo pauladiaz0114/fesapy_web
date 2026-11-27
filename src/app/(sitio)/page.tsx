@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Categorias } from "@/components/inicio/Categorias";
 import { Hero } from "@/components/inicio/Hero";
 import { Problemas } from "@/components/inicio/Problemas";
+import { Resenas } from "@/components/inicio/Resenas";
 
 // Título y descripción que muestran Google y WhatsApp al compartir el enlace.
 export const metadata: Metadata = {
@@ -19,8 +20,9 @@ export default function Inicio() {
           de cotizar y la franja dorada "¿No ves lo que buscas?" cierra la página. */}
       <Problemas />
       <Categorias />
-      {/* La sección de clientes y reseñas se quitó el 2026-11-12: vuelve cuando haya logos y
-          reseñas reales con permiso (ver docs/DECISIONES.md). */}
+      {/* Reseñas (2026-11-27): formulario para dejar una y, cuando las haya, las reales y
+          autorizadas (src/lib/resenas.ts). Logos de clientes: cuando haya permiso. */}
+      <Resenas />
     </>
   );
 }

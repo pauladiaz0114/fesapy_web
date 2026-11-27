@@ -5,6 +5,7 @@ import { GaleriaProducto } from "@/components/catalogo/GaleriaProducto";
 import { ItemConTitulo } from "@/components/catalogo/ItemConTitulo";
 import { Migas } from "@/components/catalogo/Migas";
 import { TarjetaProducto } from "@/components/catalogo/TarjetaProducto";
+import { Resenas } from "@/components/inicio/Resenas";
 import { BotonEnlace } from "@/components/ui/Boton";
 import { productoDeCategoria, productos, productosRelacionados } from "@/lib/catalogo";
 import { categorias } from "@/lib/contenido";
@@ -186,6 +187,9 @@ export default async function PaginaProducto({ params }: Props) {
           </Reveal>
         </section>
       )}
+
+      {/* Reseñas de este producto y formulario para dejar una (al final, como en la referencia). */}
+      <Resenas producto={{ slug: producto.slug, nombre: producto.nombre }} />
     </>
   );
 }

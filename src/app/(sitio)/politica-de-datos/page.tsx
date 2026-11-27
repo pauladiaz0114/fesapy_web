@@ -66,7 +66,8 @@ export default function PoliticaDeDatos() {
           <Seccion titulo="2. Qué datos tratamos">
             <p>
               Los que tú escribes en el formulario de cotización: nombre, empresa, correo,
-              teléfono, ciudad de entrega, categoría de interés y mensaje.
+              teléfono, ciudad de entrega, categoría de interés y mensaje. Y, si nos dejas una
+              reseña: nombre, empresa (opcional), calificación y el texto de la reseña.
               No pedimos datos sensibles ni datos de menores de edad.
             </p>
           </Seccion>
@@ -82,8 +83,11 @@ export default function PoliticaDeDatos() {
 
           <Seccion titulo="4. Para qué los usamos (finalidad)">
             <p>
-              Únicamente para responder tu solicitud de cotización y comunicarnos contigo sobre
-              ella. No vendemos ni compartimos tus datos con terceros para publicidad.
+              Para responder tu solicitud de cotización y comunicarnos contigo sobre ella. Si nos
+              envías una reseña y autorizas su publicación, la mostramos en este sitio con tu
+              nombre y, si la escribiste, tu empresa; puedes pedirnos que la retiremos en
+              cualquier momento escribiendo al correo de abajo. No vendemos ni compartimos tus
+              datos con terceros para publicidad.
             </p>
           </Seccion>
 

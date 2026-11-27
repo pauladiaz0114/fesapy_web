@@ -13,6 +13,22 @@ Formato:
 
 ---
 
+## 2026-11-27 — Sección de reseñas de clientes en el inicio (Sebastián con Claude Code)
+**Qué se hizo:** (rama `feat/resenas-clientes`)
+1. Sección "Lo que dicen nuestros clientes" al final del inicio, antes del pie: tarjetas de reseñas (salen de `src/lib/resenas.ts`, hoy vacía) y formulario "Deja tu reseña" que se envía por WhatsApp o correo.
+2. Calificación con 5 estrellas que son radios reales (funcionan con clic, toque y flechas del teclado).
+3. Política de datos 0.2 con el apartado de reseñas.
+4. La misma sección va **al final de cada ficha de producto** ("Opiniones de clientes"), como en la referencia agrofarbef.com: muestra solo las reseñas de ese producto y el mensaje dice de qué producto es.
+- **Verificado en Edge real** (390 y 1440 px): errores al enviar vacío y foco al primero, clic en estrellas, WhatsApp una sola vez (con doble clic) y mensaje codificado, correo con asunto, aviso de gracias, formulario limpio, teclado en estrellas con foco visible, sin desborde, CLS 0; tarjetas revisadas con 2 reseñas de prueba (solo local, no se subieron); el resto de pruebas del sitio sin cambios.
+
+**Archivos:** `src/components/inicio/Resenas.tsx`, `src/components/inicio/FormularioResena.tsx`, `src/lib/resenas.ts`, `src/lib/validaciones/resena.ts`, `src/app/(sitio)/page.tsx`, `src/app/(sitio)/politica-de-datos/page.tsx`, `src/lib/contenido.ts`, `CLAUDE.md`, `docs/`.
+
+**Conceptos aprendidos:**
+- *Radio oculto con etiqueta visible:* el botón real (radio) se esconde a la vista pero sigue ahí para el teclado y el lector de pantalla; lo que se ve es la estrella de su etiqueta.
+- *Autorización:* publicar el nombre de alguien es tratar sus datos personales; por eso la casilla pide permiso explícito.
+
+**Pendientes / notas:** `TODO(contenido)`: cargar las reseñas reales autorizadas en `src/lib/resenas.ts` y el enlace del perfil de Google de Fesapy.
+
 ## 2026-11-27 — Enlaces del pie que no llevaban a la página en iPhone (Sebastián con Claude Code)
 **Qué se hizo:** (rama `fix/enlaces-pie-iphone`) los enlaces del pie (Páginas y logo) pasan de `<Link>` de Next.js a `<a>` normales: el navegador carga la página completa desde arriba. En Chrome funcionaban, pero en un iPhone tocarlos no llevaba a la página.
 - **Verificado en Edge real** (390 y 1440 px): los 6 enlaces desde 3 páginas llegan a su página y la muestran desde arriba (antes la prueba solo miraba la dirección). Falta confirmarlo en el iPhone.

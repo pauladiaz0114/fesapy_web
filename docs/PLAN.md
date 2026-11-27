@@ -27,6 +27,7 @@ Cada tarea debe cumplir los controles de `ARQUITECTURA-Y-SEGURIDAD.md` que le co
 - [x] Inicio con diseño oscuro de impacto (propuesta 2) y "Envíos nacionales" (rama `feat/diseno-oscuro-impacto`). Video corto: pendiente (falta `dotacion.mp4` y ffmpeg)
 - [x] Catálogo: 4 productos de stickers y personalización, 4 de lubricantes y mantenimiento, y avisos para vehículos movidos a stickers (rama `feat/catalogo-stickers-lubricantes`)
 - [x] Todo el sitio en tema oscuro (rama `feat/sitio-oscuro`)
+- [x] Sección de reseñas con formulario por WhatsApp/correo (rama `feat/resenas-clientes`); faltan reseñas reales y enlace de Google
 - [x] Contacto (WhatsApp, correo, Instagram y Facebook), sedes por ciudad sin direcciones, horario, sin barra de anuncio, sin sección de clientes/reseñas, formulario sin NIT y WhatsApp en verde oficial (rama `chore/contacto-redes-sin-sede`)
 
 ### Pendiente: contenido (`TODO(contenido)`, lo debe dar Fesapy)
