@@ -3,7 +3,7 @@ import { BotonEnlace } from "@/components/ui/Boton";
 import { BotonWhatsApp } from "@/components/ui/BotonWhatsApp";
 import { IconoCamion, IconoDocumento, IconoMensaje, IconoReloj } from "@/components/ui/iconos";
 import { empresa } from "@/lib/contenido";
-import { VideoHero } from "./VideoHero";
+import { HeroCarrusel } from "./HeroCarrusel";
 
 type Beneficio = {
   titulo: string;
@@ -51,7 +51,7 @@ export function Hero() {
             </div>
           </div>
 
-          <VideoHero />
+          <HeroCarrusel />
         </div>
       </section>
 
